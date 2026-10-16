@@ -26,24 +26,16 @@ Cada reportagem ocupa duas páginas: abertura em verde da capa e continuação. 
 
 ## Design
 
-- **Direção visual (revisão de 2026-10-16).** O responsável achou o visual infantil. A revista ficou mais editorial:
-  - aberturas em verde-floresta escuro (`--forest`); o verde da capa ficou como acento (`--brand`, `--brand-ink`);
-  - títulos em Inter Tight;
-  - integrantes listados só por nome, sem avatares;
-  - fotos retangulares;
-  - gráficos com barras retas;
-  - FAB no formato padrão do M3;
-  - sem formas decorativas nem capitulares dentro das páginas;
-  - fundo orgânico mais transparente.
-- **Material Design 3.** Os papéis de cor foram gerados com `@material/material-color-utilities` 0.3.0 (`SchemeTonalSpot`, menos saturado que o `SchemeContent` da primeira composição) a partir de #02A913 e ficam como tokens `--md-sys-*` no `<style>`. `on-secondary-container` foi escurecido para texto corrido. Seguem a especificação do M3: escala de forma, elevação, chips, botões segmentados, top app bar, gaveta de navegação modal e FAB. Os componentes foram escritos em CSS, sem a biblioteca `@material/web`.
-- **Formas expressivas.** Formas inspiradas na biblioteca do M3 Expressive (cookie, clover, sunny, burst, flower, puffy, pentagon), desenhadas como curvas polares de 144 pontos. Por isso qualquer forma morfa em outra, com uma mola que imita o motion expressivo. Depois da revisão, o código das formas continua no arquivo, mas elas não aparecem mais dentro das páginas; o canvas de fundo usa as mesmas manchas orgânicas. É uma reimplementação aproximada, não o código oficial do Material.
+- **Direção visual.** Em 2026-10-16 foi testada uma versão mais sóbria (commit `ab6b62f`): verde-floresta, Inter Tight e sem formas. O responsável não gostou e pediu a identidade anterior de volta. Vale a identidade abaixo, com o verde da capa nas aberturas, títulos em Montserrat e formas expressivas.
+- **Material Design 3.** Os papéis de cor foram gerados com `@material/material-color-utilities` 0.3.0 (`SchemeContent`) a partir de #02A913 e ficam como tokens `--md-sys-*` no `<style>`. `on-secondary-container` foi escurecido para texto corrido. Seguem a especificação do M3: escala de forma, elevação, chips, botões segmentados, top app bar, gaveta de navegação modal e FAB. Os componentes foram escritos em CSS, sem a biblioteca `@material/web`.
+- **Formas expressivas.** Formas inspiradas na biblioteca do M3 Expressive (cookie, clover, sunny, burst, flower, puffy, pentagon), desenhadas como curvas polares de 144 pontos. Por isso qualquer forma morfa em outra, com uma mola que imita o motion expressivo. Aparecem na decoração das páginas e como máscara das fotografias. É uma reimplementação aproximada, não o código oficial do Material.
 - **Fundo orgânico.** Um `<canvas>` fixo atrás das páginas desenha sete manchas nas cores da capa. A física é uma mola amortecida.
   - Cursor ou dedo: afastam e incham as bordas próximas.
   - Clique ou toque: geram uma onda.
   - Rolagem: agita as manchas, com paralaxe.
   - Troca de página: rearranja a composição.
   - O canvas tem `aria-hidden` e `pointer-events: none`, pausa com a aba oculta, fica estático com `prefers-reduced-motion` e não aparece na impressão.
-- **Tipografia.** Inter Tight (500/600) nos títulos e rótulos e Roboto Flex no texto e na interface. Playfair Display e Montserrat 800 ficaram só em “ENERGIA” e “ATÔMICA”, na capa enviada. As fontes vêm do Google Fonts, com reservas locais.
+- **Tipografia.** Montserrat nos títulos (700/800) e nos rótulos; Roboto Flex no texto e na interface; Playfair Display só no “ENERGIA” da capa, para preservar a capa enviada.
 - **Páginas.** 794 × 1123 px (proporção A4) no desktop, com margem de 64 px e espaço de 26 px entre blocos. Não há rodapé corrido nem linha de seção no topo. Abaixo de 860 px, as páginas viram fluxo vertical de uma coluna. O texto é alinhado à esquerda, porque o Chromium em Linux não hifeniza português e o texto justificado abria rios.
 - **Números.** Não há blocos de “contadores”, os quadros de número grande com legenda. Os números ficam no texto, nos gráficos e nas tabelas. O sumário usa numeração tipográfica leve, e as etapas usam números em caixas que viram pílula quando selecionadas.
 - **Ícones.** Caminhos SVG dos Material Icons (Apache 2.0), embutidos no HTML.
@@ -70,7 +62,7 @@ Ajustes de 2026-10-16: espaçamento maior, títulos sem serifa, sem contadores, 
 - `npm test`: 13 de 13, incluindo `tests/energia-atomica.test.mjs` (ordem das seções, arquivo único, ausência de marcação de reportagem e rodapé, fundo orgânico, payback e formas).
 - Não verificados: leitores de tela, Safari e iOS, aparelhos físicos, impressão e desempenho real. Os 61 quadros/s do canvas foram medidos só no headless.
 
-- Página 14: o título “Desligar e religar” não se explicava. Virou “Os países que tentaram abandonar a energia nuclear”, com um parágrafo de contexto e uma tabela no lugar dos cartões com filtro. O conceito de Beck entrou no parágrafo; a menção a Gramsci saiu da página por espaço.
+- Página 14: o título “Desligar e religar” não se explicava. Virou “Os países que tentaram abandonar a energia nuclear”, com um parágrafo de contexto e uma tabela no lugar dos cartões com filtro. O conceito de Beck entrou no parágrafo; a menção a Gramsci saiu da página por espaço. Essa mudança foi mantida depois da volta à identidade visual anterior.
 
 ## Próximo passo
 
