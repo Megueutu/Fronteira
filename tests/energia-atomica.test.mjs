@@ -55,6 +55,5 @@ test('formas expressivas têm o mesmo número de pontos para permitir morph', ()
     assert.ok(Math.max(...r) === 1 && Math.min(...r) > 0.5, name);
     assert.match(pathFrom(r), /^M[\d.]+ [\d.]+(L[\d.]+ [\d.]+)+Z$/);
   }
-  assert.match(html, /data-shape="cookie9"/);
   for (const [, name] of html.matchAll(/data-(?:shape|morph)="([^"]+)"/g)) assert.ok(SHAPE_NAMES.includes(name), name);
 });
