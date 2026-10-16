@@ -4,7 +4,7 @@ Status: edição de 20 páginas implementada em 2026-10-16. Mantém-se a grafia 
 
 ## Estrutura
 
-Aplicação estática com JavaScript, HTML/CSS e WebGL nativos, sem bibliotecas, fontes remotas ou instalação de dependências. Node.js 22 ou superior serve os arquivos com `npm start`. A edição pode ser hospedada estaticamente; os caminhos partem da raiz do domínio.
+Aplicação estática com JavaScript, HTML/CSS e WebGL nativos, sem bibliotecas, fontes remotas ou instalação de dependências. Node.js 22 ou superior serve os arquivos com `npm start`. O build `npm run build:pages` gera `_site/` e adapta os caminhos da raiz ao `BASE_PATH` de publicação. O workflow `.github/workflows/pages.yml` testa e publica a `main` no GitHub Pages a cada push, com acionamento manual disponível. Apenas arquivos do site entram no artefato; a branch da nova identidade visual permanece independente até sua integração à `main`.
 
 | Arquivo | Responsabilidade |
 | --- | --- |

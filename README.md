@@ -12,6 +12,14 @@ npm start
 
 Abra [a revista](http://localhost:3000). No desktop, o modo inicial é 3D; no celular, páginas HTML legíveis. Links diretos: [3D](http://localhost:3000/?template=3d) e [HTML](http://localhost:3000/?template=html). `?page=13` abre a região correspondente da edição.
 
+## Publicar no GitHub Pages
+
+Site: [megueutu.github.io/Fronteira](https://megueutu.github.io/Fronteira/).
+
+O workflow [Deploy GitHub Pages](.github/workflows/pages.yml) executa os testes, gera o site e publica a `main` a cada push. Também pode ser iniciado manualmente em Actions. Nas configurações do repositório, Pages deve usar **GitHub Actions** como origem. Outras branches não são publicadas automaticamente; a nova identidade visual chegará ao site quando for incorporada à `main`.
+
+`npm run build:pages` gera `_site/`, usando `BASE_PATH` para adaptar imagens, texturas, scripts e links ao endereço da publicação. O workflow obtém esse caminho da configuração do Pages. Somente `index.html`, `src/`, `assets/` e `previews/` entram no pacote; documentos locais e artefatos de teste ficam fora. As texturas já versionadas são reutilizadas.
+
 ## Ler e explorar
 
 - Botões e setas do teclado viram páginas. Home volta à capa; End vai ao fim.
