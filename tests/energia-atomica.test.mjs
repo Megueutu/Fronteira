@@ -37,6 +37,13 @@ test('energia atômica tem fundo orgânico interativo atrás das páginas', () =
   for (const event of ['pointermove', 'pointerdown', 'visibilitychange']) assert.match(script, new RegExp(event));
 });
 
+test('energia atômica amplia fotos e gráficos em um diálogo', () => {
+  assert.match(html, /<dialog class="viewer" id="viewer"/);
+  assert.match(script, /function expandables\(\)/);
+  for (const sel of ['.shaped-photo', '.chart-card', '.table-card', '.stepper-card', '.cycle-card']) assert.ok(script.includes(sel), sel);
+  assert.match(script, /^expandables\(\);$/m);
+});
+
 test('payback confere com os cenários do grupo', () => {
   const expected = [[4.67, 5.1, 7.7], [5.80, 4.1, 6.2], [6.79, 3.5, 5.3]];
   for (const [fluxo, rest, total] of expected) {

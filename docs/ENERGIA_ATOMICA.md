@@ -64,6 +64,22 @@ Ajustes de 2026-10-16: espaçamento maior, títulos sem serifa, sem contadores, 
 
 - Página 14: o título “Desligar e religar” não se explicava. Virou “Os países que tentaram abandonar a energia nuclear”, com um parágrafo de contexto e uma tabela no lugar dos cartões com filtro. O conceito de Beck entrou no parágrafo; a menção a Gramsci saiu da página por espaço. Essa mudança foi mantida depois da volta à identidade visual anterior.
 
+## Ampliação de fotos e gráficos (2026-10-16)
+
+Pedido do responsável: ao clicar em uma imagem ou gráfico, ele deve se expandir para ser visto melhor.
+
+- **O que se expande:** as 2 fotos e os 10 gráficos, tabelas e diagramas (classes `.shaped-photo`, `.chart-card`, `.table-card`, `.stepper-card` e `.cycle-card`).
+- **Como abrir:** clique em qualquer área do elemento que não seja botão ou link, ou use o botão de ampliar no canto, que também funciona pelo teclado.
+- **Como funciona:** abre um `<dialog>` modal no estilo M3, que ocupa a tela toda no celular. O próprio elemento é movido para o diálogo, então filtros, abas e cenários continuam funcionando lá, e o estado se mantém ao fechar.
+  - Gráficos: são ampliados com `zoom` até caber na tela, no máximo 2,6×.
+  - Fotos: aparecem inteiras, sem a máscara de forma, com a legenda legível. Foram reembutidas em 1280 px; o arquivo passou de cerca de 245 KB para cerca de 600 KB.
+- **Como fechar:** Esc, o botão ✕ ou um clique fora. O foco volta ao botão que abriu, e as setas do teclado não trocam de página com o diálogo aberto.
+- **Validação (Chromium headless):**
+  - em 1440 px: o payback ampliado (1,66×) trocou de cenário dentro do diálogo e manteve o estado ao fechar; a foto de Angra abriu inteira; Esc e clique fora fecham; clicar em uma aba do ciclo não abre o diálogo;
+  - em 390 px, com toque: o filtro da matriz funcionou dentro do diálogo;
+  - sem erros de console; `npm test` passa 14 de 14.
+- Não verificados: leitores de tela, Safari e iOS. O `zoom` exige Firefox 126 ou posterior.
+
 ## Próximo passo
 
 O grupo revisa o arquivo, principalmente a reportagem 2 e as condensações, e indica as próximas mudanças.
