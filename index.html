@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#222821">
+    <title>Fronteira — laboratório de leitura</title>
+    <link rel="stylesheet" href="/src/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Fronteira, início">fronteira<span>®</span></a>
+      <span class="header-note">UM LABORATÓRIO DE LEITURA</span>
+      <a class="about-link" href="#sobre">sobre o experimento <span class="icon-diagonal" aria-hidden="true"></span></a>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="title">
+        <div><p class="eyebrow"><span class="live-dot"></span> ESTUDO 001 · A FORMA DA LEITURA</p><h1 id="title">Uma revista.<br><em>Outras possibilidades.</em></h1></div>
+        <p class="intro-copy">Abra, explore, interaja. <br>Dois jeitos de experimentar a mesma revista — e descobrir o que existe além da página.</p>
+      </section>
+      <section class="reader" aria-label="Experimente os templates da revista">
+        <div class="reader-bar">
+          <div class="template-tabs" role="group" aria-label="Escolha o template">
+            <button type="button" data-mode="html" aria-pressed="true"><span>01</span> Páginas interativas</button>
+            <button type="button" data-mode="3d" aria-pressed="false"><span>02</span> Revista 3D</button>
+          </div>
+          <button type="button" class="text-button" id="read-linear">Leitura linear <span class="icon-diagonal" aria-hidden="true"></span></button>
+        </div>
+        <div class="stage" id="stage">
+          <div class="stage-label" id="stage-label">HTML · TOQUE PARA EXPLORAR</div>
+          <div class="book-frame" id="html-view"><div id="html-book" class="html-book"></div></div>
+          <div id="webgl-view" class="webgl-view" hidden><canvas id="book-canvas" aria-label="Revista tridimensional. Use os botões de navegação e as áreas interativas." role="img"></canvas><div id="hotspots" class="hotspots"></div></div>
+          <p class="stage-error" id="stage-error" hidden>Não foi possível iniciar a revista 3D neste navegador. As páginas interativas e a leitura linear continuam disponíveis.</p>
+          <div class="stage-caption"><span>EDIÇÃO EXPERIMENTAL / 2026</span><span id="mode-caption">Páginas que convidam a participar.</span></div>
+        </div>
+        <div class="navigation">
+          <p class="nav-hint" id="nav-hint">Use as setas ou deslize nas margens para folhear.</p>
+          <div class="nav-controls"><button type="button" id="previous" class="round-button" aria-label="Páginas anteriores">←</button><span id="page-status" role="status" aria-live="polite" aria-atomic="true"></span><button type="button" id="next" class="round-button" aria-label="Próximas páginas">→</button></div>
+          <span class="interaction-hint"><i></i> procure os pontos de interação</span>
+        </div>
+      </section>
+      <section id="sobre" class="experiment-notes" aria-label="Sobre o experimento">
+        <p class="eyebrow">ALÉM DE VIRAR PÁGINAS</p>
+        <div class="note-grid"><article><span class="icon-diagonal" aria-hidden="true"></span><h2>Uma camada a mais.</h2><p>Abra notas e histórias em popups sem perder o lugar na revista.</p></article><article><span>↔</span><h2>Mais de um olhar.</h2><p>Percorra imagens no carrossel e descubra diferentes composições.</p></article><article><span class="icon-expand" aria-hidden="true"></span><h2>Chegue mais perto.</h2><p>Amplie as imagens para ver os detalhes, no seu tempo.</p></article></div>
+      </section>
+    </main>
+    <footer><span>fronteira / laboratório</span><p>Conteúdo demonstrativo. Conceito editorial e design system ainda em aberto.</p><span>001 — 2026</span></footer>
+    <dialog id="interaction-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span class="eyebrow" id="dialog-label">EXPLORE</span><button type="button" id="close-dialog" class="round-button" aria-label="Fechar janela">×</button></div><div id="dialog-content"></div></dialog>
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
