@@ -169,6 +169,33 @@ O responsável pediu uma usina em cada foto da capa: Angra 1 na forma da esquerd
 - A foto ilustrativa de usina no exterior saiu da capa.
 - **Validação:** captura da capa em Chromium headless; `npm test`, 18 de 18.
 
+## Capa profissional e fotos mais vivas (2026-10-16)
+
+**Pedido do responsável:** fotos mais vivas, capa mais próxima de revistas profissionais, com mais texto e com a marca do grupo.
+
+**Fotos.** A rede desta sessão continua bloqueando Unsplash, Eletronuclear e Wikimedia (403 no proxy), então não houve fotos novas. As atuais ganharam tratamento de cor (`grade()` em `photos.py`):
+- abertura de sombras (gama 0,9) e leve aquecimento;
+- saturação +30% e contraste +5%;
+- compressão dos altos, para não estourar o céu.
+
+A licença CC BY permite adaptação com indicação, e os créditos informam “cor ajustada”.
+
+**Capa**, com a mesma composição de formas e Angra 1, 2 e 3:
+- **expediente:** barra no topo, com “Revista de reportagem · Sociologia” e “Nº 01 · Outubro 2026 · Distribuição gratuita”;
+- **chamada principal:** “Reportagem especial — A aposta nuclear”, com linha fina;
+- **chamadas com números:** três à direita (2%, R$ 23,9 bi, 83%) e uma à esquerda (6 países);
+- **selo:** em forma expressiva (sunny), com “16 páginas interativas”;
+- **etiquetas:** Angra 1, Angra 2 e “Angra 3 · em obras” sobre as fotos;
+- **rodapé:** faixa “Por dentro”, com as cinco reportagens e “Instituto J&F”.
+
+**Marca: pendente.** Os SVGs de marca (favicon “FR” e logotipo), o QR Code e o código de barras não estão no repositório nem nos anexos da sessão. Não há commit com eles na `main` nem nesta branch. O favicon continua o provisório (“A” sobre o verde). Quando chegarem, o logotipo entra no expediente da capa e na barra do topo, o favicon substitui o atual, e o QR Code e o código de barras vão para o canto inferior da capa.
+
+**Validação:**
+- capa capturada em Chromium headless;
+- 16 páginas dentro da margem;
+- página dupla e ampliação funcionando;
+- `npm test`: 18 de 18.
+
 ## Próximo passo
 
 O grupo revisa o arquivo, principalmente a reportagem 2 e as condensações, e indica as próximas mudanças.

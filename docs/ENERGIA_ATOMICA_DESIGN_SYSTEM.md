@@ -215,6 +215,13 @@ A escolha entre Rolagem e Revista fica salva no navegador (`localStorage`, com f
 | Página dupla | Foto contínua nas duas páginas, com gradiente para o texto |
 | Fotos no corpo do texto | Forma expressiva |
 
+- **Tratamento de cor:** toda foto passa pela mesma função (`grade()`), para manter a edição viva e coesa: abre sombras, aquece levemente, aumenta a saturação em 30% e preserva os altos. O crédito indica “cor ajustada” quando é exigido.
+- **Capa:**
+  - expediente no topo em Montserrat 800, 8,5 px, com tracking de 0,14em;
+  - chamada principal em 24 px, linha fina em Roboto Flex 12,5 px e números das chamadas em Montserrat 800, em `#D7ECDC`;
+  - selo em forma *sunny*, no `secondary-container`;
+  - etiquetas brancas a 92% de opacidade;
+  - faixa inferior com gradiente verde-escuro.
 - **Ampliação:** mostra a foto inteira, na proporção original.
 - **Crédito:** obrigatório na própria página, na linha de fontes ou na legenda; o crédito da capa fica na página 02.
 
