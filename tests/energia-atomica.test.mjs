@@ -44,6 +44,36 @@ test('energia atômica amplia fotos e gráficos em um diálogo', () => {
   assert.match(script, /^expandables\(\);$/m);
 });
 
+test('energia atômica marca números de dados e liga os de gráfico a uma ênfase existente', () => {
+  const nums = [...html.matchAll(/<button type="button" class="dnum"([^>]*)>([^<]+)<\/button>/g)];
+  assert.ok(nums.length >= 60, `só ${nums.length} números marcados`);
+  for (const [, attrs, value] of nums) {
+    assert.match(attrs, /data-info="[^"]+"/, value);
+    assert.match(attrs, /data-src="[^"]+"/, value);
+    const chart = attrs.match(/data-chart="([^"]+)"/)?.[1];
+    if (!chart) continue;
+    const key = attrs.match(/data-emph="([^"]*)"/)?.[1];
+    assert.ok(html.includes(`id="${chart}"`), `gráfico ${chart} de ${value}`);
+    // A chave precisa existir no HTML ou nas marcações geradas pelo script (matriz e payback).
+    const inHtml = html.includes(`data-key="${key}"`) || html.includes(`data-key="${key} `);
+    const generated = (chart === 'matrix-chart' && /data-key="\$\{name\}" data-group="\$\{type\}"/.test(script)) || (chart === 'payback' && /data-key="(rest|total)"/.test(script));
+    assert.ok(inHtml || generated, `ênfase ${key} de ${value}`);
+  }
+});
+
+test('energia atômica usa ícones do sprite Material Symbols e oferece três layouts', () => {
+  const used = new Set([...html.matchAll(/<use href="#(i-[\w-]+)"/g), ...script.matchAll(/<use href="#(i-[\w-]+)"/g)].map(m => m[1]));
+  for (const id of used) assert.match(html, new RegExp(`<symbol id="${id}"`), id);
+  assert.doesNotMatch(html.replace(/<svg class="icon-sprite"[\s\S]*?<\/svg>/, ''), /<path d="M\d+ \d+[\d.]*H/);
+  for (const mode of ['scroll', 'spread', 'focus']) assert.match(html, new RegExp(`data-layout="${mode}"`));
+  assert.match(script, /function createFocus\(\)/);
+});
+
+test('energia atômica segue o tema Verde Bandeira ES, sem o verde neon anterior', () => {
+  assert.match(html, /--brand: #1d7449;/);
+  assert.doesNotMatch(html, /#02a913|#0fc621|#11b81f|#76ff66|#57e24c/i);
+});
+
 test('payback confere com os cenários do grupo', () => {
   const expected = [[4.67, 5.1, 7.7], [5.80, 4.1, 6.2], [6.79, 3.5, 5.3]];
   for (const [fluxo, rest, total] of expected) {

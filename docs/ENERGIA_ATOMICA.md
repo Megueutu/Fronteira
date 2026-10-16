@@ -26,8 +26,11 @@ Cada reportagem ocupa duas páginas: abertura em verde da capa e continuação. 
 
 ## Design
 
+A referência oficial de cor, tipografia, ícones, forma, estados, números e layouts é o [design system da Energia Atômica](ENERGIA_ATOMICA_DESIGN_SYSTEM.md). Esta seção guarda o histórico das decisões.
+
+
 - **Direção visual.** Em 2026-10-16 foi testada uma versão mais sóbria (commit `ab6b62f`): verde-floresta, Inter Tight e sem formas. O responsável não gostou e pediu a identidade anterior de volta. Vale a identidade abaixo, com o verde da capa nas aberturas, títulos em Montserrat e formas expressivas.
-- **Material Design 3.** Os papéis de cor foram gerados com `@material/material-color-utilities` 0.3.0 (`SchemeContent`) a partir de #02A913 e ficam como tokens `--md-sys-*` no `<style>`. `on-secondary-container` foi escurecido para texto corrido. Seguem a especificação do M3: escala de forma, elevação, chips, botões segmentados, top app bar, gaveta de navegação modal e FAB. Os componentes foram escritos em CSS, sem a biblioteca `@material/web`.
+- **Material Design 3.** Os papéis de cor foram gerados com `@material/material-color-utilities` 0.3.0 (`SchemeContent`); desde 2026-10-16, a partir do Verde Bandeira ES #1D7449 (antes, #02A913) e ficam como tokens `--md-sys-*` no `<style>`. `on-secondary-container` foi escurecido para texto corrido. Seguem a especificação do M3: escala de forma, elevação, chips, botões segmentados, top app bar, gaveta de navegação modal e FAB. Os componentes foram escritos em CSS, sem a biblioteca `@material/web`.
 - **Formas expressivas.** Formas inspiradas na biblioteca do M3 Expressive (cookie, clover, sunny, burst, flower, puffy, pentagon), desenhadas como curvas polares de 144 pontos. Por isso qualquer forma morfa em outra, com uma mola que imita o motion expressivo. Aparecem na decoração das páginas e como máscara das fotografias. É uma reimplementação aproximada, não o código oficial do Material.
 - **Fundo orgânico.** Um `<canvas>` fixo atrás das páginas desenha sete manchas nas cores da capa. A física é uma mola amortecida.
   - Cursor ou dedo: afastam e incham as bordas próximas.
@@ -38,7 +41,7 @@ Cada reportagem ocupa duas páginas: abertura em verde da capa e continuação. 
 - **Tipografia.** Montserrat nos títulos (700/800) e nos rótulos; Roboto Flex no texto e na interface; Playfair Display só no “ENERGIA” da capa, para preservar a capa enviada.
 - **Páginas.** 794 × 1123 px (proporção A4) no desktop, com margem de 64 px e espaço de 26 px entre blocos. Não há rodapé corrido nem linha de seção no topo. Abaixo de 860 px, as páginas viram fluxo vertical de uma coluna. O texto é alinhado à esquerda, porque o Chromium em Linux não hifeniza português e o texto justificado abria rios.
 - **Números.** Não há blocos de “contadores”, os quadros de número grande com legenda. Os números ficam no texto, nos gráficos e nas tabelas. O sumário usa numeração tipográfica leve, e as etapas usam números em caixas que viram pílula quando selecionadas.
-- **Ícones.** Caminhos SVG dos Material Icons (Apache 2.0), embutidos no HTML.
+- **Ícones.** Desde 2026-10-16, Material Symbols Rounded em um sprite SVG embutido. Antes eram caminhos soltos dos Material Icons.
 
 ## Conteúdo e fontes
 
@@ -79,6 +82,33 @@ Pedido do responsável: ao clicar em uma imagem ou gráfico, ele deve se expandi
   - em 390 px, com toque: o filtro da matriz funcionou dentro do diálogo;
   - sem erros de console; `npm test` passa 14 de 14.
 - Não verificados: leitores de tela, Safari e iOS. O `zoom` exige Firefox 126 ou posterior.
+
+## Padronização: ícones, números, tema e layouts (2026-10-16)
+
+O responsável pediu cinco mudanças. Todas estão implementadas e descritas em detalhe no [design system](ENERGIA_ATOMICA_DESIGN_SYSTEM.md).
+
+1. **Formas consistentes.** Componentes retangulares não mudam mais de raio ao interagir: chips, itens do sumário, botões de ícone, botão de ampliar, cartões de país e números das etapas. O estado agora aparece só pela camada de estado. As formas expressivas continuam morfando.
+2. **Ícones e tipografia.** A biblioteca escolhida foi o Material Symbols Rounded. Os ícones ficam em um sprite, com três tamanhos e papéis de cor documentados. A tipografia virou tokens `--type-*`, aplicados aos componentes.
+3. **Números de dados.** 80 valores do texto corrido ficaram em verde.
+   - 26 abrem o gráfico correspondente, com o valor em ênfase.
+   - 54 abrem uma ficha com o significado e a fonte.
+   - Foram criadas ênfases nos gráficos que não tinham. Na página 13, os valores de percepção e confiança entraram no texto para ligar o texto aos gráficos.
+4. **Tema.** O tema passou a ser o Verde Bandeira ES, aplicado também à capa, ao favicon e ao fundo orgânico. A paleta usa um matiz só, com croma igual ou menor.
+5. **Layouts.** O seletor na barra superior oferece rolagem, revista (duas páginas) e foco (tela inteira, zoom e arrasto).
+
+**Validação (Chromium headless, `file://`):**
+- **Composição:** as 14 páginas, em 1280 px, ficam dentro da margem. A página 13 precisou de uma frase mais curta.
+- **Desktop (1440 px):**
+  - o número “15,8 TWh” abriu a matriz com “Nuclear” em ênfase e a nota de fonte; ao fechar, a ênfase some;
+  - “91 anos” abriu a ficha, que fecha com Esc;
+  - “62,1%” selecionou a parada “Salvador” do ciclo;
+  - “R$ 23,9 bilhões” destacou as 3 barras do custo restante;
+  - “1,8 a 2,6 anos” destacou as colunas de payback da tabela.
+- **Modo revista:** colunas de 794 px na escala; a escolha persiste ao recarregar; a seta vai de 04–05 para 06–07.
+- **Modo foco:** abre ajustado (70%); zoom + leva a 110%; o arrasto move a página; a seta vai para a página seguinte; Esc volta ao modo anterior com as 14 páginas no lugar.
+- **Celular (390 px, toque):** o botão “Revista” fica oculto; a ênfase “Brasil” funciona; a ficha abre; o foco ajusta pela largura (100%).
+- Sem erros de console. `npm test`: 17 de 17.
+- **Não verificados:** Safari e iOS, leitores de tela, trackpads reais (pinça e Ctrl + rolagem) e desempenho em aparelhos.
 
 ## Próximo passo
 

@@ -3,64 +3,75 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#02a913">
+  <meta name="theme-color" content="#1d7449">
   <meta name="description" content="Energia Atômica, edição 01: revista do 2º ano D do Instituto J&F sobre a aposta brasileira na energia nuclear.">
   <title>Energia Atômica</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2302a913'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Arial' font-weight='900' font-size='36' fill='%23fff'%3EA%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d7449'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Arial' font-weight='900' font-size='36' fill='%23fff'%3EA%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Roboto+Flex:opsz,wght@8..144,300..800&display=swap">
   <style>
-/* Energia Atômica · v1
-   Tokens Material Design 3 gerados com @material/material-color-utilities (SchemeContent)
-   a partir do verde da capa, #02a913. Ajustes de contraste estão anotados. */
+/* Energia Atômica — design system (ver docs/ENERGIA_ATOMICA_DESIGN_SYSTEM.md)
+   Tema Verde Bandeira ES (#1d7449, HCT 159/43/43). Papéis de cor do Material 3 gerados com
+   @material/material-color-utilities (SchemeContent); ajustes anotados. Regra de paleta:
+   mesmo matiz (~159) e croma igual ou menor que o da semente, sem verdes neon. */
 :root {
-  /* Capa */
-  --cover-bg: #02a913;
-  --cover-blob-1: #0fc621;
-  --cover-blob-2: #4cc859;
-  --cover-blob-3: #57c663;
+  /* Marca e capa */
+  --brand: #1d7449;            /* Verde Bandeira ES */
+  --cover-bg: var(--brand);
+  --cover-blob-1: #44845e;     /* tom 50, croma 36 */
+  --cover-blob-2: #598f6d;     /* tom 55, croma 32 */
+  --cover-blob-3: #6ba27e;     /* tom 62, croma 32 */
+  --on-brand: #ffffff;
+  --on-brand-variant: #d6eadc; /* texto secundário sobre o verde */
 
-  /* Cor */
-  --md-sys-color-primary: #006e08;
+  /* Cor — papéis M3 */
+  --md-sys-color-primary: #005a35;
   --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #02a913;
-  --md-sys-color-on-primary-container: #003301;
-  --md-sys-color-secondary: #2a6c24;
+  --md-sys-color-primary-container: #1d7449;
+  --md-sys-color-on-primary-container: #ffffff;        /* gerado #a3f7c1; branco tem 5,7:1 e é menos saturado */
+  --md-sys-color-secondary: #476551;
   --md-sys-color-on-secondary: #ffffff;
-  --md-sys-color-secondary-container: #adf59b;
-  --md-sys-color-on-secondary-container: #0f3d0b; /* escurecido para leitura de texto corrido */
-  --md-sys-color-tertiary: #00639c;
-  --md-sys-color-tertiary-container: #cfe5ff;
-  --md-sys-color-on-tertiary-container: #001d33;
-  --md-sys-color-surface: #f3fceb;
-  --md-sys-color-on-surface: #161e13;
-  --md-sys-color-on-surface-variant: #3e4a39;
+  --md-sys-color-secondary-container: #c6e8ce;
+  --md-sys-color-on-secondary-container: #1f3d2a;      /* escurecido para texto corrido */
+  --md-sys-color-surface: #f7faf4;
+  --md-sys-color-on-surface: #181d19;
+  --md-sys-color-on-surface-variant: #3f4941;
   --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #eef6e5;
-  --md-sys-color-surface-container: #e8f1e0;
-  --md-sys-color-surface-container-high: #e2ebda;
-  --md-sys-color-surface-container-highest: #dce5d5;
-  --md-sys-color-outline: #6d7b67;
-  --md-sys-color-outline-variant: #bccbb4;
-  --md-sys-color-inverse-surface: #2b3327;
-  --md-sys-color-inverse-on-surface: #ebf4e3;
-  --md-sys-color-inverse-primary: #57e24c;
-  --md-sys-color-primary-fixed: #76ff66;
-  --md-sys-color-primary-fixed-dim: #57e24c;
+  --md-sys-color-surface-container-low: #f1f5ee;
+  --md-sys-color-surface-container: #ebefe9;
+  --md-sys-color-surface-container-high: #e5e9e3;
+  --md-sys-color-surface-container-highest: #e0e4dd;
+  --md-sys-color-outline: #6f7a71;
+  --md-sys-color-outline-variant: #bec9bf;
+  --md-sys-color-inverse-surface: #2d322e;
+  --md-sys-color-inverse-on-surface: #eef2ec;
+  --md-sys-color-inverse-primary: #9fd1b0;             /* gerado #85d8a4, dessaturado */
+  --md-sys-color-primary-fixed: #c3e2cc;               /* gerado #a1f5bf, dessaturado para decoração */
+  --md-sys-color-primary-fixed-dim: #9cc5a8;
+  --md-sys-color-scrim: #000000;
 
-  /* Forma */
+  /* Dados: destaque de números e ênfase em gráficos */
+  --data-ink: var(--md-sys-color-primary);
+  --data-emphasis: #1d7449;
+  --data-emphasis-container: #d7ecdc;
+
+  /* Forma: escala M3. Componentes retangulares mantêm o mesmo raio em todos os estados. */
   --md-sys-shape-corner-extra-small: 4px;
   --md-sys-shape-corner-small: 8px;
   --md-sys-shape-corner-medium: 12px;
   --md-sys-shape-corner-large: 16px;
-  --md-sys-shape-corner-large-increased: 20px;
   --md-sys-shape-corner-extra-large: 28px;
-  --md-sys-shape-corner-extra-large-increased: 32px;
   --md-sys-shape-corner-extra-extra-large: 48px;
   --md-sys-shape-corner-full: 999px;
 
-  /* Movimento expressivo */
+  /* Estados (camadas de estado M3) */
+  --md-sys-state-hover: 8%;
+  --md-sys-state-focus: 10%;
+  --md-sys-state-pressed: 10%;
+  --md-sys-state-dragged: 16%;
+
+  /* Movimento */
   --md-sys-motion-spring-fast-spatial: 350ms cubic-bezier(.42, 1.67, .21, .9);
   --md-sys-motion-spring-default-spatial: 500ms cubic-bezier(.38, 1.21, .22, 1);
   --md-sys-motion-spring-fast-effects: 150ms cubic-bezier(.31, .94, .34, 1);
@@ -71,11 +82,30 @@
   --md-sys-elevation-2: 0 1px 2px rgb(0 0 0 / .3), 0 2px 6px 2px rgb(0 0 0 / .15);
   --md-sys-elevation-3: 0 4px 8px 3px rgb(0 0 0 / .15), 0 1px 3px rgb(0 0 0 / .3);
 
-  /* Tipografia */
+  /* Famílias */
   --font-cover: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-display: Montserrat, 'Arial Black', Arial, sans-serif;
   --font-brand: Montserrat, 'Arial Black', Arial, sans-serif;
   --font-plain: 'Roboto Flex', Roboto, 'Segoe UI', Arial, sans-serif;
+
+  /* Escala tipográfica (peso tamanho/entrelinha família) */
+  --type-display: 800 44px/1.1 var(--font-display);
+  --type-headline: 800 40px/1.1 var(--font-display);
+  --type-title-large: 700 20px/1.25 var(--font-display);
+  --type-title-medium: 600 16px/22px var(--font-plain);
+  --type-title-small: 600 14px/20px var(--font-plain);
+  --type-body-large: 400 18px/1.45 var(--font-plain);
+  --type-body-medium: 400 14px/1.62 var(--font-plain);
+  --type-body-small: 400 12.5px/1.45 var(--font-plain);
+  --type-label-large: 500 14px/20px var(--font-plain);
+  --type-label-medium: 500 12px/16px var(--font-plain);
+  --type-overline: 800 11px/16px var(--font-brand);   /* rótulos em caixa alta, tracking .1em */
+  --type-caption: 400 11px/1.4 var(--font-plain);
+
+  /* Ícones: Material Symbols Rounded 400 */
+  --icon-sm: 18px;   /* dentro de chips, texto e rótulos */
+  --icon-md: 20px;   /* botões compactos: ampliar, barra do modo foco */
+  --icon-lg: 24px;   /* padrão: barra superior, diálogos, FAB */
 
   --page-w: 794px;
   --page-h: 1123px;
@@ -86,6 +116,11 @@
   color: var(--md-sys-color-on-surface);
   background: var(--md-sys-color-surface-container);
 }
+
+/* Ícones */
+.icon { width: var(--icon-lg); height: var(--icon-lg); flex: none; fill: currentColor; vertical-align: middle; }
+.icon-sm { width: var(--icon-sm); height: var(--icon-sm); }
+.icon-md { width: var(--icon-md); height: var(--icon-md); }
 
 * { box-sizing: border-box; }
 html { scroll-padding-top: 80px; }
@@ -106,19 +141,19 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   transition: box-shadow var(--md-sys-motion-spring-default-effects);
 }
 .app-title { display: flex; flex-direction: column; min-width: 0; margin-left: 4px; }
-.app-title strong { font: 600 18px/24px var(--font-plain); }
-.app-title span { font: 400 13px/18px var(--font-plain); color: var(--md-sys-color-on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-title strong { font: var(--type-title-medium); font-size: 18px; }
+.app-title span { font: var(--type-label-medium); font-weight: 400; color: var(--md-sys-color-on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .app-actions { margin-left: auto; display: flex; align-items: center; gap: 2px; }
-.page-counter { font: 500 14px/20px var(--font-plain); font-variant-numeric: tabular-nums; min-width: 64px; text-align: center; color: var(--md-sys-color-on-surface-variant); }
+.page-counter { font: var(--type-label-large); font-variant-numeric: tabular-nums; min-width: 64px; text-align: center; color: var(--md-sys-color-on-surface-variant); }
 .icon-button {
   width: 48px; height: 48px; display: grid; place-items: center;
   border: 0; border-radius: var(--md-sys-shape-corner-full); background: transparent;
   color: var(--md-sys-color-on-surface-variant);
-  transition: border-radius var(--md-sys-motion-spring-fast-spatial), background var(--md-sys-motion-spring-fast-effects);
+  transition: background var(--md-sys-motion-spring-fast-effects);
 }
-.icon-button svg { width: 24px; height: 24px; fill: currentColor; }
-.icon-button:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 8%, transparent); }
-.icon-button:active { border-radius: var(--md-sys-shape-corner-medium); background: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 12%, transparent); }
+.icon-button svg { width: var(--icon-lg); height: var(--icon-lg); fill: currentColor; }
+.icon-button:hover { background: color-mix(in srgb, currentColor var(--md-sys-state-hover), transparent); }
+.icon-button:active { background: color-mix(in srgb, currentColor var(--md-sys-state-pressed), transparent); }
 .icon-button:disabled { opacity: .38; cursor: default; background: transparent; }
 
 /* ---------- Navigation drawer (modal) ---------- */
@@ -133,7 +168,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 }
 .drawer-open .nav-drawer { transform: none; }
 .drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 4px 8px 16px; }
-.drawer-title { font: 500 14px/20px var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
+.drawer-title { font: var(--type-label-large); color: var(--md-sys-color-on-surface-variant); }
 .nav-drawer ul { list-style: none; margin: 0; padding: 0; }
 .nav-drawer a {
   display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 24px 0 16px;
@@ -152,9 +187,9 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 }
 .fab .fab-shape { position: absolute; inset: 0; width: 100%; height: 100%; }
 .fab .fab-shape path { fill: var(--md-sys-color-primary-container); }
-.fab .fab-icon { position: relative; width: 28px; height: 28px; fill: var(--md-sys-color-on-primary-container); transition: transform var(--md-sys-motion-spring-default-spatial); }
+.fab .fab-icon { position: relative; width: var(--icon-lg); height: var(--icon-lg); fill: var(--md-sys-color-on-primary-container); transition: transform var(--md-sys-motion-spring-default-spatial); }
 .fab.at-end .fab-icon { transform: rotate(180deg); }
-.fab:hover .fab-shape path { fill: #11b81f; }
+.fab:hover .fab-shape path { fill: color-mix(in srgb, var(--md-sys-color-on-primary-container) var(--md-sys-state-hover), var(--md-sys-color-primary-container)); }
 
 /* ---------- Páginas ---------- */
 .magazine { position: relative; z-index: 1; display: grid; justify-content: center; gap: 32px; padding: 16px 16px 120px; }
@@ -172,21 +207,21 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 }
 .page > * { position: relative; z-index: 1; flex-shrink: 0; }
 
-.headline { margin: 0; font: 800 40px/1.1 var(--font-display); letter-spacing: -.025em; color: var(--md-sys-color-on-surface); text-wrap: balance; }
-.headline.display { font-size: 44px; }
-.standfirst, .lead { margin: 0; font: 400 18px/1.45 var(--font-plain); color: var(--md-sys-color-on-surface-variant); text-wrap: pretty; }
-.title-medium { margin: 0 0 6px; font: 600 16px/22px var(--font-plain); }
-.title-small { font: 600 14px/20px var(--font-plain); }
-.label { margin: 0 0 6px; font: 800 11px/16px var(--font-brand); letter-spacing: .1em; text-transform: uppercase; color: var(--md-sys-color-primary); }
+.headline { margin: 0; font: var(--type-headline); letter-spacing: -.025em; color: var(--md-sys-color-on-surface); text-wrap: balance; }
+.headline.display { font: var(--type-display); letter-spacing: -.025em; }
+.standfirst, .lead { margin: 0; font: var(--type-body-large); color: var(--md-sys-color-on-surface-variant); text-wrap: pretty; }
+.title-medium { margin: 0 0 6px; font: var(--type-title-medium); }
+.title-small { font: var(--type-title-small); }
+.label { margin: 0 0 6px; font: var(--type-overline); letter-spacing: .1em; text-transform: uppercase; color: var(--md-sys-color-primary); }
 
-.body-text { font: 400 14px/1.62 var(--font-plain); color: var(--md-sys-color-on-surface); hyphens: auto; -webkit-hyphens: auto; }
+.body-text { font: var(--type-body-medium); color: var(--md-sys-color-on-surface); hyphens: auto; -webkit-hyphens: auto; }
 .body-text p { margin: 0 0 12px; text-align: start; text-wrap: pretty; orphans: 2; widows: 2; }
 .body-text p:last-child { margin-bottom: 0; }
 .columns { column-count: 2; column-gap: 36px; }
 .columns.single { column-count: 1; }
 .dropcap::first-letter { float: left; margin: 4px 8px 0 0; font: 800 54px/.82 var(--font-brand); color: var(--md-sys-color-primary-container); }
 
-.sources { margin: auto 0 0; font: 400 11px/1.4 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
+.sources { margin: auto 0 0; font: var(--type-caption); color: var(--md-sys-color-on-surface-variant); }
 
 /* Formas expressivas */
 .xs { display: block; overflow: visible; }
@@ -204,7 +239,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .cover-art { position: absolute; inset: 0; width: 100%; height: 100%; }
 .cover-energia { font: 400 118px var(--font-cover); fill: #fff; }
 .cover-atomica { font: 800 62px var(--font-brand); fill: #fff; }
-.cover-meta { font: 800 12px var(--font-brand); letter-spacing: .12em; fill: var(--md-sys-color-on-primary-container); }
+.cover-meta { font: 800 12px var(--font-brand); letter-spacing: .12em; fill: var(--on-brand-variant); }
 .cover-foot { font-size: 11px; }
 .cover-blob { transform-box: fill-box; transform-origin: center; animation: drift 14s ease-in-out infinite alternate; }
 .cover-blob:nth-of-type(2) { animation-duration: 17s; animation-delay: -4s; }
@@ -224,7 +259,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .members span { font: 400 13px/18px var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
 
 /* ---------- Cards ---------- */
-.card { position: relative; border-radius: var(--md-sys-shape-corner-large); padding: 22px 24px; background: var(--md-sys-color-surface-container-low); font: 400 13.5px/1.5 var(--font-plain); transition: border-radius var(--md-sys-motion-spring-default-spatial); }
+.card { position: relative; border-radius: var(--md-sys-shape-corner-large); padding: 22px 24px; background: var(--md-sys-color-surface-container-low); font: var(--type-body-small); font-size: 13.5px; line-height: 1.5; }
 .card p { margin: 0 0 10px; }
 .card p:last-child { margin-bottom: 0; }
 .card.filled { background: var(--md-sys-color-surface-container-highest); }
@@ -255,15 +290,16 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 20px;
   padding: 18px 20px 18px 8px; text-decoration: none; color: inherit;
   border-radius: var(--md-sys-shape-corner-extra-large);
-  transition: border-radius var(--md-sys-motion-spring-default-spatial), background var(--md-sys-motion-spring-fast-effects);
+  transition: background var(--md-sys-motion-spring-fast-effects);
 }
-.toc a:hover, .toc a:focus-visible { border-radius: var(--md-sys-shape-corner-medium); background: var(--md-sys-color-surface-container-low); }
+.toc a:hover, .toc a:focus-visible { background: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-hover), transparent); }
+.toc a:active { background: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-pressed), transparent); }
 .toc-num { font: 300 44px/1 var(--font-plain); font-variant-numeric: tabular-nums; letter-spacing: -.04em; color: var(--md-sys-color-primary); }
 .toc-text { display: grid; gap: 4px; }
 .toc-text small { font: 800 11px/16px var(--font-brand); letter-spacing: .1em; text-transform: uppercase; color: var(--md-sys-color-primary); }
-.toc-text strong { font: 700 20px/1.25 var(--font-display); letter-spacing: -.01em; }
+.toc-text strong { font: var(--type-title-large); letter-spacing: -.01em; }
 .toc-text span { font: 400 14px/1.4 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
-.research-question { margin-top: auto; padding: 22px 26px; border-radius: var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-small); background: var(--md-sys-color-inverse-surface); color: var(--md-sys-color-inverse-on-surface); }
+.research-question { margin-top: auto; padding: 22px 26px; border-radius: var(--md-sys-shape-corner-extra-large); background: var(--md-sys-color-inverse-surface); color: var(--md-sys-color-inverse-on-surface); }
 .research-question .label { color: var(--md-sys-color-inverse-primary); }
 .research-question blockquote { margin: 0; font: 600 19px/1.45 var(--font-display); }
 .deco-bl path { fill: var(--md-sys-color-surface-container); opacity: 1; }
@@ -273,14 +309,14 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .pull { margin: 0; max-width: 560px; font: 600 20px/1.4 var(--font-display); color: var(--md-sys-color-primary); }
 .editorial .body-text { font-size: 15px; line-height: 1.6; }
 .editorial .body-text p { margin-bottom: 11px; }
-.signature { margin: auto 0 0; font: 800 11px/16px var(--font-brand); letter-spacing: .1em; text-transform: uppercase; color: var(--md-sys-color-on-surface-variant); }
+.signature { margin: auto 0 0; font: var(--type-overline); letter-spacing: .1em; text-transform: uppercase; color: var(--md-sys-color-on-surface-variant); }
 
 /* ---------- Reportagens ---------- */
 .opener {
   position: relative; overflow: hidden;
   margin: calc(var(--page-pad) * -1) calc(var(--page-pad) * -1) 0;
   padding: 56px var(--page-pad) 40px;
-  background: var(--cover-bg); color: #fff;
+  background: var(--cover-bg); color: var(--on-brand);
   border-radius: 0 0 var(--md-sys-shape-corner-extra-extra-large) var(--md-sys-shape-corner-extra-extra-large);
   display: grid; gap: 16px;
 }
@@ -290,8 +326,8 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .opener-shape.s1 path { fill: var(--cover-blob-1); }
 .opener-shape.s2 { width: 170px; height: 170px; right: 150px; bottom: -90px; }
 .opener-shape.s2 path { fill: var(--cover-blob-2); }
-.opener .headline { color: #fff; margin: 0; }
-.standfirst.on-green { color: #fff; font-size: 17px; font-weight: 500; }
+.opener .headline { color: var(--on-brand); margin: 0; }
+.standfirst.on-green { color: var(--on-brand-variant); font-size: 17px; font-weight: 500; }
 
 .report-grid { display: grid; grid-template-columns: 1fr 290px; gap: 36px; align-items: start; }
 .report-grid .columns { column-count: 1; }
@@ -300,30 +336,35 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 /* Chips e controles */
 .chip-set { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 16px; }
 .chip {
+  display: inline-flex; align-items: center; gap: 6px;
   height: 32px; padding: 0 14px; border: 1px solid var(--md-sys-color-outline-variant);
   border-radius: var(--md-sys-shape-corner-small); background: transparent;
-  font: 500 13px/1 var(--font-plain); color: var(--md-sys-color-on-surface-variant);
-  transition: border-radius var(--md-sys-motion-spring-fast-spatial), background var(--md-sys-motion-spring-fast-effects);
+  font: var(--type-label-large); font-size: 13px; color: var(--md-sys-color-on-surface-variant);
+  transition: background var(--md-sys-motion-spring-fast-effects);
 }
-.chip:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 8%, transparent); }
-.chip[aria-pressed="true"] { border-color: transparent; border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); font-weight: 700; }
-.chip[aria-pressed="true"]::before { content: '✓ '; }
-.chip[aria-pressed="true"]:hover { background: var(--md-sys-color-secondary-container); }
+.chip .icon { display: none; margin-left: -4px; }
+.chip:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface-variant) var(--md-sys-state-hover), transparent); }
+.chip:active { background: color-mix(in srgb, var(--md-sys-color-on-surface-variant) var(--md-sys-state-pressed), transparent); }
+.chip[aria-pressed="true"] { border-color: transparent; background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.chip[aria-pressed="true"] .icon { display: block; }
+.chip[aria-pressed="true"]:hover { background: color-mix(in srgb, var(--md-sys-color-on-secondary-container) var(--md-sys-state-hover), var(--md-sys-color-secondary-container)); }
 
 .segmented { display: flex; margin: 10px 0 12px; }
 .segmented button {
   flex: 1; height: 40px; padding: 0 8px; border: 1px solid var(--md-sys-color-outline);
-  margin-left: -1px; background: transparent; font: 500 13px/1 var(--font-plain); color: var(--md-sys-color-on-surface);
-  transition: background var(--md-sys-motion-spring-fast-effects), border-radius var(--md-sys-motion-spring-fast-spatial);
+  margin-left: -1px; background: transparent; font: var(--type-label-large); font-size: 13px; color: var(--md-sys-color-on-surface);
+  transition: background var(--md-sys-motion-spring-fast-effects);
 }
+.segmented button:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-hover), transparent); }
 .segmented button:first-child { margin: 0; border-radius: var(--md-sys-shape-corner-full) 0 0 var(--md-sys-shape-corner-full); }
 .segmented button:last-child { border-radius: 0 var(--md-sys-shape-corner-full) var(--md-sys-shape-corner-full) 0; }
 .segmented button[aria-checked="true"] { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); font-weight: 700; }
+.segmented button[aria-checked="true"]:hover { background: color-mix(in srgb, var(--md-sys-color-on-secondary-container) var(--md-sys-state-hover), var(--md-sys-color-secondary-container)); }
 
 /* Gráficos */
 .chart-card { margin: 0; background: var(--md-sys-color-surface-container-low); }
 .chart-card figcaption { display: grid; gap: 2px; }
-.chart-card figcaption span { font: 400 12px/16px var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
+.chart-card figcaption span { font: var(--type-label-medium); font-weight: 400; color: var(--md-sys-color-on-surface-variant); }
 .bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .bar { display: grid; grid-template-columns: 92px 1fr 62px; align-items: center; gap: 8px; font: 400 12px/1.2 var(--font-plain); transition: opacity var(--md-sys-motion-spring-default-effects); }
 .bar.dim { opacity: .28; }
@@ -336,7 +377,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .bar-value { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
 .bar-value small { display: block; font-weight: 400; font-size: 10px; color: var(--md-sys-color-on-surface-variant); }
 .chart-total { margin: 12px 0 0 !important; font: 500 12px/1.4 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
-.note { font: 400 11.5px/1.4 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
+.note { font: var(--type-caption); font-size: 11.5px; color: var(--md-sys-color-on-surface-variant); }
 
 .wavy-meter { display: grid; gap: 4px; margin: 14px 0 6px; }
 .meter-label { font: 400 12px/1.35 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
@@ -356,8 +397,9 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .stepper button, .cycle button { position: relative; width: 100%; display: grid; justify-items: center; gap: 4px; padding: 0 2px; border: 0; background: transparent; text-align: center; }
 .stepper svg, .cycle svg { width: 68px; height: 68px; }
 .stepper svg path, .cycle svg path { fill: var(--md-sys-color-surface-container-highest); transition: fill var(--md-sys-motion-spring-default-effects); }
-.stepper b { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--md-sys-shape-corner-medium); border: 1.5px solid var(--md-sys-color-outline-variant); background: var(--md-sys-color-surface-container-lowest); font: 500 18px/1 var(--font-plain); color: var(--md-sys-color-on-surface-variant); transition: border-radius var(--md-sys-motion-spring-fast-spatial), background var(--md-sys-motion-spring-fast-effects); }
-.stepper button[aria-selected="true"] b { border-color: transparent; border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-primary-container); }
+.stepper b { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--md-sys-shape-corner-full); border: 1.5px solid var(--md-sys-color-outline-variant); background: var(--md-sys-color-surface-container-lowest); font: 500 18px/1 var(--font-plain); color: var(--md-sys-color-on-surface-variant); transition: background var(--md-sys-motion-spring-fast-effects); }
+.stepper button:hover b { background: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-hover), var(--md-sys-color-surface-container-lowest)); }
+.stepper button[aria-selected="true"] b { border-color: transparent; background: var(--md-sys-color-primary-container); }
 .cycle b { position: static; font: 600 12.5px/1.25 var(--font-plain); color: var(--md-sys-color-on-surface); }
 .stepper span, .cycle span { font: 500 12px/1.25 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
 .stepper button[aria-selected="true"] svg path, .cycle button[aria-selected="true"] svg path { fill: var(--md-sys-color-primary-container); }
@@ -376,7 +418,6 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .plant-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .plant-list li { display: grid; gap: 2px; padding: 14px 18px; }
 .plant-list b { font: 800 20px/1.2 var(--font-brand); }
-.plant-list li:nth-child(2) { border-radius: var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-small); }
 
 .balance { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .balance-card { background: var(--md-sys-color-surface-container); border-top: 4px solid var(--md-sys-color-primary-container); }
@@ -401,10 +442,10 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 /* Payback */
 .scenario-facts { margin: 0 0 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .scenario-facts div { padding: 10px 12px; border-radius: var(--md-sys-shape-corner-medium); background: var(--md-sys-color-surface-container-lowest); }
-.scenario-facts .hero { grid-column: 1 / -1; background: var(--md-sys-color-primary-container); color: #fff; border-radius: var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-medium); }
+.scenario-facts .hero { grid-column: 1 / -1; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
 .scenario-facts .small { grid-column: 1 / -1; }
 .scenario-facts dt { font: 400 11px/1.3 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
-.scenario-facts .hero dt { color: var(--md-sys-color-on-primary-container); font-weight: 600; }
+.scenario-facts .hero dt { color: var(--on-brand-variant); font-weight: 600; }
 .scenario-facts dd { margin: 2px 0 0; font: 800 17px/1.2 var(--font-brand); }
 .scenario-facts .hero dd { font-size: 30px; }
 .scenario-facts .small dd { font: 400 11.5px/1.4 var(--font-plain); }
@@ -439,14 +480,13 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 
 /* Países */
 .countries { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.countries li { padding: 10px 14px 12px; font-size: 12px; line-height: 1.4; background: var(--md-sys-color-surface-container-low); transition: opacity var(--md-sys-motion-spring-default-effects), border-radius var(--md-sys-motion-spring-default-spatial); }
-.countries li:hover { border-radius: var(--md-sys-shape-corner-extra-large); }
+.countries li { padding: 10px 14px 12px; font-size: 12px; line-height: 1.4; background: var(--md-sys-color-surface-container-low); transition: opacity var(--md-sys-motion-spring-default-effects); }
 .countries li.dim { opacity: .3; }
 .countries b { display: block; font: 800 15px/1.2 var(--font-brand); }
 .pill { display: inline-block; margin: 5px 0 6px; padding: 3px 10px; border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); font: 600 11px/16px var(--font-plain); }
 .countries li[data-group="mantido"] .pill { background: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface); }
-.closing { position: relative; overflow: hidden; padding: 16px 150px 16px 24px; border-radius: var(--md-sys-shape-corner-extra-large); background: var(--cover-bg); color: #fff; }
-.closing .label { color: var(--md-sys-color-on-primary-container); }
+.closing { position: relative; overflow: hidden; padding: 16px 150px 16px 24px; border-radius: var(--md-sys-shape-corner-extra-large); background: var(--cover-bg); color: var(--on-brand); }
+.closing .label { color: var(--on-brand-variant); }
 .closing p:last-child { margin: 0; font: 600 17px/1.45 var(--font-display); }
 .closing-shape { position: absolute; right: -24px; top: 50%; width: 170px; height: 170px; transform: translateY(-50%); }
 .closing-shape path { fill: var(--cover-blob-1); }
@@ -489,11 +529,11 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   border-radius: var(--md-sys-shape-corner-full);
   background: color-mix(in srgb, var(--md-sys-color-surface-container-lowest) 88%, transparent);
   color: var(--md-sys-color-on-surface-variant); box-shadow: var(--md-sys-elevation-1);
-  opacity: .75; transition: opacity var(--md-sys-motion-spring-fast-effects), border-radius var(--md-sys-motion-spring-fast-spatial);
+  opacity: .75; transition: opacity var(--md-sys-motion-spring-fast-effects), background var(--md-sys-motion-spring-fast-effects);
 }
-.expand-btn svg { width: 20px; height: 20px; fill: currentColor; }
+.expand-btn svg { width: var(--icon-md); height: var(--icon-md); fill: currentColor; }
+.expand-btn:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface-variant) var(--md-sys-state-hover), var(--md-sys-color-surface-container-lowest)); }
 .expandable:hover > .expand-btn, .expand-btn:focus-visible { opacity: 1; }
-.expand-btn:active { border-radius: var(--md-sys-shape-corner-small); }
 .shaped-photo .expand-btn { top: 10px; right: 10px; }
 .viewer {
   width: min(1180px, 96vw); max-width: none; height: min(900px, 94vh); max-height: none;
@@ -501,11 +541,11 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   background: var(--md-sys-color-surface-container-lowest); color: var(--md-sys-color-on-surface);
   box-shadow: var(--md-sys-elevation-3); overflow: hidden;
 }
-.viewer[open] { display: grid; grid-template-rows: auto 1fr; animation: viewer-in var(--md-sys-motion-spring-default-spatial) both; }
+.viewer[open] { display: grid; grid-template-rows: auto auto 1fr; animation: viewer-in var(--md-sys-motion-spring-default-spatial) both; }
 .viewer::backdrop { background: rgb(0 0 0 / .6); }
 @keyframes viewer-in { from { opacity: 0; transform: scale(.94); } }
 .viewer-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 24px; }
-.viewer-title { font: 600 16px/22px var(--font-plain); }
+.viewer-title { font: var(--type-title-medium); }
 .viewer-stage { overflow: auto; display: grid; place-items: center; padding: 8px 24px 28px; }
 .viewer-stage > * { margin: 0; cursor: default; }
 .viewer-stage > .expandable > .expand-btn { display: none; }
@@ -519,13 +559,107 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   .viewer-stage { padding: 8px 12px 20px; }
 }
 
+
+/* ---------- Números de dados no texto ----------
+   Verde = dado verificável. Sublinhado contínuo: abre o gráfico com o valor em destaque.
+   Sublinhado pontilhado: abre uma ficha com o significado e a fonte do valor. */
+.dnum {
+  display: inline; padding: 0 1px; margin: 0; border: 0; border-radius: var(--md-sys-shape-corner-extra-small);
+  background: transparent; font: inherit; font-weight: 600; color: var(--data-ink);
+  text-decoration: underline dotted; text-decoration-thickness: 1.5px; text-underline-offset: 3px;
+  cursor: help; transition: background var(--md-sys-motion-spring-fast-effects);
+}
+.dnum[data-chart] { text-decoration-style: solid; cursor: zoom-in; }
+.dnum:hover { background: color-mix(in srgb, var(--data-ink) var(--md-sys-state-hover), transparent); }
+.dnum:active, .dnum[aria-expanded="true"] { background: var(--data-emphasis-container); }
+.opener .dnum, .closing .dnum { color: var(--on-brand); }
+
+.num-pop {
+  position: fixed; z-index: 60; width: min(320px, calc(100vw - 32px));
+  padding: 12px 16px 14px; border-radius: var(--md-sys-shape-corner-medium);
+  background: var(--md-sys-color-surface-container-lowest); color: var(--md-sys-color-on-surface);
+  box-shadow: var(--md-sys-elevation-2); font: var(--type-body-small);
+  animation: pop-in var(--md-sys-motion-spring-fast-spatial) both;
+}
+@keyframes pop-in { from { opacity: 0; transform: translateY(4px) scale(.98); } }
+.num-pop-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; color: var(--data-ink); }
+.num-pop-value { font: var(--type-title-medium); color: var(--md-sys-color-on-surface); }
+.num-pop p { margin: 0; }
+.num-pop .num-pop-src { margin-top: 8px; font: var(--type-caption); color: var(--md-sys-color-on-surface-variant); }
+.num-pop .num-pop-close { position: absolute; top: 4px; right: 4px; width: 32px; height: 32px; }
+.num-pop .num-pop-close svg { width: var(--icon-sm); height: var(--icon-sm); }
+
+/* Ênfase de um valor dentro de um gráfico */
+[data-key] { transition: opacity var(--md-sys-motion-spring-default-effects), background var(--md-sys-motion-spring-default-effects); }
+.has-emphasis [data-key]:not(.is-emphasis):not(:has(.is-emphasis)) { opacity: .32; }
+.is-emphasis { position: relative; box-shadow: 0 0 0 2px var(--data-emphasis), 0 0 0 6px var(--data-emphasis-container); border-radius: var(--md-sys-shape-corner-extra-small); }
+:is(li, div, button).is-emphasis { background: var(--data-emphasis-container); }
+:is(tr, td, th).is-emphasis { box-shadow: none; background: var(--data-emphasis-container); }
+.has-emphasis .pb-group { opacity: 1; }
+.has-emphasis { animation: emphasis-in 900ms var(--md-sys-motion-spring-default-effects); }
+@keyframes emphasis-in { 0% { filter: none; } 30% { filter: brightness(1.04); } }
+.viewer-note { display: flex; align-items: center; gap: 8px; margin: 0 24px 4px; padding: 8px 12px; border-radius: var(--md-sys-shape-corner-small); background: var(--data-emphasis-container); color: var(--md-sys-color-on-secondary-container); font: var(--type-body-small); }
+.viewer-note[hidden] { display: none; }
+.viewer-note b { color: var(--data-ink); }
+
+/* ---------- Seletor de layout (barra superior) ---------- */
+.layout-switch { display: flex; gap: 2px; padding: 4px; margin: 0 8px 0 auto; border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-surface-container-high); }
+.layout-switch button { width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border: 0; border-radius: var(--md-sys-shape-corner-full); background: transparent; color: var(--md-sys-color-on-surface-variant); transition: background var(--md-sys-motion-spring-fast-effects); }
+.layout-switch button:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface-variant) var(--md-sys-state-hover), transparent); }
+.layout-switch button[aria-pressed="true"] { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.layout-switch .icon-on { display: none; }
+.layout-switch button[aria-pressed="true"] .icon-on { display: block; }
+.layout-switch button[aria-pressed="true"] .icon-off { display: none; }
+.app-actions { margin-left: 0; }
+
+/* ---------- Modo revista: duas páginas lado a lado ---------- */
+body[data-layout="spread"] .magazine { grid-template-columns: repeat(2, var(--page-w)); column-gap: 0; row-gap: 56px; zoom: var(--spread-zoom, 1); padding-top: 24px; }
+body[data-layout="spread"] .page { border-radius: 0; box-shadow: var(--md-sys-elevation-2); }
+body[data-layout="spread"] .page:first-child { grid-column: 2; }
+body[data-layout="spread"] .page.is-left { border-radius: var(--md-sys-shape-corner-extra-small) 0 0 var(--md-sys-shape-corner-extra-small); }
+body[data-layout="spread"] .page.is-right { border-radius: 0 var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-extra-small) 0; }
+body[data-layout="spread"] .page::after { content: ''; position: absolute; top: 0; bottom: 0; width: 48px; z-index: 5; pointer-events: none; }
+body[data-layout="spread"] .page.is-left::after { right: 0; background: linear-gradient(to left, rgb(0 0 0 / .14), transparent); }
+body[data-layout="spread"] .page.is-right::after { left: 0; background: linear-gradient(to right, rgb(0 0 0 / .16), transparent 70%); }
+
+/* ---------- Modo foco: uma página, tela inteira, zoom e arrasto ---------- */
+.focus-stage { position: fixed; inset: 0; z-index: 40; overflow: hidden; background: var(--md-sys-color-surface-container-highest); touch-action: none; cursor: grab; user-select: none; }
+.focus-stage.is-dragging { cursor: grabbing; }
+.focus-stage[hidden] { display: none; }
+.focus-canvas { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+.focus-canvas .page { box-shadow: var(--md-sys-elevation-3); cursor: inherit; }
+.focus-canvas .page a, .focus-canvas .page button, .focus-canvas .page [role="tab"], .focus-canvas .page .expandable { cursor: pointer; }
+.focus-toolbar {
+  position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 2px; padding: 6px;
+  border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-inverse-surface); color: var(--md-sys-color-inverse-on-surface);
+  box-shadow: var(--md-sys-elevation-3); cursor: default;
+}
+.focus-toolbar .icon-button { width: 40px; height: 40px; color: inherit; }
+.focus-toolbar .icon-button svg { width: var(--icon-md); height: var(--icon-md); }
+.focus-toolbar .sep { width: 1px; height: 24px; margin: 0 6px; background: color-mix(in srgb, currentColor 24%, transparent); }
+.focus-toolbar output { min-width: 56px; text-align: center; font: var(--type-label-large); font-variant-numeric: tabular-nums; }
+.focus-hint { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: var(--md-sys-shape-corner-full); background: color-mix(in srgb, var(--md-sys-color-inverse-surface) 88%, transparent); color: var(--md-sys-color-inverse-on-surface); font: var(--type-label-medium); pointer-events: none; transition: opacity 600ms; }
+.focus-hint.is-hidden { opacity: 0; }
+body[data-layout="focus"] { overflow: hidden; }
+body[data-layout="focus"] .fab { display: none; }
+
+@media (max-width: 860px) {
+  .layout-switch { margin-right: 4px; }
+  .layout-switch [data-layout="spread"] { display: none; }
+  .app-title span { display: none; }
+  .focus-toolbar { bottom: 12px; }
+  .focus-toolbar .zoom-out, .focus-toolbar .zoom-in { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
 @media print {
   .organic-bg { display: none !important; }
-  .top-app-bar, .fab, .nav-drawer, .scrim, .skip-link { display: none !important; }
+  .top-app-bar, .fab, .nav-drawer, .scrim, .skip-link, .focus-stage, .num-pop { display: none !important; }
+  .dnum { color: inherit; text-decoration: none; }
   body, .magazine { background: #fff; padding: 0; gap: 0; }
   .page { box-shadow: none; border-radius: 0; break-after: page; }
   @page { size: 794px 1123px; margin: 0; }
@@ -533,17 +667,45 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   </style>
 </head>
 <body>
+<svg class="icon-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <!-- Material Symbols Rounded, peso 400 (@material-symbols/svg-400 0.48.0, Apache-2.0). -->
+  <symbol id="i-menu" viewBox="0 -960 960 960"><path d="M150-240q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h660q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H150Zm0-210q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h660q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H150Zm0-210q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h660q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H150Z"/></symbol>
+  <symbol id="i-close" viewBox="0 -960 960 960"><path d="M480-438 270-228q-9 9-21 9t-21-9q-9-9-9-21t9-21l210-210-210-210q-9-9-9-21t9-21q9-9 21-9t21 9l210 210 210-210q9-9 21-9t21 9q9 9 9 21t-9 21L522-480l210 210q9 9 9 21t-9 21q-9 9-21 9t-21-9L480-438Z"/></symbol>
+  <symbol id="i-arrow_back" viewBox="0 -960 960 960"><path d="m274-450 227 227q9 9 9 21t-9 21q-9 9-21 9t-21-9L181-459q-5-5-7-10t-2-11q0-6 2-11t7-10l278-278q9-9 21-9t21 9q9 9 9 21t-9 21L274-510h496q13 0 21.5 8.5T800-480q0 13-8.5 21.5T770-450H274Z"/></symbol>
+  <symbol id="i-arrow_forward" viewBox="0 -960 960 960"><path d="M686-450H190q-13 0-21.5-8.5T160-480q0-13 8.5-21.5T190-510h496L459-737q-9-9-9-21t9-21q9-9 21-9t21 9l278 278q5 5 7 10t2 11q0 6-2 11t-7 10L501-181q-9 9-21 9t-21-9q-9-9-9-21t9-21l227-227Z"/></symbol>
+  <symbol id="i-arrow_downward" viewBox="0 -960 960 960"><path d="M450-274v-496q0-13 8.5-21.5T480-800q13 0 21.5 8.5T510-770v496l227-227q9-9 21-9t21 9q9 9 9 21t-9 21L501-181q-5 5-10 7t-11 2q-6 0-11-2t-10-7L181-459q-9-9-9-21t9-21q9-9 21-9t21 9l227 227Z"/></symbol>
+  <symbol id="i-open_in_full" viewBox="0 -960 960 960"><path d="M150-120q-12.75 0-21.37-8.63Q120-137.25 120-150v-240q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v168l558-558H570q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h240q12.75 0 21.38 8.62Q840-822.75 840-810v240q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-168L222-180h168q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H150Z"/></symbol>
+  <symbol id="i-view_agenda" viewBox="0 -960 960 960"><path d="M180-510q-24 0-42-18t-18-42v-210q0-24 18-42t42-18h600q24 0 42 18t18 42v210q0 24-18 42t-42 18H180Zm0-60h600v-210H180v210Zm0 450q-24 0-42-18t-18-42v-210q0-24 18-42t42-18h600q24 0 42 18t18 42v210q0 24-18 42t-42 18H180Zm0-60h600v-210H180v210Zm0-600v210-210Zm0 390v210-210Z"/></symbol>
+  <symbol id="i-view_agenda-fill" viewBox="0 -960 960 960"><path d="M180-510q-24 0-42-18t-18-42v-210q0-24 18-42t42-18h600q24 0 42 18t18 42v210q0 24-18 42t-42 18H180Zm0 390q-24 0-42-18t-18-42v-210q0-24 18-42t42-18h600q24 0 42 18t18 42v210q0 24-18 42t-42 18H180Z"/></symbol>
+  <symbol id="i-menu_book" viewBox="0 -960 960 960"><path d="M248-300q53.57 0 104.28 12.5Q403-275 452-250v-427q-45-30-97.62-46.5Q301.76-740 248-740q-38 0-74.5 9.5T100-707v434q31-14 70.5-20.5T248-300Zm264 50q50-25 98-37.5T712-300q38 0 78.5 6t69.5 16v-429q-34-17-71.82-25-37.82-8-76.18-8-54 0-104.5 16.5T512-677v427Zm-44.5 77.5Q461-174 456-178q-47-29-99.85-45-52.84-16-108.15-16-36.54 0-71.77 9T106-208q-23.1 11-44.55-3Q40-225 40-251v-463q0-15 7-27.5T68-761q42-20 87.39-29.5 45.4-9.5 92.61-9.5 63 0 122.5 17T482-731q51-35 109.5-52T712-800q46.87 0 91.93 9.5Q849-781 891-761q14 7 21.5 19.5T920-714v463q0 27.89-22.5 42.45Q875-194 853-208q-34-14-69.23-22.5Q748.54-239 712-239q-54.27 0-106.14 16Q554-207 508-178q-5 4-11.5 5.5T482-171q-8 0-14.5-1.5ZM276-489Zm284-119q0-5.52 4.02-11.34 4.03-5.82 8.98-7.66 30-11 61.34-17 31.33-6 65.91-6 21.61 0 42.68 2.5T784-640q6 2 11 7.4 5 5.39 5 12.13 0 11.47-7.5 17.47-7.5 6-18.5 3-16.8-5-35.4-7.5Q720-610 700-610q-29 0-56 5.5T591-588q-14 5-22.5-.5T560-608Zm0 220q0-5.81 4.02-11.94 4.03-6.12 8.98-8.06 30-11 61.34-16.5 31.33-5.5 65.91-5.5 21.61 0 42.68 2.5T784-420q6 2 11 7.4 5 5.39 5 12.13 0 11.47-7.5 17.47-7.5 6-18.5 3-16.8-5-35.4-7.5Q720-390 700-390q-29 0-56 5t-53 16q-14 5-22.5 0t-8.5-19Zm0-110q0-5.52 4.02-11.34 4.03-5.82 8.98-7.66 30-11 61.34-17 31.33-6 65.91-6 21.61 0 42.68 2.5T784-530q6 2 11 7.4 5 5.39 5 12.13 0 11.47-7.5 17.47-7.5 6-18.5 3-16.8-5-35.4-7.5Q720-500 700-500q-29 0-56 5.5T591-478q-14 5-22.5-.5T560-498Z"/></symbol>
+  <symbol id="i-menu_book-fill" viewBox="0 -960 960 960"><path d="M512-250q50-25 98-37.5T712-300q38 0 78.5 6t69.5 16v-429q-34-17-72-25t-76-8q-54 0-104.5 16.5T512-677v427Zm-44.5 77.5Q461-174 456-178q-47-29-100-45t-108-16q-37 0-72 9t-70 22q-23 11-44.5-3T40-251v-463q0-15 7-27.5T68-761q42-20 87.5-29.5T248-800q63 0 122.5 17T482-731q51-35 109.5-52T712-800q47 0 92 9.5t87 29.5q14 7 21.5 19.5T920-714v463q0 28-22.5 42.5t-44.5.5q-34-14-69-22.5t-72-8.5q-54 0-106 16t-98 45q-5 4-11.5 5.5T482-171q-8 0-14.5-1.5ZM560-608q0-6 4-11.5t9-7.5q30-11 61.5-17t65.5-6q22 0 43 2.5t41 7.5q6 2 11 7.5t5 12.5q0 11-7.5 17t-18.5 3q-17-5-35.5-7.5T700-610q-29 0-56 5.5T591-588q-14 5-22.5-.5T560-608Zm0 220q0-6 4-12t9-8q30-11 61.5-16.5T700-430q22 0 43 2.5t41 7.5q6 2 11 7.5t5 12.5q0 11-7.5 17t-18.5 3q-17-5-35.5-7.5T700-390q-29 0-56 5t-53 16q-14 5-22.5 0t-8.5-19Zm0-110q0-6 4-11.5t9-7.5q30-11 61.5-17t65.5-6q22 0 43 2.5t41 7.5q6 2 11 7.5t5 12.5q0 11-7.5 17t-18.5 3q-17-5-35.5-7.5T700-500q-29 0-56 5.5T591-478q-14 5-22.5-.5T560-498Z"/></symbol>
+  <symbol id="i-center_focus_strong" viewBox="0 -960 960 960"><path d="M180-120q-24 0-42-18t-18-42v-142q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v142h142q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H180Zm600 0H638q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h142v-142q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v142q0 24-18 42t-42 18ZM120-638v-142q0-24 18-42t42-18h142q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H180v142q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37Zm660 0v-142H638q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h142q24 0 42 18t18 42v142q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37ZM347.5-347.5Q293-402 293-480t54.5-132.5Q402-667 480-667t132.5 54.5Q667-558 667-480t-54.5 132.5Q558-293 480-293t-132.5-54.5Zm223-42Q607-426 607-480t-36.5-90.5Q534-607 480-607t-90.5 36.5Q353-534 353-480t36.5 90.5Q426-353 480-353t90.5-36.5ZM480-480Z"/></symbol>
+  <symbol id="i-center_focus_strong-fill" viewBox="0 -960 960 960"><path d="M347.5-347.5Q293-402 293-480t54.5-132.5Q402-667 480-667t132.5 54.5Q667-558 667-480t-54.5 132.5Q558-293 480-293t-132.5-54.5ZM180-120q-24 0-42-18t-18-42v-142q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v142h142q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H180Zm600 0H638q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h142v-142q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v142q0 24-18 42t-42 18ZM120-638v-142q0-24 18-42t42-18h142q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H180v142q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37Zm660 0v-142H638q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h142q24 0 42 18t18 42v142q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37Z"/></symbol>
+  <symbol id="i-zoom_in" viewBox="0 -960 960 960"><path d="M346-556h-52q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h52v-51q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v51h51q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5h-51v52q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-52Zm32 227q-108.16 0-183.08-75Q120-479 120-585t75-181q75-75 181.5-75t181 75Q632-691 632-584.85 632-542 618-502q-14 40-42 75l242 240q9 8.56 9 21.78T818-143q-9 9-22.22 9-13.22 0-21.78-9L533-384q-30 26-69.96 40.5Q423.08-329 378-329Zm-1-60q81.25 0 138.13-57.5Q572-504 572-585t-56.87-138.5Q458.25-781 377-781q-82.08 0-139.54 57.5Q180-666 180-585t57.46 138.5Q294.92-389 377-389Z"/></symbol>
+  <symbol id="i-zoom_out" viewBox="0 -960 960 960"><path d="M305-556q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h141q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H305Zm73 227q-108.16 0-183.08-75Q120-479 120-585t75-181q75-75 181.5-75t181 75Q632-691 632-584.85 632-542 618-502q-14 40-42 75l242 240q9 8.56 9 21.78T818-143q-9 9-22.22 9-13.22 0-21.78-9L533-384q-30 26-69.96 40.5Q423.08-329 378-329Zm-1-60q81.25 0 138.13-57.5Q572-504 572-585t-56.87-138.5Q458.25-781 377-781q-82.08 0-139.54 57.5Q180-666 180-585t57.46 138.5Q294.92-389 377-389Z"/></symbol>
+  <symbol id="i-fit_screen" viewBox="0 -960 960 960"><path d="M820-640v-100H720q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h100q24 0 42 18t18 42v100q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37Zm-740 0v-100q0-24 18-42t42-18h100q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H140v100q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63Q80-627.25 80-640Zm740 480H720q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h100v-100q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v100q0 24-18 42t-42 18Zm-680 0q-24 0-42-18t-18-42v-100q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v100h100q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H140Zm60-180v-280q0-24.75 17.63-42.38Q235.25-680 260-680h440q24.75 0 42.38 17.62Q760-644.75 760-620v280q0 24.75-17.62 42.37Q724.75-280 700-280H260q-24.75 0-42.37-17.63Q200-315.25 200-340Zm60 0h440v-280H260v280Zm0 0v-280 280Z"/></symbol>
+  <symbol id="i-pan_tool" viewBox="0 -960 960 960"><path d="M402-40q-27 0-51.5-12.5T311-88L68-446q-6-9-4-20t10-18q17-15 39.5-19t44.57 13.19L280-397v-413q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v468q0 19-16.5 27t-31.5-3l-126-92 195 288q7 11 17.5 16.5T402-100h288q38 0 64-26t26-64v-580q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v580q0 63-43.5 106.5T690-40H402Zm96.5-871.38q8.5 8.63 8.5 21.38v380q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-380q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62Zm167 40q8.5 8.63 8.5 21.38v340q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-340q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62ZM473-290Z"/></symbol>
+  <symbol id="i-check" viewBox="0 -960 960 960"><path d="m378-332 363-363q9-9 21.5-9t21.5 9q9 9 9 21.5t-9 21.5L399-267q-9 9-21 9t-21-9L175-449q-9-9-8.5-21.5T176-492q9-9 21.5-9t21.5 9l159 160Z"/></symbol>
+  <symbol id="i-info" viewBox="0 -960 960 960"><path d="M504.5-288.63q8.5-8.62 8.5-21.37v-180q0-12.75-8.68-21.38-8.67-8.62-21.5-8.62-12.82 0-21.32 8.62-8.5 8.63-8.5 21.38v180q0 12.75 8.68 21.37 8.67 8.63 21.5 8.63 12.82 0 21.32-8.63Zm-1-314.57q9.5-9.2 9.5-22.8 0-14.45-9.48-24.22-9.48-9.78-23.5-9.78t-23.52 9.78Q447-640.45 447-626q0 13.6 9.48 22.8 9.48 9.2 23.5 9.2t23.52-9.2ZM480.27-80q-82.74 0-155.5-31.5Q252-143 197.5-197.5t-86-127.34Q80-397.68 80-480.5t31.5-155.66Q143-709 197.5-763t127.34-85.5Q397.68-880 480.5-880t155.66 31.5Q709-817 763-763t85.5 127Q880-563 880-480.27q0 82.74-31.5 155.5Q817-252 763-197.68q-54 54.31-127 86Q563-80 480.27-80Zm.23-60Q622-140 721-239.5t99-241Q820-622 721.19-721T480-820q-141 0-240.5 98.81T140-480q0 141 99.5 240.5t241 99.5Zm-.5-340Z"/></symbol>
+  <symbol id="i-bar_chart" viewBox="0 -960 960 960"><path d="M690-160q-12.75 0-21.37-8.63Q660-177.25 660-190v-220q0-12.75 8.63-21.38Q677.25-440 690-440h80q12.75 0 21.38 8.62Q800-422.75 800-410v220q0 12.75-8.62 21.37Q782.75-160 770-160h-80Zm-250 0q-12.75 0-21.37-8.63Q410-177.25 410-190v-580q0-12.75 8.63-21.38Q427.25-800 440-800h80q12.75 0 21.38 8.62Q550-782.75 550-770v580q0 12.75-8.62 21.37Q532.75-160 520-160h-80Zm-250 0q-12.75 0-21.37-8.63Q160-177.25 160-190v-380q0-12.75 8.63-21.38Q177.25-600 190-600h80q12.75 0 21.38 8.62Q300-582.75 300-570v380q0 12.75-8.62 21.37Q282.75-160 270-160h-80Z"/></symbol>
+  <symbol id="i-fullscreen_exit" viewBox="0 -960 960 960"><path d="M253-253H150q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h133q12.75 0 21.38 8.62Q313-295.75 313-283v133q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-103Zm454 0v103q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-133q0-12.75 8.63-21.38Q664.25-313 677-313h133q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H707ZM253-707v-103q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v133q0 12.75-8.62 21.37Q295.75-647 283-647H150q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h103Zm454 0h103q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H677q-12.75 0-21.37-8.63Q647-664.25 647-677v-133q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v103Z"/></symbol>
+</svg>
   <a class="skip-link" href="#p1">Pular para a revista</a>
 
   <header class="top-app-bar">
     <button class="icon-button" id="open-drawer" aria-label="Abrir sumário" aria-controls="drawer" aria-expanded="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
     </button>
     <div class="app-title"><strong>Energia Atômica</strong><span id="current-section">Capa</span></div>
+    <div class="layout-switch" role="group" aria-label="Layout das páginas">
+      <button type="button" data-layout="scroll" aria-pressed="true" aria-label="Rolagem: uma página abaixo da outra" title="Rolagem"><svg class="icon icon-off" aria-hidden="true"><use href="#i-view_agenda"/></svg><svg class="icon icon-on" aria-hidden="true"><use href="#i-view_agenda-fill"/></svg></button>
+      <button type="button" data-layout="spread" aria-pressed="false" aria-label="Revista: duas páginas lado a lado" title="Revista"><svg class="icon icon-off" aria-hidden="true"><use href="#i-menu_book"/></svg><svg class="icon icon-on" aria-hidden="true"><use href="#i-menu_book-fill"/></svg></button>
+      <button type="button" data-layout="focus" aria-pressed="false" aria-label="Foco: uma página em tela inteira, com zoom e arrasto" title="Foco"><svg class="icon icon-off" aria-hidden="true"><use href="#i-center_focus_strong"/></svg><svg class="icon icon-on" aria-hidden="true"><use href="#i-center_focus_strong-fill"/></svg></button>
+    </div>
     <div class="app-actions">
-      <button class="icon-button" id="prev-page" aria-label="Página anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button>
+      <button class="icon-button" id="prev-page" aria-label="Página anterior"><svg class="icon" aria-hidden="true"><use href="#i-arrow_back"/></svg></button>
       <span class="page-counter" id="page-counter" role="status" aria-live="polite">01 / 14</span>
-      <button class="icon-button" id="next-page" aria-label="Próxima página"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></button>
+      <button class="icon-button" id="next-page" aria-label="Próxima página"><svg class="icon" aria-hidden="true"><use href="#i-arrow_forward"/></svg></button>
     </div>
   </header>
 
@@ -551,7 +713,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   <nav class="nav-drawer" id="drawer" aria-label="Sumário da revista" hidden>
     <div class="drawer-head">
       <span class="drawer-title">Sumário</span>
-      <button class="icon-button" id="close-drawer" aria-label="Fechar sumário"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+      <button class="icon-button" id="close-drawer" aria-label="Fechar sumário"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
     </div>
     <ul id="drawer-list"></ul>
   </nav>
@@ -611,7 +773,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 
       <article class="card outlined how-to">
         <h2 class="title-medium">Como ler</h2>
-        <p>Role a página ou use as setas do teclado. O botão de menu abre o sumário. Gráficos, diagramas e mapas têm botões: toque para comparar cenários, seguir o ciclo do urânio e percorrer o funcionamento de uma usina.</p>
+        <p>Role a página ou use as setas do teclado. O botão de menu abre o sumário. Números em verde são dados: toque para ver o que significam ou para abrir o gráfico com o valor em destaque. Fotos e gráficos se ampliam com um toque. No alto, escolha entre rolagem, revista aberta e modo foco.</p>
       </article>
     </section>
 
@@ -657,18 +819,18 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
       </header>
       <div class="report-grid">
         <div class="columns body-text">
-          <p class="dropcap">Segundo o Anuário Estatístico de Energia Elétrica 2026 da Empresa de Pesquisa Energética (EPE), com dados de 2025, as fontes renováveis somaram 86,6% da geração elétrica brasileira. A hidrelétrica, sozinha, respondeu por 51,7%, seguida pela eólica (15,0%), pela solar (11,4%) e pela biomassa (8,5%).</p>
-          <p>A energia nuclear gerou 15,8 TWh, ou 2,0% do total. Entre as não renováveis, ficou atrás do gás natural (7,6%) e à frente do carvão mineral (1,4%) e dos derivados de petróleo (0,9%). O contraste com o potencial é o ponto de partida desta edição: o Brasil tem uma das maiores reservas de urânio do mundo e domina etapas do ciclo do combustível, mas a fonte segue pequena e concentrada em duas usinas, em Angra dos Reis (RJ).</p>
-          <p>Depender tanto da água também é uma vulnerabilidade. Na crise hídrica de 2021, considerada a mais grave em 91 anos no Centro-Sul, termelétricas fósseis foram acionadas e a participação dessas fontes no Sistema Interligado Nacional subiu de cerca de 15% para 20% a 21% em um ano.</p>
-          <p>Se Angra 3 somar os 12 mil GWh anuais anunciados, a fatia nuclear subiria para cerca de 3,5%, pelo cálculo do grupo: ainda uma fonte minoritária.</p>
-          <p>Parte da infraestrutura nasce de acordos internacionais: Itaipu, binacional com o Paraguai, atende cerca de 7% do consumo elétrico brasileiro e 87% do paraguaio.</p>
+          <p class="dropcap">Segundo o Anuário Estatístico de Energia Elétrica 2026 da Empresa de Pesquisa Energética (EPE), com dados de 2025, as fontes renováveis somaram <button type="button" class="dnum" data-chart="matrix-chart" data-emph="renovavel" data-info="Soma das fontes renováveis na geração elétrica de 2025: hidrelétrica, eólica, solar e biomassa." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">86,6%</button> da geração elétrica brasileira. A hidrelétrica, sozinha, respondeu por <button type="button" class="dnum" data-chart="matrix-chart" data-emph="Hidrelétrica" data-info="Participação da hidrelétrica na geração elétrica de 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">51,7%</button>, seguida pela eólica (<button type="button" class="dnum" data-chart="matrix-chart" data-emph="Eólica" data-info="Participação da eólica na geração elétrica de 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">15,0%</button>), pela solar (<button type="button" class="dnum" data-chart="matrix-chart" data-emph="Solar" data-info="Participação da solar na geração elétrica de 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">11,4%</button>) e pela biomassa (<button type="button" class="dnum" data-chart="matrix-chart" data-emph="Biomassa" data-info="Participação da biomassa na geração elétrica de 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">8,5%</button>).</p>
+          <p>A energia nuclear gerou <button type="button" class="dnum" data-chart="matrix-chart" data-emph="Nuclear" data-info="Eletricidade gerada por Angra 1 e Angra 2 em 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">15,8 TWh</button>, ou <button type="button" class="dnum" data-chart="matrix-chart" data-emph="Nuclear" data-info="Participação nuclear na geração elétrica de 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">2,0%</button> do total. Entre as não renováveis, ficou atrás do gás natural (<button type="button" class="dnum" data-chart="matrix-chart" data-emph="Gás natural" data-info="Participação do gás natural na geração elétrica de 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">7,6%</button>) e à frente do carvão mineral (<button type="button" class="dnum" data-chart="matrix-chart" data-emph="Carvão mineral" data-info="Participação do carvão mineral na geração elétrica de 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">1,4%</button>) e dos derivados de petróleo (<button type="button" class="dnum" data-chart="matrix-chart" data-emph="Derivados de petróleo" data-info="Participação dos derivados de petróleo na geração elétrica de 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">0,9%</button>). O contraste com o potencial é o ponto de partida desta edição: o Brasil tem uma das maiores reservas de urânio do mundo e domina etapas do ciclo do combustível, mas a fonte segue pequena e concentrada em duas usinas, em Angra dos Reis (RJ).</p>
+          <p>Depender tanto da água também é uma vulnerabilidade. Na crise hídrica de 2021, considerada a mais grave em <button type="button" class="dnum" data-info="A crise hídrica de 2021 foi considerada a mais grave em 91 anos no Centro-Sul." data-src="Pesquisa do grupo">91 anos</button> no Centro-Sul, termelétricas fósseis foram acionadas e a participação dessas fontes no Sistema Interligado Nacional subiu de cerca de <button type="button" class="dnum" data-info="Participação de fontes fósseis no Sistema Interligado Nacional, antes e depois da crise hídrica de 2021." data-src="Pesquisa do grupo">15% para 20% a 21%</button> em um ano.</p>
+          <p>Se Angra 3 somar os <button type="button" class="dnum" data-info="Geração anual anunciada pela Eletronuclear para Angra 3." data-src="Eletronuclear">12 mil GWh</button> anuais anunciados, a fatia nuclear subiria para cerca de <button type="button" class="dnum" data-chart="matrix-chart" data-emph="Nuclear" data-info="Participação nuclear estimada com Angra 3: (15.834 + 12.000) ÷ (775.896 + 12.000) GWh. Hoje a fonte tem 2,0%." data-src="Pesquisa do grupo, com dados da EPE">3,5%</button>, pelo cálculo do grupo: ainda uma fonte minoritária.</p>
+          <p>Parte da infraestrutura nasce de acordos internacionais: Itaipu, binacional com o Paraguai, atende cerca de <button type="button" class="dnum" data-info="Parcela do consumo elétrico brasileiro atendida por Itaipu." data-src="Pesquisa do grupo">7%</button> do consumo elétrico brasileiro e <button type="button" class="dnum" data-info="Parcela do consumo elétrico paraguaio atendida por Itaipu." data-src="Pesquisa do grupo">87%</button> do paraguaio.</p>
         </div>
         <figure class="card chart-card" id="matrix-chart">
           <figcaption><strong class="title-small">Geração elétrica por fonte, 2025</strong><span>Participação no total gerado</span></figcaption>
           <div class="chip-set" role="group" aria-label="Filtrar fontes">
-            <button class="chip" aria-pressed="true" data-filter="all">Todas</button>
-            <button class="chip" aria-pressed="false" data-filter="renovavel">Renováveis</button>
-            <button class="chip" aria-pressed="false" data-filter="nao">Não renováveis</button>
+            <button class="chip" aria-pressed="true" data-filter="all"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check"/></svg>Todas</button>
+            <button class="chip" aria-pressed="false" data-filter="renovavel"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check"/></svg>Renováveis</button>
+            <button class="chip" aria-pressed="false" data-filter="nao"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check"/></svg>Não renováveis</button>
           </div>
           <ul class="bars" id="matrix-bars"></ul>
           <p class="chart-total" id="matrix-total" aria-live="polite"></p>
@@ -683,9 +845,9 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
       <h2 class="headline" id="t-p6">A rede mistura tudo, mas não alcança todos</h2>
       <div class="columns body-text">
         <p>É comum imaginar que uma usina “manda energia” para determinados estados. O Sistema Interligado Nacional (SIN) não funciona assim: é uma rede compartilhada, dividida em quatro subsistemas (Sul, Sudeste/Centro-Oeste, Nordeste e Norte), ligados por linhas de alta tensão. A energia injetada se mistura ao fluxo geral.</p>
-        <p>A localização, porém, importa. Angra 1, 2 e a futura Angra 3 estão ligadas por linhas de 500 kV à malha de Furnas, no subsistema Sudeste/Centro-Oeste. Para chegar ao Nordeste ou ao Norte, a energia depende de interligações de capacidade limitada. Em agosto de 2023, uma falha na interligação Norte-Nordeste deixou 25 estados e o Distrito Federal sem energia, cerca de 30 milhões de pessoas.</p>
-        <p>Há ainda quem esteja fora da rede. Os Sistemas Isolados, principalmente na Amazônia, somam cerca de 160 localidades e atendem entre 1,9 e 3,1 milhões de pessoas, com cerca de 70% da geração a óleo diesel. Nenhuma usina conectada ao SIN chega até lá. Em janeiro de 2026, o Ministério de Minas e Energia criou um grupo técnico para avaliar pequenos reatores modulares nessas localidades, dentro do programa Energias da Amazônia.</p>
-        <p>Segundo o IBGE, 99,8% dos domicílios tinham eletricidade em 2024. O problema, então, deixa de ser só a ligação e passa a ser continuidade, qualidade e preço. Para o Instituto Energia e Meio Ambiente, cerca de 1 milhão de brasileiros ainda não têm serviço público de energia; uma pesquisa IPEC/Instituto Pólis aponta que 36% das famílias comprometem metade ou mais da renda com luz e gás de cozinha.</p>
+        <p>A localização, porém, importa. Angra 1, 2 e a futura Angra 3 estão ligadas por linhas de <button type="button" class="dnum" data-info="Tensão das linhas que ligam Angra à malha de Furnas, no subsistema Sudeste/Centro-Oeste." data-src="Pesquisa do grupo">500 kV</button> à malha de Furnas, no subsistema Sudeste/Centro-Oeste. Para chegar ao Nordeste ou ao Norte, a energia depende de interligações de capacidade limitada. Em agosto de 2023, uma falha na interligação Norte-Nordeste deixou <button type="button" class="dnum" data-info="Estados atingidos pelo apagão de agosto de 2023, além do Distrito Federal." data-src="ONS e reportagens de 2023">25 estados</button> e o Distrito Federal sem energia, cerca de <button type="button" class="dnum" data-info="Pessoas afetadas pelo apagão de agosto de 2023." data-src="ONS e reportagens de 2023">30 milhões</button> de pessoas.</p>
+        <p>Há ainda quem esteja fora da rede. Os Sistemas Isolados, principalmente na Amazônia, somam cerca de <button type="button" class="dnum" data-info="Localidades atendidas pelos Sistemas Isolados, fora do SIN." data-src="MME">160 localidades</button> e atendem entre <button type="button" class="dnum" data-info="Pessoas atendidas pelos Sistemas Isolados, segundo diferentes levantamentos." data-src="MME">1,9 e 3,1 milhões</button> de pessoas, com cerca de <button type="button" class="dnum" data-info="Parcela da geração dos Sistemas Isolados feita com óleo diesel." data-src="MME">70%</button> da geração a óleo diesel. Nenhuma usina conectada ao SIN chega até lá. Em janeiro de 2026, o Ministério de Minas e Energia criou um grupo técnico para avaliar pequenos reatores modulares nessas localidades, dentro do programa Energias da Amazônia.</p>
+        <p>Segundo o IBGE, <button type="button" class="dnum" data-info="Domicílios com energia elétrica em 2024, pela rede geral ou por fonte alternativa." data-src="IBGE (2024)">99,8%</button> dos domicílios tinham eletricidade em 2024. O problema, então, deixa de ser só a ligação e passa a ser continuidade, qualidade e preço. Para o Instituto Energia e Meio Ambiente, cerca de <button type="button" class="dnum" data-info="Brasileiros sem acesso a serviço público de energia." data-src="Instituto Energia e Meio Ambiente">1 milhão</button> de brasileiros ainda não têm serviço público de energia; uma pesquisa IPEC/Instituto Pólis aponta que <button type="button" class="dnum" data-info="Famílias que comprometem metade ou mais da renda com luz e gás de cozinha." data-src="IPEC/Instituto Pólis (2023-2024)">36%</button> das famílias comprometem metade ou mais da renda com luz e gás de cozinha.</p>
       </div>
       <div class="card-grid two">
         <article class="card concept">
@@ -694,16 +856,16 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
           <h3 class="title-medium">Espaços luminosos e opacos</h3>
           <p>Com Maria Laura Silveira, Milton Santos chama de luminosos os lugares com alta densidade técnica e científica, que atraem mais capital, e de opacos aqueles onde essa densidade é baixa. Angra, ligada à malha do Sudeste, está no primeiro grupo; os Sistemas Isolados, no segundo. A leitura não é contra a fonte nuclear: descreve o padrão espacial que qualquer expansão tende a seguir.</p>
         </article>
-        <figure class="card outlined table-card">
+        <figure class="card outlined table-card" id="tariffs">
           <figcaption class="title-small">Tarifas de energia por região (R$/kWh)</figcaption>
           <table>
             <thead><tr><th scope="col">Região</th><th scope="col">Mínima</th><th scope="col">Máxima</th></tr></thead>
             <tbody>
-              <tr><th scope="row">Sudeste</th><td>0,578</td><td>1,484</td></tr>
-              <tr><th scope="row">Nordeste</th><td>0,588</td><td>1,044</td></tr>
-              <tr><th scope="row">Sul</th><td>0,413</td><td>1,033</td></tr>
-              <tr><th scope="row">Norte</th><td>0,641</td><td>0,938</td></tr>
-              <tr><th scope="row">Centro-Oeste</th><td>0,678</td><td>0,878</td></tr>
+              <tr data-key="Sudeste"><th scope="row">Sudeste</th><td>0,578</td><td>1,484</td></tr>
+              <tr data-key="Nordeste"><th scope="row">Nordeste</th><td>0,588</td><td>1,044</td></tr>
+              <tr data-key="Sul"><th scope="row">Sul</th><td>0,413</td><td>1,033</td></tr>
+              <tr data-key="Norte"><th scope="row">Norte</th><td>0,641</td><td>0,938</td></tr>
+              <tr data-key="Centro-Oeste"><th scope="row">Centro-Oeste</th><td>0,678</td><td>0,878</td></tr>
             </tbody>
           </table>
           <p class="note">Compilação Meutudo, 2026, por distribuidora.</p>
@@ -723,7 +885,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
       <div class="columns body-text">
         <p class="dropcap">Em vez de queimar carvão, gás ou óleo, o reator aproveita a fissão nuclear. Quando um nêutron atinge o núcleo de um átomo de urânio-235, o núcleo se divide em dois menores, libera muita energia na forma de calor e solta novos nêutrons. Esses nêutrons podem provocar outras fissões: é a reação em cadeia.</p>
         <p>Em uma usina, essa reação é mantida sob controle. Barras de controle absorvem nêutrons e permitem aumentar, reduzir ou interromper a potência. A própria água que circula no reator desacelera os nêutrons e retira o calor.</p>
-        <p>O combustível são pastilhas de dióxido de urânio empilhadas em varetas metálicas, agrupadas em elementos combustíveis. Em usinas como as de Angra, o urânio é enriquecido a cerca de 3% a 5% de urânio-235, muito abaixo dos níveis acima de 90% associados a armas nucleares.</p>
+        <p>O combustível são pastilhas de dióxido de urânio empilhadas em varetas metálicas, agrupadas em elementos combustíveis. Em usinas como as de Angra, o urânio é enriquecido a cerca de <button type="button" class="dnum" data-info="Enriquecimento típico do combustível de reatores de água pressurizada, como os de Angra." data-src="Eletronuclear; AIEA">3% a 5%</button> de urânio-235, muito abaixo dos níveis acima de <button type="button" class="dnum" data-info="Nível de enriquecimento associado a armas nucleares." data-src="AIEA">90%</button> associados a armas nucleares.</p>
         <p>Angra 1 e Angra 2 usam reatores de água pressurizada. Neles, dois circuitos de água separados levam o calor do reator até a turbina, como mostra o diagrama abaixo.</p>
       </div>
       <figure class="card stepper-card" id="reactor-steps">
@@ -779,16 +941,16 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
       </header>
       <div class="report-grid">
         <div class="columns body-text">
-          <p class="dropcap">O país tem entre a 5ª e a 8ª maior reserva de urânio do mundo, a depender do levantamento. O Serviço Geológico do Brasil contabiliza cerca de 280 mil toneladas; números divulgados pelo Ministério de Minas e Energia chegam a 309 mil, mais de 5% do total mundial.</p>
-          <p>A produção, porém, foi de apenas 75 toneladas em 2025, enquanto Angra 1 e Angra 2 consomem cerca de 450 toneladas por ano. Com Angra 3, a demanda subiria para 700 a 900 toneladas. Para comparar: o Cazaquistão, maior produtor global, extrai 23 mil toneladas por ano; o Canadá, 14 mil.</p>
-          <p>O déficit é coberto por importação, hoje com a estatal russa Rosatom. Em fevereiro de 2024, as Indústrias Nucleares do Brasil (INB) receberam cerca de 21 toneladas de urânio enriquecido da Rússia para fabricar o combustível de Angra 1.</p>
-          <p>O Brasil é importador e exportador ao mesmo tempo. O concentrado já foi enviado ao Canadá, à Holanda e, mais recentemente, à França para ser convertido em gás, que volta para ser enriquecido em Resende. Desde o fim de 2022, o país enriquece até 70% do combustível de Angra 1. Em outros momentos, exportou urânio enriquecido excedente para a Argentina: o limite está na escala, não na tecnologia.</p>
+          <p class="dropcap">O país tem entre a <button type="button" class="dnum" data-info="Posição do Brasil entre as maiores reservas de urânio do mundo, conforme o levantamento." data-src="Pesquisa do grupo">5ª e a 8ª</button> maior reserva de urânio do mundo, a depender do levantamento. O Serviço Geológico do Brasil contabiliza cerca de <button type="button" class="dnum" data-info="Reserva de urânio contabilizada pelo Serviço Geológico do Brasil." data-src="Serviço Geológico do Brasil">280 mil toneladas</button>; números divulgados pelo Ministério de Minas e Energia chegam a <button type="button" class="dnum" data-info="Reserva de urânio em toneladas, segundo números divulgados pelo Ministério de Minas e Energia." data-src="MME">309 mil</button>, mais de <button type="button" class="dnum" data-info="Parcela brasileira das reservas mundiais de urânio, segundo o MME." data-src="MME">5%</button> do total mundial.</p>
+          <p>A produção, porém, foi de apenas <button type="button" class="dnum" data-chart="dependency" data-emph="Brasil" data-info="Produção brasileira de urânio em 2025. A diferença para o consumo de Angra 1 e 2 dá os 83% do gráfico." data-src="Pesquisa do grupo">75 toneladas</button> em 2025, enquanto Angra 1 e Angra 2 consomem cerca de <button type="button" class="dnum" data-chart="dependency" data-emph="Brasil" data-info="Consumo anual de urânio de Angra 1 e Angra 2." data-src="Pesquisa do grupo">450 toneladas</button> por ano. Com Angra 3, a demanda subiria para <button type="button" class="dnum" data-chart="uranium-cycle" data-emph="4" data-info="Demanda anual de urânio com Angra 3 em operação." data-src="Pesquisa do grupo">700 a 900 toneladas</button>. Para comparar: o Cazaquistão, maior produtor global, extrai <button type="button" class="dnum" data-info="Produção anual de urânio do Cazaquistão, maior produtor do mundo." data-src="InvestNews">23 mil toneladas</button> por ano; o Canadá, <button type="button" class="dnum" data-info="Produção anual de urânio do Canadá, em toneladas." data-src="InvestNews">14 mil</button>.</p>
+          <p>O déficit é coberto por importação, hoje com a estatal russa Rosatom. Em fevereiro de 2024, as Indústrias Nucleares do Brasil (INB) receberam cerca de <button type="button" class="dnum" data-info="Urânio enriquecido importado da Rússia pela INB em fevereiro de 2024, para o combustível de Angra 1." data-src="INB (fev. 2024)">21 toneladas</button> de urânio enriquecido da Rússia para fabricar o combustível de Angra 1.</p>
+          <p>O Brasil é importador e exportador ao mesmo tempo. O concentrado já foi enviado ao Canadá, à Holanda e, mais recentemente, à França para ser convertido em gás, que volta para ser enriquecido em Resende. Desde o fim de 2022, o país enriquece até <button type="button" class="dnum" data-chart="uranium-cycle" data-emph="3" data-info="Parcela do combustível de Angra 1 enriquecida no Brasil desde o fim de 2022." data-src="INB">70%</button> do combustível de Angra 1. Em outros momentos, exportou urânio enriquecido excedente para a Argentina: o limite está na escala, não na tecnologia.</p>
           <p>Ter usinas, portanto, reduz a dependência de petróleo e gás, mas não garante autossuficiência na cadeia do combustível. Nem a França, país mais associado à ideia de independência pelo átomo, chega lá.</p>
         </div>
-        <figure class="card chart-card">
+        <figure class="card chart-card" id="dependency">
           <figcaption><strong class="title-small">Dependência externa no combustível</strong><span>Parcela coberta por importação</span></figcaption>
-          <div class="wavy-meter" data-value="83"><span class="meter-label"><b>Brasil · 83%</b>375 das 450 t consumidas por Angra 1 e 2 em 2025, pela conta do grupo</span><svg viewBox="0 0 300 24" aria-hidden="true"></svg></div>
-          <div class="wavy-meter" data-value="39"><span class="meter-label"><b>França · 39%</b>urânio enriquecido importado da Rússia em 2025</span><svg viewBox="0 0 300 24" aria-hidden="true"></svg></div>
+          <div class="wavy-meter" data-value="83" data-key="Brasil"><span class="meter-label"><b>Brasil · 83%</b>375 das 450 t consumidas por Angra 1 e 2 em 2025, pela conta do grupo</span><svg viewBox="0 0 300 24" aria-hidden="true"></svg></div>
+          <div class="wavy-meter" data-value="39" data-key="França"><span class="meter-label"><b>França · 39%</b>urânio enriquecido importado da Rússia em 2025</span><svg viewBox="0 0 300 24" aria-hidden="true"></svg></div>
           <p class="note">Os dois números partem de contas diferentes, mas apontam na mesma direção: mesmo países com usinas dependem de fornecedores externos.</p>
         </figure>
       </div>
@@ -802,17 +964,17 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
       <figure class="card cycle-card" id="uranium-cycle">
         <figcaption><strong class="title-small">O caminho do urânio</strong><span>Toque em cada parada</span></figcaption>
         <ol class="cycle" role="tablist" aria-label="Etapas do ciclo do combustível">
-          <li><button role="tab" aria-selected="true" data-stop="0"><svg class="xs" viewBox="0 0 100 100" data-shape="cookie9" aria-hidden="true"><path/></svg><b>Caetité · BA</b><span>Mineração</span></button></li>
-          <li><button role="tab" aria-selected="false" data-stop="1"><svg class="xs" viewBox="0 0 100 100" data-shape="cookie4" aria-hidden="true"><path/></svg><b>Salvador · BA</b><span>Porto</span></button></li>
-          <li><button role="tab" aria-selected="false" data-stop="2"><svg class="xs" viewBox="0 0 100 100" data-shape="sunny" aria-hidden="true"><path/></svg><b>Exterior</b><span>Conversão</span></button></li>
-          <li><button role="tab" aria-selected="false" data-stop="3"><svg class="xs" viewBox="0 0 100 100" data-shape="clover4" aria-hidden="true"><path/></svg><b>Resende · RJ</b><span>Enriquecimento</span></button></li>
-          <li><button role="tab" aria-selected="false" data-stop="4"><svg class="xs" viewBox="0 0 100 100" data-shape="burst" aria-hidden="true"><path/></svg><b>Angra · RJ</b><span>Geração</span></button></li>
+          <li><button role="tab" aria-selected="true" data-stop="0" data-key="0"><svg class="xs" viewBox="0 0 100 100" data-shape="cookie9" aria-hidden="true"><path/></svg><b>Caetité · BA</b><span>Mineração</span></button></li>
+          <li><button role="tab" aria-selected="false" data-stop="1" data-key="1"><svg class="xs" viewBox="0 0 100 100" data-shape="cookie4" aria-hidden="true"><path/></svg><b>Salvador · BA</b><span>Porto</span></button></li>
+          <li><button role="tab" aria-selected="false" data-stop="2" data-key="2"><svg class="xs" viewBox="0 0 100 100" data-shape="sunny" aria-hidden="true"><path/></svg><b>Exterior</b><span>Conversão</span></button></li>
+          <li><button role="tab" aria-selected="false" data-stop="3" data-key="3"><svg class="xs" viewBox="0 0 100 100" data-shape="clover4" aria-hidden="true"><path/></svg><b>Resende · RJ</b><span>Enriquecimento</span></button></li>
+          <li><button role="tab" aria-selected="false" data-stop="4" data-key="4"><svg class="xs" viewBox="0 0 100 100" data-shape="burst" aria-hidden="true"><path/></svg><b>Angra · RJ</b><span>Geração</span></button></li>
         </ol>
         <div class="step-detail" role="tabpanel" id="cycle-detail" aria-live="polite"></div>
       </figure>
       <div class="columns body-text">
-        <p>A logística pesa. O concentrado percorre mais de 700 km de estrada até o porto de Salvador, e 62,1% dos trechos avaliados pela Pesquisa CNT de Rodovias 2025 estão em condição regular, ruim ou péssima. Em 2021, uma remessa foi barrada pela França por falta do aviso prévio de 15 dias exigido por lei.</p>
-        <p>Há planos de mudar a escala. O depósito de Itataia, em Santa Quitéria (CE), a maior reserva não explorada, está parado há mais de duas décadas, embora tenha parceria definida entre a Galvani e a INB, de R$ 2,3 bilhões a R$ 3 bilhões, e potencial de até 1.600 toneladas de concentrado por ano. A INB planeja investir cerca de R$ 3 bilhões até 2033 para tornar-se autossuficiente no combustível de Angra. Um estudo da Secretaria de Assuntos Estratégicos com o Ipea estimou que o país poderia faturar até US$ 1,5 bilhão por ano exportando urânio enriquecido.</p>
+        <p>A logística pesa. O concentrado percorre mais de <button type="button" class="dnum" data-chart="uranium-cycle" data-emph="1" data-info="Distância por estrada entre Caetité (BA) e o porto de Salvador." data-src="Pesquisa do grupo">700 km</button> de estrada até o porto de Salvador, e <button type="button" class="dnum" data-chart="uranium-cycle" data-emph="1" data-info="Trechos avaliados em condição regular, ruim ou péssima." data-src="CNT, Pesquisa CNT de Rodovias 2025">62,1%</button> dos trechos avaliados pela Pesquisa CNT de Rodovias 2025 estão em condição regular, ruim ou péssima. Em 2021, uma remessa foi barrada pela França por falta do aviso prévio de <button type="button" class="dnum" data-chart="uranium-cycle" data-emph="2" data-info="Prazo de aviso prévio exigido pela França para receber remessas." data-src="Pesquisa do grupo">15 dias</button> exigido por lei.</p>
+        <p>Há planos de mudar a escala. O depósito de Itataia, em Santa Quitéria (CE), a maior reserva não explorada, está parado há mais de duas décadas, embora tenha parceria definida entre a Galvani e a INB, de <button type="button" class="dnum" data-info="Investimento previsto na parceria entre Galvani e INB para o depósito de Itataia." data-src="Pesquisa do grupo">R$ 2,3 bilhões a R$ 3 bilhões</button>, e potencial de até <button type="button" class="dnum" data-info="Produção anual potencial de concentrado de urânio em Santa Quitéria (CE)." data-src="Pesquisa do grupo">1.600 toneladas</button> de concentrado por ano. A INB planeja investir cerca de <button type="button" class="dnum" data-info="Investimento planejado pela INB até 2033 para a autossuficiência no combustível de Angra." data-src="INB">R$ 3 bilhões</button> até 2033 para tornar-se autossuficiente no combustível de Angra. Um estudo da Secretaria de Assuntos Estratégicos com o Ipea estimou que o país poderia faturar até <button type="button" class="dnum" data-info="Faturamento anual possível com a exportação de urânio enriquecido." data-src="SAE/Ipea">US$ 1,5 bilhão</button> por ano exportando urânio enriquecido.</p>
       </div>
       <div class="card-grid two">
         <article class="card concept">
@@ -841,8 +1003,8 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
       </header>
       <div class="report-grid">
         <div class="columns body-text">
-          <p class="dropcap">Angra 3 terá 1.405 megawatts de potência e poderá produzir cerca de 12 milhões de megawatts-hora por ano, o consumo equivalente de aproximadamente 4,5 milhões de habitantes, segundo a Eletronuclear. A obra está cerca de 66% concluída, e aproximadamente R$ 12 bilhões já foram aplicados.</p>
-          <p>Um estudo do BNDES atualizado em 2025 estima que faltam R$ 23,9 bilhões, o que leva o custo total conhecido a cerca de R$ 35,9 bilhões. Desistir também custa: entre R$ 21,9 bilhões e R$ 25,97 bilhões, além de cerca de R$ 1 bilhão por ano com a obra parada.</p>
+          <p class="dropcap">Angra 3 terá <button type="button" class="dnum" data-info="Potência instalada prevista para Angra 3." data-src="Eletronuclear">1.405 megawatts</button> de potência e poderá produzir cerca de <button type="button" class="dnum" data-info="Produção anual prevista para Angra 3." data-src="Eletronuclear">12 milhões de megawatts-hora</button> por ano, o consumo equivalente de aproximadamente <button type="button" class="dnum" data-info="Habitantes cujo consumo equivale à produção anual de Angra 3." data-src="Eletronuclear">4,5 milhões</button> de habitantes, segundo a Eletronuclear. A obra está cerca de <button type="button" class="dnum" data-info="Estágio da obra de Angra 3." data-src="Pesquisa do grupo">66%</button> concluída, e aproximadamente <button type="button" class="dnum" data-info="Valor já aplicado em equipamentos, materiais e componentes de Angra 3." data-src="Pesquisa do grupo">R$ 12 bilhões</button> já foram aplicados.</p>
+          <p>Um estudo do BNDES atualizado em 2025 estima que faltam <button type="button" class="dnum" data-chart="payback" data-emph="rest" data-info="Investimento restante para concluir Angra 3. É a base das barras verdes do payback." data-src="BNDES (2025)">R$ 23,9 bilhões</button>, o que leva o custo total conhecido a cerca de <button type="button" class="dnum" data-chart="payback" data-emph="total" data-info="Custo total conhecido de Angra 3: R$ 12 bi aplicados + R$ 23,9 bi restantes." data-src="BNDES (2025); cálculo do grupo">R$ 35,9 bilhões</button>. Desistir também custa: entre <button type="button" class="dnum" data-info="Custo estimado de abandonar Angra 3." data-src="Pesquisa do grupo">R$ 21,9 bilhões e R$ 25,97 bilhões</button>, além de cerca de <button type="button" class="dnum" data-info="Despesa anual estimada com a obra de Angra 3 paralisada." data-src="Pesquisa do grupo">R$ 1 bilhão por ano</button> com a obra parada.</p>
           <p>O grupo usou o payback simples, que divide o investimento pelo fluxo líquido anual. Três cenários variam o fator de capacidade, a tarifa e os custos operacionais. Em cada um, a conta foi feita duas vezes: só com o que falta investir e com o custo total.</p>
         </div>
         <figure class="card chart-card" id="payback">
@@ -857,14 +1019,14 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
           <p class="legend"><i class="sw rest"></i>Custo restante (R$ 23,9 bi) <i class="sw total"></i>Custo total (R$ 35,9 bi)</p>
         </figure>
       </div>
-      <figure class="card outlined table-card wide">
+      <figure class="card outlined table-card wide" id="payback-table">
         <figcaption class="title-small">Cenários de fluxo de caixa anual</figcaption>
         <table>
-          <thead><tr><th scope="col">Cenário</th><th scope="col">Fator de capacidade</th><th scope="col">Tarifa (R$/MWh)</th><th scope="col">Custos operacionais</th><th scope="col">Fluxo líquido</th><th scope="col">Payback restante</th><th scope="col">Payback total</th></tr></thead>
+          <thead><tr><th scope="col">Cenário</th><th scope="col">Fator de capacidade</th><th scope="col">Tarifa (R$/MWh)</th><th scope="col">Custos operacionais</th><th scope="col">Fluxo líquido</th><th scope="col" data-key="payback-cols">Payback restante</th><th scope="col" data-key="payback-cols">Payback total</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Conservador</th><td>75%</td><td>778,86</td><td>35% da receita</td><td>R$ 4,67 bi</td><td>5,1 anos</td><td>7,7 anos</td></tr>
-            <tr><th scope="row">Base</th><td>85%</td><td>791,81</td><td>30% da receita</td><td>R$ 5,80 bi</td><td>4,1 anos</td><td>6,2 anos</td></tr>
-            <tr><th scope="row">Otimista</th><td>90%</td><td>817,27</td><td>25% da receita</td><td>R$ 6,79 bi</td><td>3,5 anos</td><td>5,3 anos</td></tr>
+            <tr data-key="Conservador"><th scope="row">Conservador</th><td>75%</td><td>778,86</td><td>35% da receita</td><td>R$ 4,67 bi</td><td data-key="payback-cols">5,1 anos</td><td data-key="payback-cols">7,7 anos</td></tr>
+            <tr data-key="Base"><th scope="row">Base</th><td>85%</td><td>791,81</td><td>30% da receita</td><td>R$ 5,80 bi</td><td data-key="payback-cols">4,1 anos</td><td data-key="payback-cols">6,2 anos</td></tr>
+            <tr data-key="Otimista"><th scope="row">Otimista</th><td>90%</td><td>817,27</td><td>25% da receita</td><td>R$ 6,79 bi</td><td data-key="payback-cols">3,5 anos</td><td data-key="payback-cols">5,3 anos</td></tr>
           </tbody>
         </table>
       </figure>
@@ -884,29 +1046,29 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
           <figcaption>Canteiro de Angra 3 em 20/05/2015, registro histórico. Foto: Wusel007, <a href="https://commons.wikimedia.org/wiki/File:Construction_site_Angra_III.JPG">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>, recortada.</figcaption>
         </figure>
         <div class="columns body-text single">
-          <p>A diferença entre as duas colunas de payback, de 1,8 a 2,6 anos, pesa mais que o cenário escolhido: o retorno depende menos de otimismo e mais do ponto da obra em que a conta começa.</p>
-          <p>Considerando que o dinheiro futuro vale menos que o de hoje, com taxas de desconto de 6% a 10% ao ano, o payback do valor restante vai de 4,1 a 7,5 anos; o do custo total, de 6,5 a 15,3 anos. Com início de operação previsto para março de 2033, o cenário-base recuperaria o investimento restante por volta de 2037-2038.</p>
+          <p>A diferença entre as duas colunas de payback, de <button type="button" class="dnum" data-chart="payback-table" data-emph="payback-cols" data-info="Diferença entre o payback do custo total e o do custo restante em cada cenário: 2,6 anos no conservador, 2,1 no base e 1,8 no otimista." data-src="Cálculo do grupo">1,8 a 2,6 anos</button>, pesa mais que o cenário escolhido: o retorno depende menos de otimismo e mais do ponto da obra em que a conta começa.</p>
+          <p>Considerando que o dinheiro futuro vale menos que o de hoje, com taxas de desconto de <button type="button" class="dnum" data-info="Taxas de desconto usadas no payback descontado." data-src="Cálculo do grupo">6% a 10%</button> ao ano, o payback do valor restante vai de <button type="button" class="dnum" data-info="Payback descontado do investimento restante." data-src="Cálculo do grupo">4,1 a 7,5 anos</button>; o do custo total, de <button type="button" class="dnum" data-info="Payback descontado do custo total conhecido." data-src="Cálculo do grupo">6,5 a 15,3 anos</button>. Com início de operação previsto para março de 2033, o cenário-base recuperaria o investimento restante por volta de 2037-2038.</p>
         </div>
       </div>
       <aside class="card tonal caution">
         <p class="label">Leia com cautela</p>
-        <p>A tarifa usada é de equilíbrio, feita para recuperar despesas e financiamento. A conta mostra que o capital volta se ela for cobrada, mas não prova que Angra 3 será mais barata que outras fontes. Em 2024, a EPE estimava impacto preliminar de 2,9% nas tarifas.</p>
+        <p>A tarifa usada é de equilíbrio, feita para recuperar despesas e financiamento. A conta mostra que o capital volta se ela for cobrada, mas não prova que Angra 3 será mais barata que outras fontes. Em 2024, a EPE estimava impacto preliminar de <button type="button" class="dnum" data-info="Impacto preliminar de Angra 3 nas tarifas das distribuidoras estimado pela EPE em 2024." data-src="EPE (2024)">2,9%</button> nas tarifas.</p>
       </aside>
       <div class="balance">
         <article class="card balance-card">
           <p class="label">A favor</p>
           <ul>
             <li>Para Celso Cunha, presidente da Abdan, “não tem o menor sentido não finalizar”: abandonar e retomar depois custaria mais.</li>
-            <li>Segundo a FGV Energia, cada R$ 1 bilhão investido no setor nuclear pode somar cerca de R$ 2 bilhões ao PIB e 22,5 mil empregos.</li>
-            <li>Exportar urânio enriquecido poderia render até US$ 1,5 bilhão por ano, segundo SAE/Ipea.</li>
+            <li>Segundo a FGV Energia, cada <button type="button" class="dnum" data-info="Base do multiplicador econômico estimado pela FGV Energia." data-src="FGV Energia (2024)">R$ 1 bilhão</button> investido no setor nuclear pode somar cerca de <button type="button" class="dnum" data-info="Acréscimo ao PIB estimado para cada R$ 1 bilhão investido no setor nuclear." data-src="FGV Energia (2024)">R$ 2 bilhões</button> ao PIB e <button type="button" class="dnum" data-info="Empregos diretos, indiretos e induzidos associados a cada R$ 1 bilhão investido." data-src="FGV Energia (2024)">22,5 mil empregos</button>.</li>
+            <li>Exportar urânio enriquecido poderia render até <button type="button" class="dnum" data-info="Faturamento anual possível com a exportação de urânio enriquecido." data-src="SAE/Ipea">US$ 1,5 bilhão</button> por ano, segundo SAE/Ipea.</li>
           </ul>
         </article>
         <article class="card balance-card">
           <p class="label">Em debate</p>
           <ul>
-            <li>Segundo o World Nuclear Industry Status Report, citado pelo grupo, 97% de 180 projetos iniciados desde 2014 estouraram o orçamento, em média 117%.</li>
-            <li>Em fevereiro de 2026, o TCU julgou irregulares contas de gestores da Eletronuclear e executivos da Andrade Gutierrez: prejuízo estimado de R$ 341 milhões.</li>
-            <li>Pela FGV, cerca de 80% do PIB adicional e 76% dos empregos ficariam no Rio de Janeiro.</li>
+            <li>Segundo o World Nuclear Industry Status Report, citado pelo grupo, <button type="button" class="dnum" data-info="Projetos nucleares iniciados desde 2014 que estouraram o orçamento." data-src="World Nuclear Industry Status Report, citado pelo grupo">97%</button> de 180 projetos iniciados desde 2014 estouraram o orçamento, em média <button type="button" class="dnum" data-info="Aumento médio de custo sobre o orçamento original nesses projetos." data-src="World Nuclear Industry Status Report, citado pelo grupo">117%</button>.</li>
+            <li>Em fevereiro de 2026, o TCU julgou irregulares contas de gestores da Eletronuclear e executivos da Andrade Gutierrez: prejuízo estimado de <button type="button" class="dnum" data-info="Prejuízo aos cofres públicos reconhecido pelo TCU em fevereiro de 2026." data-src="TCU (2026)">R$ 341 milhões</button>.</li>
+            <li>Pela FGV, cerca de <button type="button" class="dnum" data-info="Parcela do PIB adicional que ficaria no Rio de Janeiro." data-src="FGV Energia (2024)">80%</button> do PIB adicional e <button type="button" class="dnum" data-info="Parcela dos empregos que ficaria no Rio de Janeiro." data-src="FGV Energia (2024)">76%</button> dos empregos ficariam no Rio de Janeiro.</li>
           </ul>
         </article>
       </div>
@@ -929,25 +1091,25 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
         <p class="standfirst on-green">Não basta saber se um político é a favor ou contra a energia nuclear. É preciso perguntar quais interesses, valores e condições sociais estão por trás de cada posição.</p>
       </header>
       <div class="columns body-text">
-        <p class="dropcap">Em 2026, o senador Flávio Bolsonaro defendeu a conclusão de Angra 3 e mencionou parcerias com a iniciativa privada. O governo Luiz Inácio Lula da Silva mantém posição mais ambígua: previu cerca de R$ 651,8 milhões para a Eletronuclear no orçamento de 2027, ligados à manutenção dos contratos de Angra 3, mas deixou para 2027 a decisão sobre concluir a obra. Também reafirmou o programa do submarino nuclear.</p>
-        <p>Enquanto isso, a Eletronuclear usou cerca de R$ 1,4 bilhão do próprio caixa desde setembro de 2024 com manutenção e dívida de Angra 3. A decisão sobre uma usina chega, pela conta de luz, a quem nunca a viu.</p>
-        <p>Em 17 de setembro de 2026, o grupo pediu por e-mail a posição oficial de nove candidaturas e partidos sobre a energia nuclear. Até o fechamento da pesquisa, nenhuma resposta havia chegado.</p>
-        <p>A discussão pública enfrenta outro obstáculo. Na pesquisa de percepção pública da ciência de 2023, do CGEE e do MCTI, a energia nuclear foi a única de oito áreas em que a percepção negativa superou a positiva. Médicos e cientistas de universidades públicas são as fontes mais confiáveis; políticos, a menos confiável.</p>
-        <p>Notícias falsas se espalham mais longe e mais rápido que as verdadeiras: no estudo de Vosoughi, Roy e Aral (Science, 2018), mentiras tiveram 70% mais chance de serem compartilhadas. Em 2025, a agência Aos Fatos desmentiu um boato que ligava o sumiço de duas ampolas de amostra de urânio em Resende a navios iranianos: os navios tinham partido quatro meses antes, e as amostras, de 8 g a 4,25%, eram incompatíveis com uso bélico. A peça teve 11 mil compartilhamentos.</p>
+        <p class="dropcap">Em 2026, o senador Flávio Bolsonaro defendeu a conclusão de Angra 3 e mencionou parcerias com a iniciativa privada. O governo Luiz Inácio Lula da Silva mantém posição mais ambígua: previu cerca de <button type="button" class="dnum" data-info="Aporte previsto para a Eletronuclear no orçamento de 2027." data-src="Pesquisa do grupo">R$ 651,8 milhões</button> para a Eletronuclear no orçamento de 2027, ligados à manutenção dos contratos de Angra 3, mas deixou para 2027 a decisão sobre concluir a obra. Também reafirmou o programa do submarino nuclear.</p>
+        <p>Enquanto isso, a Eletronuclear usou cerca de <button type="button" class="dnum" data-info="Caixa da Eletronuclear usado desde setembro de 2024 com manutenção e dívida de Angra 3." data-src="Pesquisa do grupo">R$ 1,4 bilhão</button> do próprio caixa desde setembro de 2024 com manutenção e dívida de Angra 3. A decisão sobre uma usina chega, pela conta de luz, a quem nunca a viu.</p>
+        <p>Em 17 de setembro de 2026, o grupo pediu por e-mail a posição oficial de nove candidaturas e partidos sobre a energia nuclear. Até o fechamento, nenhuma havia respondido.</p>
+        <p>A discussão pública enfrenta outro obstáculo. Na pesquisa de percepção pública da ciência de 2023, do CGEE e do MCTI, a energia nuclear foi a única de oito áreas em que a percepção negativa (<button type="button" class="dnum" data-chart="perception" data-emph="Energia nuclear" data-info="Entrevistados que associam a energia nuclear a algum impacto negativo." data-src="CGEE/MCTI (2023)">40,2%</button>) superou a positiva (<button type="button" class="dnum" data-chart="perception" data-emph="Energia nuclear" data-info="Entrevistados que associam a energia nuclear a algum impacto positivo." data-src="CGEE/MCTI (2023)">38,6%</button>). Médicos (<button type="button" class="dnum" data-chart="trust" data-emph="Médicos" data-info="Índice de confiança nos médicos como fonte de informação, de −1 a +1." data-src="CGEE/MCTI (2023)">0,72</button>) e cientistas de universidades públicas (<button type="button" class="dnum" data-chart="trust" data-emph="Cientistas" data-info="Índice de confiança nos cientistas de universidades públicas, de −1 a +1." data-src="CGEE/MCTI (2023)">0,66</button>) são as fontes mais confiáveis; políticos (<button type="button" class="dnum" data-chart="trust" data-emph="Políticos" data-info="Índice de confiança nos políticos, de −1 a +1: a fonte menos confiável." data-src="CGEE/MCTI (2023)">−0,89</button>), a menos confiável.</p>
+        <p>Notícias falsas se espalham mais longe e mais rápido que as verdadeiras: no estudo de Vosoughi, Roy e Aral (Science, 2018), mentiras tiveram <button type="button" class="dnum" data-info="Chance a mais de uma notícia falsa ser compartilhada, em comparação com uma verdadeira." data-src="Vosoughi, Roy e Aral, Science (2018)">70%</button> mais chance de serem compartilhadas. Em 2025, a agência Aos Fatos desmentiu um boato que ligava o sumiço de duas ampolas de amostra de urânio em Resende a navios iranianos: os navios tinham partido quatro meses antes, e as amostras, de <button type="button" class="dnum" data-info="Massa e enriquecimento de cada ampola de amostra, muito abaixo dos mais de 90% de uso bélico." data-src="Aos Fatos (2025)">8 g a 4,25%</button>, eram incompatíveis com uso bélico. A peça teve <button type="button" class="dnum" data-info="Compartilhamentos do boato no Facebook." data-src="Aos Fatos (2025)">11 mil</button> compartilhamentos.</p>
       </div>
       <div class="card-grid two">
-        <figure class="card chart-card">
+        <figure class="card chart-card" id="perception">
           <figcaption><strong class="title-small">Percepção de impacto, 2023</strong><span>Respostas positivas e negativas</span></figcaption>
-          <div class="split-bar"><span class="split-name">Energia nuclear</span><div class="split"><i class="pos" style="--v:38.6">38,6%</i><i class="neg" style="--v:40.2">40,2%</i></div></div>
-          <div class="split-bar"><span class="split-name">Energia solar</span><div class="split"><i class="pos" style="--v:82.6">82,6%</i><i class="neg" style="--v:9.3">9,3%</i></div></div>
+          <div class="split-bar" data-key="Energia nuclear"><span class="split-name">Energia nuclear</span><div class="split"><i class="pos" style="--v:38.6">38,6%</i><i class="neg" style="--v:40.2">40,2%</i></div></div>
+          <div class="split-bar" data-key="Energia solar"><span class="split-name">Energia solar</span><div class="split"><i class="pos" style="--v:82.6">82,6%</i><i class="neg" style="--v:9.3">9,3%</i></div></div>
           <p class="legend"><i class="sw pos"></i>Impacto positivo <i class="sw neg"></i>Impacto negativo</p>
         </figure>
-        <figure class="card chart-card">
+        <figure class="card chart-card" id="trust">
           <figcaption><strong class="title-small">Índice de confiança, 2023</strong><span>De −1 a +1</span></figcaption>
           <ul class="trust">
-            <li><span>Médicos</span><i style="--v:.72"></i><b>0,72</b></li>
-            <li><span>Cientistas de universidades públicas</span><i style="--v:.66"></i><b>0,66</b></li>
-            <li class="negative"><span>Políticos</span><i style="--v:.89"></i><b>−0,89</b></li>
+            <li data-key="Médicos"><span>Médicos</span><i style="--v:.72"></i><b>0,72</b></li>
+            <li data-key="Cientistas"><span>Cientistas de universidades públicas</span><i style="--v:.66"></i><b>0,66</b></li>
+            <li class="negative" data-key="Políticos"><span>Políticos</span><i style="--v:.89"></i><b>−0,89</b></li>
           </ul>
         </figure>
       </div>
@@ -959,23 +1121,23 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
       <svg class="xs deco deco-tr small" viewBox="0 0 100 100" data-shape="flower" data-morph="cookie12" aria-hidden="true"><path/></svg>
       <h2 class="headline" id="t-p14">Os países que tentaram abandonar a energia nuclear</h2>
       <p class="lead">Acidentes, referendos e exigências externas levaram seis países a desligar ou prometer desligar suas usinas. Só Alemanha e Lituânia seguem sem nuclear em 2026. Para o sociólogo Ulrich Beck, decisões assim respondem à percepção de um risco global e invisível, e não apenas ao cálculo de custo.</p>
-      <figure class="table-card countries-table">
+      <figure class="table-card countries-table" id="countries-table">
         <table>
           <thead><tr><th scope="col">País</th><th scope="col">O que decidiu</th><th scope="col">Efeito documentado</th><th scope="col">Situação em 2026</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Alemanha</th><td>Antecipou o fim após Fukushima e desligou os últimos reatores em 2023</td><td>Mais carvão e gás; emissões subiram no período de fechamento</td><td>Segue sem nuclear</td></tr>
-            <tr><th scope="row">Itália</th><td>Referendo de 1987, após Chernobyl; última usina fechada em 1990</td><td>Passou a importar cerca de 14% da eletricidade (2009)</td><td class="reverted">Governo anunciou lei para retomar</td></tr>
-            <tr><th scope="row">Lituânia</th><td>Fechou Ignalina (2004 e 2009) como condição para entrar na União Europeia</td><td>Perdeu de 70% a 77% da geração; mais dependência da Rússia</td><td>Sem usinas</td></tr>
-            <tr><th scope="row">Japão</th><td>Parou quase todos os 54 reatores após Fukushima (2011)</td><td>Primeiro déficit comercial em três décadas</td><td class="reverted">Reativa reatores desde 2015</td></tr>
-            <tr><th scope="row">Coreia do Sul</th><td>Prometeu uma “era livre do nuclear” em 2017</td><td>Estudo indicava que o país precisaria expandir a fonte</td><td class="reverted">Política revertida pelo governo Yoon</td></tr>
-            <tr><th scope="row">Bélgica</th><td>Lei de 2003 previa o fim da fonte até 2025</td><td>Governo afirmou que o sistema “não se sustenta” sem nuclear</td><td class="reverted">Lei revogada em 2025</td></tr>
+            <tr data-key="Alemanha"><th scope="row">Alemanha</th><td>Antecipou o fim após Fukushima e desligou os últimos reatores em 2023</td><td>Mais carvão e gás; emissões subiram no período de fechamento</td><td>Segue sem nuclear</td></tr>
+            <tr data-key="Itália"><th scope="row">Itália</th><td>Referendo de 1987, após Chernobyl; última usina fechada em 1990</td><td>Passou a importar cerca de 14% da eletricidade (2009)</td><td class="reverted">Governo anunciou lei para retomar</td></tr>
+            <tr data-key="Lituânia"><th scope="row">Lituânia</th><td>Fechou Ignalina (2004 e 2009) como condição para entrar na União Europeia</td><td>Perdeu de 70% a 77% da geração; mais dependência da Rússia</td><td>Sem usinas</td></tr>
+            <tr data-key="Japão"><th scope="row">Japão</th><td>Parou quase todos os 54 reatores após Fukushima (2011)</td><td>Primeiro déficit comercial em três décadas</td><td class="reverted">Reativa reatores desde 2015</td></tr>
+            <tr data-key="Coreia do Sul"><th scope="row">Coreia do Sul</th><td>Prometeu uma “era livre do nuclear” em 2017</td><td>Estudo indicava que o país precisaria expandir a fonte</td><td class="reverted">Política revertida pelo governo Yoon</td></tr>
+            <tr data-key="Bélgica"><th scope="row">Bélgica</th><td>Lei de 2003 previa o fim da fonte até 2025</td><td>Governo afirmou que o sistema “não se sustenta” sem nuclear</td><td class="reverted">Lei revogada em 2025</td></tr>
           </tbody>
         </table>
         <figcaption class="note">Em verde, os países que reverteram a decisão de abandonar a fonte.</figcaption>
       </figure>
       <article class="card filled">
           <p class="label">História · Plano Messmer</p>
-          <p><strong>França, 1974.</strong> Após o choque do petróleo, a França pôs em operação de 56 a 58 reatores até 1999, sem debate parlamentar, financiados sobretudo pela estatal EDF e por empréstimos garantidos. Virou a maior exportadora líquida de eletricidade do mundo, mas a dívida da EDF passou de 64 bilhões de euros em 2022.</p>
+          <p><strong>França, 1974.</strong> Após o choque do petróleo, a França pôs em operação de <button type="button" class="dnum" data-info="Reatores postos em operação na França entre 1974 e 1999 pelo Plano Messmer." data-src="El Orden Mundial, conforme pesquisa do grupo">56 a 58 reatores</button> até 1999, sem debate parlamentar, financiados sobretudo pela estatal EDF e por empréstimos garantidos. Virou a maior exportadora líquida de eletricidade do mundo, mas a dívida da EDF passou de <button type="button" class="dnum" data-info="Dívida da EDF em 2022." data-src="Pesquisa do grupo">64 bilhões de euros</button> em 2022.</p>
       </article>
       <aside class="closing">
         <svg class="xs closing-shape" viewBox="0 0 100 100" data-shape="sunny" data-morph="flower" aria-hidden="true"><path/></svg>
@@ -986,17 +1148,35 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
     </section>
   </main>
 
+  <div class="focus-stage" id="focus-stage" hidden aria-label="Modo foco" role="region">
+    <div class="focus-canvas" id="focus-canvas"></div>
+    <p class="focus-hint" id="focus-hint"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-pan_tool"/></svg>Arraste para mover · Ctrl + rolagem, pinça ou + e − para o zoom</p>
+    <div class="focus-toolbar" role="toolbar" aria-label="Controles do modo foco">
+      <button class="icon-button" type="button" id="focus-exit" aria-label="Sair do modo foco" title="Sair do modo foco (Esc)"><svg class="icon" aria-hidden="true"><use href="#i-fullscreen_exit"/></svg></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="icon-button" type="button" id="focus-prev" aria-label="Página anterior"><svg class="icon" aria-hidden="true"><use href="#i-arrow_back"/></svg></button>
+      <output id="focus-page" aria-live="polite">01 / 14</output>
+      <button class="icon-button" type="button" id="focus-next" aria-label="Próxima página"><svg class="icon" aria-hidden="true"><use href="#i-arrow_forward"/></svg></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="icon-button zoom-out" type="button" id="focus-zoom-out" aria-label="Diminuir zoom"><svg class="icon" aria-hidden="true"><use href="#i-zoom_out"/></svg></button>
+      <output id="focus-zoom" aria-live="polite">100%</output>
+      <button class="icon-button zoom-in" type="button" id="focus-zoom-in" aria-label="Aumentar zoom"><svg class="icon" aria-hidden="true"><use href="#i-zoom_in"/></svg></button>
+      <button class="icon-button" type="button" id="focus-fit" aria-label="Ajustar a página à tela"><svg class="icon" aria-hidden="true"><use href="#i-fit_screen"/></svg></button>
+    </div>
+  </div>
+
   <dialog class="viewer" id="viewer" aria-label="Visualização ampliada">
     <div class="viewer-bar">
       <span class="viewer-title" id="viewer-title"></span>
-      <button class="icon-button" id="viewer-close" aria-label="Fechar visualização ampliada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+      <button class="icon-button" id="viewer-close" aria-label="Fechar visualização ampliada"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
     </div>
+    <p class="viewer-note" id="viewer-note" hidden></p>
     <div class="viewer-stage" id="viewer-stage"></div>
   </dialog>
 
   <button class="fab" id="fab" aria-label="Próxima página">
     <svg class="xs fab-shape" viewBox="0 0 100 100" data-shape="cookie9" data-morph="sunny" aria-hidden="true"><path/></svg>
-    <svg class="fab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"/></svg>
+    <svg class="fab-icon" aria-hidden="true"><use href="#i-arrow_downward"/></svg>
   </button>
 
   <script>
@@ -1103,6 +1283,9 @@ function bindMorphs() {
 /* ---------- Navegação ---------- */
 const pages = $$('.page');
 let current = 0;
+let layout = 'scroll';
+let openFigure = () => {};
+let focusMode = null;
 const pad = n => String(n).padStart(2, '0');
 
 function buildDrawer() {
@@ -1138,17 +1321,29 @@ function closeDrawer() {
   $('#open-drawer').focus({ preventScroll: true });
 }
 
+// No modo revista, a navegação anda por aberturas: capa sozinha, depois 02–03, 04–05...
+const spreadStart = i => (i === 0 ? 0 : i % 2 ? i : i - 1);
+function step(dir) {
+  if (layout !== 'spread') return goTo(current + dir);
+  const s = spreadStart(current);
+  goTo(dir > 0 ? (s === 0 ? 1 : s + 2) : Math.max(0, s - 2));
+}
+
 function goTo(index) {
   const i = Math.max(0, Math.min(pages.length - 1, index));
+  history.replaceState(null, '', `#${pages[i].id}`);
+  if (layout === 'focus') { focusMode.show(i); return; }
   const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
   pages[i].scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-  history.replaceState(null, '', `#${pages[i].id}`);
 }
 
 function updateCurrent(i) {
   current = i;
   const page = pages[i];
-  $('#page-counter').textContent = `${pad(i + 1)} / ${pad(pages.length)}`;
+  const s = spreadStart(i);
+  $('#page-counter').textContent = layout === 'spread' && s > 0 && s + 1 < pages.length
+    ? `${pad(s + 1)}–${pad(s + 2)} / ${pad(pages.length)}`
+    : `${pad(i + 1)} / ${pad(pages.length)}`;
   $('#current-section').textContent = page.dataset.section;
   $('#prev-page').disabled = i === 0;
   $('#next-page').disabled = i === pages.length - 1;
@@ -1168,7 +1363,7 @@ function watchPages() {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const i = pages.indexOf(entry.target);
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && layout !== 'focus') {
         updateCurrent(i);
         if (!seen.has(i)) {
           seen.add(i);
@@ -1187,9 +1382,9 @@ function bindNav() {
   $('#open-drawer').addEventListener('click', openDrawer);
   $('#close-drawer').addEventListener('click', closeDrawer);
   $('#scrim').addEventListener('click', closeDrawer);
-  $('#prev-page').addEventListener('click', () => goTo(current - 1));
-  $('#next-page').addEventListener('click', () => goTo(current + 1));
-  $('#fab').addEventListener('click', () => goTo(current === pages.length - 1 ? 0 : current + 1));
+  $('#prev-page').addEventListener('click', () => step(-1));
+  $('#next-page').addEventListener('click', () => step(1));
+  $('#fab').addEventListener('click', () => (current === pages.length - 1 ? goTo(0) : step(1)));
   $$('.toc a').forEach(a => a.addEventListener('click', e => {
     e.preventDefault();
     goTo(pages.indexOf($(a.getAttribute('href'))));
@@ -1198,8 +1393,9 @@ function bindNav() {
     if (e.key === 'Escape' && document.body.classList.contains('drawer-open')) { closeDrawer(); return; }
     if ($('#viewer')?.open) return;
     if (e.target.closest('input, textarea, [role="tablist"], [role="radiogroup"]') || e.altKey || e.ctrlKey || e.metaKey) return;
-    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
-    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+    if (layout === 'focus' && focusMode.key(e)) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); step(1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); step(-1); }
     if (e.key === 'Home') { e.preventDefault(); goTo(0); }
     if (e.key === 'End') { e.preventDefault(); goTo(pages.length - 1); }
   });
@@ -1224,7 +1420,7 @@ const br = n => n.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFra
 function matrixChart() {
   const list = $('#matrix-bars');
   list.innerHTML = MATRIX.map(([name, v, type, twh]) => `
-    <li class="bar ${type}${name === 'Nuclear' ? ' highlight' : ''}" data-type="${type}">
+    <li class="bar ${type}${name === 'Nuclear' ? ' highlight' : ''}" data-type="${type}" data-key="${name}" data-group="${type}">
       <span class="bar-name">${name}</span>
       <span class="bar-track"><i style="--v:${v / 51.7}"></i></span>
       <span class="bar-value">${br(v)}%<small>${twh}</small></span>
@@ -1301,8 +1497,8 @@ function payback() {
   bars.innerHTML = SCENARIOS.map((s, i) => `
     <div class="pb-group" data-i="${i}">
       <div class="pb-cols">
-        <i class="rest" style="--v:${REST / s.fluxo / 8}"><b>${br(REST / s.fluxo)}</b></i>
-        <i class="total" style="--v:${TOTAL / s.fluxo / 8}"><b>${br(TOTAL / s.fluxo)}</b></i>
+        <i class="rest" data-key="rest" style="--v:${REST / s.fluxo / 8}"><b>${br(REST / s.fluxo)}</b></i>
+        <i class="total" data-key="total" style="--v:${TOTAL / s.fluxo / 8}"><b>${br(TOTAL / s.fluxo)}</b></i>
       </div>
       <span>${s.name}</span>
     </div>`).join('');
@@ -1496,7 +1692,7 @@ function organicBackground() {
 function expandables() {
   const viewer = $('#viewer'), stage = $('#viewer-stage');
   if (!viewer?.showModal) return;
-  const icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11V3h-8l3.29 3.29-10 10L3 13v8h8l-3.29-3.29 10-10z"/></svg>';
+  const icon = '<svg class="icon icon-md" aria-hidden="true"><use href="#i-open_in_full"/></svg>';
   let current = null, placeholder = null, opener = null;
   const titleOf = el => {
     const label = el.querySelector('svg[role="img"]')?.getAttribute('aria-label');
@@ -1511,7 +1707,29 @@ function expandables() {
     const k = Math.min((box.width - 48) / r.width, (box.height - 36) / r.height, 2.6);
     el.style.zoom = Math.max(1, k).toFixed(3);
   };
-  const open = (el, trigger) => {
+  const note = $('#viewer-note');
+  const clearEmphasis = el => {
+    el.classList.remove('has-emphasis');
+    $$('.is-emphasis', el).forEach(n => n.classList.remove('is-emphasis'));
+    note.hidden = true; note.textContent = '';
+  };
+  const emphasize = (el, emph) => {
+    // Destaca os elementos do gráfico cuja chave (data-key) ou grupo (data-group) corresponde ao número clicado.
+    const hits = $$('[data-key], [data-group]', el).filter(n => (n.dataset.key || '').split(' ').includes(emph.key) || n.dataset.group === emph.key);
+    hits.forEach(n => n.classList.add('is-emphasis'));
+    if (hits.length) el.classList.add('has-emphasis');
+    const tab = hits.find(n => n.matches('[role="tab"]'));
+    if (tab) tab.click();
+    note.innerHTML = '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-bar_chart"/></svg>';
+    const text = document.createElement('span');
+    const value = document.createElement('b');
+    value.textContent = emph.value;
+    text.append('Em destaque: ', value, ` — ${emph.info}`, emph.src ? ` Fonte: ${emph.src}.` : '');
+    note.append(text);
+    note.hidden = false;
+    requestAnimationFrame(() => hits[0]?.scrollIntoView({ block: 'nearest', inline: 'nearest' }));
+  };
+  const open = (el, trigger, emph) => {
     if (current) return;
     current = el; opener = trigger || el;
     placeholder = document.createElement('div');
@@ -1530,10 +1748,13 @@ function expandables() {
       el.style.width = '100%';
     }
     else requestAnimationFrame(() => fit(el));
+    if (emph?.key) emphasize(el, emph);
     $('#viewer-close').focus();
   };
+  openFigure = open;
   const restore = () => {
     if (!current) return;
+    clearEmphasis(current);
     current.style.zoom = ''; current.style.width = '';
     if (current._photo) {
       const svg = $('svg', current), img = $('image', current), o = current._photo;
@@ -1566,6 +1787,217 @@ function expandables() {
   addEventListener('resize', () => { if (current && !current.matches('.shaped-photo')) fit(current); });
 }
 
+/* ---------- Números de dados no texto ----------
+   Número com gráfico (data-chart): abre o gráfico ampliado com o valor em destaque.
+   Número sem gráfico: abre uma ficha com o significado e a fonte. */
+function dataNumbers() {
+  let pop = null, owner = null;
+  const close = () => {
+    pop?.remove(); pop = null;
+    owner?.setAttribute('aria-expanded', 'false'); owner = null;
+  };
+  const place = btn => {
+    const r = btn.getBoundingClientRect(), p = pop.getBoundingClientRect();
+    const left = Math.min(Math.max(16, r.left + r.width / 2 - p.width / 2), innerWidth - p.width - 16);
+    const below = r.bottom + 8 + p.height < innerHeight - 8;
+    pop.style.left = `${left}px`;
+    pop.style.top = `${below ? r.bottom + 8 : Math.max(8, r.top - p.height - 8)}px`;
+  };
+  const show = btn => {
+    close();
+    owner = btn; btn.setAttribute('aria-expanded', 'true');
+    pop = document.createElement('div');
+    pop.className = 'num-pop';
+    pop.setAttribute('role', 'dialog');
+    pop.setAttribute('aria-label', `Sobre o valor ${btn.textContent}`);
+    pop.innerHTML = `<div class="num-pop-head"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-info"/></svg><span class="num-pop-value"></span></div><p class="num-pop-info"></p><p class="num-pop-src"></p><button type="button" class="icon-button num-pop-close" aria-label="Fechar"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>`;
+    $('.num-pop-value', pop).textContent = btn.textContent;
+    $('.num-pop-info', pop).textContent = btn.dataset.info;
+    $('.num-pop-src', pop).textContent = `Fonte: ${btn.dataset.src}`;
+    $('.num-pop-close', pop).addEventListener('click', () => { const o = owner; close(); o?.focus(); });
+    document.body.append(pop);
+    place(btn);
+  };
+  $$('.dnum').forEach(btn => {
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', `${btn.textContent}: ${btn.dataset.chart ? 'ver no gráfico' : 'ver o significado'}`);
+  });
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.dnum');
+    if (btn) {
+      if (btn.dataset.chart) {
+        close();
+        const fig = document.getElementById(btn.dataset.chart);
+        if (fig) openFigure(fig, btn, { key: btn.dataset.emph, value: btn.textContent, info: btn.dataset.info, src: btn.dataset.src });
+      } else if (owner === btn) close();
+      else show(btn);
+      return;
+    }
+    if (pop && !e.target.closest('.num-pop')) close();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && pop) { const o = owner; close(); o?.focus(); } });
+  addEventListener('scroll', close, { passive: true });
+  addEventListener('resize', close);
+  dataNumbers.close = close;
+}
+
+/* ---------- Modo foco: uma página, tela inteira, zoom e arrasto ---------- */
+function createFocus() {
+  const stage = $('#focus-stage'), canvas = $('#focus-canvas'), hint = $('#focus-hint');
+  let page = null, holder = null, index = 0, s = 1, x = 0, y = 0;
+  const pointers = new Map();
+  let drag = null, pinch = null, suppressClick = false, hintTimer = 0;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const apply = () => {
+    canvas.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+    $('#focus-zoom').textContent = `${Math.round(s * 100)}%`;
+  };
+  const fit = () => {
+    // Ajusta a página inteira à área livre (acima da barra de controles).
+    const w = page.offsetWidth, h = page.offsetHeight;
+    const vw = innerWidth, vh = innerHeight - 84;
+    // No celular, a página ocupa a largura; no desktop, cabe inteira na tela.
+    s = narrowScreen.matches ? vw / w : Math.min(vw / w, vh / h) * 0.97;
+    x = (vw - w * s) / 2; y = narrowScreen.matches ? 8 : Math.max(8, (vh - h * s) / 2);
+    apply();
+  };
+  const zoomAt = (k, cx = innerWidth / 2, cy = innerHeight / 2) => {
+    const ns = clamp(s * k, 0.25, 5);
+    x = cx - (cx - x) * ns / s; y = cy - (cy - y) * ns / s; s = ns;
+    apply();
+  };
+  const putBack = () => {
+    if (!page) return;
+    holder.replaceWith(page);
+    page = holder = null;
+  };
+  const show = i => {
+    putBack();
+    index = i; page = pages[i];
+    holder = document.createElement('div');
+    holder.className = 'expand-placeholder';
+    page.replaceWith(holder);
+    canvas.append(page);
+    $('#focus-page').textContent = `${pad(i + 1)} / ${pad(pages.length)}`;
+    $('#focus-prev').disabled = i === 0;
+    $('#focus-next').disabled = i === pages.length - 1;
+    updateCurrent(i);
+    requestAnimationFrame(fit);
+  };
+  const enter = i => {
+    stage.hidden = false;
+    show(i);
+    hint.classList.remove('is-hidden');
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(() => hint.classList.add('is-hidden'), 3200);
+    $('#focus-exit').focus();
+  };
+  const exit = () => {
+    const i = index;
+    putBack();
+    stage.hidden = true;
+    return i;
+  };
+  stage.addEventListener('pointerdown', e => {
+    if (e.target.closest('.focus-toolbar') || e.button > 0) return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 2) {
+      const [a, b] = [...pointers.values()];
+      pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 };
+      drag = null;
+    } else drag = { x: e.clientX, y: e.clientY, moved: false, id: e.pointerId };
+  });
+  stage.addEventListener('pointermove', e => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinch && pointers.size === 2) {
+      const [a, b] = [...pointers.values()];
+      const d = Math.hypot(a.x - b.x, a.y - b.y), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      x += mx - pinch.mx; y += my - pinch.my;
+      zoomAt(d / pinch.d, mx, my);
+      pinch = { d, mx, my };
+      suppressClick = true;
+      return;
+    }
+    if (!drag) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.moved && Math.hypot(dx, dy) < 5) return;
+    if (!drag.moved) { drag.moved = true; stage.setPointerCapture(e.pointerId); stage.classList.add('is-dragging'); dataNumbers.close?.(); }
+    x += dx; y += dy; drag.x = e.clientX; drag.y = e.clientY;
+    apply();
+  });
+  const end = e => {
+    pointers.delete(e.pointerId);
+    if (pointers.size < 2) pinch = null;
+    if (drag?.moved) suppressClick = true;
+    if (!pointers.size) { drag = null; stage.classList.remove('is-dragging'); }
+  };
+  stage.addEventListener('pointerup', end);
+  stage.addEventListener('pointercancel', end);
+  // Um arrasto não deve virar clique em um botão da página.
+  stage.addEventListener('click', e => { if (suppressClick) { e.preventDefault(); e.stopPropagation(); suppressClick = false; } }, true);
+  stage.addEventListener('wheel', e => {
+    e.preventDefault();
+    if (e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * 0.01), e.clientX, e.clientY);
+    else { x -= e.deltaX; y -= e.deltaY; apply(); }
+  }, { passive: false });
+  $('#focus-exit').addEventListener('click', () => setLayout(focusMode.before || 'scroll'));
+  $('#focus-prev').addEventListener('click', () => show(Math.max(0, index - 1)));
+  $('#focus-next').addEventListener('click', () => show(Math.min(pages.length - 1, index + 1)));
+  $('#focus-zoom-in').addEventListener('click', () => zoomAt(1.25));
+  $('#focus-zoom-out').addEventListener('click', () => zoomAt(0.8));
+  $('#focus-fit').addEventListener('click', fit);
+  addEventListener('resize', () => { if (page) fit(); });
+  const key = e => {
+    const map = {
+      Escape: () => setLayout(focusMode.before || 'scroll'),
+      ArrowRight: () => show(Math.min(pages.length - 1, index + 1)), PageDown: () => show(Math.min(pages.length - 1, index + 1)),
+      ArrowLeft: () => show(Math.max(0, index - 1)), PageUp: () => show(Math.max(0, index - 1)),
+      '+': () => zoomAt(1.25), '=': () => zoomAt(1.25), '-': () => zoomAt(0.8), '0': fit,
+      Home: () => show(0), End: () => show(pages.length - 1),
+    };
+    if (!map[e.key]) return false;
+    e.preventDefault(); map[e.key]();
+    return true;
+  };
+  return { enter, exit, show, key, before: 'scroll' };
+}
+
+/* ---------- Layouts: rolagem, revista (duas páginas) e foco ---------- */
+const narrowScreen = matchMedia('(max-width: 860px)');
+function spreadZoom() {
+  const z = Math.min(1, (innerWidth - 32) / (2 * 794));
+  document.documentElement.style.setProperty('--spread-zoom', z.toFixed(3));
+}
+function setLayout(next, { persist = true } = {}) {
+  let mode = next === 'spread' && narrowScreen.matches ? 'scroll' : next;
+  const keep = current;
+  if (layout === 'focus' && mode !== 'focus') focusMode.exit();
+  if (mode === 'focus' && layout !== 'focus') focusMode.before = layout;
+  layout = mode;
+  document.body.dataset.layout = mode;
+  $$('.layout-switch button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.layout === mode)));
+  pages.forEach((p, i) => { p.classList.toggle('is-left', i > 0 && i % 2 === 1); p.classList.toggle('is-right', i === 0 || (i > 0 && i % 2 === 0)); });
+  if (mode === 'spread') spreadZoom();
+  if (mode === 'focus') focusMode.enter(keep);
+  else {
+    requestAnimationFrame(() => pages[keep].scrollIntoView({ block: 'start' }));
+    if (persist) { try { localStorage.setItem('ea-layout', mode); } catch { /* armazenamento indisponível */ } }
+    updateCurrent(keep);
+  }
+}
+function layouts() {
+  focusMode = createFocus();
+  $$('.layout-switch button').forEach(b => b.addEventListener('click', () => setLayout(b.dataset.layout)));
+  addEventListener('resize', () => {
+    if (layout === 'spread') { if (narrowScreen.matches) setLayout('scroll', { persist: false }); else spreadZoom(); }
+  });
+  let saved = null;
+  try { saved = localStorage.getItem('ea-layout'); } catch { /* armazenamento indisponível */ }
+  if (saved === 'spread' && !narrowScreen.matches) setLayout('spread', { persist: false });
+  else document.body.dataset.layout = 'scroll';
+}
+
 organicBackground();
 drawShapes();
 buildDrawer();
@@ -1578,8 +2010,10 @@ wavyMeters();
 countries();
 bindMorphs();
 expandables();
+dataNumbers();
+layouts();
 watchPages();
-updateCurrent(0);
+updateCurrent(current);
 })();
   </script>
 </body>

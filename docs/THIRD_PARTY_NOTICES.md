@@ -23,3 +23,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Material Symbols
+
+The Energia Atômica magazine embeds icons from Material Symbols (Rounded, weight 400), taken from the npm package `@material-symbols/svg-400` 0.48.0. Material Symbols are designed by Google and licensed under the Apache License, Version 2.0: https://www.apache.org/licenses/LICENSE-2.0. The SVG paths are used unmodified inside `<symbol>` elements.
