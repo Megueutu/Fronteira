@@ -50,6 +50,29 @@ Cada reportagem ocupa duas páginas: abertura em verde da capa e continuação.
 - `npm test`: os 7 testes da edição Fronteira e os 4 de `tests/energia-atomica.test.mjs` (ordem das seções, arquivo único com fotos embutidas, editorial, contas do payback, formas) passam.
 - Ainda não verificados: leitores de tela, Safari e iOS, aparelhos físicos, impressão e desempenho.
 
+## v2 — fundo orgânico (2026-10-16)
+
+Pedido do responsável: um canvas de fundo que simule formas orgânicas conforme a interação. Arquivo: `edicoes/energia-atomica/v2.html`, copiado da v1. A v1 não foi alterada.
+
+- **O que faz.** Um `<canvas>` fixo, atrás das páginas, desenha sete manchas nas cores da capa, com transparência. Cada mancha é uma curva fechada de 56 pontos, suavizada por quadráticas, e seu raio é deformado por quatro harmônicos lentos.
+- **Interação:**
+  - cursor ou dedo: as manchas próximas se afastam e a borda voltada para o ponteiro incha na direção dele;
+  - clique ou toque: uma onda empurra todas as manchas a partir do ponto;
+  - rolagem: a velocidade agita as formas, e cada mancha se desloca com profundidade diferente (paralaxe);
+  - mudança de página: a composição se rearranja suavemente.
+- **Física:** mola amortecida até uma âncora, com passo de tempo limitado a 50 ms.
+- **Cuidados:**
+  - o canvas tem `aria-hidden` e `pointer-events: none` e não cobre o texto, porque as páginas são opacas;
+  - a resolução é limitada a 2× a densidade de pixels da tela;
+  - a animação pausa com a aba oculta;
+  - com `prefers-reduced-motion`, desenha um quadro estático;
+  - fica oculto na impressão.
+- **Celular:** as páginas ocupam a largura toda, então o fundo aparece só entre as páginas.
+- **Validação:**
+  - Chromium headless em 1440 px, por `file://`: o canvas pinta cerca de 30% da tela e reage a movimento, clique e rolagem; sem erros de console; 61 quadros/s no headless, o que não comprova o desempenho em aparelhos reais;
+  - as 14 páginas continuam sem transbordar;
+  - `npm test`: 14 de 14.
+
 ## Próximo passo
 
-O grupo revisa a v1, principalmente a reportagem 2 e as condensações, e indica as mudanças para a v2.
+O grupo revisa a v2, principalmente a reportagem 2 e as condensações, e indica as mudanças para a v2.

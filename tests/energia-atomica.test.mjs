@@ -3,13 +3,16 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 
-const html = await readFile(new URL('../edicoes/energia-atomica/v1.html', import.meta.url), 'utf8');
+const read = v => readFile(new URL(`../edicoes/energia-atomica/${v}.html`, import.meta.url), 'utf8');
+const versions = { v1: await read('v1'), v2: await read('v2') };
+const html = versions.v2;
 const script = html.match(/<script>\n([\s\S]*?)<\/script>/)[1];
 // Executa só o trecho das formas, que não depende do DOM.
 const shapesCode = script.slice(script.indexOf('const N ='), script.indexOf('const reduceMotion'));
 const { radii, pathFrom, SHAPE_NAMES } = vm.runInNewContext(`${shapesCode}; ({ radii, pathFrom, SHAPE_NAMES })`);
 
-test('energia atômica v1 segue a ordem editorial combinada', () => {
+for (const [version, html] of Object.entries(versions)) {
+test(`energia atômica ${version} segue a ordem editorial combinada`, () => {
   const sections = [...html.matchAll(/<section class="page[^"]*" id="p(\d+)" data-section="([^"]+)"/g)].map(m => [Number(m[1]), m[2]]);
   assert.equal(sections.length, 14);
   assert.deepEqual(sections.map(s => s[0]), Array.from({ length: 14 }, (_, i) => i + 1));
@@ -18,12 +21,20 @@ test('energia atômica v1 segue a ordem editorial combinada', () => {
   for (const href of html.matchAll(/<a href="#(p\d+)"/g)) assert.match(html, new RegExp(`id="${href[1]}"`));
 });
 
-test('energia atômica v1 é um único arquivo, com fotos embutidas e creditadas', () => {
+test(`energia atômica ${version} é um único arquivo, com fotos embutidas e creditadas`, () => {
   assert.doesNotMatch(html, /<link rel="stylesheet" href="(?!https:)|<script[^>]+src=|href="\.\.\//);
   assert.equal((html.match(/<image href="data:image\/jpeg;base64,/g) || []).length, 2);
   assert.equal((html.match(/CC BY 3\.0/g) || []).length, 2);
   assert.match(html, /Escolher como produzir eletricidade é também decidir o futuro de um país\./);
   assert.match(html, /Transparência sobre IA/);
+});
+}
+
+test('energia atômica v2 tem fundo orgânico interativo atrás das páginas', () => {
+  assert.match(html, /<canvas class="organic-bg" id="organic-bg" aria-hidden="true"><\/canvas>/);
+  assert.match(script, /function organicBackground\(\)/);
+  assert.match(script, /prefers-reduced-motion/);
+  for (const event of ['pointermove', 'pointerdown', 'visibilitychange']) assert.match(script, new RegExp(event));
 });
 
 test('payback da v1 confere com os cenários do grupo', () => {
