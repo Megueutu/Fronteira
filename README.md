@@ -33,6 +33,15 @@ npm run test:browser
 
 É possível indicar `CHROMIUM_PATH` e `TEST_URL`. As capturas de tela ficam em `artifacts/`, ignorado pelo Git. O teste de navegador utiliza Chromium headless com renderização WebGL por software; não substitui testes em aparelhos reais.
 
+No Windows (PowerShell), informe o caminho de um executável Chromium ou Chrome instalado antes de executar o teste:
+
+```powershell
+$env:CHROMIUM_PATH = 'C:\caminho\para\chrome.exe'
+npm run test:browser
+```
+
+O teste usa o WebSocket nativo do Node e uma porta de depuração local temporária, sem dependências adicionais.
+
 ## Estado do projeto
 
 Estes são templates técnicos para escolher o núcleo. O folheamento HTML usa uma transição de folha plana; o 3D usa malha segmentada deformável. Não há simulação física, editor de revista, importação de PDF ou conteúdo remoto. O visual e as artes locais são demonstrativos; conceito editorial e design system continuam como TO DO.

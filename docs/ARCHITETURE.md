@@ -66,7 +66,15 @@ Essas medidas não equivalem a uma auditoria de acessibilidade. Leitor de tela, 
 - `npm run test:browser`: navegação HTML e 3D; popup, Escape e foco; carrossel e ampliação; retorno à leitura linear; modo de uma página; ausência de transbordamento horizontal no celular; movimento reduzido; perda de contexto WebGL; ausência de exceções JavaScript no fluxo.
 - Capturas de desktop e viewport móvel são geradas em `artifacts/` e foram inspecionadas visualmente.
 
-Verificações executadas no Chromium 154 headless, com WebGL por software. Não foram medidos FPS, bateria ou memória real do navegador; não há garantia de compatibilidade com Safari, Firefox ou aparelhos móveis físicos.
+Na sessão de nuvem, as verificações foram executadas no Chromium 154 headless, com WebGL por software. Não foram medidos FPS, bateria ou memória real do navegador; não há garantia de compatibilidade com Safari, Firefox ou aparelhos móveis físicos.
+
+### Recuperação e validação local — 2026-10-15
+
+Os arquivos foram recuperados do pacote `fronteira-templates.zip`, que contém o código e a documentação, mas não o histórico Git. A implementação foi registrada em um novo commit sobre a `main` inicial; o hash da sessão de nuvem não é preservado pelo ZIP.
+
+No Windows, com Node.js 25.9.0 e Chrome for Testing 153.0.8010.12 headless, passaram os três testes do núcleo e o fluxo completo de navegador descrito acima. Foram inspecionadas as capturas HTML e 3D em desktop e viewport móvel. O 3D continua com duas páginas pequenas no celular; a escolha do núcleo permanece pendente da avaliação com o responsável.
+
+O teste de navegador passou a usar CDP por WebSocket em uma porta local temporária, em vez dos descritores de pipe usados na nuvem, e a aguardar novas tentativas de remoção do perfil temporário no Windows. A aplicação continua sem dependências externas. O Edge 155 instalado encerrou durante a inicialização headless; esta validação local utilizou o Chrome for Testing, sem comprovar compatibilidade com Edge.
 
 ## Próximas decisões
 

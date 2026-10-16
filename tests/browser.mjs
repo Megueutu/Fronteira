@@ -5,26 +5,32 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 
 const profile = await mkdtemp(path.join(tmpdir(), 'fronteira-browser-'));
-const chrome = spawn(process.env.CHROMIUM_PATH || 'chromium', ['--headless', '--no-sandbox', '--disable-dev-shm-usage', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--remote-debugging-pipe', `--user-data-dir=${profile}`, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe', 'pipe', 'pipe'] });
-let seq = 0, pending = new Map(), buffer = '', session;
+const chrome = spawn(process.env.CHROMIUM_PATH || 'chromium', ['--headless', '--no-sandbox', '--disable-dev-shm-usage', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--remote-debugging-address=127.0.0.1', '--remote-debugging-port=0', `--user-data-dir=${profile}`, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'], windowsHide: true });
+let seq = 0, pending = new Map(), session, socket;
 const errors = [];
 const deadline = setTimeout(() => { console.error('Browser test timed out'); chrome.kill('SIGKILL'); process.exitCode = 1; }, 45000);
-chrome.stderr.on('data', () => {});
-chrome.stdio[4].on('data', chunk => {
-  buffer += chunk.toString();
-  let split;
-  while ((split = buffer.indexOf('\0')) >= 0) {
-    const message = JSON.parse(buffer.slice(0, split)); buffer = buffer.slice(split + 1);
-    if (message.id) { const item = pending.get(message.id); if (item) { pending.delete(message.id); message.error ? item.reject(new Error(JSON.stringify(message.error))) : item.resolve(message.result); } }
-    if (message.method === 'Runtime.exceptionThrown') errors.push(message.params.exceptionDetails.text + ': ' + (message.params.exceptionDetails.exception?.description || ''));
-  }
+const endpoint = new Promise((resolve, reject) => {
+  let diagnostics = '';
+  chrome.stderr.on('data', chunk => {
+    diagnostics = (diagnostics + chunk.toString()).slice(-8000);
+    const match = diagnostics.match(/DevTools listening on (ws:\/\/\S+)/);
+    if (match) resolve(match[1]);
+  });
+  chrome.once('error', reject);
+  chrome.once('exit', () => reject(new Error(`Chromium closed during startup: ${diagnostics}`)));
 });
+function receive(event) {
+  const message = JSON.parse(event.data);
+  if (message.id) { const item = pending.get(message.id); if (item) { pending.delete(message.id); message.error ? item.reject(new Error(JSON.stringify(message.error))) : item.resolve(message.result); } }
+  if (message.method === 'Runtime.exceptionThrown') errors.push(message.params.exceptionDetails.text + ': ' + (message.params.exceptionDetails.exception?.description || ''));
+}
+function disconnect() { for (const item of pending.values()) item.reject(new Error('Chromium connection closed')); pending.clear(); }
 chrome.on('error', error => { for (const item of pending.values()) item.reject(error); });
-chrome.on('exit', () => { for (const item of pending.values()) item.reject(new Error('Chromium closed')); pending.clear(); });
+chrome.on('exit', disconnect);
 function send(method, params = {}, direct = false) {
   return new Promise((resolve, reject) => {
     const id = ++seq; pending.set(id, { resolve, reject });
-    chrome.stdio[3].write(JSON.stringify({ id, method, params, ...(session && !direct ? { sessionId: session } : {}) }) + '\0');
+    socket.send(JSON.stringify({ id, method, params, ...(session && !direct ? { sessionId: session } : {}) }));
   });
 }
 async function evaluate(expression) {
@@ -46,6 +52,13 @@ async function screenshot(name) {
 }
 
 try {
+  socket = new WebSocket(await endpoint);
+  socket.addEventListener('message', receive);
+  socket.addEventListener('close', disconnect);
+  await new Promise((resolve, reject) => {
+    socket.addEventListener('open', resolve, { once: true });
+    socket.addEventListener('error', () => reject(new Error('Could not connect to Chromium')), { once: true });
+  });
   const target = await send('Target.createTarget', { url: 'about:blank' }, true);
   session = (await send('Target.attachToTarget', { targetId: target.targetId, flatten: true }, true)).sessionId;
   await send('Page.enable'); await send('Runtime.enable');
@@ -120,5 +133,5 @@ try {
   assert.deepEqual(errors, [], 'sem exceções JavaScript');
   console.log('PASS: html, 3d, navegação, popup/foco/escape, carrossel, ampliação, leitura linear, mobile, movimento reduzido e perda de WebGL.');
 } finally {
-  clearTimeout(deadline); chrome.kill('SIGTERM'); await pause(250); await rm(profile, { recursive: true, force: true });
+  clearTimeout(deadline); socket?.close(); chrome.kill('SIGTERM'); await pause(250); await rm(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
 }
