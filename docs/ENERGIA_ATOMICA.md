@@ -147,6 +147,19 @@ Pedido do responsável: imagens em todo lugar cabível, ligadas ao tema, como An
 - números, ênfases e layouts foram repetidos; o Esc no modo foco agora funciona mesmo com o foco numa aba;
 - sem erros de console; `npm test`: 18 de 18.
 
+## Sombras, tamanho das páginas e capa (2026-10-16)
+
+- **Sombras:** padronizadas e suavizadas, em camadas e tingidas de verde-escuro. No modo revista, cada página projeta sombra só para fora, e a dobra central tem um escurecimento curto e um reflexo de papel. Ver [design system, 4.1](ENERGIA_ATOMICA_DESIGN_SYSTEM.md#41-sombras).
+- **Tamanho das páginas:** na rolagem não dava para ver a página inteira. A barra superior ganhou diminuir, porcentagem, aumentar e “Página inteira”, também no modo revista.
+- **Capa:** o painel de controle e as linhas de transmissão foram trocados pelo canteiro de Angra 3 e por uma usina nuclear em operação (ilustrativa), por pedido do responsável.
+- **Correção:** a reescrita das sombras tinha removido a regra que deixa a capa sozinha à direita no modo revista. A regra foi restaurada, e os pares voltaram a 02–03 … 08–09.
+- **Pendente:** os arquivos de marca (favicon “FR”, logotipo), o QR Code e o código de barras citados pelo responsável estão no computador dele (`C:\Users\…\Downloads`) e não chegaram ao ambiente desta sessão.
+- **Validação (Chromium headless, `file://`):**
+  - na rolagem, “Página inteira” ajusta a 72% em 1440 × 900 e a página 05 cabe inteira (804 px de altura);
+  - +, − e a porcentagem funcionam;
+  - no modo revista, a capa fica sozinha à direita, a dupla 08–09 forma uma imagem contínua e “Página inteira” mostra as duas páginas a 72%;
+  - sem erros de console; `npm test`: 18 de 18.
+
 ## Próximo passo
 
 O grupo revisa o arquivo, principalmente a reportagem 2 e as condensações, e indica as próximas mudanças.

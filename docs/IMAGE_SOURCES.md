@@ -36,12 +36,12 @@ O arquivo `edicoes/energia-atomica.html` embute as nove fotografias de `assets/p
 | Foto | Onde aparece |
 | --- | --- |
 | `angra.jpg` | Capa, página dupla 08–09, foto da página 10 e aberturas de Custo e Política |
-| `angra3.jpg` | Abertura de Custo e foto da página 14 |
-| `control-room.jpg` | Capa e abertura de Como funciona |
-| `transmission.jpg` | Capa, abertura de Matriz e página 06 |
+| `angra3.jpg` | Capa, abertura de Custo e foto da página 14 |
+| `control-room.jpg` | Abertura de Como funciona |
+| `transmission.jpg` | Abertura de Matriz e página 06 |
 | `wind.jpg` | Abertura de Matriz |
 | `coast.jpg` | Página 12 e abertura de Política |
-| `nuclear-steam.jpg`, `nuclear-night.jpg`, `nuclear-lake.jpg` | Aberturas de Como funciona e Urânio, como ilustrativas |
+| `nuclear-steam.jpg`, `nuclear-night.jpg`, `nuclear-lake.jpg` | Aberturas de Como funciona e Urânio; `nuclear-night.jpg` também na capa. Sempre como ilustrativas |
 
 Em 2026-10-16, imagens novas do Unsplash e da Eletronuclear foram pedidas, mas a rede desta sessão bloqueou os dois domínios. Para a Eletronuclear, continua valendo a regra de não presumir licença.
 

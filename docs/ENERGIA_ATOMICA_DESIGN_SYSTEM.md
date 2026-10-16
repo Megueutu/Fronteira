@@ -137,6 +137,23 @@ A capa é exceção: “ENERGIA” usa Playfair Display e “ATÔMICA”, Montse
 
 - **Camadas de estado:** cor do conteúdo misturada ao fundo, nas proporções hover 8%, foco 10%, pressionado 10% e arrasto 16% (`--md-sys-state-*`). Foco de teclado: contorno de 3 px em `primary`.
 
+## 4.1 Sombras
+
+As sombras são suaves e em camadas: uma de contato, curta e quase invisível, e uma de ambiente, larga e difusa. A cor vem do verde-escuro do tema (`--shadow-ink: 16 38 25`), nunca do preto puro, e as opacidades ficam entre 5% e 22%.
+
+| Token | Uso |
+| --- | --- |
+| `--md-sys-elevation-1` | Botão de ampliar e de página dupla |
+| `--md-sys-elevation-2` | Ficha de número |
+| `--md-sys-elevation-3` | Diálogo ampliado, página no modo foco, barra do foco |
+| `--shadow-page` | Páginas na rolagem e capa no modo revista |
+| `--shadow-drop` | Formas com foto (aberturas e cantos) e FAB, como `filter: drop-shadow` |
+
+No **modo revista**, as duas páginas se comportam como um livro aberto:
+- cada página projeta sombra só para o lado de fora, sem sombra cruzando a dobra;
+- a dobra central tem um escurecimento curto, que some em 72 px;
+- a página da direita tem um reflexo fino de papel.
+
 ## 5. Números de dados no texto
 
 - **Aparência:** todo valor numérico do texto corrido (percentuais, valores, quantidades, prazos) vem em verde `primary`, peso 600 e sublinhado. Datas e nomes próprios com números ficam de fora.
@@ -168,6 +185,16 @@ Seletor na barra superior, em grupo de botões de ícone:
 - **Saída:** Esc sai do modo.
 - **Cliques:** um arrasto não dispara clique nos botões da página.
 
+**Tamanho das páginas.** Na rolagem e na revista, a barra superior tem diminuir, porcentagem, aumentar e “Página inteira” (`fit_screen`).
+
+| Modo | Tamanho |
+| --- | --- |
+| Padrão | 100% na rolagem; na revista, a largura que cabe na tela |
+| Página inteira | Ajusta altura e largura para ver a página toda |
+| Manual | De 40% a 200%, em passos de 15% |
+
+O clique na porcentagem volta ao padrão. O ajuste fica oculto no celular e no modo foco.
+
 A escolha entre Rolagem e Revista fica salva no navegador (`localStorage`, com falha silenciosa). O foco não é salvo.
 
 ## 7. Fotografia
@@ -177,7 +204,7 @@ A escolha entre Rolagem e Revista fica salva no navegador (`localStorage`, com f
   1. Unsplash, com a página da foto verificada;
   2. Eletronuclear, só com autorização ou licença explícita;
   3. Wikimedia Commons, com licença individual.
-- **Registro:** cada foto aparece no bloco JSON `#photo-data` com `src` (JPEG em base64, até 1800 px na página dupla e 900–1280 px nas demais), `ratio`, `credit`, `license`, `url` e `context`. Os elementos usam `data-photo="chave"`, e a mesma foto nunca é embutida duas vezes.
+- **Registro:** cada foto aparece no bloco JSON `#photo-data` com `src` (JPEG em base64, até 1800 px na página dupla e 900–1280 px nas demais), `ratio`, `credit`, `license`, `url` e `context`. Na capa: Angra (Sturm), o canteiro de Angra 3 (Wusel007) e uma usina nuclear no exterior, ilustrativa (Nicolas Hippert). O painel de controle e as linhas de transmissão saíram da capa, a pedido do responsável, por fugirem do assunto. Os elementos usam `data-photo="chave"`, e a mesma foto nunca é embutida duas vezes.
 - **Onde aparecem:**
 
 | Lugar | Moldura |
