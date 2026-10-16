@@ -11,19 +11,33 @@ const { radii, pathFrom, SHAPE_NAMES } = vm.runInNewContext(`${shapesCode}; ({ r
 
 test('energia atômica segue a ordem editorial combinada', () => {
   const sections = [...html.matchAll(/<section class="page[^"]*" id="p(\d+)" data-section="([^"]+)"/g)].map(m => [Number(m[1]), m[2]]);
-  assert.equal(sections.length, 14);
-  assert.deepEqual(sections.map(s => s[0]), Array.from({ length: 14 }, (_, i) => i + 1));
+  assert.equal(sections.length, 16);
+  assert.deepEqual(sections.map(s => s[0]), Array.from({ length: 16 }, (_, i) => i + 1));
   const order = [...new Set(sections.map(s => s[1]))];
   assert.deepEqual(order, ['Capa', 'Integrantes', 'Sumário', 'Editorial', 'Panorama da matriz elétrica', 'Como funciona a energia nuclear', 'O urânio brasileiro e o seu ciclo', 'O custo e o payback', 'Política']);
   for (const href of html.matchAll(/<a href="#(p\d+)"/g)) assert.match(html, new RegExp(`id="${href[1]}"`));
 });
 
-test('energia atômica é um único arquivo, com fotos embutidas e creditadas', () => {
-  assert.doesNotMatch(html, /<link rel="stylesheet" href="(?!https:)|<script[^>]+src=|href="\.\.\//);
-  assert.equal((html.match(/<image href="data:image\/jpeg;base64,/g) || []).length, 2);
-  assert.equal((html.match(/CC BY 3\.0/g) || []).length, 2);
+test('energia atômica é um único arquivo, com fotos embutidas uma vez e creditadas', () => {
+  assert.doesNotMatch(html, /<link rel="stylesheet" href="(?!https:)|<script[^>]+src=|href="\.\.\/|src="(?!data:)[^"]+\.(jpe?g|png|webp)"/);
+  const photos = JSON.parse(html.match(/<script type="application\/json" id="photo-data">([\s\S]*?)<\/script>/)[1].replaceAll('<\\/', '</'));
+  const used = new Set([...html.matchAll(/data-photo="([\w-]+)"/g)].map(m => m[1]));
+  for (const key of used) {
+    assert.ok(photos[key]?.src.startsWith('data:image/jpeg;base64,'), key);
+    assert.ok(photos[key].credit && photos[key].license && photos[key].url, `crédito de ${key}`);
+    assert.ok(html.includes(photos[key].credit), `crédito visível de ${key}`);
+  }
+  assert.deepEqual([...used].sort(), Object.keys(photos).sort());
+  assert.equal((html.match(/data:image\/jpeg;base64,/g) || []).length, Object.keys(photos).length);
   assert.match(html, /Escolher como produzir eletricidade é também decidir o futuro de um país\./);
   assert.match(html, /Transparência sobre IA/);
+});
+
+test('energia atômica tem página dupla com a foto de Angra nas páginas 8 e 9', () => {
+  assert.match(html, /id="p8"[^>]*|class="page spread-page spread-left" id="p8"/);
+  assert.match(html, /class="page spread-page spread-left" id="p8"/);
+  assert.match(html, /class="page spread-page spread-right" id="p9"/);
+  assert.equal((html.match(/<div class="spread-photo" aria-hidden="true"><img data-photo="angra"/g) || []).length, 2);
 });
 
 test('energia atômica não marca a reportagem nem usa rodapé corrido', () => {

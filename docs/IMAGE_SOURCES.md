@@ -29,6 +29,22 @@ Os nomes e URLs provêm dos créditos fornecidos. A [licença geral do Unsplash]
 
 O acervo também contém uma ilha, outra fotografia de torres, uma segunda eólica e uma paisagem de montanhas. Nem todas são usadas na edição. O estudo anterior conserva suas cópias em `previews/assets/`.
 
+## Uso na revista Energia Atômica
+
+O arquivo `edicoes/energia-atomica.html` embute as nove fotografias de `assets/photos/`, reduzidas e recomprimidas em JPEG. Os créditos aparecem nas linhas de fonte de cada página.
+
+| Foto | Onde aparece |
+| --- | --- |
+| `angra.jpg` | Capa, página dupla 08–09, foto da página 10 e aberturas de Custo e Política |
+| `angra3.jpg` | Abertura de Custo e foto da página 14 |
+| `control-room.jpg` | Capa e abertura de Como funciona |
+| `transmission.jpg` | Capa, abertura de Matriz e página 06 |
+| `wind.jpg` | Abertura de Matriz |
+| `coast.jpg` | Página 12 e abertura de Política |
+| `nuclear-steam.jpg`, `nuclear-night.jpg`, `nuclear-lake.jpg` | Aberturas de Como funciona e Urânio, como ilustrativas |
+
+Em 2026-10-16, imagens novas do Unsplash e da Eletronuclear foram pedidas, mas a rede desta sessão bloqueou os dois domínios. Para a Eletronuclear, continua valendo a regra de não presumir licença.
+
 ## Política de uso
 
 Cada fotografia da edição tem legenda completa, autoria e link para a licença na ampliação e na lista de créditos. Não há imagens geradas por IA apresentadas como documentação de fatos. Uma foto de torres de resfriamento não é prova automática de que o local seja uma central nuclear, nem permite concluir o nível de emissão ou risco.

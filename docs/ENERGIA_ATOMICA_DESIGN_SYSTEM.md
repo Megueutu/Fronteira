@@ -170,6 +170,27 @@ Seletor na barra superior, em grupo de botões de ícone:
 
 A escolha entre Rolagem e Revista fica salva no navegador (`localStorage`, com falha silenciosa). O foco não é salvo.
 
-## 7. Validação
+## 7. Fotografia
+
+- **Tema:** só imagens ligadas à energia nuclear e ao território da pesquisa, como Angra, a rede elétrica, as fontes da matriz e as instalações do ciclo. Usinas do exterior aparecem sempre como “ilustrativas”.
+- **Fontes, por prioridade:**
+  1. Unsplash, com a página da foto verificada;
+  2. Eletronuclear, só com autorização ou licença explícita;
+  3. Wikimedia Commons, com licença individual.
+- **Registro:** cada foto aparece no bloco JSON `#photo-data` com `src` (JPEG em base64, até 1800 px na página dupla e 900–1280 px nas demais), `ratio`, `credit`, `license`, `url` e `context`. Os elementos usam `data-photo="chave"`, e a mesma foto nunca é embutida duas vezes.
+- **Onde aparecem:**
+
+| Lugar | Moldura |
+| --- | --- |
+| Capa | Formas orgânicas, com camada de cor deslocada |
+| Aberturas | Formas expressivas, que morfam |
+| Canto das páginas dos estados | Forma expressiva |
+| Página dupla | Foto contínua nas duas páginas, com gradiente para o texto |
+| Fotos no corpo do texto | Forma expressiva |
+
+- **Ampliação:** mostra a foto inteira, na proporção original.
+- **Crédito:** obrigatório na própria página, na linha de fontes ou na legenda; o crédito da capa fica na página 02.
+
+## 8. Validação
 
 Validação desta etapa: [ENERGIA_ATOMICA.md](ENERGIA_ATOMICA.md#padronização-ícones-números-tema-e-layouts-2026-10-16).

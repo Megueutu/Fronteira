@@ -12,17 +12,18 @@ Status: em revisão com o responsável desde 2026-10-16. É uma revista separada
 
 | Página | Conteúdo | Interação |
 | --- | --- | --- |
-| 01 | Capa, reproduzindo a capa enviada (verde #02A913, ENERGIA/ATÔMICA e três formas) | — |
+| 01 | Capa no estilo da referência *Brasil Nuclear*: fotos dentro das formas orgânicas, camadas de cor deslocadas e chamadas | — |
 | 02 | Apresentação dos integrantes, turma e transparência sobre IA | Formas morfam ao passar o cursor |
 | 03 | Sumário e pergunta da pesquisa | Links para cada seção |
 | 04 | Editorial: texto do grupo, reproduzido sem alterações a partir do PDF | — |
 | 05–06 | Panorama da matriz elétrica | Gráfico com filtro por tipo de fonte |
-| 07–08 | Como funciona a energia nuclear | Percurso em cinco etapas |
-| 09–10 | O urânio brasileiro e o seu ciclo | Medidores ondulados; ciclo em cinco paradas |
-| 11–12 | O custo e o payback | Cenários com botões segmentados |
-| 13–14 | Política: posições e desinformação; países que tentaram abandonar a energia nuclear | Gráficos de percepção; tabela comparativa dos seis países |
+| 07, 10 | Como funciona a energia nuclear | Percurso em cinco etapas |
+| 08–09 | Página dupla: usinas de Angra dos Reis, foto contínua nas duas páginas | Ampliar a foto inteira |
+| 11–12 | O urânio brasileiro e o seu ciclo | Medidores; ciclo em cinco paradas |
+| 13–14 | O custo e o payback | Cenários com botões segmentados |
+| 15–16 | Política: posições e desinformação; países que tentaram abandonar a energia nuclear | Gráficos de percepção; tabela comparativa dos seis países |
 
-Cada reportagem ocupa duas páginas: abertura em verde da capa e continuação. As páginas não marcam o número da reportagem.
+Cada reportagem ocupa duas páginas: abertura no verde da marca e continuação. “Como funciona” tem ainda a página dupla 08–09, que no modo revista forma uma abertura contínua. As páginas não marcam o número da reportagem.
 
 ## Design
 
@@ -109,6 +110,42 @@ O responsável pediu cinco mudanças. Todas estão implementadas e descritas em 
 - **Celular (390 px, toque):** o botão “Revista” fica oculto; a ênfase “Brasil” funciona; a ficha abre; o foco ajusta pela largura (100%).
 - Sem erros de console. `npm test`: 17 de 17.
 - **Não verificados:** Safari e iOS, leitores de tela, trackpads reais (pinça e Ctrl + rolagem) e desempenho em aparelhos.
+
+## Imagens (2026-10-16)
+
+Pedido do responsável: imagens em todo lugar cabível, ligadas ao tema, como Angra e microrreatores. Os pontos citados foram a capa (seguindo a referência *Brasil Nuclear*), a parte dos estados, as figuras das aberturas e uma página dupla. As fontes preferidas são Unsplash e Eletronuclear.
+
+**Bloqueio de rede.** A política de rede do ambiente desta sessão recusou (403) unsplash.com, images.unsplash.com, eletronuclear.gov.br, commons.wikimedia.org e agenciabrasil.ebc.com.br. Nenhuma imagem nova pôde ser baixada nem verificada. Para continuar, libere esses domínios nas configurações de rede do ambiente.
+
+**O que foi feito, só com as 9 fotos já licenciadas do repositório** (ver [IMAGE_SOURCES.md](IMAGE_SOURCES.md)):
+- **Capa:** três fotos dentro das formas orgânicas, com camadas de cor deslocadas e duas chamadas, como na referência. As fotos são Angra, um painel de controle e linhas de transmissão.
+- **Aberturas:** as duas formas expressivas de cada abertura agora mostram fotos.
+
+| Abertura | Fotos |
+| --- | --- |
+| Matriz | Transmissão e eólicas |
+| Como funciona | Painel histórico e torres de resfriamento no exterior |
+| Urânio | Duas usinas no exterior |
+| Custo | Angra 3 e Angra |
+| Política | Angra e a costa de Angra |
+
+- **Estados:** a página 06 (rede e regiões) tem foto de transmissão no canto. A página 12 (ciclo pelos estados) tem a costa de Angra dos Reis, ponto final do ciclo.
+- **Página dupla 08–09:** a foto de Angra (Sturm, CC BY 3.0) ocupa as duas páginas, com título e dados sobre a imagem. O botão de ampliar mostra a foto inteira.
+- **Créditos e transparência:** toda foto tem crédito na linha de fontes da página (as da capa, na página 02). As fotos de usinas no exterior aparecem como ilustrativas, porque Angra não tem torres de resfriamento.
+- **Técnica:** cada foto é embutida uma única vez, num bloco JSON (`#photo-data`), e aplicada por `data-photo`. O arquivo passou de cerca de 650 KB para cerca de 1,3 MB.
+
+**Pendências:**
+- **Microrreatores:** nenhuma foto disponível no acervo.
+- **Etapas do ciclo:** faltam fotos de mineração em Caetité e da fábrica de combustível de Resende.
+- **Eletronuclear:** só usar fotos com licença ou autorização confirmada. Até agora, nenhuma licença geral de reprodução foi verificada.
+- **Unsplash:** busca por “nuclear”, “Angra”, “uranium” e “reactor” assim que a rede for liberada, com a página de cada foto verificada.
+
+**Validação (Chromium headless, `file://`):**
+- as 16 páginas, em 1280 px, ficam dentro da margem; as páginas 8 e 9 são de sangria total;
+- no modo revista, as páginas 08–09 formam uma foto contínua, e a ampliação mostra a foto inteira e a devolve escondida ao fechar;
+- todas as 21 marcações `data-photo` receberam a imagem;
+- números, ênfases e layouts foram repetidos; o Esc no modo foco agora funciona mesmo com o foco numa aba;
+- sem erros de console; `npm test`: 18 de 18.
 
 ## Próximo passo
 
