@@ -1,18 +1,14 @@
 # Finalidade do Fronteira
 
-O Fronteira será uma revista interativa na web. A experiência central deve simular uma revista física: um objeto no centro da interface, com capa, folhas e navegação por páginas.
+O Fronteira é uma revista interativa sobre energia nuclear no Brasil, concebida como um objeto de leitura no centro da interface. A edição inicial tem 20 páginas e combina o folheamento de folhas curvas em WebGL com camadas HTML para explorar imagens, dados, diagramas, notas e referências.
 
-O núcleo deve transmitir a sensação de abrir e folhear uma revista. O responsável confirmou que o folheamento frontal atende, mas também pediu um template 3D real para comparar. Os dois devem oferecer interações: popup, carrossel e imagem que expande. HTML, PDF e imagens são possibilidades de conteúdo, não uma exigência de oferecer todos os formatos na primeira versão.
+O responsável confirmou os cinco temas, a direção branca e verde e a conclusão da edição em 2026-10-16. A exigência anterior de manter editorial e design system como TO DO foi superada por essa autorização. O núcleo conserva seus limites explícitos de compatibilidade e validação; não há declaração de desempenho em aparelhos reais.
 
-## Etapa atual
+A revista atende ao trabalho de Sociologia do 2º ano D do Instituto J&F. Parte da pesquisa do grupo e a reorganiza com transparência sobre edição e uso de IA. Milton Santos, Max Weber e Immanuel Wallerstein oferecem lentes de interpretação. Os argumentos a favor e em debate têm peso visual equivalente.
 
-Pesquisar alternativas, definir a abordagem e validar um protótipo técnico com conteúdo neutro. Consulte [ARCHITETURE.md](ARCHITETURE.md).
+Texto justificado em colunas, fotografias contextualizadas e componentes padronizados sustentam a composição. Interatividade acrescenta exploração sem esconder o conteúdo essencial: o HTML, a abertura ampliada e a leitura contínua permanecem disponíveis para ler e selecionar texto.
 
-Há dois templates técnicos implementados com o mesmo conteúdo neutro: páginas HTML interativas e revista WebGL com folhas deformáveis. A escolha final do núcleo aguarda avaliação visual e testes em aparelhos reais.
-
-## Etapas seguintes
-
-- TO DO: definir a ideia e a proposta editorial em [MAGAZINE.md](MAGAZINE.md), após concluir o núcleo inicial.
-- TO DO: definir o design system em [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md), após concluir o núcleo inicial.
-
-Realismo visual, legibilidade, interação e funcionamento em celulares precisam ser avaliados juntos.
+- [Estrutura da edição](MAGAZINE.md).
+- [Design system](DESIGN_SYSTEM.md).
+- [Arquitetura e limites](ARCHITETURE.md).
+- [Revisão e decisões](REVIEW.md).

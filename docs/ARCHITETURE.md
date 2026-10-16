@@ -1,97 +1,73 @@
 # Arquitetura da revista interativa
 
-Status: dois templates técnicos implementados e verificados no Chromium; núcleo final ainda em avaliação.
-Pesquisa e decisões: 2026-10-15.
+Status: edição de 20 páginas implementada em 2026-10-16. Mantém-se a grafia solicitada deste arquivo. Consulte [REVIEW.md](REVIEW.md) para decisões de revisão e limites de validação.
 
-## Objetivo e decisões do produto
+## Estrutura
 
-Simular uma revista no centro da interface, com páginas e navegação por folheamento. O responsável confirmou que folheamento frontal atende; depois pediu dois templates comparáveis: um 3D real e outro com páginas interativas. Confirmou também popup, carrossel e imagem ampliável como interações desejadas.
+Aplicação estática com JavaScript, HTML/CSS e WebGL nativos, sem bibliotecas, fontes remotas ou instalação de dependências. Node.js 22 ou superior serve os arquivos com `npm start`. A edição pode ser hospedada estaticamente; os caminhos partem da raiz do domínio.
 
-Os dois templates compartilham seis páginas neutras e as mesmas ações. A ideia editorial e o design system aguardam a conclusão e validação do núcleo. O nome deste arquivo segue o solicitado: `ARCHITETURE.md`.
+| Arquivo | Responsabilidade |
+| --- | --- |
+| `src/content.js` | Vinte páginas, imagens, bibliografia, destinos do sumário e composição HTML. |
+| `src/data.js` | Dados da matriz, fórmulas e cenários, etapas e recortes históricos. |
+| `src/app.js` | Página atual, modos, navegação, URL, enquadramento, teclado, toque e falhas. |
+| `src/interactions.js` | Galeria, notas, ampliação, sumário, fontes, diagramas, cenários e leitura ampliada. |
+| `src/styles.css` | Tokens, composições editoriais, colunas, responsividade, foco e camadas. |
+| `src/webgl-reader.js` | Geometria segmentada, projeção e API de criação do renderer. |
+| `src/webgl-scene.js` | Recursos WebGL, texturas, virada e projeção dos botões HTML. |
+| `scripts/chromium.mjs` | Controle de um Chromium local por CDP/WebSocket, sem biblioteca adicional. |
+| `scripts/render-textures.mjs` | Geração e inspeção geométrica das vinte páginas. |
+| `assets/photos/` | Fotografias locais e otimizadas. |
+| `assets/textures/` | Composição editorial gerada em JPEG e manifesto de origem. |
+| `tests/` | Invariantes, cálculos, recursos e fluxos reais no navegador. |
 
-## Alternativas pesquisadas
+O conteúdo é local e confiável. Introduzir CMS ou conteúdo remoto exigirá validação e tratamento de HTML. Não há backend de produto, banco, autenticação ou telemetria.
 
-| Abordagem | Vantagem | Limitação |
-| --- | --- | --- |
-| Three.js + React Three Fiber | Cena 3D, iluminação e folhas deformáveis | Exige gerenciamento de GPU, interações e leitura acessível fora do canvas |
-| StPageFlip (`page-flip`) | Folheamento pronto para HTML e imagens, suporte declarado a toque e retrato/paisagem | Ainda exige validar gestos, foco, páginas ocultas e compatibilidade |
-| APIs nativas de HTML/CSS e WebGL | Protótipo local sem dependências; controle direto da comparação | Mais responsabilidade pela geometria, animação, manutenção e acessibilidade |
+## Uma composição para dois modos
 
-O tutorial de Wawa Sensei demonstra a viabilidade de um livro 3D, não a qualidade de leitura ou desempenho do Fronteira. O link de código final no tutorial apontou para outro projeto na consulta; confirmar o repositório e a licença antes de reutilizar material.
+`pageHTML` compõe a página lógica de 760 × 1064 pixels. O HTML usa essa composição diretamente. O script de renderização abre cada página em Chromium e grava uma textura de 1140 × 1596 pixels para o 3D. Assim, justificação, quebras, fotografias, fontes e espaçamentos são produzidos pelo mesmo mecanismo de layout.
 
-## Implementação desta comparação
+O manifesto contém a contagem e um hash normalizado do conteúdo, dos dados e do CSS. O teste unitário detecta divergência após mudanças. Capturas PNG e o relatório de limites ficam em `artifacts/`, ignorado pelo Git; os JPEGs usados pelo leitor são versionados. O navegador do leitor não precisa gerar texturas em tempo real nem instalar dependências.
 
-A proposta anterior era avaliar StPageFlip para folheamento frontal e Three.js para 3D. O acesso ao npm falhou porque o proxy local do ambiente estava indisponível. Para entregar uma comparação executável, os templates foram implementados em JavaScript com APIs nativas, sem dependências, CDN ou assets remotos. Isso é uma decisão provisória do protótipo, não uma conclusão de que escrever um motor próprio seja a melhor opção de produção.
+Não se trata de PDF ou captura de um documento Word. O HTML permanece selecionável e interativo. As texturas dão a mesma composição às superfícies curvas e são complementadas por botões HTML.
 
-Não há React, Three.js, StPageFlip, framework ou etapa de build nesta versão. O servidor Node serve arquivos estáticos; `npm start` inicia o projeto. Uma hospedagem estática pode servir os mesmos arquivos.
+## Folheamento HTML
 
-### Template HTML
+O desktop mostra duas páginas com transição CSS de folha plana. A cópia visual é `inert` e oculta de tecnologias assistivas. O texto pode ser selecionado; imagens e ações permanecem em DOM. Zoom aumenta a superfície e permite rolagem.
 
-`src/html-reader.js` monta a abertura usando HTML semântico. A transição de desktop usa uma cópia visual da página com rotação CSS e perspectiva; essa cópia é `inert` e oculta de tecnologias assistivas. A folha dessa transição é plana, sem deformação curva.
+No celular, o HTML mostra uma página em fluxo vertical, com corpo de 18 px e uma coluna, preservando o conteúdo. Toque horizontal dispara a troca ao soltar. O gesto não acompanha continuamente o dedo. A leitura ampliada e a leitura contínua também funcionam sem depender de WebGL.
 
-Texto, botões e carrossel permanecem em DOM. No celular, uma página por vez; páginas ocultas ficam `inert`. Botões e setas navegam, e um deslize iniciado nas margens também troca páginas. O centro preserva seleção e scroll. O gesto dispara a transição ao soltar: a folha não acompanha continuamente o dedo. Em telas pequenas, a troca é imediata.
+## Folheamento 3D
 
-### Template 3D
+WebGL desenha folhas segmentadas com deformação durante a virada, iluminação simplificada e texturas de frente/verso orientadas para a leitura. Camadas sugerem espessura. O enquadramento é fixo, sem câmera livre ou simulação física completa.
 
-`src/webgl-reader.js` implementa uma cena WebGL com projeção em perspectiva, folhas segmentadas e animação que as levanta e curva no espaço. A malha é recalculada durante a virada. Frente e verso recebem mapeamentos distintos para evitar texto espelhado. Camadas simplificadas sugerem espessura; o enquadramento é fixo, sem rotação livre.
+Carrega-se o par atual sob demanda. Uma virada mantém os pares de origem e destino; ao terminar, texturas que não pertencem à abertura atual são descartadas. Os testes conferem dois recursos ao estabilizar. Não se carregam as vinte páginas na GPU simultaneamente.
 
-O conteúdo de cada página é desenhado em canvas 2D e enviado à GPU como textura. A interface posiciona botões HTML sobre pontos projetados da folha. Eles abrem as mesmas interações do template HTML. Os hotspots ficam ocultos enquanto a folha vira.
+Botões HTML são projetados sobre a faixa de ação das páginas e ocultados durante a virada. O texto das texturas não é selecionável; “Ler esta abertura” abre a composição HTML em tamanho confortável. O 3D mantém duas páginas no celular quando escolhido explicitamente; o modo inicial em uma visita móvel sem preferência na URL é HTML.
 
-O texto da textura não é selecionável. O carrossel do 3D abre em uma janela HTML; não é um componente DOM curvado sobre a malha. A leitura linear permite acessar o conteúdo sem depender do canvas. O template 3D mantém duas páginas também no celular; a legibilidade nessa tela é uma limitação conhecida.
+Falha ao iniciar ou perda de contexto WebGL mostra a composição HTML e mantém a navegação. Não há recuperação automática do contexto perdido. Não se afirmam FPS, consumo energético ou compatibilidade em hardware real.
 
-Apenas a animação e o redimensionamento solicitam novos frames. As seis texturas da amostra são carregadas na inicialização do template 3D. Isso não é uma estratégia para uma edição grande: antes de ampliar o volume, implementar cache limitado e carregamento de aberturas vizinhas. A amostra usa aproximadamente 32 MiB para seis texturas RGBA de 1000 × 1400, além dos demais recursos.
+## Interações e acessibilidade
 
-## Conteúdo e interações compartilhadas
+Dialogs nativos têm rótulo, fechamento por Escape, foco inicial e devolução do foco. A leitura contínua mantém um histórico de camadas para que fechar uma nota devolva o texto anterior. O sumário navega diretamente; Home e End alcançam os extremos. Atalhos de navegação não capturam controles de formulário ou interações abertas.
 
-- `src/content.js`: seis páginas, ordem editorial, artes, textos, ações e composição HTML. Uma abertura possui duas páginas.
-- `src/app.js`: template ativo, abertura, página móvel, navegação, coordenação das transições e links `?template=html` / `?template=3d`.
-- `src/interactions.js`: popup, carrossel circular, ampliação e leitura linear, usando um `dialog` nativo com rótulo, foco inicial e restauração de foco. Interações abertas da leitura linear retornam ao texto ao fechar.
-- `src/styles.css`: apresentação demonstrativa, comportamento responsivo e movimento reduzido.
-- `assets/`: três artes SVG locais, criadas para o protótipo.
-- `server.mjs`: servidor de desenvolvimento sem dependências.
+Gráficos expõem números em texto; filtros mantêm a escala. O laboratório mostra fórmula, unidades, parâmetros e limites. As marcações do quadro de avaliação não são enviadas a um serviço. Movimento reduzido evita a virada prolongada. Essas medidas não equivalem a uma auditoria completa de acessibilidade.
 
-As informações comuns vêm do manifesto, mas a composição visual HTML e o desenho de textura 3D são implementações separadas. Mudanças de layout precisam ser conferidas nos dois templates. Todo conteúdo é local e confiável; introduzir conteúdo externo exigirá validação e tratamento de HTML antes da renderização.
+## Pesquisa e decisões anteriores
 
-Não há backend de produto, banco de dados, CMS ou autenticação. PDF, vídeo, editor de edição, zoom gestual e publicação de conteúdo não foram implementados.
+A pesquisa inicial considerou StPageFlip para HTML e Three.js/React Three Fiber para 3D. O ambiente de nuvem não conseguiu instalar pacotes devido ao proxy, motivando os protótipos nativos. Nenhum código ou asset dessas referências foi copiado.
 
-## Acessibilidade e falhas
+- [StPageFlip](https://github.com/Nodlik/StPageFlip): alternativa de folheamento HTML/imagem, licença MIT.
+- [Three.js — SkinnedMesh](https://threejs.org/docs/pages/SkinnedMesh.html): deformação por esqueleto.
+- [React Three Fiber — desempenho](https://r3f.docs.pmnd.rs/advanced/scaling-performance): renderização sob demanda e reutilização de recursos.
+- [Drei — Html](https://drei.docs.pmnd.rs/misc/html): posicionamento de DOM no espaço 3D.
+- [Wawa Sensei — livro 3D](https://wawasensei.dev/tuto/3d-book-slider-landing-page-threejs-and-react): demonstração de animação; verificar licença e repositório antes de reutilizar.
+- [PDF.js](https://mozilla.github.io/pdf.js/): alternativa futura para PDF; não usada nesta edição.
 
-Botões possuem nomes acessíveis e foco visível. Dialogs permitem Escape e clique fora; o foco retorna ao acionador. O conteúdo pode ser lido em modo linear, inclusive sem WebGL. Movimento reduzido evita viradas prolongadas. Uma falha ao iniciar WebGL ou perda de contexto mostra uma mensagem e mantém HTML e leitura linear disponíveis; a recuperação automática do contexto 3D não foi implementada.
+A implementação atual conserva o renderer nativo e resolve a divergência entre a composição HTML e a textura desenhada manualmente. Uma futura troca de motor deve preservar conteúdo, interações, leitura acessível e testes.
 
-Essas medidas não equivalem a uma auditoria de acessibilidade. Leitor de tela, contraste, toque físico e diferentes navegadores ainda precisam de avaliação.
+## Recuperação e limites
 
-## Verificações e limites
+O código da nuvem foi recuperado de ZIP em 2026-10-15. O pacote não preservava o commit `0f36176`, por isso a recuperação recebeu novo commit sobre a main inicial. A publicação pelo Git local passou a funcionar nesta máquina.
 
-- `npm test`: limites e ordem de páginas, geometria curva, orientação do verso e projeção dos hotspots.
-- `npm run test:browser`: navegação HTML e 3D; popup, Escape e foco; carrossel e ampliação; retorno à leitura linear; modo de uma página; ausência de transbordamento horizontal no celular; movimento reduzido; perda de contexto WebGL; ausência de exceções JavaScript no fluxo.
-- Capturas de desktop e viewport móvel são geradas em `artifacts/` e foram inspecionadas visualmente.
-
-Na sessão de nuvem, as verificações foram executadas no Chromium 154 headless, com WebGL por software. Não foram medidos FPS, bateria ou memória real do navegador; não há garantia de compatibilidade com Safari, Firefox ou aparelhos móveis físicos.
-
-### Recuperação e validação local — 2026-10-15
-
-Os arquivos foram recuperados do pacote `fronteira-templates.zip`, que contém o código e a documentação, mas não o histórico Git. A implementação foi registrada em um novo commit sobre a `main` inicial; o hash da sessão de nuvem não é preservado pelo ZIP.
-
-No Windows, com Node.js 25.9.0 e Chrome for Testing 153.0.8010.12 headless, passaram os três testes do núcleo e o fluxo completo de navegador descrito acima. Foram inspecionadas as capturas HTML e 3D em desktop e viewport móvel. O 3D continua com duas páginas pequenas no celular; a escolha do núcleo permanece pendente da avaliação com o responsável.
-
-O teste de navegador passou a usar CDP por WebSocket em uma porta local temporária, em vez dos descritores de pipe usados na nuvem, e a aguardar novas tentativas de remoção do perfil temporário no Windows. A aplicação continua sem dependências externas. O Edge 155 instalado encerrou durante a inicialização headless; esta validação local utilizou o Chrome for Testing, sem comprovar compatibilidade com Edge.
-
-## Próximas decisões
-
-1. Comparar os templates visualmente com o responsável e escolher o núcleo principal, ou manter ambos.
-2. Definir se a folha precisa acompanhar o arraste e se capa fechada/abertura fazem parte da primeira experiência. A amostra inicia aberta e não implementa abrir/fechar a revista.
-3. Definir celulares e navegadores de referência e quantidade esperada de páginas por edição.
-4. Avaliar biblioteca de folheamento/3D antes de consolidar o renderer de produção, agora com interações concretas para comparar.
-5. Validar desempenho e acessibilidade nos alvos definidos.
-6. Depois de concluir o núcleo, iniciar ideia editorial e design system. Os documentos correspondentes permanecem TO DO.
-
-## Fontes primárias da pesquisa
-
-- [StPageFlip — repositório oficial](https://github.com/Nodlik/StPageFlip): alternativa com HTML e imagens, licença MIT. Verificar versão, manutenção e compatibilidade antes de adotar.
-- [Wawa Sensei — livro 3D com Three.js e React](https://wawasensei.dev/tuto/3d-book-slider-landing-page-threejs-and-react): referência de animação e demonstração pública.
-- [Three.js — SkinnedMesh](https://threejs.org/docs/pages/SkinnedMesh.html): deformação de malha por esqueleto, alternativa ao renderer experimental atual.
-- [React Three Fiber — desempenho](https://r3f.docs.pmnd.rs/advanced/scaling-performance): referência de renderização sob demanda e reutilização de recursos.
-- [Drei — Html](https://drei.docs.pmnd.rs/misc/html): posicionar DOM em uma cena não o transforma automaticamente em superfície deformável.
-- [Mozilla — PDF.js](https://mozilla.github.io/pdf.js/): possível renderização futura de PDF, licença Apache 2.0.
-
-Nenhum código, biblioteca ou asset dessas fontes foi incorporado aos templates.
+Não há editor, importação de PDF, vídeo, capa com abertura/fechamento articulados, zoom gestual, arraste contínuo ou rotação livre da cena. Não foram homologados Safari, Firefox, aparelhos físicos, leitores de tela ou impressões do navegador. Os testes atuais são de Chromium headless no Windows com WebGL por software.

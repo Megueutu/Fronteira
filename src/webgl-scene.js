@@ -1,0 +1,112 @@
+import { pages, getSpread } from './content.js';
+import { pageGeometry, projection, projectPoint } from './webgl-reader.js';
+
+const WIDTH = 1.43, HEIGHT = 2;
+const vertexSource = `attribute vec3 position; attribute vec2 uv; attribute vec3 normal;
+uniform mat4 matrix; varying vec2 vUV; varying float light;
+void main(){vUV=uv; light=.94+.06*abs(dot(normalize(normal),normalize(vec3(-.3,.5,1.)))); gl_Position=matrix*vec4(position,1.);}`;
+const fragmentSource = `precision mediump float; uniform sampler2D page; uniform float tint;
+varying vec2 vUV; varying float light;
+void main(){vec4 c=texture2D(page,vUV);float gutter=1.-.10*exp(-min(vUV.x,1.-vUV.x)*38.);gl_FragColor=vec4(c.rgb*light*gutter*tint,c.a);}`;
+
+export async function create3DReader(onLost) {
+  const canvas = document.querySelector('#book-canvas'), hotspots = document.querySelector('#hotspots');
+  const gl = canvas.getContext('webgl',{ alpha:true, antialias:true, premultipliedAlpha:false });
+  if (!gl) throw new Error('WebGL indisponível');
+  let lost = false, spread = 0, animation, frame = 0, matrix, width, height, resolveTurn, showId = 0, operationId = 0;
+  const textures = new Map(), pending = new Map();
+  function shader(type,source) {
+    const value = gl.createShader(type); gl.shaderSource(value,source); gl.compileShader(value);
+    if (!gl.getShaderParameter(value,gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(value));
+    return value;
+  }
+  const program = gl.createProgram(), vertex = shader(gl.VERTEX_SHADER,vertexSource), fragment = shader(gl.FRAGMENT_SHADER,fragmentSource);
+  gl.attachShader(program,vertex); gl.attachShader(program,fragment); gl.linkProgram(program);
+  if (!gl.getProgramParameter(program,gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(program));
+  gl.deleteShader(vertex); gl.deleteShader(fragment); gl.useProgram(program);
+  const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+  for (const [attribute,size,offset] of [['position',3,0],['uv',2,12],['normal',3,20]]) {
+    const loc = gl.getAttribLocation(program,attribute); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);
+  }
+  const matrixLocation = gl.getUniformLocation(program,'matrix'), tintLocation = gl.getUniformLocation(program,'tint');
+  gl.uniform1i(gl.getUniformLocation(program,'page'),0); gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
+  async function ensure(index) {
+    if (textures.has(index)) return;
+    if (pending.has(index)) return pending.get(index);
+    const operation = (async () => {
+      const image = new Image(); image.src = `/assets/textures/page-${String(index + 1).padStart(2,'0')}.jpg`;
+      await image.decode(); if (lost) return;
+      const texture = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,texture); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
+      gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,image);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+      textures.set(index,texture);
+    })();
+    pending.set(index,operation);
+    try { await operation; } finally { pending.delete(index); }
+  }
+  async function prepare(value) { await Promise.all([ensure(value * 2),ensure(value * 2 + 1)]); }
+  function prune() {
+    const keep = new Set([spread * 2,spread * 2 + 1]);
+    for (const [index,texture] of textures) if (!keep.has(index)) { gl.deleteTexture(texture); textures.delete(index); }
+    canvas.dataset.textureCount = String(textures.size);
+  }
+  function dimensions() {
+    const r = canvas.getBoundingClientRect(); width = r.width; height = r.height;
+    if (!width || !height) return false;
+    const ratio = Math.min(devicePixelRatio || 1,2);
+    canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
+    matrix = projection(width / height); gl.viewport(0,0,canvas.width,canvas.height); gl.uniformMatrix4fv(matrixLocation,false,matrix); return true;
+  }
+  function draw(side,index,progress = 0,offset = 0,tint = 1) {
+    if (!textures.has(index)) return;
+    const vertices = pageGeometry(side,progress,offset);
+    gl.bindTexture(gl.TEXTURE_2D,textures.get(index)); gl.uniform1f(tintLocation,tint);
+    gl.bufferData(gl.ARRAY_BUFFER,vertices,gl.DYNAMIC_DRAW); gl.drawArrays(gl.TRIANGLES,0,vertices.length / 8);
+  }
+  function updateHotspots() {
+    if (!matrix || !width) return;
+    for (const [i,button] of [...hotspots.children].entries()) {
+      const page = pages[spread * 2 + i]; if (!page) continue;
+      const x = i === 0 ? -WIDTH * (1 - page.action.x) : WIDTH * page.action.x;
+      const point = projectPoint(matrix,x,HEIGHT * (.5 - page.action.y),.015,width,height);
+      const y = HEIGHT * (.5 - page.action.y);
+      const center = projectPoint(matrix,0,y,0,width,height), edge = projectPoint(matrix,WIDTH,y,0,width,height);
+      button.style.left = `${point.x}px`; button.style.top = `${point.y}px`; button.style.width = `${Math.max(90,(edge.x - center.x) * .90)}px`;
+    }
+  }
+  function makeHotspots() {
+    hotspots.innerHTML = getSpread(spread).map((page,i) => `<button type="button" class="hotspot" data-action="${page.action.type}" data-page="${spread * 2 + i}">${page.action.label}<span aria-hidden="true">↗</span></button>`).join(''); updateHotspots();
+  }
+  function render(now = performance.now()) {
+    if (lost || !matrix) return;
+    gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    const base = animation ? animation.from : spread;
+    for (let i = 4; i >= 1; i--) { draw(-1,base * 2,0,-i * .012,.83 + .025 * i); draw(1,base * 2 + 1,0,-i * .012,.83 + .025 * i); }
+    if (!animation) { draw(-1,spread * 2); draw(1,spread * 2 + 1); return; }
+    const raw = Math.min(1,(now - animation.start) / 850), progress = raw * raw * (3 - 2 * raw), forward = animation.to > animation.from;
+    draw(-1,(forward ? animation.from : animation.to) * 2); draw(1,(forward ? animation.to : animation.from) * 2 + 1);
+    const index = forward ? (progress <= .5 ? animation.from * 2 + 1 : animation.to * 2) : (progress <= .5 ? animation.from * 2 : animation.to * 2 + 1);
+    draw(forward ? 1 : -1,index,progress,.018);
+    if (raw < 1) frame = requestAnimationFrame(render);
+    else { spread = animation.to; animation = null; makeHotspots(); render(); prune(); const done = resolveTurn; resolveTurn = null; done?.(); }
+  }
+  function cancel() { ++operationId; cancelAnimationFrame(frame); if (animation) spread = animation.to; animation = null; const done = resolveTurn; resolveTurn = null; done?.(); }
+  async function show(value) {
+    const request = ++showId; cancel(); await prepare(value);
+    if (request !== showId || lost) return;
+    spread = value; if (dimensions()) { makeHotspots(); render(); prune(); }
+  }
+  const observer = new ResizeObserver(() => { if (!lost && dimensions()) { updateHotspots(); if (!animation) render(); } }); observer.observe(canvas);
+  canvas.addEventListener('webglcontextlost',event => { event.preventDefault(); lost = true; ++showId; cancel(); hotspots.replaceChildren(); onLost(); });
+  return {
+    show,cancel,
+    async turn(from,to) {
+      cancel(); const request = operationId; await Promise.all([prepare(from),prepare(to)]);
+      if (lost || request !== operationId) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { await show(to); return; }
+      return new Promise(resolve => { resolveTurn = resolve; animation = { from,to,start:performance.now() }; frame = requestAnimationFrame(render); });
+    },
+    dispose() { lost = true; cancel(); observer.disconnect(); textures.forEach(texture => gl.deleteTexture(texture)); textures.clear(); gl.deleteBuffer(buffer); gl.deleteProgram(program); },
+  };
+}

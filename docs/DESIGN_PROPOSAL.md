@@ -2,6 +2,8 @@
 
 Status: estudo para avaliação, 2026-10-16. Preferências confirmadas: branco, verde, minimalismo, fotografia e interação como parte da leitura. Não substitui a validação do núcleo nem consolida o design system.
 
+Registro histórico: depois deste estudo, o responsável autorizou concluir a edição de 20 páginas. A implementação atual e seus limites estão em [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md), [MAGAZINE.md](MAGAZINE.md) e [REVIEW.md](REVIEW.md).
+
 ## Referência escolhida para o estudo
 
 O repositório local `Inter/awesome-design-md` corresponde a [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md), revisão local `13be5c05c63be24b57581162364167028020f043`, licença MIT. Ele oferece análises e instruções de design, sem entregar componentes nem motor de revista.

@@ -1,19 +1,36 @@
-# Acervo e créditos das imagens
+# Fotografias e licenças
 
-Conferência local: 2026-10-16. O ZIP `revista-energia-nuclear-imagens.zip` contém onze fotografias. O pacote `Revista_Energia_Nuclear.zip` contém os links e créditos correspondentes. As cinco versões abaixo foram redimensionadas para até 1600 pixels, com orientação EXIF aplicada e compressão JPEG, para a prévia. Os originais baixados não foram alterados.
+Edição de 20 páginas, 2026-10-16. As fotografias são locais, em JPEG otimizado. Foram aplicados orientação EXIF, redimensionamento e recortes de exibição; cores e objetos não foram alterados. Os originais baixados foram preservados. As licenças das fotografias são independentes da licença do código e da referência de design.
 
-| Arquivo na prévia | Crédito informado no acervo | Página de origem | Uso e contexto |
+## Registros históricos de Angra
+
+| Arquivo | Autoria e contexto | Origem e licença |
+| --- | --- | --- |
+| `assets/photos/angra.jpg` | Sturm. Vista das usinas de Angra; a página do arquivo informa janeiro de 2009. A legenda apresenta essa data como a indicada pela fonte, sem usar o registro para representar o estágio atual. | [Arquivo original](https://commons.wikimedia.org/wiki/File:Angra_dos_Reis_-_usinas_nucleares.jpg), [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). |
+| `assets/photos/angra3.jpg` | Wusel007. Canteiro de Angra 3 em 20/05/2015. Registro histórico, sem afirmar o andamento atual da obra. | [Arquivo original](https://commons.wikimedia.org/wiki/File:Construction_site_Angra_III.JPG), [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), opção escolhida entre as licenças oferecidas pelo autor. |
+
+As páginas de descrição dos dois arquivos foram consultadas para verificar autoria, contexto e licença. A reprodução credita os autores, liga à origem e à licença e identifica redimensionamento/recorte. Não implica apoio dos autores à edição.
+
+## Acervo Unsplash fornecido
+
+O ZIP `revista-energia-nuclear-imagens.zip` contém onze fotografias, e o pacote `Revista_Energia_Nuclear.zip` inclui o arquivo de créditos correspondente. As sete abaixo integram a edição e sua galeria.
+
+| Arquivo | Crédito informado no acervo | Origem | Contexto |
 | --- | --- | --- | --- |
-| `previews/assets/transmission.jpg` | Matthew Henry / Unsplash | [Fotografia](https://unsplash.com/photos/yETqkLnhsUI) | Transmissão; imagem ilustrativa, sem identificação como instalação brasileira. |
-| `previews/assets/nuclear-night.jpg` | Nicolas Hippert / Unsplash | [Fotografia](https://unsplash.com/photos/C82jAEQkfE0) | Torres à noite; imagem ilustrativa, não representa Angra. |
-| `previews/assets/control-room.jpg` | Dan Meyers / Unsplash | [Fotografia](https://unsplash.com/photos/cHR1Q2g1_F4) | Painel histórico; imagem ilustrativa, não representa Angra. |
-| `previews/assets/nuclear-lake.jpg` | Hansjorg Keller / Unsplash | [Fotografia](https://unsplash.com/photos/WmQgU73hngg) | Instalação industrial com torres; localização não validada. |
-| `previews/assets/wind.jpg` | Jaime Dantas / Unsplash | [Fotografia](https://unsplash.com/photos/ppAKt8nCVoI) | Eólica; imagem ilustrativa para comparação entre fontes. |
+| `transmission.jpg` | Matthew Henry | [Unsplash](https://unsplash.com/photos/yETqkLnhsUI) | Torres de transmissão; instalação não identificada como brasileira. |
+| `nuclear-night.jpg` | Nicolas Hippert | [Unsplash](https://unsplash.com/photos/C82jAEQkfE0) | Torres à noite; não representa Angra nem é identificada como central francesa. |
+| `control-room.jpg` | Dan Meyers | [Unsplash](https://unsplash.com/photos/cHR1Q2g1_F4) | Painel histórico; não representa os sistemas atuais de Angra. |
+| `nuclear-lake.jpg` | Hansjorg Keller | [Unsplash](https://unsplash.com/photos/WmQgU73hngg) | Instalação com torres; localização exata não validada. |
+| `wind.jpg` | Jaime Dantas | [Unsplash](https://unsplash.com/photos/ppAKt8nCVoI) | Aerogeradores em dunas, imagem ilustrativa da diversificação. |
+| `coast.jpg` | Alexsandre Almeida | [Unsplash](https://unsplash.com/photos/Auv6d5BXCG4) | Paisagem identificada no acervo como região de Angra; não comprova impactos nem retrata uma central. |
+| `nuclear-steam.jpg` | Andry Sagatelov | [Unsplash](https://unsplash.com/photos/8rtotUvnp8U) | Torres de resfriamento; não permitem identificar ou avaliar uma tecnologia apenas pela imagem. |
 
-As atribuições e URLs vieram do arquivo de créditos fornecido no pacote; as páginas individuais do Unsplash não abriram na consulta web desta etapa. Não foram confirmadas localização exata nem data de cada fotografia. A [licença geral do Unsplash](https://unsplash.com/license) foi consultada; a identificação específica de cada arquivo deve ser conferida antes da edição final. Os créditos permanecem visíveis nas ampliações, mesmo quando a licença não exige atribuição.
+Os nomes e URLs provêm dos créditos fornecidos. A [licença geral do Unsplash](https://unsplash.com/license) foi consultada; as páginas individuais não abriram na ferramenta de pesquisa desta sessão. Datas e localização exata não foram confirmadas independentemente. As legendas mantêm esse limite e as imagens são identificadas como ilustrativas.
 
-O restante do acervo inclui outras torres de resfriamento, duas imagens costeiras identificadas nos créditos como Angra dos Reis, uma segunda foto eólica e uma paisagem de montanhas. Imagens da cidade ou do litoral não comprovam que uma usina esteja retratada; torres genéricas não devem ser apresentadas como Angra 1, 2 ou 3.
+O acervo também contém uma ilha, outra fotografia de torres, uma segunda eólica e uma paisagem de montanhas. Nem todas são usadas na edição. O estudo anterior conserva suas cópias em `previews/assets/`.
 
-Não foi necessário baixar imagens adicionais para o estudo. Faltam imagens específicas e verificadas das instalações de Angra, do ciclo do urânio e de territórios discutidos na reportagem. O [portal de imprensa da Eletronuclear](https://www.eletronuclear.gov.br/Imprensa-e-Midias/Paginas/default.aspx) foi localizado como fonte possível; nenhuma foto foi extraída dali sem identificação de autoria e condição de reprodução. O documento de créditos recebido já orienta verificar autorização para essa fonte.
+## Política de uso
 
-Não aplicar a licença MIT do código às fotografias. Não usar imagem institucional como prova dos argumentos da reportagem. Fotografias, fontes e representações gráficas devem ter créditos próprios.
+Cada fotografia da edição tem legenda completa, autoria e link para a licença na ampliação e na lista de créditos. Não há imagens geradas por IA apresentadas como documentação de fatos. Uma foto de torres de resfriamento não é prova automática de que o local seja uma central nuclear, nem permite concluir o nível de emissão ou risco.
+
+O portal de imprensa da Eletronuclear foi localizado como referência possível. Não foram baixadas fotografias institucionais presumindo uma autorização geral de uso. Os dois registros de Angra vieram de arquivos com licença individual explícita no Commons.

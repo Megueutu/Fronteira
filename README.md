@@ -1,63 +1,63 @@
 # Fronteira
 
-Protótipo de revista interativa com dois templates comparáveis e o mesmo conteúdo demonstrativo:
-
-- **Páginas interativas:** HTML selecionável, folheamento frontal, popup, carrossel na página e imagem ampliável.
-- **Revista 3D:** folhas WebGL que curvam durante a virada; áreas clicáveis abrem popup, carrossel e imagem ampliada em HTML.
+Revista interativa em 20 páginas sobre energia nuclear no Brasil. Reúne os cinco temas acordados — Panorama, Como funciona, Urânio, Custo e payback, Política — com Milton Santos, Max Weber e Immanuel Wallerstein, balanço final, transparência sobre IA e referências.
 
 ## Executar
 
-Requer Node.js 22 ou superior. Não é necessário instalar dependências.
+Requer Node.js 22 ou superior. Não há dependências para instalar.
 
 ```sh
 npm start
 ```
 
-Abra [http://localhost:3000](http://localhost:3000). Links diretos: [HTML](http://localhost:3000/?template=html) e [3D](http://localhost:3000/?template=3d).
+Abra [a revista](http://localhost:3000). No desktop, o modo inicial é 3D; no celular, páginas HTML legíveis. Links diretos: [3D](http://localhost:3000/?template=3d) e [HTML](http://localhost:3000/?template=html). `?page=13` abre a região correspondente da edição.
 
-Use os botões ou as setas do teclado para navegar. No HTML, deslize a partir das margens; no celular, uma página é exibida por vez. O template 3D usa uma abertura com duas páginas. A troca de template preserva a abertura atual. O botão “Leitura linear” oferece o conteúdo sem animação, inclusive quando WebGL não está disponível.
+## Ler e explorar
 
-Popups fecham pelo botão, por Escape ou ao clicar fora. Na leitura linear, fechar uma interação retorna ao texto.
+- Botões e setas do teclado viram páginas. Home volta à capa; End vai ao fim.
+- O sumário leva a uma seção. “Ler esta abertura” amplia o conteúdo em HTML; “Leitura contínua” reúne as 20 páginas.
+- Fotografias ampliam, a galeria aceita botões e setas e cada imagem tem contexto, autoria e licença.
+- O gráfico da matriz permite filtros. Diagramas revelam etapas. O laboratório de payback permite mudar premissas. A linha do tempo abre seis trajetórias e suas fontes.
+- Notas, fluxogramas, referências e o quadro de avaliação complementam a leitura. Escape fecha uma camada e o foco retorna ao acionador.
+- Em HTML no desktop há zoom; no celular, uma página em fluxo legível. Deslizes por toque disparam a troca. O gesto não acompanha continuamente o dedo.
+
+O 3D usa folhas segmentadas que curvam durante a virada e camadas HTML para interação. Texto e fotos têm a composição dos arquivos HTML, por meio de texturas locais geradas a partir das páginas. O texto das texturas não é selecionável; a leitura ampliada e o modo HTML são selecionáveis.
 
 ## Verificar
 
 ```sh
 npm test
-```
-
-Com o servidor rodando e Chromium instalado:
-
-```sh
 npm run test:browser
 ```
 
-É possível indicar `CHROMIUM_PATH` e `TEST_URL`. As capturas de tela ficam em `artifacts/`, ignorado pelo Git. O teste de navegador utiliza Chromium headless com renderização WebGL por software; não substitui testes em aparelhos reais.
-
-No Windows (PowerShell), informe o caminho de um executável Chromium ou Chrome instalado antes de executar o teste:
+O teste de navegador precisa do servidor ativo e de um Chromium instalado. Aceita `CHROMIUM_PATH` e `TEST_URL`; no Windows procura também uma instalação local do Chrome for Testing headless ou Chrome. Exemplo PowerShell:
 
 ```powershell
 $env:CHROMIUM_PATH = 'C:\caminho\para\chrome.exe'
 npm run test:browser
 ```
 
-O teste usa o WebSocket nativo do Node e uma porta de depuração local temporária, sem dependências adicionais.
+Capturas e relatórios ficam em `artifacts/`, ignorado pelo Git. Os testes headless usam WebGL por software; não comprovam desempenho em aparelhos físicos.
 
-## Estado do projeto
+## Atualizar a edição
 
-Estes são templates técnicos para escolher o núcleo. O folheamento HTML usa uma transição de folha plana; o 3D usa malha segmentada deformável. Não há simulação física, editor de revista, importação de PDF ou conteúdo remoto. O visual e as artes locais são demonstrativos; conceito editorial e design system continuam como TO DO.
+Conteúdo, fontes, fotos e composição: `src/content.js`. Dados e fórmulas: `src/data.js`. Tokens e componentes: `src/styles.css`. Depois de alterar a composição, regenere as texturas com o servidor ativo:
 
-A pesquisa recomendou avaliar StPageFlip e Three.js, mas o proxy do ambiente impediu instalar dependências. A comparação inicial foi implementada com APIs nativas, sem copiar código ou assets das referências. A decisão entre manter estes renderers ou adotar uma biblioteca depende da avaliação dos templates.
+```sh
+npm run render:textures
+```
 
-- [Orientações para agentes e regras de commits](AGENTS.md).
+O comando captura as 20 páginas, verifica limites de composição e grava JPEGs em `assets/textures/`, PNGs de revisão em `artifacts/pages/` e um manifesto de origem. Revise os PNGs antes de publicar. As texturas são versionadas; quem apenas abre a revista não precisa de Chromium nem de etapa de build.
+
+## Documentação
+
+- [Orientações para agentes](AGENTS.md).
 - [Finalidade](docs/PURPOSE.md).
-- [Arquitetura, pesquisa e limitações](docs/ARCHITETURE.md).
-- [Ideia editorial — TO DO](docs/MAGAZINE.md).
-- [Design system — TO DO](docs/DESIGN_SYSTEM.md).
+- [Arquitetura e limites](docs/ARCHITETURE.md).
+- [Estrutura editorial](docs/MAGAZINE.md).
+- [Design system](docs/DESIGN_SYSTEM.md).
+- [Revisão e decisões de edição](docs/REVIEW.md).
+- [Fotografias e licenças](docs/IMAGE_SOURCES.md).
+- [Créditos da referência visual](docs/THIRD_PARTY_NOTICES.md).
 
-## Estudo visual e interativo
-
-A direção solicitada é branca e verde, minimalista, com fotografia e exploração por camadas. Com o servidor rodando, abra [a prévia separada](http://localhost:3000/previews/index.html): cinco temas, sumário, fotografias ampliáveis, galeria, diagrama conceitual e notas. Ela demonstra composição e interação; o núcleo HTML/3D permanece em avaliação.
-
-- [Proposta visual e próximos critérios de validação](docs/DESIGN_PROPOSAL.md).
-- [Acervo e créditos fotográficos](docs/IMAGE_SOURCES.md).
-- [Licença da referência de design](docs/THIRD_PARTY_NOTICES.md).
+O estudo anterior permanece em [previews/index.html](http://localhost:3000/previews/index.html) como histórico da direção; a edição está na página principal. Não há editor de conteúdo, importação de PDF ou vídeo nesta versão.
