@@ -160,6 +160,15 @@ Pedido do responsável: imagens em todo lugar cabível, ligadas ao tema, como An
   - no modo revista, a capa fica sozinha à direita, a dupla 08–09 forma uma imagem contínua e “Página inteira” mostra as duas páginas a 72%;
   - sem erros de console; `npm test`: 18 de 18.
 
+## Capa: Angra 1, 2 e 3 (2026-10-16)
+
+O responsável pediu uma usina em cada foto da capa: Angra 1 na forma da esquerda, Angra 2 na da direita e Angra 3 em construção na de baixo.
+- O acervo tem só uma foto com Angra 1 e Angra 2 juntas (Sturm, 2009, CC BY 3.0). Por isso, cada usina é um recorte dela: o prédio cilíndrico de Angra 1 e a cúpula esférica de Angra 2.
+- A forma de baixo usa a foto do canteiro de Angra 3 (Wusel007, 2015), enquadrada nos guindastes.
+- O crédito na página 02 informa os recortes.
+- A foto ilustrativa de usina no exterior saiu da capa.
+- **Validação:** captura da capa em Chromium headless; `npm test`, 18 de 18.
+
 ## Próximo passo
 
 O grupo revisa o arquivo, principalmente a reportagem 2 e as condensações, e indica as próximas mudanças.

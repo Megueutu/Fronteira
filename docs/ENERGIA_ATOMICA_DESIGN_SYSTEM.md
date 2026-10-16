@@ -204,7 +204,7 @@ A escolha entre Rolagem e Revista fica salva no navegador (`localStorage`, com f
   1. Unsplash, com a página da foto verificada;
   2. Eletronuclear, só com autorização ou licença explícita;
   3. Wikimedia Commons, com licença individual.
-- **Registro:** cada foto aparece no bloco JSON `#photo-data` com `src` (JPEG em base64, até 1800 px na página dupla e 900–1280 px nas demais), `ratio`, `credit`, `license`, `url` e `context`. Na capa: Angra (Sturm), o canteiro de Angra 3 (Wusel007) e uma usina nuclear no exterior, ilustrativa (Nicolas Hippert). O painel de controle e as linhas de transmissão saíram da capa, a pedido do responsável, por fugirem do assunto. Os elementos usam `data-photo="chave"`, e a mesma foto nunca é embutida duas vezes.
+- **Registro:** cada foto aparece no bloco JSON `#photo-data` com `src` (JPEG em base64, até 1800 px na página dupla e 900–1280 px nas demais), `ratio`, `credit`, `license`, `url` e `context`. Na capa, uma usina em cada forma, a pedido do responsável: Angra 1 à esquerda, Angra 2 à direita e Angra 3 em construção embaixo. Angra 1 e Angra 2 são recortes da mesma foto de Sturm (registros `angra1` e `angra2`, com coordenadas de recorte em `photos.py`); Angra 3 é a foto de Wusel007. O painel de controle e as linhas de transmissão saíram antes, por fugirem do assunto. Os elementos usam `data-photo="chave"`, e a mesma foto nunca é embutida duas vezes.
 - **Onde aparecem:**
 
 | Lugar | Moldura |
