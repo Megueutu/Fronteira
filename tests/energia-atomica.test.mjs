@@ -1,10 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, access } from 'node:fs/promises';
-import { radii, pathFrom, SHAPE_NAMES } from '../edicoes/energia-atomica/v1/shapes.js';
+import { readFile } from 'node:fs/promises';
+import vm from 'node:vm';
 
-const base = new URL('../edicoes/energia-atomica/v1/', import.meta.url);
-const html = await readFile(new URL('index.html', base), 'utf8');
+const html = await readFile(new URL('../edicoes/energia-atomica/v1.html', import.meta.url), 'utf8');
+const script = html.match(/<script>\n([\s\S]*?)<\/script>/)[1];
+// Executa só o trecho das formas, que não depende do DOM.
+const shapesCode = script.slice(script.indexOf('const N ='), script.indexOf('const reduceMotion'));
+const { radii, pathFrom, SHAPE_NAMES } = vm.runInNewContext(`${shapesCode}; ({ radii, pathFrom, SHAPE_NAMES })`);
 
 test('energia atômica v1 segue a ordem editorial combinada', () => {
   const sections = [...html.matchAll(/<section class="page[^"]*" id="p(\d+)" data-section="([^"]+)"/g)].map(m => [Number(m[1]), m[2]]);
@@ -15,8 +18,9 @@ test('energia atômica v1 segue a ordem editorial combinada', () => {
   for (const href of html.matchAll(/<a href="#(p\d+)"/g)) assert.match(html, new RegExp(`id="${href[1]}"`));
 });
 
-test('energia atômica v1 credita fotos locais e reproduz o editorial do grupo', async () => {
-  for (const [, src] of html.matchAll(/href="(\.\.\/\.\.\/\.\.\/assets\/photos\/[^"]+)"/g)) await access(new URL(src, base));
+test('energia atômica v1 é um único arquivo, com fotos embutidas e creditadas', () => {
+  assert.doesNotMatch(html, /<link rel="stylesheet" href="(?!https:)|<script[^>]+src=|href="\.\.\//);
+  assert.equal((html.match(/<image href="data:image\/jpeg;base64,/g) || []).length, 2);
   assert.equal((html.match(/CC BY 3\.0/g) || []).length, 2);
   assert.match(html, /Escolher como produzir eletricidade é também decidir o futuro de um país\./);
   assert.match(html, /Transparência sobre IA/);

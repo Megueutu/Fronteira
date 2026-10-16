@@ -9,7 +9,7 @@ Este arquivo é o ponto de entrada e o handoff para quem trabalhar no Fronteira.
 3. [Estrutura editorial](docs/MAGAZINE.md).
 4. [Design system da edição](docs/DESIGN_SYSTEM.md).
 5. [Revisão e decisões](docs/REVIEW.md) e [créditos das fotografias](docs/IMAGE_SOURCES.md).
-6. [Energia Atômica, edição versionada](docs/ENERGIA_ATOMICA.md), em `edicoes/energia-atomica/vN/`.
+6. [Energia Atômica, edição versionada](docs/ENERGIA_ATOMICA.md), em `edicoes/energia-atomica/vN.html`.
 
 ## Commits e branches
 
@@ -30,7 +30,7 @@ Este arquivo é o ponto de entrada e o handoff para quem trabalhar no Fronteira.
 
 ## Ordem do trabalho
 
-- A edição Fronteira tem 20 páginas, autorizadas pelo responsável em 2026-10-16. A revista Energia Atômica é versionada à parte: crie uma nova pasta `vN` em vez de editar uma versão entregue. Prioridade: manter leitura, conteúdo e interação coerentes nos modos HTML e 3D.
+- A edição Fronteira tem 20 páginas, autorizadas pelo responsável em 2026-10-16. A revista Energia Atômica é versionada à parte, e cada versão é um único arquivo HTML autocontido (`vN.html`), sem CSS, JS ou imagens separados. Crie uma nova versão em vez de editar uma já entregue. Prioridade: manter leitura, conteúdo e interação coerentes nos modos HTML e 3D.
 - Pesquise bibliotecas e implementações públicas antes de implementar. Verifique licenças antes de reutilizar código ou assets.
 - O responsável autorizou concluir a edição e o design branco e verde. Preserve os cinco temas, o equilíbrio dos argumentos e a transparência sobre IA; não atribua falas ou aprovação individual aos autores.
 - Depois de alterar `src/content.js`, `src/data.js` ou `src/styles.css`, execute `npm run render:textures` com o servidor ativo, confira os PNGs das 20 páginas e rode os testes. As texturas 3D são geradas da mesma composição HTML e devem permanecer sincronizadas.

@@ -4,9 +4,9 @@ Status: v1 implementada em 2026-10-16, a pedido do responsável. É uma revista 
 
 ## Onde fica e como abrir
 
-- Cada versão é uma pasta autocontida em `edicoes/energia-atomica/vN/` (`index.html`, `styles.css`, `shapes.js`, `app.js`).
-- Com `npm start`, abra [a v1](http://localhost:3000/edicoes/energia-atomica/v1/). `#p11` abre direto a página 11.
-- Para uma nova versão, copie a pasta da versão anterior para `vN+1`, altere a cópia e registre as mudanças abaixo. Versões publicadas não são editadas, exceto para correções.
+- Decisão do responsável (2026-10-16): cada versão é **um único arquivo HTML**, `edicoes/energia-atomica/vN.html`, com CSS, JavaScript, favicon e fotografias embutidos (fotos em JPEG base64, reduzidas a 640 px). Não crie arquivos separados para a revista.
+- Abra o arquivo direto no navegador, com dois cliques; não precisa de servidor. Com `npm start`, ele também abre em [localhost](http://localhost:3000/edicoes/energia-atomica/v1.html). `#p11` abre direto a página 11.
+- Para uma nova versão, copie `vN.html` para `vN+1.html`, altere a cópia e registre as mudanças abaixo. Versões entregues não são editadas, exceto para correções.
 
 ## Ordem editorial (pedido do responsável)
 
@@ -27,7 +27,8 @@ Cada reportagem ocupa duas páginas: abertura em verde da capa e continuação.
 ## Design
 
 - **Material Design 3.** Os papéis de cor foram gerados com `@material/material-color-utilities` 0.3.0 (`SchemeContent`), a partir de #02A913, e ficam como tokens `--md-sys-*` no início de `styles.css`. `on-secondary-container` foi escurecido para texto corrido. Escala de forma, elevação, chips, botões segmentados, top app bar, gaveta de navegação modal e FAB seguem a especificação do M3. Os componentes foram escritos em CSS, sem a biblioteca `@material/web`.
-- **Formas expressivas.** `shapes.js` desenha formas inspiradas na biblioteca do M3 Expressive (cookie, clover, sunny, burst, flower, puffy, pentagon) como curvas polares com 144 pontos. Por isso qualquer forma morfa em outra com uma mola com overshoot, que imita o motion expressivo. São usadas na decoração das páginas, nos avatares, no sumário, nas etapas, no FAB e como máscara das fotografias. Não é o código oficial do Material; é uma reimplementação aproximada.
+- **Formas expressivas.** O script desenha formas inspiradas na biblioteca do M3 Expressive (cookie, clover, sunny, burst, flower, puffy, pentagon) como curvas polares com 144 pontos. Por isso qualquer forma morfa em outra com uma mola com overshoot, que imita o motion expressivo. São usadas na decoração das páginas, nos avatares, no sumário, nas etapas, no FAB e como máscara das fotografias. Não é o código oficial do Material; é uma reimplementação aproximada.
+- **Arquivo único.** Na v1, o CSS está em `<style>` e o script em um `<script>` comum, não de módulo, para funcionar também por `file://`. As formas ficam no início do script (`SHAPES`, `radii`, `pathFrom`, `morph`), seguidas da navegação e das interações.
 - **Tipografia.** Playfair Display (títulos, como “ENERGIA”), Montserrat 800 (rótulos, como “ATÔMICA”) e Roboto Flex (texto e interface), via Google Fonts com fontes locais de reserva. É a primeira dependência de CDN do projeto; sem rede, a página usa Georgia/Arial.
 - **Ícones.** Caminhos SVG dos Material Icons (Apache 2.0), embutidos no HTML.
 - **Páginas.** 794 × 1123 px (proporção A4) no desktop. Abaixo de 860 px, viram fluxo vertical de uma coluna. O texto é alinhado à esquerda, sem justificação: o Chromium em Linux não hifenizou o português, e o texto justificado abria rios.
@@ -43,9 +44,10 @@ Cada reportagem ocupa duas páginas: abertura em verde da capa e continuação.
 
 ## Validação da v1
 
+- Conversão para arquivo único: as 14 páginas foram capturadas de novo, abertas por `file://` sem servidor; nada ultrapassa o rodapé, e as fotos embutidas aparecem. As interações foram repetidas sem erros.
 - Chromium headless (Playwright 1.56) em 1280 px: as 14 páginas foram capturadas e conferidas visualmente; nenhum bloco ultrapassa o rodapé. Também foi conferido o fluxo em 390 px.
 - Foram exercitados no navegador, sem erros de console: filtro da matriz, etapas, ciclo com setas do teclado, cenários de payback, filtro de países, gaveta, `#p11`, Home.
-- `npm test`: os 7 testes da edição Fronteira e os 4 de `tests/energia-atomica.test.mjs` (ordem das seções, fotos, editorial, contas do payback, formas) passam.
+- `npm test`: os 7 testes da edição Fronteira e os 4 de `tests/energia-atomica.test.mjs` (ordem das seções, arquivo único com fotos embutidas, editorial, contas do payback, formas) passam.
 - Ainda não verificados: leitores de tela, Safari e iOS, aparelhos físicos, impressão e desempenho.
 
 ## Próximo passo
