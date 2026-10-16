@@ -8,6 +8,7 @@ Este arquivo é o ponto de entrada e o handoff para quem trabalhar no Fronteira.
 2. [Arquitetura e pesquisa](docs/ARCHITETURE.md).
 3. [Ideia editorial — TO DO](docs/MAGAZINE.md).
 4. [Design system — TO DO](docs/DESIGN_SYSTEM.md).
+5. [Proposta visual e interativa em avaliação](docs/DESIGN_PROPOSAL.md) e [créditos das fotografias](docs/IMAGE_SOURCES.md).
 
 ## Commits e branches
 

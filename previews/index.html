@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fronteira — estudo da revista interativa</title>
+  <link rel="stylesheet" href="./study.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/?template=3d">fronteira<span>ESTUDO EDITORIAL / 01</span></a><p>ENERGIA, TERRITÓRIO E SOCIEDADE</p><a href="/?template=3d">Voltar ao núcleo 3D ↗</a></header>
+  <main>
+    <div class="study-note"><span>PRÉVIA DE DESIGN E INTERAÇÕES</span><p>Branco, verde e fotografia. Textos de demonstração; a edição completa e o folheamento físico continuam em desenvolvimento.</p></div>
+    <nav class="chapters" aria-label="Temas da revista">
+      <button data-chapter="0" aria-pressed="true"><span>01</span> Panorama</button>
+      <button data-chapter="1" aria-pressed="false"><span>02</span> Como funciona</button>
+      <button data-chapter="2" aria-pressed="false"><span>03</span> Urânio</button>
+      <button data-chapter="3" aria-pressed="false"><span>04</span> Custo e payback</button>
+      <button data-chapter="4" aria-pressed="false"><span>05</span> Política</button>
+    </nav>
+    <section class="reader" aria-label="Abertura interativa de demonstração">
+      <div class="reader-meta"><span id="chapter-label">01 / PANORAMA</span><span>EXPLORE A PÁGINA</span></div>
+      <div class="spread">
+        <article class="page cover">
+          <div class="running-head"><span>ENERGIA NUCLEAR NO BRASIL</span><span>SOCIOLOGIA / 2026</span></div>
+          <p class="kicker">UMA QUESTÃO DE ACESSO</p>
+          <h1 id="chapter-title">Um Brasil<br><em>desigual.</em></h1>
+          <p class="deck" id="chapter-deck">Olhar para a energia também é olhar para o território, para a conta de luz e para quem participa das decisões.</p>
+          <figure><button class="photo-button" id="expand-photo" aria-label="Ampliar fotografia de torres de transmissão"><img id="cover-photo" src="./assets/transmission.jpg" alt="Torres de transmissão ao entardecer"><span>↗ &nbsp; EXPLORAR FOTOGRAFIA</span></button><figcaption id="photo-credit">Matthew Henry / Unsplash · fotografia ilustrativa</figcaption></figure>
+          <div class="page-foot"><span>INSTITUTO J&F · 2º ANO D</span><span id="left-number">ABERTURA 01</span></div>
+        </article>
+        <article class="page reading">
+          <div class="running-head"><span>LEITURA EM CAMADAS</span><button class="text-action" id="open-index">SUMÁRIO ↗</button></div>
+          <h2 id="reading-title">A energia não termina<br>no interruptor.</h2>
+          <div class="text-columns"><p id="paragraph-one">Uma revista sobre energia nuclear também precisa perguntar como a eletricidade se relaciona com o cotidiano. A geração é uma parte da história; o acesso, as tarifas e o território completam essa leitura.</p><p id="paragraph-two">Milton Santos acompanha o olhar sobre desigualdade. Ao longo dos cinco temas, Weber e Wallerstein ajudam a organizar outras perguntas sobre decisões políticas, tecnologia e soberania.</p></div>
+          <button class="explore-row" id="open-diagram"><span class="row-number">01</span><span><strong>Da geração ao cotidiano</strong><small>Explore as etapas da eletricidade</small></span><span class="arrow">↗</span></button>
+          <button class="explore-row" id="open-note"><span class="row-number">02</span><span><strong id="note-name">Uma lente para o território</strong><small>Abra uma nota de leitura</small></span><span class="arrow">↗</span></button>
+          <button class="explore-row" id="open-gallery"><span class="row-number">03</span><span><strong>Outros enquadramentos</strong><small>Uma galeria para olhar mais de perto</small></span><span class="arrow">↗</span></button>
+          <aside class="balance" aria-label="Quadro de debate demonstrativo"><div><h3>A FAVOR</h3><p>Quais benefícios são apresentados e quais evidências os sustentam?</p></div><div><h3>EM DEBATE</h3><p>Quais custos, riscos e alternativas precisam ser considerados?</p></div></aside>
+          <div class="page-foot"><span>PERGUNTAS PARA GUIAR A REPORTAGEM</span><span id="right-number">LEITURA 01</span></div>
+        </article>
+      </div>
+      <div class="reader-controls"><button id="previous" aria-label="Tema anterior">←</button><span id="position" role="status" aria-live="polite">01 / 05 TEMAS</span><button id="next" aria-label="Próximo tema">→</button><button id="linear" class="linear">Ler sem páginas ↗</button></div>
+    </section>
+    <footer><p>Fotografias do acervo baixado · créditos disponíveis nas ampliações.</p><p>Referência editorial: WIRED / Awesome DESIGN.md, adaptada à direção branca e verde.</p></footer>
+  </main>
+  <dialog aria-labelledby="dialog-title" id="study-dialog"><div class="dialog-head"><span>FRONTEIRA / EXPLORE</span><button id="close-dialog" aria-label="Fechar janela">✕</button></div><div id="dialog-content"></div></dialog>
+  <script type="module" src="./study.js"></script>
+</body>
+</html>

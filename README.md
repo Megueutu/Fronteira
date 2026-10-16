@@ -53,3 +53,11 @@ A pesquisa recomendou avaliar StPageFlip e Three.js, mas o proxy do ambiente imp
 - [Arquitetura, pesquisa e limitações](docs/ARCHITETURE.md).
 - [Ideia editorial — TO DO](docs/MAGAZINE.md).
 - [Design system — TO DO](docs/DESIGN_SYSTEM.md).
+
+## Estudo visual e interativo
+
+A direção solicitada é branca e verde, minimalista, com fotografia e exploração por camadas. Com o servidor rodando, abra [a prévia separada](http://localhost:3000/previews/index.html): cinco temas, sumário, fotografias ampliáveis, galeria, diagrama conceitual e notas. Ela demonstra composição e interação; o núcleo HTML/3D permanece em avaliação.
+
+- [Proposta visual e próximos critérios de validação](docs/DESIGN_PROPOSAL.md).
+- [Acervo e créditos fotográficos](docs/IMAGE_SOURCES.md).
+- [Licença da referência de design](docs/THIRD_PARTY_NOTICES.md).
