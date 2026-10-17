@@ -66,6 +66,7 @@ O comando captura as 20 páginas, verifica limites de composição e grava JPEGs
 - [Design system](docs/DESIGN_SYSTEM.md).
 - [Revisão e decisões de edição](docs/REVIEW.md).
 - [Fotografias e licenças](docs/IMAGE_SOURCES.md).
+- [Energia Atômica](docs/ENERGIA_ATOMICA.md): um único arquivo, `edicoes/energia-atomica.html`, que abre direto no navegador; as versões ficam nos commits.
 - [Créditos da referência visual](docs/THIRD_PARTY_NOTICES.md).
 
 O estudo anterior permanece em [previews/index.html](http://localhost:3000/previews/index.html) como histórico da direção; a edição está na página principal. Não há editor de conteúdo, importação de PDF ou vídeo nesta versão.
