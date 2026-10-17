@@ -63,6 +63,17 @@ O responsável forneceu seis JPEGs e solicitou sua inclusão na revista. Os arqu
 Os nomes foram associados aos arquivos fornecidos pelo responsável; não houve identificação por reconhecimento facial. O crédito informa a origem no grupo e que o fotógrafo não foi informado. Os retratos não integram a galeria temática das nove fotografias de energia.
 
 
+## Fotografias da seção Adolfo Braid (2026-10-17)
+
+O responsável autorizou pesquisar imagens na internet para a entrevista. Foram escolhidos dois registros de eventos institucionais do portal IRD/ANSN. As notícias identificam a participação de Adolfo; as legendas não identificam sua posição na mesa por reconhecimento facial e não apresentam as fotos como registros da entrevista escolar. Não foi incorporado retrato individual da ABDAN/LinkedIn sem licença de redistribuição identificada; o perfil profissional e seu retrato continuam acessíveis pelo link da ABDAN.
+
+| Arquivo | Contexto e crédito | Fonte e licença |
+| --- | --- | --- |
+| `assets/interview/adolfo-licenciamento-2026.jpg` | Reunião de licenciamento ANSN/IEN/Terminus em 21/01/2026. Crédito da página: Douglas Troufa. 1599 × 1066 px. | [IRD/ANSN, notícia da reunião](https://www.gov.br/ird/pt-br/assuntos/noticias/noticias-2026/reuniao-entre-ansn-e-o-ien-para-discutir-termo-de-referencia-acontece-na-sede-da-autarquia). Rodapé: [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/deed.pt_BR). |
+| `assets/interview/adolfo-amazul-2025.jpg` | Reunião na Amazul sobre o projeto de microrreator, 2025. Crédito informado na notícia indexada: Ana Paula Artaxo/ANSN. 1600 × 970 px. | [IRD/ANSN, notícia da Amazul](https://www.gov.br/ird/pt-br/assuntos/noticias/noticias-2025/ansn-participa-de-reuniao-na-amazul-sobre-projeto-de-microrreator-nuclear-brasileiro). Rodapé: [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/deed.pt_BR). |
+
+Os bytes baixados foram preservados, sem recompressão, recorte ou tratamento de cor. A exibição usa largura responsiva e altura proporcional; a ampliação conserva a imagem inteira. URLs diretas, dimensões e SHA-256 estão em [SOURCES.json](../assets/interview/SOURCES.json). As duas fontes foram consultadas em 17/10/2026; os HTMLs usados para conferir os créditos e a licença estão em `artifacts/interview/`. A reprodução não implica apoio do fotógrafo ou dos órgãos às conclusões da revista.
+
 ## Política de uso
 
 Cada fotografia do acervo de energia tem legenda completa, autoria e link para a licença na ampliação e na lista de créditos. Os retratos seguem o registro de fornecimento pelo grupo descrito acima. Não há imagens geradas por IA apresentadas como documentação de fatos. Uma foto de torres de resfriamento não é prova automática de que o local seja uma central nuclear, nem permite concluir o nível de emissão ou risco.

@@ -9,6 +9,7 @@ Aplicação estática com JavaScript, HTML/CSS e WebGL nativos, sem bibliotecas,
 | Arquivo | Responsabilidade |
 | --- | --- |
 | `src/content.js` | Vinte páginas, imagens, bibliografia, destinos do sumário e composição HTML. |
+| `src/interview.js` | Perfil, fontes, sínteses e roteiro da entrevista com Adolfo Braid; sem citações literais atribuídas às notas. |
 | `src/data.js` | Dados da matriz, fórmulas e cenários, etapas e recortes históricos. |
 | `src/app.js` | Página atual, modos, navegação, URL, enquadramento, teclado, toque e falhas. |
 | `src/interactions.js` | Galeria, notas, ampliação, sumário, fontes, diagramas, cenários e leitura ampliada. |
@@ -58,6 +59,10 @@ Botões HTML são projetados sobre a faixa de ação das páginas e ocultados du
 Falha ao iniciar ou perda de contexto WebGL mostra a composição HTML e mantém a navegação. Não há recuperação automática do contexto perdido. Não se afirmam FPS, consumo energético ou compatibilidade em hardware real.
 
 ## Interações e acessibilidade
+
+A entrevista de Adolfo Braid usa um único renderer `interviewHTML`, em `src/content.js`, com conteúdo em `src/interview.js`. Aparece como suplemento após a página 17 na landing e na leitura contínua, sem alterar a lista de vinte páginas ou o manifesto de quantidade. As camadas de entrevista e fotografia reutilizam o histórico de diálogos, Escape e devolução de foco. Sumário e ação da página 17 abrem a entrevista também no HTML e no 3D. `interview=adolfo` na URL abre a camada diretamente. Os destinos da landing são procurados por `data-page-index`, pois há um suplemento entre os artigos numerados; a posição no array de filhos deixou de ser um índice editorial válido.
+
+As fotos do suplemento são locais e separadas da galeria temática de nove imagens. O componente preserva a imagem inteira, sem filtros ou recortes, conforme a licença CC BY-ND 3.0 indicada no portal IRD/ANSN. Créditos e procedência estão em [IMAGE_SOURCES.md](IMAGE_SOURCES.md). O código usa HTML, CSS e os diálogos nativos já presentes, sem biblioteca nova. A consulta pública identificou atribuições profissionais na ABDAN e CNEN; o perfil indicado do LinkedIn foi mantido como link, sem contornar seu bloqueio de acesso.
 
 Dialogs nativos têm rótulo, fechamento por Escape, foco inicial e devolução do foco. A leitura contínua mantém um histórico de camadas para que fechar uma nota devolva o texto anterior. O sumário navega diretamente; Home e End alcançam os extremos. Atalhos de navegação não capturam controles de formulário ou interações abertas.
 

@@ -143,6 +143,18 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Próximo passo.** Revisão visual do responsável e elaboração da seção de entrevista a partir do registro posteriormente recuperado, conforme [ENTREVISTA_ADOLFO_BRAID.md](ENTREVISTA_ADOLFO_BRAID.md).
 
+## Entrevista com Adolfo Braid (2026-10-17)
+
+**Pedido implementado.** Seção completa com identificação profissional, formação/trajetória, cinco eixos de perguntas e respostas sintetizadas e roteiro expansível com dezessete perguntas/intensões e suas lacunas. As conexões com a pesquisa são identificadas como análise do grupo; cada eixo permite abrir o tema relacionado. Não foram inventadas falas literais, motivação pessoal, cronologia detalhada ou cálculos de payback ausentes do registro. As fontes profissionais e os limites de atribuição estão em [ENTREVISTA_ADOLFO_BRAID.md](ENTREVISTA_ADOLFO_BRAID.md).
+
+**Composição e navegação.** Suplemento após a página 17 na landing e na leitura contínua, mantendo as vinte páginas e seus parágrafos. Atalho no sumário, no sumário modal e na ação da página 17 do HTML/3D. `interview=adolfo` abre diretamente a entrevista. Links das páginas posteriores usam `data-page-index`, evitando que o suplemento desloque os destinos. A correção de Escape impede que o fechamento nativo também encerre a camada acabada de restaurar, preservando o retorno de foto → entrevista → sumário → acionador.
+
+**Imagens.** Duas fotos institucionais do IRD/ANSN, com participação de Adolfo registrada nas notícias, créditos e licença CC BY-ND 3.0. Arquivos integrais sem recorte, filtro ou recompressão; hashes preservados. As legendas distinguem os eventos da entrevista escolar. O retrato individual da ABDAN ficou acessível por link, sem incorporar uma foto cuja licença de redistribuição não foi identificada.
+
+**Verificação.** `npm test`: 19/19; `test:landing` e `test:interview` passaram. O teste novo cobre link direto, preservação das vinte páginas/parágrafos, navegação 17 → 18 após o suplemento, acesso por sumário nos três modos e ação do 3D, ambas as fotos, créditos, manutenção do roteiro aberto, Escape/foco em três camadas e larguras 1440, 768, 390 e 320 px sem transbordamento horizontal. As fotos mantêm a proporção natural. Checagem adicional de leitura contínua e retorno da ampliação em 1440 e 390 px passou. Capturas de título, respostas e roteiro revisadas; evidências em `artifacts/interview/`.
+
+**Texturas e limites.** Vinte texturas regeneradas e vinte PNGs revisados. Sumário com atalho: conteúdo até 931 px, ações a partir de 957 px. Página 17: conteúdo até 945 px. O gerador mantém saída 1 pelos sete alertas anteriores em 06, 08, 09, 10, 13, 14 e 18, sem novo alerta. O teste geral de navegador continua com os limites históricos descritos acima; não foi declarado aprovado nesta etapa. Próximo passo: revisão das sínteses pelo grupo e, se disponíveis, conferência das gravações para acrescentar citações literais e respostas ainda sem registro. Sem nova publicação nesta etapa.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

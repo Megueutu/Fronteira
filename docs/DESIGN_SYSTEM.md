@@ -34,6 +34,8 @@ No celular, o HTML é exibido em uma página por vez, em fluxo vertical, com cor
 
 ## Componentes
 
+O suplemento de entrevista usa a mesma base branca e verde `#1E7349`, Georgia e Arial. O nome abre a seção; um painel verde identifica o profissional, acompanhado de fotografia institucional integral. A trajetória fica numa coluna lateral e perguntas/sínteses na área principal. Cada resposta tem um quadro de análise do grupo e link para o tema da revista. Roteiro completo e fontes usam `details` nativo; fotos ampliam com legenda e licença. Abaixo de 761 px, as áreas empilham. O atalho do sumário tem raio fixo de 8 px; as fotos não são mascaradas ou tratadas, respeitando a licença CC BY-ND 3.0.
+
 O átomo decorativo da capa usa três elipses e um núcleo fixo. A bolinha menor começa na curva superior esquerda, centrada no traço, e percorre a elipse inclinada em 35° em oito segundos, com velocidade constante via SVG `animateMotion`. O caminho compartilha centro e raios com o arco (50, 50; 44 × 17). Em movimento reduzido, impressão e geração de texturas, só a bolinha estática aparece na posição inicial. HTML, Página inteira e leitura contínua usam a animação; o 3D mantém a composição estática da textura.
 
 - Botão de página: ação principal com divisores finos, texto verde e seta. No 3D, botão HTML projetado sobre a posição correspondente.

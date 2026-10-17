@@ -1,4 +1,4 @@
-import { pages, pageHTML, clampSpread, formatPages } from './content.js';
+import { pages, pageHTML, clampSpread, formatPages, interviewHTML } from './content.js';
 import { createInteractions } from './interactions.js';
 
 const renderIndex = new URLSearchParams(location.search).get('render');
@@ -55,6 +55,7 @@ if (renderIndex !== null) {
         article.setAttribute('aria-labelledby',title.id); article.removeAttribute('aria-label');
         article.querySelectorAll('img').forEach(img => { img.loading = index === 0 ? 'eager' : 'lazy'; });
       });
+      landing.querySelector('#landing-public').insertAdjacentHTML('afterend',interviewHTML({inline:true}));
       const cover = landing.firstElementChild;
       const oldTitle = cover.querySelector('h2'), title = document.createElement('h1');
         title.id = oldTitle.id; title.className = oldTitle.className; title.tabIndex = -1; title.innerHTML = oldTitle.innerHTML; oldTitle.replaceWith(title);
@@ -65,7 +66,7 @@ if (renderIndex !== null) {
     observeLanding();
   }
   function scrollLanding({ focus = false } = {}) {
-    const article = landing.children[pageIndex];
+    const article = landing.querySelector(`[data-page-index="${pageIndex}"]`);
     article.scrollIntoView({block:'start'});
     if (focus) article.querySelector('h1,h2').focus({preventScroll:true});
   }
@@ -173,4 +174,5 @@ if (renderIndex !== null) {
   window.addEventListener('resize',layout);
   mobile.addEventListener('change',() => { showHTML(); update(); });
   setMode(mode);
+  if (params.get('interview') === 'adolfo') interactions.open('interview');
 }

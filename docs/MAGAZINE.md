@@ -12,7 +12,7 @@ A reportagem começa em “Um Brasil Desigual”, depois da capa, do sumário e 
 
 ## Paginação
 
-Em 2026-10-17, o responsável pediu uma seção própria sobre a trajetória de Adolfo Braid e a entrevista realizada pelo grupo. O pedido e a estrutura proposta estão em [ENTREVISTA_ADOLFO_BRAID.md](ENTREVISTA_ADOLFO_BRAID.md). O registro consolidado, que já havia sido anexado à conversa “Registrar fontes de pesquisa”, foi recuperado para `pesquisa/`; veja [contexto e fontes](CONTEXTO_REGISTRAR_FONTES_DE_PESQUISA.md). A redação e o encaixe na paginação continuam pendentes; a identificação profissional e as citações literais ainda exigem conferência. Nenhuma fala ou informação biográfica foi acrescentada à edição nesta recuperação.
+Em 2026-10-17, o responsável pediu uma seção própria sobre a trajetória de Adolfo Braid e autorizou sua implementação com pesquisa de imagens na internet. A entrevista foi acrescentada como suplemento após a página 17 em Página inteira e na leitura contínua, com acesso pelo sumário e pela ação da página 17 em HTML e 3D. Preserva as vinte páginas originais e os cinco temas. Perfil profissional, cinco eixos de respostas, as dezessete perguntas/intensões do roteiro e duas fotografias institucionais integram a seção. As respostas são sínteses atribuídas às anotações; não há citações literais sem conferência do áudio. Método, fontes e limites estão em [ENTREVISTA_ADOLFO_BRAID.md](ENTREVISTA_ADOLFO_BRAID.md).
 
 A paginação editorial abaixo também orienta o modo Página inteira, autorizado e implementado em 2026-10-17: cada página vira uma seção fluida da mesma edição, sem condensação adicional ou remoção de parágrafos. As reportagens, os dois lados dos balanços, as referências e a transparência sobre IA continuam no percurso principal.
 

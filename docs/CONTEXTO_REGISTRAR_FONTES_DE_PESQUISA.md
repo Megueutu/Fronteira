@@ -1,5 +1,7 @@
 # Contexto de “Registrar fontes de pesquisa”
 
+Atualização posterior em 2026-10-17: a seção de Adolfo foi implementada a pedido do responsável, com as fontes e imagens descritas em [ENTREVISTA_ADOLFO_BRAID.md](ENTREVISTA_ADOLFO_BRAID.md). Este documento preserva o estado da recuperação; as pendências de implementação abaixo são históricas e foram superadas por essa etapa.
+
 ## Origem e alcance
 
 Contexto recuperado em 2026-10-17, a pedido do responsável, para continuidade no chat “Ajuste e anime a bolinha nos arcos”. A conversa de origem tem o identificador `01a14b52-ab27-7881-8cb5-840356227e7d`, no host local e neste mesmo diretório do Fronteira.

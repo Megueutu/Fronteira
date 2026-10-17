@@ -14,6 +14,8 @@ Abra [a revista](http://localhost:3000). No desktop, o modo inicial é 3D; no ce
 
 O seletor também oferece [Página inteira](http://localhost:3000/?template=landing): a edição em formato de site, com capa ampla e vinte seções em rolagem contínua. Sumário e botões levam diretamente às seções; a URL acompanha a leitura. `?template=landing&page=13` abre a seção correspondente à página 13. A troca entre os três modos conserva a posição editorial, ajustada ao par no 3D/HTML desktop.
 
+A entrevista com Adolfo Braid é um suplemento após a página 17 em Página inteira e na leitura contínua. O sumário e a ação da página 17 abrem a seção completa nos três modos. `?template=landing&page=17&interview=adolfo` abre diretamente a entrevista, com trajetória, sínteses das respostas, roteiro completo e fotografias institucionais creditadas. As vinte páginas originais são preservadas.
+
 ## Publicar no GitHub Pages
 
 Site: [megueutu.github.io/Fronteira](https://megueutu.github.io/Fronteira/).
@@ -39,6 +41,7 @@ O 3D usa folhas segmentadas que curvam durante a virada e camadas HTML para inte
 npm test
 npm run test:browser
 npm run test:landing
+npm run test:interview
 ```
 
 O teste de navegador precisa do servidor ativo e de um Chromium instalado. Aceita `CHROMIUM_PATH` e `TEST_URL`; no Windows procura também uma instalação local do Chrome for Testing headless ou Chrome. Exemplo PowerShell:
