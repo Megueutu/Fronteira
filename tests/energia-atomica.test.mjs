@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 
 const html = await readFile(new URL('../edicoes/energia-atomica.html', import.meta.url), 'utf8');
-const script = html.match(/<script>\n([\s\S]*?)<\/script>/)[1];
+const script = html.match(/<script>\r?\n([\s\S]*?)<\/script>/)[1];
 // Executa só o trecho das formas, que não depende do DOM.
 const shapesCode = script.slice(script.indexOf('const N ='), script.indexOf('const reduceMotion'));
 const { radii, pathFrom, SHAPE_NAMES } = vm.runInNewContext(`${shapesCode}; ({ radii, pathFrom, SHAPE_NAMES })`);

@@ -1,8 +1,10 @@
 # Fotografias e licenças
 
-Edição de 20 páginas, 2026-10-16. As fotografias são locais, em JPEG otimizado. Foram aplicados orientação EXIF, redimensionamento e recortes de exibição; cores e objetos não foram alterados. Os originais baixados foram preservados. As licenças das fotografias são independentes da licença do código e da referência de design.
+Edição de 20 páginas, 2026-10-16. As fotografias são locais, em JPEG otimizado. Foram aplicados orientação EXIF, redimensionamento e recortes de exibição. A capa recebeu tratamento azulado por CSS em 2026-10-17, identificado no crédito; as demais exibições e ampliações mantêm as cores originais. Os objetos fotografados não foram alterados e os arquivos locais preservam suas cores. As licenças das fotografias são independentes da licença do código e da referência de design.
 
 ## Registros históricos de Angra
+
+Na capa Fronteira reformulada em 2026-10-17, `control-room.jpg`, `angra.jpg` e `angra3.jpg` aparecem em uma silhueta contínua em S, recortada por máscara SVG embutida no CSS, com tratamento azulado. A linha de crédito identifica essa adaptação, o painel como ilustrativo e registra Angra em 2009 e Angra 3 em 2015. Cada fotografia em HTML abre o original em cores com legenda completa, autoria, origem e licença. A referência Brasil Nuclear fornecida pelo responsável orientou o desenho das curvas; suas fotografias, textos e marca não são reproduzidos na revista.
 
 | Arquivo | Autoria e contexto | Origem e licença |
 | --- | --- | --- |
@@ -45,8 +47,24 @@ O arquivo `edicoes/energia-atomica.html` embute as nove fotografias de `assets/p
 
 Em 2026-10-16, imagens novas do Unsplash e da Eletronuclear foram pedidas, mas a rede desta sessão bloqueou os dois domínios. Para a Eletronuclear, continua valendo a regra de não presumir licença.
 
+## Retratos fornecidos pelo grupo (2026-10-17)
+
+O responsável forneceu seis JPEGs e solicitou sua inclusão na revista. Os arquivos foram copiados para `assets/team/`, com extensão `.jpg`, sem recompressão, alteração de cores ou de proporções. Os retratos aparecem no sumário, nos créditos e nas ampliações; integram também a textura 3D do sumário. Fotógrafo não informado: não se atribui uma licença Creative Commons ou Unsplash a esses retratos. O uso nesta revista decorre do pedido do responsável.
+
+| Arquivo local | Nome exibido |
+| --- | --- |
+| `davi-silva.jpg` | Davi de Oliveira, nome confirmado pelo responsável apesar do nome do arquivo |
+| `eduardo-rodrigues.jpg` | Eduardo Rodrigues |
+| `gustavo-souza.jpg` | Gustavo Souza |
+| `igor-quinto.jpg` | Igor Quinto |
+| `felipe-kogake.jpg` | Felipe Kogake |
+| `lucas-lima.jpg` | Lucas Lima |
+
+Os nomes foram associados aos arquivos fornecidos pelo responsável; não houve identificação por reconhecimento facial. O crédito informa a origem no grupo e que o fotógrafo não foi informado. Os retratos não integram a galeria temática das nove fotografias de energia.
+
+
 ## Política de uso
 
-Cada fotografia da edição tem legenda completa, autoria e link para a licença na ampliação e na lista de créditos. Não há imagens geradas por IA apresentadas como documentação de fatos. Uma foto de torres de resfriamento não é prova automática de que o local seja uma central nuclear, nem permite concluir o nível de emissão ou risco.
+Cada fotografia do acervo de energia tem legenda completa, autoria e link para a licença na ampliação e na lista de créditos. Os retratos seguem o registro de fornecimento pelo grupo descrito acima. Não há imagens geradas por IA apresentadas como documentação de fatos. Uma foto de torres de resfriamento não é prova automática de que o local seja uma central nuclear, nem permite concluir o nível de emissão ou risco.
 
 O portal de imprensa da Eletronuclear foi localizado como referência possível. Não foram baixadas fotografias institucionais presumindo uma autorização geral de uso. Os dois registros de Angra vieram de arquivos com licença individual explícita no Commons.

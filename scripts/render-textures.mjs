@@ -5,6 +5,12 @@ import { launchBrowser } from './chromium.mjs';
 
 const base = process.env.TEST_URL || 'http://localhost:3000';
 const selected = process.argv.slice(2).map(value=>Number(value)-1);
+// Evita reabrir artefatos idênticos durante a sincronização do OneDrive.
+async function writeGenerated(file, data) {
+  const previous = await readFile(file).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
+  if (previous?.equals(Buffer.isBuffer(data) ? data : Buffer.from(data))) return;
+  await writeFile(file, data);
+}
 await mkdir(new URL('../assets/textures/',import.meta.url),{recursive:true});
 await mkdir(new URL('../artifacts/pages/',import.meta.url),{recursive:true});
 const browser = await launchBrowser({timeout:300000});
@@ -18,8 +24,8 @@ try {
     const layout = await browser.evaluate(`(() => {const page=document.querySelector('.magazine-page'),main=page.querySelector('.page-main'),tail=page.querySelector('.page-tail');return {index:${index},contentBottom:Math.max(...[...main.children].map(el=>el.getBoundingClientRect().bottom)),tailTop:tail.getBoundingClientRect().top,pageBottom:page.getBoundingClientRect().bottom,tailBottom:tail.getBoundingClientRect().bottom,missingImages:[...document.images].filter(i=>!i.naturalWidth).length,horizontal:page.scrollWidth>page.clientWidth,columns:getComputedStyle(page.querySelector('.columns')).columnCount,justify:getComputedStyle(page.querySelector('.columns p')).textAlign}})()`);
     const clip = {x:0,y:0,width:760,height:1064};
     const name = `page-${String(index + 1).padStart(2,'0')}`;
-    await writeFile(new URL(`../assets/textures/${name}.jpg`,import.meta.url),await browser.screenshot({format:'jpeg',quality:88,scale:1.5,clip}));
-    await writeFile(new URL(`../artifacts/pages/${name}.png`,import.meta.url),await browser.screenshot({clip}));
+    await writeGenerated(new URL(`../assets/textures/${name}.jpg`,import.meta.url),await browser.screenshot({format:'jpeg',quality:88,scale:1.5,clip}));
+    await writeGenerated(new URL(`../artifacts/pages/${name}.png`,import.meta.url),await browser.screenshot({clip}));
     results.push(layout);
     console.log(`${name}: ${layout.contentBottom <= layout.tailTop - 10 && layout.tailBottom <= 1064 && !layout.horizontal && !layout.missingImages ? 'OK' : 'REVIEW'} (content ${Math.round(layout.contentBottom)} / footer ${Math.round(layout.tailTop)})`);
   }

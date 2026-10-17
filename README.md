@@ -12,6 +12,8 @@ npm start
 
 Abra [a revista](http://localhost:3000). No desktop, o modo inicial é 3D; no celular, páginas HTML legíveis. Links diretos: [3D](http://localhost:3000/?template=3d) e [HTML](http://localhost:3000/?template=html). `?page=13` abre a região correspondente da edição.
 
+O seletor também oferece [Página inteira](http://localhost:3000/?template=landing): a edição em formato de site, com capa ampla e vinte seções em rolagem contínua. Sumário e botões levam diretamente às seções; a URL acompanha a leitura. `?template=landing&page=13` abre a seção correspondente à página 13. A troca entre os três modos conserva a posição editorial, ajustada ao par no 3D/HTML desktop.
+
 ## Publicar no GitHub Pages
 
 Site: [megueutu.github.io/Fronteira](https://megueutu.github.io/Fronteira/).
@@ -36,6 +38,7 @@ O 3D usa folhas segmentadas que curvam durante a virada e camadas HTML para inte
 ```sh
 npm test
 npm run test:browser
+npm run test:landing
 ```
 
 O teste de navegador precisa do servidor ativo e de um Chromium instalado. Aceita `CHROMIUM_PATH` e `TEST_URL`; no Windows procura também uma instalação local do Chrome for Testing headless ou Chrome. Exemplo PowerShell:

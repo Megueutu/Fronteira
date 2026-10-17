@@ -1,4 +1,4 @@
-import { pages, pageHTML, photos, artworks, chapters, references, referenceHTML, escapeHTML } from './content.js';
+import { pages, pageHTML, photos, artworks, chapters, references, referenceHTML, escapeHTML, teamMembers, teamHTML } from './content.js';
 import { chartHTML, fuelSteps, reactorSteps, calculateScenario, scenarios, timeline, timelineHTML, decimal } from './data.js';
 
 export function createInteractions(onJump) {
@@ -39,8 +39,13 @@ export function createInteractions(onJump) {
     if (type === 'index') {
       title = 'Escolha por onde começar.';
       markup = `<nav class="dialog-index" aria-label="Sumário">${chapters.map(ch => `<button type="button" data-jump="${ch.page}"><b>${String(ch.page + 1).padStart(2,'0')}</b><span>${ch.title}<small>${ch.detail}</small></span><i aria-hidden="true">↗</i></button>`).join('')}</nav><details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>`;
+    } else if (type === 'member') {
+      const member = teamMembers.find(item => item.id === trigger?.dataset.member);
+      if (!member) return;
+      title = member.name;
+      markup = `<figure class="expanded-photo member-photo"><img src="${member.portrait}" alt="Retrato de ${escapeHTML(member.name)}"><figcaption>${escapeHTML(member.name)} · Integrante da pesquisa.<br>Fotografia fornecida pelo grupo para esta revista. Fotógrafo não informado.</figcaption></figure>`;
     } else if (type === 'image') {
-      const art = page.image || photos.angra;
+      const art = photos[trigger?.dataset.photoKey] || page.image || photos.angra;
       title = art.title; markup = photoHTML(art);
     } else if (type === 'carousel') {
       title = 'Paisagens da energia.'; gallery = artworks; slideIndex = 0;
@@ -65,14 +70,14 @@ export function createInteractions(onJump) {
       markup = `${page.refs?.length ? `<h3>Nesta página</h3><ol class="references-list">${referenceHTML(page.refs)}</ol>` : ''}<details ${page.refs?.length ? '' : 'open'}><summary>Todas as referências da edição</summary><ol class="references-list">${referenceHTML([],true)}</ol></details><p class="source-note">Fontes consultadas e contexto da pesquisa: 16/10/2026. Os exemplos internacionais são datados; as hipóteses financeiras pertencem ao estudo do grupo.</p>`;
     } else if (type === 'credits') {
       title = 'Quem fez estas imagens.';
-      markup = `<p class="dialog-intro">Os arquivos foram redimensionados e têm recortes de exibição. Fotografias conservam as licenças de seus autores; nenhuma implica apoio dos fotógrafos às conclusões da revista.</p><div class="photo-credits">${artworks.map(art => `<div><img src="${art.src}" alt="${escapeHTML(art.title)}" loading="lazy"><p>${escapeHTML(art.caption)}<br><a href="${art.url}" target="_blank" rel="noopener">${escapeHTML(art.credit)} ↗</a><br><a href="${art.licenseUrl}" target="_blank" rel="noopener">${escapeHTML(art.license)}</a></p></div>`).join('')}</div>`;
+      markup = `<p class="dialog-intro">Os arquivos foram redimensionados e têm recortes de exibição. Fotografias conservam as licenças de seus autores; nenhuma implica apoio dos fotógrafos às conclusões da revista.</p><div class="photo-credits">${artworks.map(art => `<div><img src="${art.src}" alt="${escapeHTML(art.title)}" loading="lazy"><p>${escapeHTML(art.caption)}<br><a href="${art.url}" target="_blank" rel="noopener">${escapeHTML(art.credit)} ↗</a><br><a href="${art.licenseUrl}" target="_blank" rel="noopener">${escapeHTML(art.license)}</a></p></div>`).join('')}</div><h3>Retratos dos integrantes</h3><p class="source-note">Fotografias fornecidas pelo grupo para uso nesta revista. Fotógrafo não informado.</p>${teamHTML()}`;
     } else if (type === 'linear' || type === 'read') {
       title = type === 'read' ? 'Leia esta abertura.' : 'A edição no seu ritmo.';
       const selection = type === 'read' ? pages.slice(Math.floor(pageIndex / 2) * 2,Math.floor(pageIndex / 2) * 2 + 2) : pages;
       markup = `<div class="linear-content">${selection.map(p => pageHTML(p,pages.indexOf(p),{linear:true})).join('')}</div>`;
     } else {
       title = page.note?.title || 'Energia, sociedade e escolhas.';
-      markup = `<p class="note-body">${escapeHTML(page.note?.text || 'Geração, rede, distribuição, capacidade de pagamento e participação são dimensões relacionadas. Nenhuma fonte, sozinha, resolve todos esses problemas. A revista reúne esses critérios ao longo dos cinco temas.')}</p>${page.id === 'editorial' ? `<h3>Fluxograma do editorial</h3>${flowHTML(['Apresentar a pergunta central','Situar as possibilidades e os riscos','Conectar tecnologia, território e sociedade','Distinguir dados e interpretações','Comparar argumentos e reconhecer limites','Deixar espaço para uma conclusão informada'])}` : ''}${page.refs?.length ? `<h3>Fontes desta leitura</h3><ol class="references-list">${referenceHTML(page.refs)}</ol>` : ''}`;
+      markup = `<p class="note-body">${escapeHTML(page.note?.text || 'Geração, rede, distribuição, capacidade de pagamento e participação são dimensões relacionadas. Nenhuma fonte, sozinha, resolve todos esses problemas. A revista reúne esses critérios ao longo dos cinco temas.')}</p>${page.id === 'editorial' ? `<h3>Fluxograma do editorial</h3>${flowHTML(['Defender acesso à energia e autonomia tecnológica','Relacionar geração, distribuição e tarifas com Milton Santos e Maria Laura Silveira','Discutir capacidade produtiva e dependência com Wallerstein','Propor planejamento público, capacitação e ampliação industrial','Vincular financiamento a metas e prestação de contas'])}` : ''}${page.refs?.length ? `<h3>Fontes desta leitura</h3><ol class="references-list">${referenceHTML(page.refs)}</ol>` : ''}`;
     }
     content.innerHTML = `<h2 id="dialog-title">${title}</h2>${markup}`;
     if (!dialog.open) dialog.showModal();

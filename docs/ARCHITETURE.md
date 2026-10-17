@@ -37,6 +37,16 @@ O desktop mostra duas páginas com transição CSS de folha plana. A cópia visu
 
 No celular, o HTML mostra uma página em fluxo vertical, com corpo de 18 px e uma coluna, preservando o conteúdo. Toque horizontal dispara a troca ao soltar. O gesto não acompanha continuamente o dedo. A leitura ampliada e a leitura contínua também funcionam sem depender de WebGL.
 
+## Página inteira
+
+Implementado em 2026-10-17 a pedido do responsável. `?template=landing` abre a edição como site: capa com título e fotografia lado a lado no desktop; vinte artigos em fluxo, com títulos laterais, texto legível e sumário em cartões. No celular, os blocos empilham. Esse modo não usa a escala fixa de impressão nem a textura WebGL.
+
+`src/app.js` compõe `#landing-view` uma única vez com a mesma função `pageHTML`, acrescenta IDs de destino e um título principal `h1`, e reutiliza a delegação de interações existente. A seleção é sincronizada por um `IntersectionObserver` com a faixa visível abaixo da barra fixa. Sumário, Home/End e setas levam à seção; o destino recebe foco programático no título. A URL mantém `template=landing&page=N`. Ao sair, a posição é ajustada ao par de páginas quando necessário. Zoom de página e a ampliação de abertura ficam ocultos nesse modo; as ampliações de fotos, gráficos e notas continuam disponíveis.
+
+Foram consultados os guias de [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) e [scroll-margin-top](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/scroll-margin-top) da MDN. A implementação usa APIs nativas do navegador e os componentes e assets locais; não incorpora código externo nem nova biblioteca.
+
+O teste `npm run test:landing` cobre link direto, quantidade de seções, sumário, foco, atualização durante rolagem, troca de modos e limites responsivos. Capturas e medições da revisão ficam em `artifacts/landing/`.
+
 ## Folheamento 3D
 
 WebGL desenha folhas segmentadas com deformação durante a virada, iluminação simplificada e texturas de frente/verso orientadas para a leitura. Camadas sugerem espessura. O enquadramento é fixo, sem câmera livre ou simulação física completa.
@@ -54,6 +64,12 @@ Dialogs nativos têm rótulo, fechamento por Escape, foco inicial e devolução 
 Gráficos expõem números em texto; filtros mantêm a escala. O laboratório mostra fórmula, unidades, parâmetros e limites. As marcações do quadro de avaliação não são enviadas a um serviço. Movimento reduzido evita a virada prolongada. Essas medidas não equivalem a uma auditoria completa de acessibilidade.
 
 ## Pesquisa e decisões anteriores
+
+O ajuste do átomo da capa em 2026-10-17 usa SVG nativo `animateMotion`, conforme a [documentação MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/animateMotion), sem biblioteca, código ou assets externos incorporados. Dois arcos elípticos formam o percurso fechado com os mesmos centro, raios e rotação da elipse desenhada. CSS troca a representação animada pela posição estática em `prefers-reduced-motion`, impressão e `.render-document`; assim as texturas permanecem determinísticas.
+
+No refinamento da capa em 2026-10-17, `.cover-photo-flow` passou a aplicar uma máscara SVG embutida como data URI no CSS. A silhueta contínua é desenhada no código e compartilhada pelas três fotografias; ondas e átomo são vetores originais no HTML. A composição conserva a proporção vertical também no modo Página inteira. A pesquisa incluiu a documentação [MDN sobre coordenadas de recorte SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/clipPathUnits); não foi incorporado código de bibliotecas. O tratamento azulado é CSS, e os JPEGs originais e suas ampliações continuam em cores.
+
+A capa orgânica de 2026-10-17 usa CSS nativo, sem biblioteca nova. Foi consultada a documentação MDN de [unidades relativas a contêineres](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length#container_query_length_units): `container-type: inline-size` e `cqw` mantêm a proporção da tipografia dentro de `.cover-artwork`. As fotografias locais são as já licenciadas; não houve reutilização de código ou assets externos para a nova composição. `coverHTML` é chamado por `pageHTML`, e os botões identificam a fotografia por `data-photo-key` para ampliar o original correto.
 
 A pesquisa inicial considerou StPageFlip para HTML e Three.js/React Three Fiber para 3D. O ambiente de nuvem não conseguiu instalar pacotes devido ao proxy, motivando os protótipos nativos. Nenhum código ou asset dessas referências foi copiado.
 

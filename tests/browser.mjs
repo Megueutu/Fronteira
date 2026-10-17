@@ -30,7 +30,8 @@ try {
   await b.click('#open-index'); await b.click('dialog [data-jump="3"]');
   assert.equal(await b.evaluate("document.querySelector('#page-status').textContent"),'03 — 04 / 20');
   await b.click('[data-page="2"][data-action="popup"]');
-  assert.equal(await b.evaluate("document.querySelectorAll('.reading-flow li').length"),6);
+  assert.equal(await b.evaluate("document.querySelectorAll('.reading-flow li').length"),5);
+  assert.ok((await b.evaluate("document.querySelector('.reading-flow').textContent")).includes('Vincular financiamento a metas e prestação de contas'));
   assert.ok((await b.evaluate("document.querySelector('#dialog-title').textContent")).includes('editorial'));
   await b.click('#close-dialog');
   await b.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});

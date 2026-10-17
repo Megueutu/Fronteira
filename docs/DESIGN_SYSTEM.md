@@ -13,12 +13,12 @@ Os tokens ficam no início de `src/styles.css`.
 | Papel | Token | Valor |
 | --- | --- | --- |
 | Texto principal | `--ink` | `#172d24` |
-| Ações e destaques | `--green` | `#24583f` |
-| Texto secundário | `--muted` | `#53665b` |
+| Ações e destaques | `--green` | `#1e7349` |
+| Texto secundário | `--muted` | `#4e6659` |
 | Papel | `--paper` | `#ffffff` |
-| Notas e quadros | `--soft` | `#edf3ee` |
-| Superfície da revista | `--stage` | `#e6ebe5` |
-| Divisores | `--line` | `#cdd9cf` |
+| Notas e quadros | `--soft` | `#edf4f0` |
+| Superfície da revista | `--stage` | `#e3ece7` |
+| Divisores | `--line` | `#c9dcd1` |
 | Narrativa | `--serif` | Georgia e alternativas locais |
 | Controles e dados | `--sans` | Arial e alternativas locais |
 
@@ -34,6 +34,8 @@ No celular, o HTML é exibido em uma página por vez, em fluxo vertical, com cor
 
 ## Componentes
 
+O átomo decorativo da capa usa três elipses e um núcleo fixo. A bolinha menor começa na curva superior esquerda, centrada no traço, e percorre a elipse inclinada em 35° em oito segundos, com velocidade constante via SVG `animateMotion`. O caminho compartilha centro e raios com o arco (50, 50; 44 × 17). Em movimento reduzido, impressão e geração de texturas, só a bolinha estática aparece na posição inicial. HTML, Página inteira e leitura contínua usam a animação; o 3D mantém a composição estática da textura.
+
 - Botão de página: ação principal com divisores finos, texto verde e seta. No 3D, botão HTML projetado sobre a posição correspondente.
 - Fotografia: botão de ampliação, contexto e crédito; ampliação com legenda completa e links de autoria/licença.
 - Quadro de equilíbrio: duas áreas com a mesma importância, sem oposição “verde bom / vermelho ruim”.
@@ -44,6 +46,66 @@ No celular, o HTML é exibido em uma página por vez, em fluxo vertical, com cor
 - Sumário: destinos diretos e fluxo da edição; fluxograma do editorial na nota correspondente.
 
 ## Validação e manutenção
+
+### Retratos dos integrantes (2026-10-17)
+
+O sumário apresenta os seis integrantes em `.team-grid`, com fotografia quadrada, nome e botão de ampliação. `teamMembers`, em `src/content.js`, mantém a associação explícita entre nome e arquivo; `authors` deriva desses registros. Davi de Oliveira foi confirmado pelo responsável apesar do arquivo original se chamar `davi-silva.jpeg`.
+
+No frame fixo, o sumário usa duas colunas de links e seis retratos em uma linha. O conteúdo termina em 828 px, antes das ações em 957 px. Em Página inteira, os retratos mantêm seis colunas no desktop e duas no celular; o HTML de página única também usa duas colunas no celular. Na leitura contínua e na área de créditos, são três colunas no desktop e duas no celular. Fotos com 500 × 500 px, nomes com 12 px no frame fixo e 15–16 px nas composições fluidas. Imagens preservam a proporção; botões têm borda, raio de 8 px e foco visível.
+
+`teamHTML` é reutilizado no sumário e nos créditos. Cada retrato amplia seu arquivo correto, informa nome e origem no grupo e mantém a navegação de retorno dos diálogos. As fotografias do grupo têm registro próprio em [IMAGE_SOURCES.md](IMAGE_SOURCES.md); não recebem a licença do acervo de energia. Os JPEGs foram copiados sem alteração de bytes, com extensão `.jpg` para os recursos locais.
+
+### Editorial final fornecido pelo responsável (2026-10-17)
+
+O editorial tem quatro parágrafos integrais, sem cortes, e usa `kind: 'editorial'` / `.page-editorial`. No frame fixo de 760 × 1064 px, margens laterais de 32 px, título de 42 px em uma linha e corpo Georgia de 16 px com entrelinha 1,45 acomodam a versão final. O texto termina em 932 px e as ações começam em 957 px. A citação adicional da versão anterior foi retirada. Essas regras são limitadas a `.render-document` e `.html-book:not(.single-page)`; Página inteira, celular e leitura contínua mantêm a tipografia fluida e altura livre.
+
+A nota interativa identifica a versão enviada pelo responsável; não apresenta o novo editorial como uma síntese redigida pela IA. O mesmo conteúdo alimenta os modos HTML e as texturas 3D. A nota de transparência na página 19 acompanha essa mudança de origem.
+
+### Capa com recortes orgânicos (2026-10-17)
+
+Antes da animação, o ponto menor do átomo foi centrado na extremidade da órbita inclinada de 35°, na coordenada local `(6, 50)`, com a mesma rotação da elipse. O ajuste atual começa em `(7.76, 45.24)`, sobre a curva superior esquerda da mesma elipse de centro `(50, 50)` e raios 44 × 17, conforme a regra de animação descrita em Componentes.
+
+Ajuste posterior solicitado pelo responsável: removida a linha “Sociologia · Instituto J&F” abaixo da marca na capa. A remoção é compartilhada pelos modos HTML, Página inteira, leitura contínua e textura 3D.
+
+Direção refinada após o responsável pedir literalmente o formato das curvas da referência Brasil Nuclear: silhueta contínua em S unindo painel, usina e foto inferior; área verde entrando pelo meio; ondas azuis na base; degradê de verde vivo a verde claro. A marca Fronteira em Arial bold acompanha um desenho vetorial de átomo. As chamadas principais e secundária são brancas sobre a área escura. A composição conserva o título, a abertura e os cinco temas da pesquisa. Não incorpora chamadas de INAC, medicina ou datas da publicação de referência.
+
+A cor principal definida pelo responsável é `#1E7349`, compartilhada pela capa, controles, links, dados e demais destaques. A capa usa esse token, verde médio `#80ac94`, verde claro `#dcebe2` e azul `#087eaf`, além de branco e neutros. As séries secundárias dos gráficos usam `#6b9c82`. O verde vivo e o lima anteriores foram substituídos por tons dessa base. Chamadas sobre a parte escura da capa usam branco; abertura e créditos sobre a parte clara usam tinta escura. Mantém as duas famílias Georgia e Arial; o masthead e as chamadas da capa usam Arial. Os recortes são exceções ilustrativas aos raios de componentes: botões retangulares conservam raio de 8 px.
+
+O bloco `.cover-artwork` escala como uma composição única, com posições proporcionais e tipografia em unidades `cqw`. A revista em páginas mantém a área lógica de 760 × 1064 px; o desenho da capa ocupa 760 × 780 px e a abertura/créditos/ações ficam abaixo. Em Página inteira, o desenho conserva essa proporção vertical em todas as larguras, centralizado até 1000 px, para preservar a silhueta solicitada. O texto de abertura permanece fora da colagem, com 18 px no celular. As três fotos compartilham uma máscara SVG em `.cover-photo-flow` e usam `object-fit: cover`, sem distorção; filtros e sobreposição CSS produzem o azulado apenas na capa. A ampliação exibe o original em cores. Os indicadores de ampliação aparecem no hover/foco e ficam sempre visíveis no celular.
+
+O mesmo `coverHTML` fornece HTML, leitura contínua, Página inteira e textura 3D. Cada foto em HTML amplia seu próprio original com autoria, contexto e licença; a galeria da capa permanece disponível. O primeiro título vira `h1` em Página inteira, conservando sua classe e o destino de foco.
+
+Validação: textos sem sobreposição entre si e dentro da composição nas seis larguras de 320 a 1896 px; três ampliações corretas com crédito, Escape e retorno do foco; parágrafos da pesquisa preservados. As vinte texturas foram regeneradas e os vinte PNGs revisados. A capa passou na checagem geométrica e as outras dezenove páginas mantiveram suas medidas anteriores. Os oito alertas preexistentes permanecem em [REVIEW.md](REVIEW.md). Evidências locais em `artifacts/cover/`; regressão das fotos em `tests/landing.browser.mjs`.
+
+### Modo Página inteira (2026-10-17)
+
+O terceiro botão do seletor apresenta a revista como site. A capa reúne título grande, linha fina, texto de abertura e CTA para o sumário, com a fotografia de Angra ao lado. A partir do sumário, vinte seções preservam os mesmos títulos, parágrafos, fotografias, créditos e ações da edição em páginas.
+
+Os estilos ficam escopados a `.landing-view` e ao estado `body[data-reader-mode="landing"]`. Conteúdo fluido até 1520 px, margens de 48 px no desktop, 32 px em telas médias e 24 px no celular. O corpo usa Georgia 20/1,7 no desktop e 18/1,65 no celular; títulos e hierarquia mantêm Georgia e Arial. Não há novas famílias nem cores de marca. A altura dos artigos é livre, sem cortar conteúdo para caber em um frame.
+
+Abaixo de 1001 px, os blocos editoriais empilham; abaixo de 761 px, o seletor ocupa uma linha própria e o contexto/ações aparecem abaixo. Essa organização também permite escolher os três modos em telas de 320 px. O sumário usa duas colunas de cartões no desktop e uma no celular. Títulos longos podem quebrar para respeitar o espaço útil da tela.
+
+A barra do seletor permanece visível durante a rolagem desse modo. Sumário e setas navegam por seção; a URL e o contador acompanham a seção visível. O destino recebe foco no título, sem desenhar um contorno de botão ao redor do texto; controles interativos conservam foco visível. A leitura normal usa rolagem vertical e permite seleção de texto. Os modos anteriores continuam com sua composição fixa.
+
+Validação: seis larguras entre 320 e 1896 px, vinte seções sem colisão entre conteúdo e ações, todos os parágrafos originais preservados e ausência de rolagem horizontal. Sumário, fotos, gráfico, Escape, foco, links diretos e troca HTML/3D conferidos. Evidências em `artifacts/landing/` e regressão em `tests/landing.browser.mjs`.
+
+### Barra inferior e rodapé (2026-10-17)
+
+A navegação acompanha o cabeçalho: setas e contador em um grupo com rótulo “Páginas”, próximo em verde, zoom em grupo próprio e identificação da turma no modo 3D. Botões têm pelo menos 44 × 44 px; raios fixos de 8 px nos botões e 12 px nos grupos. Os ícones de seta reutilizam o sprite existente, com rotação visual para voltar.
+
+No desktop, dica de teclado, navegação e zoom ocupam três áreas. Em até 900 px, a dica sai e os controles usam duas áreas; no celular, a navegação é centralizada e a identificação da turma sai. O zoom mantém a regra anterior de aparecer apenas no HTML desktop. O rodapé reúne marca e descrição à esquerda e botões de fotos/créditos e fontes à direita; em até 760 px, os blocos empilham e os dois botões dividem a largura. O destino `#edition-footer` permite abrir a região diretamente.
+
+Validação: seis larguras de 320 a 1896 px; limites de controles, navegação anterior/próxima em HTML e 3D, zoom, créditos, fontes, Escape e retorno do foco. Evidências em `artifacts/footer/`. A composição das vinte páginas continua com as mesmas medidas de conteúdo e rodapé da etapa do cabeçalho; os oito alertas anteriores permanecem.
+
+### Cabeçalho do leitor (2026-10-17)
+
+Implementado a partir do pedido de melhorar a área superior da edição Fronteira. A marca e a identificação da edição ficam juntas; sumário e leitura contínua têm botões de 44 px de altura. A barra de leitura agrupa os modos 3D e Páginas em um seletor segmentado com `aria-pressed`, identifica a seção atual e reúne ampliação e tela cheia. Os IDs e os comportamentos existentes foram preservados.
+
+A interface usa Georgia e Arial já existentes, as cores da edição e raios fixos de 8 px nos botões (12 px no contêiner do seletor). Hover muda cor e borda; foco mantém o contorno visível. Os seis ícones são Material Symbols Rounded 400 reutilizados do sprite da Energia Atômica, com licença Apache-2.0, sem fonte de ícones ou dependência nova.
+
+Em até 900 px, a identificação da edição e o contexto da abertura saem da barra; em até 760 px, os botões de ação mostram ícones, mantendo nome acessível e tooltip. Em até 380 px, o seletor de modo conserva os textos e oculta seus ícones para caber. Foram conferidas as larguras 1896, 1440, 1024, 768, 390 e 320 px, sem transbordamento do cabeçalho e com controles de pelo menos 44 × 44 px.
+
+O cabeçalho pertence à interface externa. Não altera a composição editorial de 760 × 1064 px. A comparação com o CSS anterior confirmou os mesmos limites de conteúdo nas vinte páginas; os alertas preexistentes estão registrados em [REVIEW.md](REVIEW.md).
 
 O processo confere limites de composição, imagens ausentes, justificação, navegação, foco e interações. Capturas são revisadas antes da publicação. Isso não equivale a uma auditoria completa de acessibilidade, testes em leitores de tela ou homologação em todos os navegadores.
 

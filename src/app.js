@@ -12,13 +12,15 @@ if (renderIndex !== null) {
 } else {
   const stage = document.querySelector('#stage');
   const book = document.querySelector('#html-book');
+  const landing = document.querySelector('#landing-view');
   const mobile = matchMedia('(max-width: 760px)');
   const params = new URLSearchParams(location.search);
-  let mode = params.get('template') === 'html' ? 'html' : params.get('template') === '3d' ? '3d' : mobile.matches ? 'html' : '3d';
+  let mode = ['html','3d','landing'].includes(params.get('template')) ? params.get('template') : mobile.matches ? 'html' : '3d';
   let pageIndex = Math.max(0,Math.min(pages.length - 1,(Number(params.get('page')) || 1) - 1));
   let zoom = 1, turning = false, turnId = 0, modeId = 0, renderer, rendererPromise, failed = false, timer;
   const interactions = createInteractions(jump);
-  const single = () => mobile.matches && mode === 'html';
+  let landingObserver;
+  const single = () => mode === 'landing' || (mobile.matches && mode === 'html');
   const spread = () => Math.floor(pageIndex / 2);
   const previous = document.querySelector('#previous'), next = document.querySelector('#next');
   function update() {
@@ -26,13 +28,50 @@ if (renderIndex !== null) {
     next.disabled = turning || (single() ? pageIndex === pages.length - 1 : spread() === clampSpread(999));
     document.querySelector('#page-status').textContent = single() ? `${String(pageIndex + 1).padStart(2,'0')} / ${pages.length}` : formatPages(spread());
     document.querySelector('#section-label').textContent = pages[pageIndex].section;
+    document.querySelector('.context-label').textContent = mode === 'landing' ? 'Nesta seção' : 'Nesta abertura';
+    document.querySelector('.nav-caption').textContent = mode === 'landing' ? 'Seções' : 'Páginas';
     stage.setAttribute('aria-busy',String(turning));
     stage.classList.toggle('turning',turning);
     document.querySelector('#reading-progress').style.width = `${(single() ? pageIndex + 1 : Math.min(spread() * 2 + 2,pages.length)) / pages.length * 100}%`;
-    const url = new URL(location.href); url.searchParams.set('template',mode); url.searchParams.set('page',String(pageIndex + 1)); history.replaceState(null,'',url);
+    const url = new URL(location.href); url.searchParams.set('template',mode); url.searchParams.set('page',String(pageIndex + 1)); if (mode === 'landing') url.hash = ''; history.replaceState(null,'',url);
+  }
+  function observeLanding() {
+    landingObserver?.disconnect();
+    const top = document.querySelector('#reader-toolbar').offsetHeight + 20;
+    landingObserver = new IntersectionObserver(entries => {
+      if (mode !== 'landing' || interactions.isOpen()) return;
+      const active = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.boundingClientRect.top - a.boundingClientRect.top)[0];
+      if (active) { pageIndex = Number(active.target.dataset.pageIndex); update(); }
+    }, { rootMargin: `-${top}px 0px -${Math.max(0,innerHeight - top - 140)}px 0px` });
+    landing.querySelectorAll('.magazine-page').forEach(article => landingObserver.observe(article));
+  }
+  function showLanding() {
+    if (!landing.children.length) {
+      landing.innerHTML = pages.map((page,index) => pageHTML(page,index)).join('');
+      landing.querySelectorAll('.magazine-page').forEach((article,index) => {
+        article.id = `landing-${pages[index].id}`;
+        const title = article.querySelector('h2');
+        title.id = `landing-title-${index}`; title.tabIndex = -1;
+        article.setAttribute('aria-labelledby',title.id); article.removeAttribute('aria-label');
+        article.querySelectorAll('img').forEach(img => { img.loading = index === 0 ? 'eager' : 'lazy'; });
+      });
+      const cover = landing.firstElementChild;
+      const oldTitle = cover.querySelector('h2'), title = document.createElement('h1');
+        title.id = oldTitle.id; title.className = oldTitle.className; title.tabIndex = -1; title.innerHTML = oldTitle.innerHTML; oldTitle.replaceWith(title);
+      const actions = document.createElement('div'); actions.className = 'landing-cover-actions';
+      actions.innerHTML = '<button type="button" data-jump="1">Explore a edição <svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button><span>20 páginas · 5 temas</span>';
+      cover.querySelector('.page-main').append(actions);
+    }
+    observeLanding();
+  }
+  function scrollLanding({ focus = false } = {}) {
+    const article = landing.children[pageIndex];
+    article.scrollIntoView({block:'start'});
+    if (focus) article.querySelector('h1,h2').focus({preventScroll:true});
   }
   function layout() {
     document.querySelector('#zoom-controls').hidden = mode !== 'html' || mobile.matches;
+    if (mode === 'landing') { observeLanding(); return; }
     const availableWidth = Math.max(300,stage.clientWidth - (mobile.matches ? 20 : 70));
     const availableHeight = Math.max(430,Math.min(950,innerHeight - (mobile.matches ? 200 : 190)));
     const count = single() ? 1 : 2;
@@ -44,6 +83,7 @@ if (renderIndex !== null) {
     stage.style.setProperty('--stage-height',`${Math.max(availableHeight + 30,mode === 'html' ? 1064 * scale + 30 : 0)}px`);
   }
   function showHTML(animate = false, direction = 1) {
+    if (mode === 'landing') { showLanding(); return; }
     const old = book.querySelectorAll('article')[direction > 0 ? 1 : 0]?.cloneNode(true);
     clearTimeout(timer);
     const start = single() ? pageIndex : spread() * 2;
@@ -58,6 +98,7 @@ if (renderIndex !== null) {
     if (turning || interactions.isOpen()) return;
     const target = single() ? Math.max(0,Math.min(pages.length - 1,pageIndex + delta)) : clampSpread(spread() + delta) * 2;
     if (target === pageIndex || (!single() && Math.floor(target / 2) === spread())) return;
+    if (mode === 'landing') { jump(target); return; }
     const from = spread(), request = ++turnId;
     pageIndex = target; turning = true; update();
     try {
@@ -70,10 +111,12 @@ if (renderIndex !== null) {
     pageIndex = Math.max(0,Math.min(pages.length - 1,index)); turning = false; ++turnId; renderer?.cancel();
     if (!single()) pageIndex = Math.floor(pageIndex / 2) * 2;
     showHTML(); update();
+    if (mode === 'landing') { const target = pageIndex; requestAnimationFrame(() => { pageIndex = target; scrollLanding({focus:true}); update(); }); return; }
     if (mode === '3d' && renderer && !failed) { try { await renderer.show(spread()); } catch { showGraphicsError(); } }
     document.querySelector('#read-spread').focus();
   }
   function showGraphicsError() {
+    if (mode !== '3d') return;
     failed = true; turning = false; ++turnId;
     document.querySelector('#stage-error').hidden = false;
     document.querySelector('#webgl-view').hidden = true;
@@ -82,7 +125,12 @@ if (renderIndex !== null) {
   }
   async function setMode(value) {
     const request = ++modeId;
+    const previousMode = mode;
+    landingObserver?.disconnect();
     mode = value; turning = false; ++turnId; renderer?.cancel();
+    document.body.dataset.readerMode = mode;
+    stage.hidden = mode === 'landing'; landing.hidden = mode !== 'landing';
+    if (!single()) pageIndex = Math.floor(pageIndex / 2) * 2;
     document.querySelectorAll('[data-mode]').forEach(button => button.setAttribute('aria-pressed',String(button.dataset.mode === mode)));
     document.querySelector('#html-view').hidden = mode !== 'html';
     document.querySelector('#webgl-view').hidden = mode !== '3d';
@@ -90,6 +138,8 @@ if (renderIndex !== null) {
     document.querySelector('#zoom-controls').hidden = mode !== 'html';
     document.querySelector('#loading').hidden = mode !== '3d';
     showHTML(); update();
+    if (mode === 'landing') { const target = pageIndex; requestAnimationFrame(() => { pageIndex = target; scrollLanding(); update(); }); return; }
+    if (previousMode === 'landing') document.querySelector('#reader-toolbar').scrollIntoView({block:'start'});
     if (mode === 'html') return;
     try {
       if (failed) { showGraphicsError(); return; }

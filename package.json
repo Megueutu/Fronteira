@@ -8,6 +8,7 @@
     "dev": "node server.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "node tests/browser.mjs",
+    "test:landing": "node tests/landing.browser.mjs",
     "render:textures": "node scripts/render-textures.mjs",
     "build:pages": "node scripts/build-pages.mjs"
   },
