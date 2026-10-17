@@ -1,0 +1,2 @@
+# Preserve the supplied research document bytes and their recorded sha256.
+pesquisa/ENTREVISTA_ADOLFO_BRAID_REGISTRO_CONSOLIDADO.md -text whitespace=cr-at-eol

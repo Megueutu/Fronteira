@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#24583f">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#1e7349">
   <meta name="description" content="Uma revista interativa sobre energia nuclear no Brasil: panorama, tecnologia, urânio, custos e política, em 20 páginas.">
   <title>Fronteira — energia nuclear no Brasil</title>
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -9,17 +9,59 @@
 </head>
 <body>
   <a class="skip-link" href="#reader-toolbar">Ir para os controles de leitura</a>
-  <header class="site-header"><button class="wordmark" id="go-cover" aria-label="Fronteira, voltar à capa">fronteira<span>ENERGIA NUCLEAR NO BRASIL</span></button><div class="issue-meta">EDIÇÃO 01<span>OUTUBRO 2026 · 20 PÁGINAS</span></div><div class="header-actions"><button id="open-index">Sumário <span aria-hidden="true">☰</span></button><button id="read-linear">Leitura contínua ↗</button></div></header>
+  <svg class="reader-icon-sprite" aria-hidden="true" focusable="false"><!-- Material Symbols Rounded 400, Apache-2.0. -->
+<symbol id="ui-menu" viewBox="0 -960 960 960"><path d="M150-240q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h660q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H150Zm0-210q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h660q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H150Zm0-210q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h660q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H150Z"/></symbol>
+<symbol id="ui-arrow_forward" viewBox="0 -960 960 960"><path d="M686-450H190q-13 0-21.5-8.5T160-480q0-13 8.5-21.5T190-510h496L459-737q-9-9-9-21t9-21q9-9 21-9t21 9l278 278q5 5 7 10t2 11q0 6-2 11t-7 10L501-181q-9 9-21 9t-21-9q-9-9-9-21t9-21l227-227Z"/></symbol>
+<symbol id="ui-menu_book" viewBox="0 -960 960 960"><path d="M248-300q53.57 0 104.28 12.5Q403-275 452-250v-427q-45-30-97.62-46.5Q301.76-740 248-740q-38 0-74.5 9.5T100-707v434q31-14 70.5-20.5T248-300Zm264 50q50-25 98-37.5T712-300q38 0 78.5 6t69.5 16v-429q-34-17-71.82-25-37.82-8-76.18-8-54 0-104.5 16.5T512-677v427Zm-44.5 77.5Q461-174 456-178q-47-29-99.85-45-52.84-16-108.15-16-36.54 0-71.77 9T106-208q-23.1 11-44.55-3Q40-225 40-251v-463q0-15 7-27.5T68-761q42-20 87.39-29.5 45.4-9.5 92.61-9.5 63 0 122.5 17T482-731q51-35 109.5-52T712-800q46.87 0 91.93 9.5Q849-781 891-761q14 7 21.5 19.5T920-714v463q0 27.89-22.5 42.45Q875-194 853-208q-34-14-69.23-22.5Q748.54-239 712-239q-54.27 0-106.14 16Q554-207 508-178q-5 4-11.5 5.5T482-171q-8 0-14.5-1.5ZM276-489Zm284-119q0-5.52 4.02-11.34 4.03-5.82 8.98-7.66 30-11 61.34-17 31.33-6 65.91-6 21.61 0 42.68 2.5T784-640q6 2 11 7.4 5 5.39 5 12.13 0 11.47-7.5 17.47-7.5 6-18.5 3-16.8-5-35.4-7.5Q720-610 700-610q-29 0-56 5.5T591-588q-14 5-22.5-.5T560-608Zm0 220q0-5.81 4.02-11.94 4.03-6.12 8.98-8.06 30-11 61.34-16.5 31.33-5.5 65.91-5.5 21.61 0 42.68 2.5T784-420q6 2 11 7.4 5 5.39 5 12.13 0 11.47-7.5 17.47-7.5 6-18.5 3-16.8-5-35.4-7.5Q720-390 700-390q-29 0-56 5t-53 16q-14 5-22.5 0t-8.5-19Zm0-110q0-5.52 4.02-11.34 4.03-5.82 8.98-7.66 30-11 61.34-17 31.33-6 65.91-6 21.61 0 42.68 2.5T784-530q6 2 11 7.4 5 5.39 5 12.13 0 11.47-7.5 17.47-7.5 6-18.5 3-16.8-5-35.4-7.5Q720-500 700-500q-29 0-56 5.5T591-478q-14 5-22.5-.5T560-498Z"/></symbol>
+<symbol id="ui-view_agenda" viewBox="0 -960 960 960"><path d="M180-510q-24 0-42-18t-18-42v-210q0-24 18-42t42-18h600q24 0 42 18t18 42v210q0 24-18 42t-42 18H180Zm0-60h600v-210H180v210Zm0 450q-24 0-42-18t-18-42v-210q0-24 18-42t42-18h600q24 0 42 18t18 42v210q0 24-18 42t-42 18H180Zm0-60h600v-210H180v210Zm0-600v210-210Zm0 390v210-210Z"/></symbol>
+<symbol id="ui-open_in_full" viewBox="0 -960 960 960"><path d="M150-120q-12.75 0-21.37-8.63Q120-137.25 120-150v-240q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v168l558-558H570q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h240q12.75 0 21.38 8.62Q840-822.75 840-810v240q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-168L222-180h168q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H150Z"/></symbol>
+<symbol id="ui-fit_screen" viewBox="0 -960 960 960"><path d="M820-640v-100H720q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h100q24 0 42 18t18 42v100q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37Zm-740 0v-100q0-24 18-42t42-18h100q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H140v100q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63Q80-627.25 80-640Zm740 480H720q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h100v-100q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v100q0 24-18 42t-42 18Zm-680 0q-24 0-42-18t-18-42v-100q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v100h100q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H140Zm60-180v-280q0-24.75 17.63-42.38Q235.25-680 260-680h440q24.75 0 42.38 17.62Q760-644.75 760-620v280q0 24.75-17.62 42.37Q724.75-280 700-280H260q-24.75 0-42.37-17.63Q200-315.25 200-340Zm60 0h440v-280H260v280Zm0 0v-280 280Z"/></symbol></svg>
+  <header class="site-header">
+    <div class="header-inner">
+      <button class="wordmark" id="go-cover" aria-label="Fronteira, voltar à capa">fronteira<span>ENERGIA NUCLEAR NO BRASIL</span></button>
+      <div class="issue-meta"><strong>Edição 01</strong><span>Outubro 2026 <i aria-hidden="true">·</i> 20 páginas</span></div>
+      <div class="header-actions">
+        <button id="open-index" aria-label="Abrir sumário" title="Abrir sumário"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu"/></svg><span class="action-label">Sumário</span></button>
+        <button id="read-linear" aria-label="Abrir leitura contínua" title="Leitura contínua"><span class="action-label">Leitura contínua</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button>
+      </div>
+    </div>
+  </header>
   <main>
     <section class="reader" aria-label="Revista interativa em vinte páginas">
-      <div class="reader-toolbar" id="reader-toolbar" tabindex="-1"><div class="template-tabs" role="group" aria-label="Modo de leitura"><button data-mode="3d" aria-pressed="true">Revista 3D</button><button data-mode="html" aria-pressed="false">Páginas interativas</button></div><span id="section-label">EDIÇÃO 01</span><div class="toolbar-actions"><button id="read-spread">Ler esta abertura ↗</button><button id="fullscreen" aria-label="Alternar tela cheia">⛶</button></div></div>
+      <div class="reader-toolbar" id="reader-toolbar" tabindex="-1">
+        <div class="template-tabs" role="group" aria-label="Modo de leitura">
+          <button data-mode="3d" aria-pressed="true"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg>Revista 3D</button>
+          <button data-mode="html" aria-pressed="false"><svg class="reader-icon" aria-hidden="true"><use href="#ui-view_agenda"/></svg>Páginas</button>
+          <button data-mode="landing" aria-pressed="false" aria-label="Página inteira, leitura em rolagem contínua"><svg class="reader-icon" aria-hidden="true"><use href="#ui-fit_screen"/></svg>Página inteira</button>
+        </div>
+        <div class="section-context"><span class="context-label">Nesta abertura</span><span id="section-label">EDIÇÃO 01</span></div>
+        <div class="toolbar-actions">
+          <button id="read-spread" aria-label="Ampliar leitura desta abertura" title="Ampliar leitura desta abertura"><svg class="reader-icon" aria-hidden="true"><use href="#ui-open_in_full"/></svg><span class="action-label">Ampliar leitura</span></button>
+          <button id="fullscreen" aria-label="Alternar tela cheia" title="Tela cheia"><svg class="reader-icon" aria-hidden="true"><use href="#ui-fit_screen"/></svg></button>
+        </div>
+      </div>
       <p id="stage-error" class="stage-error" hidden>A revista 3D ficou indisponível. Você pode continuar pelas páginas abaixo ou pela leitura contínua.</p>
       <div id="stage" class="stage" aria-busy="false"><p id="loading" class="loading" role="status">Preparando sua revista…</p><div class="book-frame" id="html-view" hidden><div class="html-book" id="html-book"></div></div><div class="webgl-view" id="webgl-view"><canvas id="book-canvas" role="img" aria-label="Revista tridimensional. Use as setas para folhear e os botões sobre as páginas para explorar."></canvas><div id="hotspots" class="hotspots"></div></div></div>
+      <div id="landing-view" class="landing-view" role="region" aria-label="Revista em página inteira" hidden></div>
       <div class="reading-progress" aria-hidden="true"><i id="reading-progress"></i></div>
-      <div class="navigation"><span class="nav-hint">Folheie com as setas.<br>Explore os botões nas páginas.</span><div class="nav-controls"><button id="previous" aria-label="Páginas anteriores">←</button><span id="page-status" role="status" aria-live="polite" aria-atomic="true">01 — 02 / 20</span><button id="next" aria-label="Próximas páginas">→</button></div><div id="zoom-controls" class="zoom-controls" hidden><button id="zoom-out" aria-label="Diminuir páginas">−</button><span id="zoom-status">100%</span><button id="zoom-in" aria-label="Ampliar páginas">+</button></div><span class="edition-credit">SOCIOLOGIA · INSTITUTO J&F</span></div>
+      <div class="navigation">
+        <div class="nav-hint"><strong>Continue a leitura</strong><span>Use <kbd>←</kbd> <kbd>→</kbd> para folhear</span></div>
+        <div class="nav-controls" role="group" aria-label="Navegação da revista">
+          <button id="previous" aria-label="Páginas anteriores" title="Páginas anteriores"><svg class="reader-icon arrow-back" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button>
+          <div class="page-position"><span class="nav-caption">Páginas</span><span id="page-status" role="status" aria-live="polite" aria-atomic="true">01 — 02 / 20</span></div>
+          <button id="next" aria-label="Próximas páginas" title="Próximas páginas"><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button>
+        </div>
+        <div class="reader-utilities">
+          <div id="zoom-controls" class="zoom-controls" role="group" aria-label="Zoom das páginas" hidden><span class="zoom-label">Zoom</span><button id="zoom-out" aria-label="Diminuir páginas" title="Diminuir páginas">−</button><span id="zoom-status">100%</span><button id="zoom-in" aria-label="Ampliar páginas" title="Ampliar páginas">+</button></div>
+          <div class="edition-credit"><strong>Instituto J&amp;F</strong><span>Sociologia · 2º ano D</span></div>
+        </div>
+      </div>
     </section>
   </main>
-  <footer class="site-footer"><span>Uma edição para ler, comparar e explorar.</span><button data-action="credits">Fotografias e créditos ↗</button><button data-action="sources">Fontes da edição ↗</button></footer>
+  <footer class="site-footer" id="edition-footer"><div class="footer-inner">
+    <div class="footer-note"><strong>fronteira</strong><span>Uma edição para ler, comparar e explorar.</span></div>
+    <nav class="footer-links" aria-label="Referências da revista"><button data-action="credits">Fotos e créditos <svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button><button data-action="sources">Fontes da edição <svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button></nav>
+  </div></footer>
   <dialog id="interaction-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span>FRONTEIRA / EXPLORE</span><button id="close-dialog" aria-label="Fechar janela">✕</button></div><div id="dialog-content"></div></dialog>
   <noscript><p class="noscript-message">Esta edição precisa de JavaScript para o folheamento. A documentação e as fontes também estão no <a href="https://github.com/Megueutu/Fronteira">repositório do projeto</a>.</p></noscript>
   <script type="module" src="/src/app.js"></script>

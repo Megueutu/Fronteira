@@ -9,7 +9,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d7449'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Arial' font-weight='900' font-size='36' fill='%23fff'%3EA%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Roboto+Flex:opsz,wght@8..144,300..800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto+Flex:opsz,wght@8..144,300..800&display=swap">
   <style>
 /* Energia Atômica — design system (ver docs/ENERGIA_ATOMICA_DESIGN_SYSTEM.md)
    Tema Verde Bandeira ES (#1d7449, HCT 159/43/43). Papéis de cor do Material 3 gerados com
@@ -87,7 +87,7 @@
   --shadow-drop: drop-shadow(0 2px 3px rgb(var(--shadow-ink) / .08)) drop-shadow(0 10px 18px rgb(var(--shadow-ink) / .14));
 
   /* Famílias */
-  --font-cover: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-cover: var(--font-display);
   --font-display: Montserrat, 'Arial Black', Arial, sans-serif;
   --font-brand: Montserrat, 'Arial Black', Arial, sans-serif;
   --font-plain: 'Roboto Flex', Roboto, 'Segoe UI', Arial, sans-serif;
@@ -111,8 +111,8 @@
   --icon-md: 20px;   /* botões compactos: ampliar, barra do modo foco */
   --icon-lg: 24px;   /* padrão: barra superior, diálogos, FAB */
 
-  --page-w: 794px;
-  --page-h: 1123px;
+  --page-w: 1440px;
+  --page-h: 1024px;
   --page-pad: 64px;
 
   color-scheme: light;
@@ -223,7 +223,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .body-text p:last-child { margin-bottom: 0; }
 .columns { column-count: 2; column-gap: 36px; }
 .columns.single { column-count: 1; }
-.dropcap::first-letter { float: left; margin: 4px 8px 0 0; font: 800 54px/.82 var(--font-brand); color: var(--md-sys-color-primary-container); }
+.dropcap::first-letter { float: left; margin: 4px 8px 0 0; font: 800 56px/.82 var(--font-brand); color: var(--md-sys-color-primary-container); }
 
 .sources { margin: auto 0 0; font: var(--type-caption); color: var(--md-sys-color-on-surface-variant); }
 
@@ -241,10 +241,10 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 /* ---------- Capa ---------- */
 .page.cover { padding: 0; background: var(--cover-bg); }
 .cover-art { position: absolute; inset: 0; width: 100%; height: 100%; }
-.cover-energia { font: 400 118px var(--font-cover); fill: #fff; }
-.cover-atomica { font: 800 62px var(--font-brand); fill: #fff; }
+.cover-energia { font: 400 128px var(--font-cover); fill: #fff; }
+.cover-atomica { font: 800 56px var(--font-brand); fill: #fff; }
 .cover-meta { font: 800 12px var(--font-brand); letter-spacing: .12em; fill: var(--on-brand-variant); }
-.cover-foot { font-size: 11px; }
+.cover-foot { font-size: 12px; }
 .cover-blob { transform-box: fill-box; transform-origin: center; animation: drift 14s ease-in-out infinite alternate; }
 .cover-blob:nth-of-type(2) { animation-duration: 17s; animation-delay: -4s; }
 .cover-blob:nth-of-type(3) { animation-duration: 20s; animation-delay: -9s; }
@@ -257,13 +257,13 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .members .avatar { width: 80px; height: 80px; margin-bottom: 6px; }
 .members .avatar path { fill: var(--md-sys-color-primary-container); }
 .members li:nth-child(even) .avatar path { fill: var(--md-sys-color-secondary-container); }
-.members .avatar text { font: 800 26px var(--font-brand); fill: #fff; letter-spacing: .02em; }
+.members .avatar text { font: 800 24px var(--font-brand); fill: #fff; letter-spacing: .02em; }
 .members li:nth-child(even) .avatar text { fill: var(--md-sys-color-on-secondary-container); }
 .members strong { font: 600 16px/22px var(--font-plain); }
-.members span { font: 400 13px/18px var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
+.members span { font: 400 12px/18px var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
 
 /* ---------- Cards ---------- */
-.card { position: relative; border-radius: var(--md-sys-shape-corner-large); padding: 22px 24px; background: var(--md-sys-color-surface-container-low); font: var(--type-body-small); font-size: 13.5px; line-height: 1.5; }
+.card { position: relative; border-radius: var(--md-sys-shape-corner-large); padding: 22px 24px; background: var(--md-sys-color-surface-container-low); font: var(--type-body-small); font-size: 14px; line-height: 1.5; }
 .card p { margin: 0 0 10px; }
 .card p:last-child { margin-bottom: 0; }
 .card.filled { background: var(--md-sys-color-surface-container-highest); }
@@ -298,20 +298,20 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 }
 .toc a:hover, .toc a:focus-visible { background: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-hover), transparent); }
 .toc a:active { background: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-pressed), transparent); }
-.toc-num { font: 300 44px/1 var(--font-plain); font-variant-numeric: tabular-nums; letter-spacing: -.04em; color: var(--md-sys-color-primary); }
+.toc-num { font: 300 40px/1 var(--font-plain); font-variant-numeric: tabular-nums; letter-spacing: -.04em; color: var(--md-sys-color-primary); }
 .toc-text { display: grid; gap: 4px; }
-.toc-text small { font: 800 11px/16px var(--font-brand); letter-spacing: .1em; text-transform: uppercase; color: var(--md-sys-color-primary); }
+.toc-text small { font: 800 12px/16px var(--font-brand); letter-spacing: .1em; text-transform: uppercase; color: var(--md-sys-color-primary); }
 .toc-text strong { font: var(--type-title-large); letter-spacing: -.01em; }
 .toc-text span { font: 400 14px/1.4 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
 .research-question { margin-top: auto; padding: 22px 26px; border-radius: var(--md-sys-shape-corner-extra-large); background: var(--md-sys-color-inverse-surface); color: var(--md-sys-color-inverse-on-surface); }
 .research-question .label { color: var(--md-sys-color-inverse-primary); }
-.research-question blockquote { margin: 0; font: 600 19px/1.45 var(--font-display); }
+.research-question blockquote { margin: 0; font: 600 18px/1.45 var(--font-display); }
 .deco-bl path { fill: var(--md-sys-color-surface-container); opacity: 1; }
 
 /* ---------- Editorial ---------- */
-.editorial .headline { font-size: 42px; max-width: 600px; }
+.editorial .headline { font-size: 40px; max-width: 600px; }
 .pull { margin: 0; max-width: 560px; font: 600 20px/1.4 var(--font-display); color: var(--md-sys-color-primary); }
-.editorial .body-text { font-size: 15px; line-height: 1.6; }
+.editorial .body-text { font-size: 14px; line-height: 1.6; }
 .editorial .body-text p { margin-bottom: 11px; }
 .signature { margin: auto 0 0; font: var(--type-overline); letter-spacing: .1em; text-transform: uppercase; color: var(--md-sys-color-on-surface-variant); }
 
@@ -331,7 +331,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .opener-shape.s2 { width: 170px; height: 170px; right: 150px; bottom: -90px; }
 .opener-shape.s2 path { fill: var(--cover-blob-2); }
 .opener .headline { color: var(--on-brand); margin: 0; }
-.standfirst.on-green { color: var(--on-brand-variant); font-size: 17px; font-weight: 500; }
+.standfirst.on-green { color: var(--on-brand-variant); font-size: 16px; font-weight: 500; }
 
 .report-grid { display: grid; grid-template-columns: 1fr 290px; gap: 36px; align-items: start; }
 .report-grid .columns { column-count: 1; }
@@ -343,7 +343,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   display: inline-flex; align-items: center; gap: 6px;
   height: 32px; padding: 0 14px; border: 1px solid var(--md-sys-color-outline-variant);
   border-radius: var(--md-sys-shape-corner-small); background: transparent;
-  font: var(--type-label-large); font-size: 13px; color: var(--md-sys-color-on-surface-variant);
+  font: var(--type-label-large); font-size: 12px; color: var(--md-sys-color-on-surface-variant);
   transition: background var(--md-sys-motion-spring-fast-effects);
 }
 .chip .icon { display: none; margin-left: -4px; }
@@ -356,7 +356,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .segmented { display: flex; margin: 10px 0 12px; }
 .segmented button {
   flex: 1; height: 40px; padding: 0 8px; border: 1px solid var(--md-sys-color-outline);
-  margin-left: -1px; background: transparent; font: var(--type-label-large); font-size: 13px; color: var(--md-sys-color-on-surface);
+  margin-left: -1px; background: transparent; font: var(--type-label-large); font-size: 12px; color: var(--md-sys-color-on-surface);
   transition: background var(--md-sys-motion-spring-fast-effects);
 }
 .segmented button:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-hover), transparent); }
@@ -379,9 +379,9 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .bar.highlight .bar-name { font-weight: 800; color: var(--md-sys-color-primary); }
 .bar.highlight .bar-track { outline: 2px solid var(--md-sys-color-primary); outline-offset: 1px; }
 .bar-value { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
-.bar-value small { display: block; font-weight: 400; font-size: 10px; color: var(--md-sys-color-on-surface-variant); }
+.bar-value small { display: block; font-weight: 400; font-size: 12px; color: var(--md-sys-color-on-surface-variant); }
 .chart-total { margin: 12px 0 0 !important; font: 500 12px/1.4 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
-.note { font: var(--type-caption); font-size: 11.5px; color: var(--md-sys-color-on-surface-variant); }
+.note { font: var(--type-caption); font-size: 12px; color: var(--md-sys-color-on-surface-variant); }
 
 .wavy-meter { display: grid; gap: 4px; margin: 14px 0 6px; }
 .meter-label { font: 400 12px/1.35 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
@@ -404,12 +404,12 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .stepper b { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--md-sys-shape-corner-full); border: 1.5px solid var(--md-sys-color-outline-variant); background: var(--md-sys-color-surface-container-lowest); font: 500 18px/1 var(--font-plain); color: var(--md-sys-color-on-surface-variant); transition: background var(--md-sys-motion-spring-fast-effects); }
 .stepper button:hover b { background: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-hover), var(--md-sys-color-surface-container-lowest)); }
 .stepper button[aria-selected="true"] b { border-color: transparent; background: var(--md-sys-color-primary-container); }
-.cycle b { position: static; font: 600 12.5px/1.25 var(--font-plain); color: var(--md-sys-color-on-surface); }
+.cycle b { position: static; font: 600 12px/1.25 var(--font-plain); color: var(--md-sys-color-on-surface); }
 .stepper span, .cycle span { font: 500 12px/1.25 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
 .stepper button[aria-selected="true"] svg path, .cycle button[aria-selected="true"] svg path { fill: var(--md-sys-color-primary-container); }
 .stepper button[aria-selected="true"] b { color: #fff; }
 .stepper button[aria-selected="true"] span, .cycle button[aria-selected="true"] span { color: var(--md-sys-color-primary); font-weight: 700; }
-.step-detail { padding: 14px 18px; border-radius: var(--md-sys-shape-corner-large); background: var(--md-sys-color-surface-container-lowest); font: 400 13.5px/1.5 var(--font-plain); min-height: 112px; }
+.step-detail { padding: 14px 18px; border-radius: var(--md-sys-shape-corner-large); background: var(--md-sys-color-surface-container-lowest); font: 400 14px/1.5 var(--font-plain); min-height: 112px; }
 .step-detail p { margin: 0; }
 .step-detail .label { margin-bottom: 2px; }
 
@@ -418,7 +418,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .photo-row.compact { grid-template-columns: 190px 1fr; align-items: start; }
 .shaped-photo { margin: 0; display: grid; gap: 8px; }
 .shaped-photo svg { width: 100%; aspect-ratio: 1; }
-.shaped-photo figcaption { font: 400 10.5px/1.35 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
+.shaped-photo figcaption { font: 400 12px/1.35 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
 .plant-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .plant-list li { display: grid; gap: 2px; padding: 14px 18px; }
 .plant-list b { font: 800 20px/1.2 var(--font-brand); }
@@ -431,14 +431,14 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 /* Tabelas */
 .table-card { margin: 0; }
 .table-card figcaption { margin-bottom: 8px; }
-.table-card table { width: 100%; border-collapse: collapse; font: 400 12.5px/1.3 var(--font-plain); font-variant-numeric: tabular-nums; }
+.table-card table { width: 100%; border-collapse: collapse; font: 400 12px/1.3 var(--font-plain); font-variant-numeric: tabular-nums; }
 .table-card th, .table-card td { padding: 6px 6px; text-align: right; border-bottom: 1px solid var(--md-sys-color-outline-variant); }
 .table-card th:first-child { text-align: left; }
-.table-card thead th { font-weight: 600; font-size: 11.5px; color: var(--md-sys-color-on-surface-variant); }
+.table-card thead th { font-weight: 600; font-size: 12px; color: var(--md-sys-color-on-surface-variant); }
 .table-card tbody tr:last-child > * { border-bottom: 0; }
 .table-card .note { margin: 8px 0 0; }
 .table-card.wide td:nth-last-child(-n+2) { font-weight: 700; color: var(--md-sys-color-primary); }
-.countries-table table { font-size: 12.5px; line-height: 1.4; }
+.countries-table table { font-size: 12px; line-height: 1.4; }
 .countries-table th, .countries-table td { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; }
 .countries-table tbody th { font: 800 14px/1.3 var(--font-display); }
 .countries-table td.reverted { color: var(--md-sys-color-primary); font-weight: 700; }
@@ -448,29 +448,29 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .scenario-facts div { padding: 10px 12px; border-radius: var(--md-sys-shape-corner-medium); background: var(--md-sys-color-surface-container-lowest); }
 .scenario-facts .hero { grid-column: 1 / -1; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
 .scenario-facts .small { grid-column: 1 / -1; }
-.scenario-facts dt { font: 400 11px/1.3 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
+.scenario-facts dt { font: 400 12px/1.3 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
 .scenario-facts .hero dt { color: var(--on-brand-variant); font-weight: 600; }
-.scenario-facts dd { margin: 2px 0 0; font: 800 17px/1.2 var(--font-brand); }
-.scenario-facts .hero dd { font-size: 30px; }
-.scenario-facts .small dd { font: 400 11.5px/1.4 var(--font-plain); }
+.scenario-facts dd { margin: 2px 0 0; font: 800 16px/1.2 var(--font-brand); }
+.scenario-facts .hero dd { font-size: 32px; }
+.scenario-facts .small dd { font: 400 12px/1.4 var(--font-plain); }
 .payback-bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; height: 120px; margin-top: 18px; }
 .pb-group { display: grid; grid-template-rows: 1fr auto; gap: 4px; opacity: .45; transition: opacity var(--md-sys-motion-spring-default-effects); }
 .pb-group.active { opacity: 1; }
 .pb-cols { display: flex; align-items: flex-end; justify-content: center; gap: 4px; }
 .pb-cols i { position: relative; width: 26px; height: calc(var(--v) * 100%); border-radius: var(--md-sys-shape-corner-small) var(--md-sys-shape-corner-small) 3px 3px; transition: height var(--md-sys-motion-spring-default-spatial); }
-.pb-cols i b { position: absolute; top: -17px; left: 50%; transform: translateX(-50%); font: 700 11px/1 var(--font-plain); }
+.pb-cols i b { position: absolute; top: -17px; left: 50%; transform: translateX(-50%); font: 700 12px/1 var(--font-plain); }
 .pb-cols .rest, .sw.rest { background: var(--md-sys-color-primary-container); }
 .pb-cols .total, .sw.total { background: var(--md-sys-color-secondary); }
-.pb-group > span { text-align: center; font: 500 11.5px/1.2 var(--font-plain); }
-.legend { margin: 10px 0 0 !important; font: 400 11.5px/1.6 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
+.pb-group > span { text-align: center; font: 500 12px/1.2 var(--font-plain); }
+.legend { margin: 10px 0 0 !important; font: 400 12px/1.6 var(--font-plain); color: var(--md-sys-color-on-surface-variant); }
 .sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin: 0 4px 0 6px; vertical-align: -1px; }
 .sw:first-child { margin-left: 0; }
 
 /* Percepção e confiança */
 .split-bar { display: grid; gap: 4px; margin-top: 12px; }
-.split-name { font: 600 12.5px/1.2 var(--font-plain); }
+.split-name { font: 600 12px/1.2 var(--font-plain); }
 .split { display: flex; height: 26px; border-radius: var(--md-sys-shape-corner-full); overflow: hidden; background: var(--md-sys-color-surface-container-highest); }
-.split i { display: grid; place-items: center; width: calc(var(--v) * 1%); font: 700 11px/1 var(--font-plain); font-style: normal; white-space: nowrap; }
+.split i { display: grid; place-items: center; width: calc(var(--v) * 1%); font: 700 12px/1 var(--font-plain); font-style: normal; white-space: nowrap; }
 .split .pos, .sw.pos { background: var(--md-sys-color-primary-container); color: #fff; }
 .split .neg, .sw.neg { background: var(--md-sys-color-inverse-surface); color: #fff; margin-left: auto; }
 .trust { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
@@ -479,19 +479,19 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .trust i::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: calc(var(--v) * 50%); border-radius: inherit; background: var(--md-sys-color-primary-container); }
 .trust li.negative i::before { left: auto; right: 50%; background: var(--md-sys-color-inverse-surface); }
 .trust i::after { content: ''; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 2px; margin-left: -1px; background: var(--md-sys-color-outline); }
-.trust b { grid-row: 1 / span 2; grid-column: 2; text-align: right; font: 800 15px var(--font-brand); }
+.trust b { grid-row: 1 / span 2; grid-column: 2; text-align: right; font: 800 14px var(--font-brand); }
 .trust li.negative b { color: var(--md-sys-color-on-surface-variant); }
 
 /* Países */
 .countries { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .countries li { padding: 10px 14px 12px; font-size: 12px; line-height: 1.4; background: var(--md-sys-color-surface-container-low); transition: opacity var(--md-sys-motion-spring-default-effects); }
 .countries li.dim { opacity: .3; }
-.countries b { display: block; font: 800 15px/1.2 var(--font-brand); }
-.pill { display: inline-block; margin: 5px 0 6px; padding: 3px 10px; border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); font: 600 11px/16px var(--font-plain); }
+.countries b { display: block; font: 800 14px/1.2 var(--font-brand); }
+.pill { display: inline-block; margin: 5px 0 6px; padding: 3px 10px; border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); font: 600 12px/16px var(--font-plain); }
 .countries li[data-group="mantido"] .pill { background: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface); }
 .closing { position: relative; overflow: hidden; padding: 16px 150px 16px 24px; border-radius: var(--md-sys-shape-corner-extra-large); background: var(--cover-bg); color: var(--on-brand); }
 .closing .label { color: var(--on-brand-variant); }
-.closing p:last-child { margin: 0; font: 600 17px/1.45 var(--font-display); }
+.closing p:last-child { margin: 0; font: 600 16px/1.45 var(--font-display); }
 .closing-shape { position: absolute; right: -24px; top: 50%; width: 170px; height: 170px; transform: translateY(-50%); }
 .closing-shape path { fill: var(--cover-blob-1); }
 
@@ -503,8 +503,8 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   .page.cover { height: auto; aspect-ratio: 595 / 842; }
   .columns { column-count: 1; }
   .report-grid, .card-grid.two, .balance, .photo-row, .photo-row.compact { grid-template-columns: 1fr; }
-  .headline { font-size: 36px; }
-  .headline.display, .editorial .headline { font-size: 38px; }
+  .headline { font-size: 32px; }
+  .headline.display, .editorial .headline { font-size: 40px; }
   .opener { margin: -32px calc(var(--page-pad) * -1) 0; padding: 32px var(--page-pad) 26px; border-radius: 0 0 var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-extra-large); }
   .members { grid-template-columns: repeat(2, 1fr); }
   .members .avatar { width: 88px; height: 88px; }
@@ -513,11 +513,11 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   .stepper svg, .cycle svg { width: 52px; height: 52px; }
   .stepper::before, .cycle::before { top: 26px; }
   .toc a { grid-template-columns: 52px 1fr; gap: 12px; }
-  .toc-num { font-size: 34px; }
+  .toc-num { font-size: 32px; }
   .toc-text strong { font-size: 20px; }
   .shaped-photo svg { max-width: 300px; justify-self: center; }
   .table-card { overflow-x: auto; }
-  .page-counter { min-width: 48px; font-size: 13px; }
+  .page-counter { min-width: 48px; font-size: 12px; }
     .closing { padding-right: 100px; }
   .fab { right: 16px; bottom: 16px; width: 64px; height: 64px; }
   .deco-editorial { display: none; }
@@ -567,21 +567,21 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 
 /* ---------- Fotografias ---------- */
 /* Capa: fotos dentro das formas orgânicas, como na referência */
-.cover-masthead { font: 800 8.5px var(--font-brand); letter-spacing: .14em; fill: var(--on-brand-variant); }
-.cover-kicker { font: 800 9px var(--font-brand); letter-spacing: .16em; fill: var(--on-brand-variant); }
+.cover-masthead { font: 800 12px var(--font-brand); letter-spacing: .14em; fill: var(--on-brand-variant); }
+.cover-kicker { font: 800 12px var(--font-brand); letter-spacing: .16em; fill: var(--on-brand-variant); }
 .cover-headline { font: 800 24px var(--font-brand); letter-spacing: .01em; fill: var(--on-brand); }
-.cover-dek { font: 500 12.5px var(--font-plain); fill: var(--on-brand-variant); }
-.cover-line, .cover-line-left { font: 500 11.5px var(--font-plain); fill: var(--on-brand); }
-.cover-num { font: 800 13px var(--font-brand); fill: #d7ecdc; }
+.cover-dek { font: 500 12px var(--font-plain); fill: var(--on-brand-variant); }
+.cover-line, .cover-line-left { font: 500 12px var(--font-plain); fill: var(--on-brand); }
+.cover-num { font: 800 12px var(--font-brand); fill: #d7ecdc; }
 .cover-line-left .cover-num { font-size: 18px; }
 .cover-badge { fill: var(--md-sys-color-secondary-container); filter: drop-shadow(0 4px 8px rgb(var(--shadow-ink) / .3)); }
-.cover-badge-num { font: 800 26px var(--font-brand); fill: var(--brand); }
-.cover-badge-text { font: 800 7px var(--font-brand); letter-spacing: .1em; fill: var(--md-sys-color-on-secondary-container); }
+.cover-badge-num { font: 800 24px var(--font-brand); fill: var(--brand); }
+.cover-badge-text { font: 800 12px var(--font-brand); letter-spacing: .1em; fill: var(--md-sys-color-on-secondary-container); }
 .cover-tag rect { fill: rgb(255 255 255 / .92); filter: drop-shadow(0 2px 4px rgb(var(--shadow-ink) / .25)); }
-.cover-tag text { font: 800 8.5px var(--font-brand); letter-spacing: .1em; fill: var(--brand); }
-.cover-foot-label { font: 800 9.5px var(--font-brand); letter-spacing: .14em; fill: var(--on-brand); }
-.cover-foot-text { font: 500 10.5px var(--font-plain); fill: var(--on-brand); }
-.cover-foot-small { font: 400 8.5px var(--font-plain); fill: var(--on-brand-variant); }
+.cover-tag text { font: 800 12px var(--font-brand); letter-spacing: .1em; fill: var(--brand); }
+.cover-foot-label { font: 800 12px var(--font-brand); letter-spacing: .14em; fill: var(--on-brand); }
+.cover-foot-text { font: 500 12px var(--font-plain); fill: var(--on-brand); }
+.cover-foot-small { font: 400 12px var(--font-plain); fill: var(--on-brand-variant); }
 .cover-ring { fill: none; stroke: var(--on-brand-variant); stroke-width: 2; opacity: .55; }
 
 /* Aberturas: fotos nas formas expressivas */
@@ -620,7 +620,7 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
   .opener:has(.photo-shape) > :not(svg) { max-width: calc(100% - 120px); }
   .corner-photo { width: 120px; top: -16px; right: -16px; }
   .page:has(> .corner-photo) > .headline { max-width: calc(100% - 96px); }
-  .page.spread-page { height: auto; aspect-ratio: 794 / 1123; padding: 0; }
+  .page.spread-page { height: auto; aspect-ratio: 794 / PAGE_HEIGHT; padding: 0; }
   .spread-text { left: 20px; right: 20px; bottom: 32px; }
   .spread-caption { left: 20px; right: 20px; }
 }
@@ -743,13 +743,176 @@ body[data-layout="focus"] .fab { display: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
+
+/* ---------- Edição digital 1440 × 1024 · referência Corporate Strategy ----------
+   Modelos de referência / 99:2–99:11. Adaptação autoral de grade e hierarquia;
+   nenhum bitmap, marca ou código do template foi incorporado. */
+:root {
+  /* Cinco cores de marca; os demais papéis são aliases ou neutros. */
+  --brand-dark: #005a35;
+  --brand-mid: #44845e;
+  --brand-light: #6ba27e;
+  --brand-pale: #c6e8ce;
+  --cover-blob-1: var(--brand-mid);
+  --cover-blob-2: var(--brand-light);
+  --cover-blob-3: var(--brand-pale);
+  --on-brand-variant: #f1f3f2;
+  --md-sys-color-primary: var(--brand-dark);
+  --md-sys-color-secondary: var(--brand-mid);
+  --md-sys-color-secondary-container: var(--brand-pale);
+  --md-sys-color-on-secondary-container: #202623;
+  --md-sys-color-primary-fixed: var(--brand-pale);
+  --md-sys-color-primary-fixed-dim: var(--brand-light);
+  --md-sys-color-inverse-primary: var(--brand-pale);
+  --md-sys-color-on-surface: #202623;
+  --md-sys-color-on-surface-variant: #525955;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f4f5f4;
+  --md-sys-color-surface-container: #eceeec;
+  --md-sys-color-surface-container-high: #e5e7e5;
+  --md-sys-color-surface-container-highest: #dfe2df;
+  --md-sys-color-outline: #737a75;
+  --md-sys-color-outline-variant: #c4c9c5;
+  --md-sys-color-inverse-surface: #202623;
+  --md-sys-color-inverse-on-surface: #f4f5f4;
+  --data-emphasis-container: var(--brand-pale);
+  --type-display: 800 56px/1.08 var(--font-display);
+  --type-headline: 800 56px/1.08 var(--font-display);
+  --type-title-large: 700 24px/1.25 var(--font-display);
+  --type-title-medium: 600 20px/1.3 var(--font-plain);
+  --type-title-small: 600 18px/1.3 var(--font-plain);
+  --type-body-large: 400 24px/1.4 var(--font-plain);
+  --type-body-medium: 400 18px/1.55 var(--font-plain);
+  --type-body-small: 400 16px/1.5 var(--font-plain);
+  --type-label-large: 500 16px/1.4 var(--font-plain);
+  --type-label-medium: 500 14px/1.4 var(--font-plain);
+  --type-overline: 800 12px/1.4 var(--font-brand);
+  --type-caption: 400 12px/1.4 var(--font-plain);
+}
+.edition-meta, .cover-bottom { display: flex; justify-content: space-between; gap: 24px; font: var(--type-overline); letter-spacing: .08em; text-transform: uppercase; }
+.page.cover { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; }
+.cover-copy { display: flex; flex-direction: column; padding: 48px 56px; color: var(--on-brand); }
+.cover-name { margin: 48px 0 0; font: 800 72px/.98 var(--font-display); letter-spacing: -.065em; }
+.cover-name span { color: var(--brand-pale); }
+.cover-story { margin: 64px 0 32px; }
+.cover-story .label { color: var(--brand-pale); }
+.cover-story h2 { margin: 20px 0 24px; font: 800 96px/.98 var(--font-display); letter-spacing: -.055em; }
+.cover-story > p:last-child { margin: 0; max-width: 480px; font: var(--type-body-large); }
+.edition-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 32px; width: fit-content; min-height: 48px; padding: 12px 20px; background: var(--on-brand); color: var(--brand-dark); border-radius: 8px; font: var(--type-label-large); text-decoration: none; }
+.edition-link:hover { background: var(--brand-pale); }
+.cover-bottom { margin-top: auto; padding-top: 32px; font-size: 12px; }
+.cover-images { position: relative; background: var(--brand-pale); overflow: hidden; min-width: 0; }
+.cover-image-heading { margin: 48px 48px 0; color: var(--brand-dark); font: 700 32px/1.2 var(--font-display); letter-spacing: -.03em; }
+.cover-plant { position: absolute; margin: 0; }
+.cover-plant img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cover-plant figcaption { position: absolute; bottom: 24px; left: 24px; right: 24px; width: fit-content; padding: 8px 12px; background: #fff; color: var(--brand-dark); font: var(--type-overline); border-radius: 8px; }
+.plant-one { width: 60%; height: 39%; top: 18%; left: -3%; }
+.plant-one img { border-radius: 42% 58% 38% 62% / 45% 40% 60% 55%; }
+.plant-two { width: 53%; height: 36%; right: -5%; top: 34%; }
+.plant-two img { border-radius: 52% 48% 56% 44% / 60% 35% 65% 40%; }
+.plant-three { width: 76%; height: 28%; left: 2%; bottom: 7%; }
+.plant-three img { border-radius: 46% 54% 32% 68% / 42% 40% 60% 58%; }
+.cover-photo-note { position: absolute; bottom: 20px; right: 32px; text-align: right; color: var(--brand-dark); font: var(--type-caption); }
+.page-route { display: flex; align-items: center; gap: 20px; font: var(--type-label-medium); }
+.page-route a { min-height: 32px; display: inline-flex; align-items: center; gap: 8px; }
+.page-route span { margin-left: auto; font-variant-numeric: tabular-nums; }
+@media (min-width: 861px) {
+  .page { --page-pad: 48px; border-radius: 8px; gap: 16px; }
+  .page.cover { gap: 0; }
+  .page > .headline { max-width: 1120px; }
+  .page > .standfirst { max-width: 1100px; }
+  .columns { column-gap: 48px; }
+  .body-text p { margin-bottom: 16px; }
+  .report .body-text p { margin-bottom: 12px; }
+  .report > .columns { column-count: 3; }
+  .report-grid { grid-template-columns: 1.1fr 1fr; gap: 48px; }
+  .card { font: var(--type-body-small); padding: 24px 28px; }
+  #p13, #p14, #p15 { gap: 8px; }
+  #p13 .card, #p14 .balance-card, #p15 .card { padding: 20px 24px; }
+  .opener, .opener:has(.photo-shape) { padding: 44px var(--page-pad) 36px; gap: 16px; border-radius: 0; min-height: 250px; }
+  .opener:has(.photo-shape) > :not(svg) { max-width: 860px; }
+  .opener:has(.photo-shape) .headline.display { font-size: 56px; }
+  .opener:has(.photo-shape) .standfirst { font-size: 20px; max-width: 820px; }
+  .opener-shape.photo-shape.s1 { width: 260px; height: 260px; right: 48px; top: 8px; }
+  .opener-shape.photo-shape.s2 { right: 270px; width: 160px; height: 160px; }
+  .page:has(> .corner-photo) > .headline { max-width: 1050px; }
+  .report > .headline { font-size: 40px; max-width: 1140px; }
+  .report > .lead { font-size: 20px; }
+  .corner-photo { width: 230px; }
+  .bar { font-size: 16px; grid-template-columns: 125px 1fr 72px; gap: 12px; }
+  .bar-track { height: 16px; }
+  .bars { gap: 12px; }
+  .chart-total, .note, .stepper-card figcaption span, .cycle-card figcaption span { font-size: 14px; }
+  .step-detail { font-size: 16px; min-height: 96px; }
+  .stepper span, .cycle span, .cycle b { font-size: 14px; }
+  .table-card table { font-size: 16px; }
+  .table-card th, .table-card td { padding: 10px 8px; }
+  #payback-table table, .countries-table table { font-size: 14px; }
+  #payback-table th, #payback-table td { padding: 8px; }
+  #p13 .report-grid .body-text { line-height: 1.45; }
+  #p13 .report-grid { grid-template-columns: 1.3fr 1fr; }
+  #p13 .opener .headline { font-size: 40px; }
+  #p13 .opener { min-height: 210px; }
+  .card.caution { padding: 16px 20px; }
+  .photo-row { grid-template-columns: 280px 1fr; gap: 40px; }
+  .photo-row.compact { grid-template-columns: 240px 1fr; }
+  .shaped-photo figcaption { font-size: 12px; }
+  .members { grid-template-columns: repeat(6, 1fr); gap: 16px; margin: 8px 0; }
+  .members .avatar { width: 96px; height: 96px; }
+  .members strong { font-size: 18px; }
+  .members span { font-size: 14px; }
+  .toc-page { display: grid; grid-template-columns: 360px 1fr; grid-template-rows: auto 1fr auto; column-gap: 64px; background: linear-gradient(to right, var(--brand) 0 432px, #fff 432px); }
+  .toc-page > .deco { display: none; }
+  .toc-page > .headline { grid-column: 1; color: #fff; font-size: 56px; }
+  .toc-page > .headline::after { content: 'Nesta edição'; display: block; margin-top: 24px; font: var(--type-body-large); color: var(--brand-pale); }
+  .toc { grid-column: 2; grid-row: 1 / 3; align-content: start; }
+  .toc a { padding: 20px 8px; border-bottom: 1px solid var(--md-sys-color-outline-variant); border-radius: 0; gap: 24px; }
+  .toc-num { font: 800 56px/1 var(--font-display); }
+  .toc-text strong { font-size: 24px; }
+  .toc-text span { font-size: 16px; }
+  .research-question { grid-column: 1; grid-row: 2; align-self: end; padding: 0 12px 32px 0; background: transparent; border-radius: 0; }
+  .research-question .label { color: var(--brand-pale); }
+  .research-question blockquote { font-size: 24px; line-height: 1.4; }
+  .toc-page .page-route { grid-column: 1 / -1; color: #fff; }
+  .toc-page .page-route a { color: #fff; }
+  .toc-page .page-route span { color: var(--md-sys-color-on-surface-variant); }
+  .editorial { display: grid; grid-template-columns: 400px 1fr; grid-template-rows: auto 1fr auto auto; column-gap: 64px; }
+  .editorial .deco { display: none; }
+  .editorial > .headline { grid-column: 1; font-size: 56px; }
+  .editorial > .pull { grid-column: 1; grid-row: 2; align-self: end; border-top: 4px solid var(--brand); padding-top: 24px; font-size: 24px; }
+  .editorial > .body-text { grid-column: 2; grid-row: 1 / 4; column-count: 2; font-size: 18px; line-height: 1.55; column-gap: 32px; }
+  .editorial > .signature { grid-column: 1; font-size: 12px; }
+  .editorial > .page-route { grid-column: 1 / -1; }
+  .page > .sources { margin-top: auto; }
+  .page-route { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--md-sys-color-outline-variant); }
+  .page:has(> .sources) > .page-route { margin-top: 0; }
+  .spread-page .page-route { position: absolute; left: 64px; right: 64px; bottom: 20px; color: #fff; border: 0; }
+  .spread-page .page-route a { color: #fff; }
+  .spread-caption { bottom: 70px; }
+}
+@media (max-width: 860px) {
+  .page.cover { grid-template-columns: 1fr; height: auto; aspect-ratio: auto; }
+  .cover-copy { min-height: 760px; padding: 32px 24px; }
+  .edition-meta, .cover-bottom { gap: 16px; font-size: 12px; }
+  .cover-name { font-size: clamp(40px, 11vw, 72px); margin-top: 40px; }
+  .cover-story { margin-top: 48px; }
+  .cover-story h2 { font-size: clamp(56px, 14vw, 96px); }
+  .cover-story > p:last-child { font-size: 20px; }
+  .cover-images { height: 640px; }
+  .cover-image-heading { margin: 32px 24px; font-size: 24px; }
+  .cover-photo-note { right: 16px; }
+  .body-text, .editorial .body-text { font-size: 18px; }
+  .page-route { padding-top: 16px; border-top: 1px solid var(--md-sys-color-outline-variant); flex-wrap: wrap; }
+  .standfirst, .lead { font-size: 20px; }
+}
+
 @media print {
   .organic-bg { display: none !important; }
   .top-app-bar, .fab, .nav-drawer, .scrim, .skip-link, .focus-stage, .num-pop { display: none !important; }
   .dnum { color: inherit; text-decoration: none; }
   body, .magazine { background: #fff; padding: 0; gap: 0; }
   .page { box-shadow: none; border-radius: 0; break-after: page; }
-  @page { size: 794px 1123px; margin: 0; }
+  @page { size: 1440px 1024px; margin: 0; }
 }
   </style>
 </head>
@@ -816,66 +979,25 @@ body[data-layout="focus"] .fab { display: none; }
   <main class="magazine" id="magazine">
 
     <!-- 01 · CAPA -->
-    <section class="page cover" id="p1" data-section="Capa" aria-label="Capa">
-      <svg class="cover-art" viewBox="0 0 595 842" role="img" aria-labelledby="cover-title">
-        <title id="cover-title">Energia Atômica, edição 01, outubro de 2026. Chamada principal: A aposta nuclear. Na capa, as usinas Angra 1 e Angra 2 e o canteiro de obras de Angra 3, em Angra dos Reis.</title>
-        <defs>
-          <linearGradient id="cover-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a6a47"/><stop offset=".55" stop-color="var(--cover-bg)"/><stop offset="1" stop-color="#175f3b"/></linearGradient>
-          <linearGradient id="cover-foot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b2a1a" stop-opacity="0"/><stop offset=".45" stop-color="#0b2a1a" stop-opacity=".72"/><stop offset="1" stop-color="#0b2a1a" stop-opacity=".9"/></linearGradient>
-          <clipPath id="cover-clip-a"><path d="M0 492C38 462 56 420 56 360C56 292 82 255 132 255C190 255 218 292 246 352C280 422 366 452 366 520C366 582 312 596 240 598C162 600 92 640 30 662L0 662Z"/></clipPath>
-          <clipPath id="cover-clip-b"><path d="M595 370C560 344 520 335 470 341C402 349 356 370 360 402C364 442 410 472 430 522C452 582 456 640 520 655C550 662 575 662 595 660Z"/></clipPath>
-          <clipPath id="cover-clip-c"><path d="M102 842C70 802 36 762 42 722C50 680 150 665 240 662C330 660 420 690 480 740C530 780 566 812 572 842Z"/></clipPath>
-        </defs>
-        <rect width="595" height="842" fill="url(#cover-grad)"/>
-        <g transform="translate(22 -26)"><path class="cover-blob" fill="var(--cover-blob-1)" d="M0 492C38 462 56 420 56 360C56 292 82 255 132 255C190 255 218 292 246 352C280 422 366 452 366 520C366 582 312 596 240 598C162 600 92 640 30 662L0 662Z"/></g>
-        <g transform="translate(-24 -22)"><path class="cover-blob" fill="var(--cover-blob-2)" d="M595 370C560 344 520 335 470 341C402 349 356 370 360 402C364 442 410 472 430 522C452 582 456 640 520 655C550 662 575 662 595 660Z"/></g>
-        <g transform="translate(18 -24)"><path class="cover-blob" fill="var(--cover-blob-3)" d="M102 842C70 802 36 762 42 722C50 680 150 665 240 662C330 660 420 690 480 740C530 780 566 812 572 842Z"/></g>
-        <g clip-path="url(#cover-clip-a)"><image data-photo="angra1" x="0" y="250" width="370" height="415" preserveAspectRatio="xMidYMid slice"/></g>
-        <g clip-path="url(#cover-clip-b)"><image data-photo="angra2" x="350" y="335" width="250" height="330" preserveAspectRatio="xMidYMid slice"/></g>
-        <g clip-path="url(#cover-clip-c)"><image data-photo="angra3" x="36" y="610" width="540" height="405" preserveAspectRatio="xMidYMid slice"/></g>
-        <path class="cover-ring" d="M0 492C38 462 56 420 56 360C56 292 82 255 132 255C190 255 218 292 246 352C280 422 366 452 366 520C366 582 312 596 240 598C162 600 92 640 30 662L0 662Z" transform="translate(-10 12)"/>
-
-        <!-- expediente -->
-        <text class="cover-masthead" x="14" y="20">REVISTA DE REPORTAGEM · SOCIOLOGIA</text>
-        <text class="cover-masthead" x="581" y="20" text-anchor="end">Nº 01 · OUTUBRO 2026 · DISTRIBUIÇÃO GRATUITA</text>
-        <text class="cover-energia" x="297.5" y="116" text-anchor="middle" textLength="576" lengthAdjust="spacingAndGlyphs">ENERGIA</text>
-        <text class="cover-atomica" x="585" y="186" text-anchor="end" textLength="306" lengthAdjust="spacingAndGlyphs">ATÔMICA</text>
-        <text class="cover-meta" x="14" y="152">INSTITUTO J&amp;F</text>
-        <text class="cover-meta" x="14" y="170">2º ANO D · SÃO PAULO</text>
-
-        <!-- chamada principal e chamadas com números -->
-        <text class="cover-kicker" x="585" y="216" text-anchor="end">REPORTAGEM ESPECIAL</text>
-        <text class="cover-headline" x="585" y="242" text-anchor="end">A APOSTA NUCLEAR</text>
-        <text class="cover-dek" x="585" y="260" text-anchor="end">O que o Brasil ganha e o que arrisca</text>
-        <text class="cover-dek" x="585" y="275" text-anchor="end">ao investir na energia do átomo</text>
-        <text class="cover-line" x="585" y="298" text-anchor="end"><tspan class="cover-num">2%</tspan> da eletricidade vem de Angra</text>
-        <text class="cover-line" x="585" y="314" text-anchor="end"><tspan class="cover-num">R$ 23,9 bi</tspan> para concluir Angra 3</text>
-        <text class="cover-line" x="585" y="330" text-anchor="end"><tspan class="cover-num">83%</tspan> do urânio de Angra é importado</text>
-
-        <!-- coluna esquerda -->
-        <text class="cover-line-left" x="14" y="206"><tspan class="cover-num">6 países</tspan></text>
-        <text class="cover-line-left" x="14" y="221">tentaram desligar</text>
-        <text class="cover-line-left" x="14" y="236">suas usinas. O que</text>
-        <text class="cover-line-left" x="14" y="251">aconteceu depois?</text>
-
-        <!-- selo -->
-        <path class="cover-badge" d="M292.0 268.0L294.1 269.2L296.2 270.4L298.1 271.7L300.0 272.9L301.7 274.1L303.5 275.2L305.2 276.2L306.9 277.1L308.6 277.9L310.4 278.5L312.2 279.1L314.2 279.6L316.2 280.1L318.3 280.5L320.4 280.9L322.7 281.4L325.0 282.0L327.4 282.6L328.0 285.0L328.6 287.3L329.1 289.6L329.5 291.7L329.9 293.8L330.4 295.8L330.9 297.8L331.5 299.6L332.1 301.4L332.9 303.1L333.8 304.8L334.8 306.5L335.9 308.3L337.1 310.0L338.3 311.9L339.6 313.8L340.8 315.9L342.0 318.0L340.8 320.1L339.6 322.2L338.3 324.1L337.1 326.0L335.9 327.7L334.8 329.5L333.8 331.2L332.9 332.9L332.1 334.6L331.5 336.4L330.9 338.2L330.4 340.2L329.9 342.2L329.5 344.3L329.1 346.4L328.6 348.7L328.0 351.0L327.4 353.4L325.0 354.0L322.7 354.6L320.4 355.1L318.3 355.5L316.2 355.9L314.2 356.4L312.2 356.9L310.4 357.5L308.6 358.1L306.9 358.9L305.2 359.8L303.5 360.8L301.7 361.9L300.0 363.1L298.1 364.3L296.2 365.6L294.1 366.8L292.0 368.0L289.9 366.8L287.8 365.6L285.9 364.3L284.0 363.1L282.3 361.9L280.5 360.8L278.8 359.8L277.1 358.9L275.4 358.1L273.6 357.5L271.8 356.9L269.8 356.4L267.8 355.9L265.7 355.5L263.6 355.1L261.3 354.6L259.0 354.0L256.6 353.4L256.0 351.0L255.4 348.7L254.9 346.4L254.5 344.3L254.1 342.2L253.6 340.2L253.1 338.2L252.5 336.4L251.9 334.6L251.1 332.9L250.2 331.2L249.2 329.5L248.1 327.7L246.9 326.0L245.7 324.1L244.4 322.2L243.2 320.1L242.0 318.0L243.2 315.9L244.4 313.8L245.7 311.9L246.9 310.0L248.1 308.3L249.2 306.5L250.2 304.8L251.1 303.1L251.9 301.4L252.5 299.6L253.1 297.8L253.6 295.8L254.1 293.8L254.5 291.7L254.9 289.6L255.4 287.3L256.0 285.0L256.6 282.6L259.0 282.0L261.3 281.4L263.6 280.9L265.7 280.5L267.8 280.1L269.8 279.6L271.8 279.1L273.6 278.5L275.4 277.9L277.1 277.1L278.8 276.2L280.5 275.2L282.3 274.1L284.0 272.9L285.9 271.7L287.8 270.4L289.9 269.2Z"/>
-        <text class="cover-badge-num" x="292" y="322" text-anchor="middle">16</text>
-        <text class="cover-badge-text" x="292" y="336" text-anchor="middle">PÁGINAS</text>
-        <text class="cover-badge-text" x="292" y="346" text-anchor="middle">INTERATIVAS</text>
-
-        <!-- etiquetas das usinas -->
-        <g class="cover-tag" transform="translate(70 600)"><rect width="66" height="20" rx="10"/><text x="33" y="14" text-anchor="middle">ANGRA 1</text></g>
-        <g class="cover-tag" transform="translate(500 612)"><rect width="66" height="20" rx="10"/><text x="33" y="14" text-anchor="middle">ANGRA 2</text></g>
-        <g class="cover-tag" transform="translate(150 728)"><rect width="120" height="20" rx="10"/><text x="60" y="14" text-anchor="middle">ANGRA 3 · EM OBRAS</text></g>
-
-        <!-- faixa inferior -->
-        <rect x="0" y="770" width="595" height="72" fill="url(#cover-foot)"/>
-        <text class="cover-foot-label" x="14" y="814">POR DENTRO</text>
-        <text class="cover-foot-text" x="104" y="814">Matriz elétrica · Como funciona · Urânio · Payback · Política</text>
-        <text class="cover-foot-label" x="581" y="814" text-anchor="end">INSTITUTO J&amp;F</text>
-        <text class="cover-foot-small" x="14" y="830">Uma reportagem do 2º ano D sobre autonomia, custos e desigualdade na energia nuclear brasileira</text>
-      </svg>
+    <section class="page cover" id="p1" data-section="Capa" aria-labelledby="cover-title">
+      <div class="cover-copy">
+        <div class="edition-meta"><span>Fronteira · Sociologia</span><span>Nº 01 / Outubro 2026</span></div>
+        <h1 class="cover-name" id="cover-title">ENERGIA<br><span>ATÔMICA</span></h1>
+        <div class="cover-story">
+          <p class="label">Reportagem especial</p>
+          <h2>A aposta<br>nuclear.</h2>
+          <p>O que o Brasil ganha e o que arrisca ao investir na energia do átomo.</p>
+        </div>
+        <a class="edition-link" href="#p3">Explore esta edição <svg class="icon" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a>
+        <div class="cover-bottom"><span>Instituto J&amp;F · 2º ano D</span><span>16 páginas interativas</span></div>
+      </div>
+      <div class="cover-images">
+        <p class="cover-image-heading">Três usinas.<br>Uma escolha de país.</p>
+        <figure class="cover-plant plant-one"><img data-photo="angra1" alt="Recorte do edifício de Angra 1, em registro histórico de 2009."><figcaption>01 / Angra 1</figcaption></figure>
+        <figure class="cover-plant plant-two"><img data-photo="angra2" alt="Recorte da cúpula de Angra 2, em registro histórico de 2009."><figcaption>02 / Angra 2</figcaption></figure>
+        <figure class="cover-plant plant-three"><img data-photo="angra3" alt="Canteiro de Angra 3 em 2015, com guindastes de construção."><figcaption>03 / Angra 3 · em obras na foto de 2015</figcaption></figure>
+        <p class="cover-photo-note">Angra dos Reis, RJ · Fotografias históricas<br>Autoria e licenças na página 02</p>
+      </div>
     </section>
 
     <!-- 02 · INTEGRANTES -->
@@ -916,6 +1038,7 @@ body[data-layout="focus"] .fab { display: none; }
         <p>Role ou use as setas. Números em verde são dados: toque para ver o significado ou abrir o gráfico com o valor em destaque. Fotos e gráficos se ampliam com um toque. No alto, escolha rolagem, revista aberta ou foco.</p>
       </article>
       <p class="sources">Capa: Angra 1 e 2, recortes de foto de Sturm; Angra 3, Wusel007. Wikimedia Commons, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>, cor ajustada.</p>
+      <nav class="page-route" aria-label="Navegação da página 2"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>02 / 16</span></nav>
     </section>
 
     <!-- 03 · SUMÁRIO -->
@@ -934,6 +1057,7 @@ body[data-layout="focus"] .fab { display: none; }
         <p class="label">A pergunta da pesquisa</p>
         <blockquote>Até que ponto a aposta brasileira no setor nuclear pode gerar autonomia e desenvolvimento sem criar novas dependências, custos excessivos ou desigualdades sociais?</blockquote>
       </aside>
+      <nav class="page-route" aria-label="Navegação da página 3"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>03 / 16</span></nav>
     </section>
 
     <!-- 04 · EDITORIAL -->
@@ -948,6 +1072,7 @@ body[data-layout="focus"] .fab { display: none; }
         <p>Portanto, o Ministério de Minas e Energia, em parceria com o Ministério da Ciência, Tecnologia e Inovação, deve planejar a expansão com critérios públicos de financiamento. Os projetos devem prever avaliações de segurança, gestão de rejeitos e impactos tarifários, além de melhorias nas redes, priorizando localidades com interrupções frequentes. Paralelamente, editais devem financiar capacitação e ampliação industrial, com metas anuais e prestação de contas. A liberação dos recursos deve depender do cumprimento dessas metas, para fortalecer a autonomia tecnológica e distribuir os benefícios energéticos.</p>
       </div>
       <p class="signature">Texto do grupo · 2º ano D · Instituto J&amp;F</p>
+      <nav class="page-route" aria-label="Navegação da página 4"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>04 / 16</span></nav>
     </section>
 
     <!-- 05 · PANORAMA (A) -->
@@ -978,6 +1103,7 @@ body[data-layout="focus"] .fab { display: none; }
         </figure>
       </div>
       <p class="sources">Fontes: EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025); levantamentos sobre a crise hídrica de 2021 e Itaipu reunidos pelo grupo. Fotos da abertura: Matthew Henry e Jaime Dantas/Unsplash, ilustrativas.</p>
+      <nav class="page-route" aria-label="Navegação da página 5"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>05 / 16</span></nav>
     </section>
 
     <!-- 06 · PANORAMA (B) -->
@@ -1013,6 +1139,7 @@ body[data-layout="focus"] .fab { display: none; }
         </figure>
       </div>
       <p class="sources">Fontes: ONS e reportagens sobre o apagão de 2023; MME (jan. 2026); IBGE (2024); IEMA; IPEC/Instituto Pólis (2023-2024); SANTOS, M.; SILVEIRA, M. L. O Brasil: território e sociedade no início do século XXI, 2001. Foto: Matthew Henry/Unsplash, ilustrativa.</p>
+      <nav class="page-route" aria-label="Navegação da página 6"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>06 / 16</span></nav>
     </section>
 
     <!-- 07 · COMO FUNCIONA (A) -->
@@ -1041,6 +1168,7 @@ body[data-layout="focus"] .fab { display: none; }
         <div class="step-detail" role="tabpanel" id="step-detail" aria-live="polite"></div>
       </figure>
       <p class="sources">Conteúdo técnico complementar à pesquisa do grupo, redigido com assistência de IA a partir de material de divulgação da Eletronuclear, da CNEN e da AIEA. Revisão do grupo pendente. Fotos da abertura: Dan Meyers/Unsplash (painel histórico) e Andry Sagatelov/Unsplash (usina no exterior), ilustrativas.</p>
+      <nav class="page-route" aria-label="Navegação da página 7"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>07 / 16</span></nav>
     </section>
 
     <!-- 08–09 · PÁGINA DUPLA: ANGRA -->
@@ -1050,6 +1178,7 @@ body[data-layout="focus"] .fab { display: none; }
         <h2 class="headline display" id="t-p8">Angra dos Reis, onde o átomo vira eletricidade</h2>
         <p class="standfirst on-green">Entre o mar e a Serra do Mar, a Central Nuclear Almirante Álvaro Alberto reúne Angra 1, Angra 2 e o canteiro de Angra 3. Em 2025, as duas usinas em operação geraram <button type="button" class="dnum" data-chart="matrix-chart" data-emph="Nuclear" data-info="Eletricidade gerada por Angra 1 e Angra 2 em 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">15,8 TWh</button>, cerca de <button type="button" class="dnum" data-chart="matrix-chart" data-emph="Nuclear" data-info="Participação nuclear na geração elétrica de 2025." data-src="EPE, Anuário Estatístico de Energia Elétrica 2026 (ano-base 2025)">2,0%</button> da eletricidade do país.</p>
       </div>
+      <nav class="page-route" aria-label="Navegação da página 8"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>08 / 16</span></nav>
     </section>
     <section class="page spread-page spread-right" id="p9" data-section="Como funciona a energia nuclear" aria-label="Página dupla: usinas de Angra dos Reis, continuação">
       <div class="spread-photo" aria-hidden="true"><img data-photo="angra" alt=""></div>
@@ -1059,6 +1188,7 @@ body[data-layout="focus"] .fab { display: none; }
       </figure>
       <p class="spread-caption">Usinas de Angra dos Reis (RJ), registro de 2009. À esquerda, a cúpula de Angra 2; ao centro, Angra 1. Foto: Sturm, Wikimedia Commons, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>, recortada.</p>
       <button type="button" class="spread-expand icon-button" aria-label="Ver a foto inteira"><svg class="icon" aria-hidden="true"><use href="#i-open_in_full"/></svg></button>
+      <nav class="page-route" aria-label="Navegação da página 9"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>09 / 16</span></nav>
     </section>
 
     <!-- 10 · COMO FUNCIONA (B) -->
@@ -1088,6 +1218,7 @@ body[data-layout="focus"] .fab { display: none; }
         <article class="card balance-card"><p class="label">Em debate</p><p>Rejeitos de longa duração, custos de construção e de desmontagem e a percepção pública de risco.</p></article>
       </div>
       <p class="sources">Fontes: Eletronuclear (dados das usinas); CNEN; AIEA; ABACC; pesquisa do grupo (Angra 3 e TNP). Conteúdo técnico complementar com assistência de IA, revisão do grupo pendente.</p>
+      <nav class="page-route" aria-label="Navegação da página 10"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>10 / 16</span></nav>
     </section>
 
     <!-- 11 · URÂNIO (A) -->
@@ -1114,6 +1245,7 @@ body[data-layout="focus"] .fab { display: none; }
         </figure>
       </div>
       <p class="sources">Fontes: Serviço Geológico do Brasil; MME; INB (fev. 2024); InvestNews; CNN Brasil/DGABC (2026); Correio da Manhã (2026). Fotos da abertura: Nicolas Hippert e Hansjorg Keller/Unsplash, usinas no exterior, ilustrativas.</p>
+      <nav class="page-route" aria-label="Navegação da página 11"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>11 / 16</span></nav>
     </section>
 
     <!-- 12 · URÂNIO (B) -->
@@ -1150,6 +1282,7 @@ body[data-layout="focus"] .fab { display: none; }
         </article>
       </div>
       <p class="sources">Fontes: INB; CNT, Pesquisa CNT de Rodovias 2025; SAE/Ipea; WALLERSTEIN, I. Análise dos sistemas-mundo; SOARES DE LIMA, M. R., conforme pesquisa do grupo. Foto: Alexsandre Almeida/Unsplash, região de Angra dos Reis.</p>
+      <nav class="page-route" aria-label="Navegação da página 12"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>12 / 16</span></nav>
     </section>
 
     <!-- 13 · CUSTO (A) -->
@@ -1190,6 +1323,7 @@ body[data-layout="focus"] .fab { display: none; }
         </table>
       </figure>
       <p class="sources">Fontes: Eletronuclear; BNDES (2025); cálculos do grupo. Exercício acadêmico com tarifa de equilíbrio; não é previsão nem orçamento oficial. Fotos da abertura: Wusel007 e Sturm/Wikimedia Commons, CC BY 3.0.</p>
+      <nav class="page-route" aria-label="Navegação da página 13"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>13 / 16</span></nav>
     </section>
 
     <!-- 14 · CUSTO (B) -->
@@ -1239,6 +1373,7 @@ body[data-layout="focus"] .fab { display: none; }
         </div>
       </article>
       <p class="sources">Fontes: cálculos do grupo; EPE (2024); Estado de Minas; FGV Energia (2024); SAE/Ipea; WNISR; TCU (2026).</p>
+      <nav class="page-route" aria-label="Navegação da página 14"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>14 / 16</span></nav>
     </section>
 
     <!-- 15 · POLÍTICA (A) -->
@@ -1273,6 +1408,7 @@ body[data-layout="focus"] .fab { display: none; }
         </figure>
       </div>
       <p class="sources">Fontes: reportagens de 2026 reunidas pelo grupo; CGEE/MCTI, Percepção pública da C&amp;T no Brasil 2023; VOSOUGHI, S.; ROY, D.; ARAL, S., Science, 2018; Aos Fatos (17 jun. 2025). Fotos da abertura: Sturm/Wikimedia Commons, CC BY 3.0; Alexsandre Almeida/Unsplash.</p>
+      <nav class="page-route" aria-label="Navegação da página 15"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>15 / 16</span></nav>
     </section>
 
     <!-- 16 · POLÍTICA (B) -->
@@ -1304,6 +1440,7 @@ body[data-layout="focus"] .fab { display: none; }
         <p>O átomo pode gerar autonomia e desenvolvimento se os benefícios chegarem às regiões na sombra e o país dominar a escala do próprio combustível.</p>
       </aside>
       <p class="sources">Fontes: Agora Energiewende; governos citados na pesquisa do grupo; El Orden Mundial; BECK, U.</p>
+      <nav class="page-route" aria-label="Navegação da página 16"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>16 / 16</span></nav>
     </section>
   </main>
 
@@ -1558,7 +1695,7 @@ function bindNav() {
   $('#prev-page').addEventListener('click', () => step(-1));
   $('#next-page').addEventListener('click', () => step(1));
   $('#fab').addEventListener('click', () => (current === pages.length - 1 ? goTo(0) : step(1)));
-  $$('.toc a').forEach(a => a.addEventListener('click', e => {
+  $$('.toc a, .page-route a, .edition-link').forEach(a => a.addEventListener('click', e => {
     e.preventDefault();
     goTo(pages.indexOf($(a.getAttribute('href'))));
   }));
@@ -2158,9 +2295,12 @@ const narrowScreen = matchMedia('(max-width: 860px)');
    fit: página inteira (altura e largura) visível. manual: escolhido pelo leitor (40% a 200%). */
 const viewZoom = { mode: 'auto', value: 1 };
 const APP_BAR = 64;
+// Dimensões compartilhadas com os tokens do frame editorial.
+const PAGE_WIDTH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--page-w'));
+const PAGE_HEIGHT = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--page-h'));
 function computeZoom() {
   const cols = layout === 'spread' ? 2 : 1;
-  const widthFit = (innerWidth - 32) / (cols * 794);
+  const widthFit = (innerWidth - 32) / (cols * PAGE_WIDTH);
   if (viewZoom.mode === 'fit') return Math.min(widthFit, (innerHeight - APP_BAR - 32) / 1123);
   if (viewZoom.mode === 'manual') return viewZoom.value;
   return Math.min(1, widthFit);

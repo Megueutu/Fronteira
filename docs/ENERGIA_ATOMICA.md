@@ -196,6 +196,16 @@ A licença CC BY permite adaptação com indicação, e os créditos informam �
 - página dupla e ampliação funcionando;
 - `npm test`: 18 de 18.
 
+## Adaptação aos requisitos digitais (2026-10-17)
+
+**Pedido aceito:** adaptar o HTML existente usando um modelo da área “Modelos de referência” do Figma Sexteto Sinistro, com frames de 1440 × 1024 px, até duas famílias tipográficas, escala fixa, cinco ou mais componentes reutilizáveis, até cinco cores principais e navegação interna.
+
+**Implementado:** referência de composição do primeiro conjunto, Corporate Strategy, conservando o tema Verde Bandeira ES e as máscaras orgânicas. Capa horizontal com link para o sumário, sumário numerado com painel lateral, editorial em colunas, cinco reportagens preservadas. Montserrat e Roboto Flex; Playfair removida. Escala fixa e cinco cores de marca com aliases Material 3. Fotos, scripts e estilos permanecem no mesmo HTML. Links de capa/sumário nas páginas passam pela navegação comum e funcionam no modo foco. O zoom lê as dimensões do CSS. Regras atuais estão no [design system](ENERGIA_ATOMICA_DESIGN_SYSTEM.md); descrições A4 e tipografia com três famílias acima são históricas.
+
+**Validação:** 16 capturas em Chromium/Chrome headless, frame lógico de 1440 × 1024 em todas as páginas e conteúdo dentro das margens após ajustes de colunas e espaçamento. Testados os seis destinos do sumário e os retornos, ajuste à tela, continuidade da foto 08–09, foco com links e Escape, ampliação por número, seleção de cenário e ciclo do urânio. Verificação móvel em 390 × 844 com corpo de 18 px e sem rolagem horizontal. Relatórios e imagens em `artifacts/editorial/`. Testes unitários incluem correção da leitura de quebra de linha CRLF/LF no Windows. Não foi alterado `src/` nem o manifesto das texturas da edição Fronteira.
+
+**Limites:** as fontes ainda são externas (Google Fonts); fotos vêm do acervo anterior e conservam seus limites de contexto e resolução. Sem publicação, commit ou alteração no Figma nesta etapa. A pesquisa editorial não foi reescrita nem revalidada nesta adaptação visual.
+
 ## Próximo passo
 
 O grupo revisa o arquivo, principalmente a reportagem 2 e as condensações, e indica as próximas mudanças.

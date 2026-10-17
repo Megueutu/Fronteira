@@ -6,17 +6,21 @@ Status: edição digital de 20 páginas, autorizada em 2026-10-16. A proposta fo
 
 Fronteira é o nome adotado nesta edição do projeto. A reportagem aborda energia nuclear no Brasil para o trabalho de Sociologia do 2º ano D do Instituto J&F, São Paulo. Pesquisa fornecida por Davi de Oliveira, Eduardo Rodrigues, Gustavo Souza, Igor Quinto, Felipe Kogake e Lucas Lima.
 
-O tom é imparcial no método: fontes identificadas, limites explícitos, distinção entre dado e interpretação e quadros “a favor / em debate” com hierarquia visual equivalente. Isso não significa atribuir validade igual a afirmações sem evidência. A revista não recomenda um voto ou uma escolha de investimento.
+As reportagens usam fontes identificadas, limites explícitos, distinção entre dado e interpretação e quadros “a favor / em debate” com hierarquia visual equivalente. Isso não significa atribuir validade igual a afirmações sem evidência. O editorial final fornecido pelo responsável defende uma expansão condicionada a acesso à energia, autonomia tecnológica, metas e prestação de contas; essa posição editorial é identificada separadamente da reportagem.
 
-A reportagem começa em “Um Brasil Desigual”, depois da capa, do sumário e do editorial. O editorial sintetiza a pergunta central da pesquisa com assistência de IA; não é uma transcrição da reflexão oral do grupo nem uma declaração individual aprovada em nome de cada integrante. O atestado da página 19 descreve a participação de IA nesta edição de forma mais ampla que o documento original.
+A reportagem começa em “Um Brasil Desigual”, depois da capa, do sumário e do editorial. Em 2026-10-17, o responsável enviou a versão final do editorial e, depois, seu título: **A energia nuclear no futuro brasileiro**. Seus quatro parágrafos substituem integralmente a síntese anterior, sem reescrita ou condensação. A linha fina identifica acesso à energia e autonomia tecnológica. A citação avulsa da versão anterior foi removida. A nota interativa e o atestado da página 19 identificam a origem da versão final, sem atribuir aprovação individual aos integrantes. O fluxograma acompanha tese, distribuição, capacidade produtiva e proposta de ação pública.
 
 ## Paginação
+
+Em 2026-10-17, o responsável pediu uma seção própria sobre a trajetória de Adolfo Braid e autorizou sua implementação com pesquisa de imagens na internet. A entrevista foi acrescentada como suplemento após a página 17 em Página inteira e na leitura contínua, com acesso pelo sumário e pela ação da página 17 em HTML e 3D. Preserva as vinte páginas originais e os cinco temas. Perfil profissional, cinco eixos de respostas, as dezessete perguntas/intensões do roteiro e duas fotografias institucionais integram a seção. As respostas são sínteses atribuídas às anotações; não há citações literais sem conferência do áudio. Método, fontes e limites estão em [ENTREVISTA_ADOLFO_BRAID.md](ENTREVISTA_ADOLFO_BRAID.md).
+
+A paginação editorial abaixo também orienta o modo Página inteira, autorizado e implementado em 2026-10-17: cada página vira uma seção fluida da mesma edição, sem condensação adicional ou remoção de parágrafos. As reportagens, os dois lados dos balanços, as referências e a transparência sobre IA continuam no percurso principal.
 
 | Página | Conteúdo | Camada interativa |
 | --- | --- | --- |
 | 01 | Capa e fotografia histórica de Angra | Galeria e ampliação |
-| 02 | Sumário e expediente do grupo | Navegação direta; fluxograma da revista |
-| 03 | Editorial e critério de imparcialidade | Nota e fluxograma do editorial |
+| 02 | Sumário e apresentação dos seis integrantes com retratos | Navegação direta; ampliação dos retratos; fluxograma da revista |
+| 03 | Editorial final: acesso à energia e autonomia tecnológica | Origem do texto, fontes e fluxograma do argumento |
 | 04 | Um Brasil Desigual | Pobreza energética |
 | 05 | Matriz elétrica de 2025 | Gráfico com filtros |
 | 06 | Redes, território, tarifas e Milton Santos | Nota conceitual; balanço do Panorama |

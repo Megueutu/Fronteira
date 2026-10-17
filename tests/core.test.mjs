@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { pages, getSpread, clampSpread, formatPages } from '../src/content.js';
 import { pageGeometry, projection, projectPoint } from '../src/webgl-reader.js';
 import { matrixData, calculateScenario, scenarios, timeline } from '../src/data.js';
-import { chapters, references, pageHTML } from '../src/content.js';
+import { chapters, references, pageHTML, teamMembers } from '../src/content.js';
 import { access, readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
@@ -26,6 +26,9 @@ test('edição tem fontes, ações e destinos válidos, sem omitir os cinco tema
     if (page.image) await access(new URL(`..${page.image.src}`,import.meta.url));
   }
   assert.ok(chapters.every(ch => ch.page >= 0 && ch.page < pages.length));
+  assert.equal(teamMembers.length,6);
+  assert.equal(new Set(teamMembers.map(member => member.id)).size,6);
+  for (const member of teamMembers) await access(new URL(`..${member.portrait}`,import.meta.url));
   assert.equal(timeline.length,6);
   for (const id of ['unequal','matrix','territory','reactor','safety','uranium','wallerstein','sovereignty','cost','payback','messmer','world','public','balance','credits','references']) assert.ok(pages.some(page=>page.id===id));
 });

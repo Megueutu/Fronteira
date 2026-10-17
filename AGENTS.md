@@ -10,6 +10,7 @@ Este arquivo é o ponto de entrada e o handoff para quem trabalhar no Fronteira.
 4. [Design system da edição](docs/DESIGN_SYSTEM.md).
 5. [Revisão e decisões](docs/REVIEW.md) e [créditos das fotografias](docs/IMAGE_SOURCES.md).
 6. [Energia Atômica](docs/ENERGIA_ATOMICA.md), em `edicoes/energia-atomica.html`, e o [design system dela](docs/ENERGIA_ATOMICA_DESIGN_SYSTEM.md).
+7. [Contexto da conversa “Registrar fontes de pesquisa”](docs/CONTEXTO_REGISTRAR_FONTES_DE_PESQUISA.md), com histórico, fontes recuperadas e pendências da entrevista.
 
 ## Commits e branches
 
