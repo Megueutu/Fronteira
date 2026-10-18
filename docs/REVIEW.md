@@ -173,6 +173,14 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Verificação.** `npm test`: 22/22; `test:interview` passou, incluindo a contagem de dez perguntas, ausência dos rótulos sem resposta e remoção da pergunta sobre o momento mais marcante. Navegação, imagens, fontes, foco/Escape e quatro larguras conferidos. Vinte texturas regeneradas e vinte PNGs revisados; permanecem os sete alertas de composição anteriores, sem novo alerta. Capturas da seleção de perguntas em desktop e celular em `artifacts/interview/`. Próximo passo: revisão das respostas mantidas pelo grupo.
 
+## Entrevista sem perguntas incompletas ou graus de informação (2026-10-17)
+
+**Pedido implementado.** A seleção foi restringida a perguntas respondidas por inteiro. Retiradas cinco perguntas antes classificadas como parciais (motivação, tempo de atuação, entraves, oportunidade/risco e comparação de Angra 3 com alternativas). Os dois destaques incompletos sobre Angra 3 e oportunidades/riscos também foram excluídos. Permanecem três destaques e cinco perguntas adicionais, sem rótulos de completude ou menções editoriais às perguntas excluídas. As respostas não foram completadas por suposição. As fontes permanecem abaixo de cada resposta; a função atual aponta às fontes institucionais que a confirmam.
+
+**Verificação.** `npm test`: 22/22; `test:interview` e `test:citations` passaram. Conferidas a ausência dos rótulos, a retirada das perguntas incompletas na seção inteira, as cinco respostas adicionais e os três destaques. Fontes, fotos, navegação, foco e quatro larguras mantidos. Vinte texturas regeneradas e vinte PNGs revisados; permanecem apenas os sete alertas anteriores de composição. Capturas em `artifacts/interview/`.
+
+**Continuidade.** O registro original da pesquisa é preservado. A seleção publicada contém somente respostas sustentadas pelo material disponível. Próximo passo: revisão da seleção final pelo grupo.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

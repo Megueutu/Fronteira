@@ -43,7 +43,7 @@ try {
   assert.ok(await b.evaluate("[...document.querySelectorAll('.linear-content .inline-citation')].every(e=>getComputedStyle(e).display!=='none')"));
   await b.click('#close-dialog');
   await b.click('#open-index');await b.click('dialog [data-action=interview]');
-  assert.ok(await b.evaluate("document.querySelectorAll('dialog .interview-answer [data-source-id=interview]').length===5"));
+  assert.ok(await b.evaluate("document.querySelectorAll('dialog .interview-answer [data-source-id=interview]').length===3"));
   await b.evaluate("document.querySelector('.interview-answer').scrollIntoView({block:'start'})");
   await b.waitFor("document.querySelector('.interview-answer .claim-source').getBoundingClientRect().top<innerHeight");
   const interviewShot=await b.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});

@@ -54,9 +54,10 @@ try {
   await capture('inline-desktop');
   await browser.click('#interview-adolfo .interview-questions summary');
   assert.equal(await browser.evaluate('document.querySelector("#interview-adolfo .interview-questions").open'),true);
-  assert.equal(await browser.evaluate('document.querySelectorAll("#interview-adolfo .interview-questions dl > div").length'),10);
-  assert.ok(await browser.evaluate('[...document.querySelectorAll("#interview-adolfo .interview-questions dd > span")].every(e=>!/^sem /i.test(e.textContent))'));
-  assert.ok(!(await browser.evaluate('document.querySelector("#interview-adolfo .interview-questions").textContent')).includes('momento mais marcante'));
+  assert.equal(await browser.evaluate('document.querySelectorAll("#interview-adolfo .interview-questions dl > div").length'),5);
+  assert.equal(await browser.evaluate('document.querySelectorAll("#interview-adolfo .interview-questions dd > span").length'),0);
+  assert.ok(!(await browser.evaluate('document.querySelector("#interview-adolfo").textContent')).match(/momento mais marcante|o que o motivou|há quanto tempo atua|maior oportunidade e o maior risco|concluir angra 3 ou/i));
+  assert.equal(await browser.evaluate('document.querySelectorAll("#interview-adolfo .interview-answer").length'),3);
   await browser.click('#interview-adolfo .interview-questions summary');
 
   for (const mode of ['landing','html','3d']) {

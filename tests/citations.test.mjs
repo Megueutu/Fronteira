@@ -27,8 +27,9 @@ test('financial assumptions cite the group tables and interview answers cite the
   assert.match(finance,/Tabela 4.*Tabela 5/);
   assert.match(finance,/Hipóteses do exercício de 2025/);
   const interview=interviewHTML();
-  assert.ok((interview.match(/data-source-id="interview"/g)||[]).length>=adolfoInterview.questions.length+7);
-  assert.ok(adolfoInterview.questions.every(([,status])=>!/^sem /i.test(status)));
+  assert.ok((interview.match(/data-source-id="interview"/g)||[]).length>=adolfoInterview.conversations.length+2);
+  assert.ok(adolfoInterview.questions.every(item=>!('status' in item) && (item.sources?.length || item.record)));
+  assert.doesNotMatch(interview,/<dd><span>|respostas parciais|complementada|síntese disponível|sem resposta|não foi localizada/i);
   assert.match(interview,/Análise do grupo, com base em/);
   assert.match(interview,/data-source-id="aeita"/);
   assert.match(interview,/data-source-id="adolfo-abdan"/);
