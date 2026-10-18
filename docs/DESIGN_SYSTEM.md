@@ -118,3 +118,11 @@ O cabeçalho pertence à interface externa. Não altera a composição editorial
 O processo confere limites de composição, imagens ausentes, justificação, navegação, foco e interações. Capturas são revisadas antes da publicação. Isso não equivale a uma auditoria completa de acessibilidade, testes em leitores de tela ou homologação em todos os navegadores.
 
 Para mudanças visuais, regenere as texturas e execute as verificações documentadas no [README](../README.md). Não altere separadamente o texto desenhado em 3D: a fonte editorial é `src/content.js`.
+
+## Composição editorial em fluxo (18/10/2026)
+
+A Página inteira usa largura máxima de 1360 px por matéria, com 48 px de respiro vertical no desktop. Título e linha fina formam o cabeçalho; texto ocupa os dois lados em colunas iguais, separadas por 48 px e uma linha na cor `--line`. Corpo em Georgia, 19 px/1,65, justificado com hifenização; fontes em Arial, 12 px/1,55. Os verdes, brancos, raios e tipografias existentes foram mantidos.
+
+As fontes ficam após o trecho correspondente, com domínio na mesma linha do link quando há espaço. Nos quadros de debate e após citações, as listas de fontes usam duas colunas no desktop e uma no celular, evitando uma lista longa ao lado de uma área vazia. O texto pode continuar na coluna seguinte; notas de fonte e fotografias não são fragmentadas. Figuras inseridas na leitura têm proporção 16:10, legenda de contexto e links de crédito/licença. Fotografias de abertura usam faixa 3:1 no desktop. As ampliações mostram o original com seu contexto.
+
+Em até 1000 px, o cabeçalho empilha e o intervalo das colunas cai para 32 px. Em até 760 px, o texto passa a uma coluna, 18 px, alinhado à esquerda, e as aberturas usam 16:10. Capa, gráficos e carrosséis preservam seus componentes e controles. Aceitação: texto presente nos dois lados em desktop; nenhum corte de fonte/foto; conteúdo integral; foco de volta à fotografia ampliada; sem transbordamento em 1440, 1024, 768, 390 e 320 px.

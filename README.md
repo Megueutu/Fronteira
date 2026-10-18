@@ -46,6 +46,7 @@ npm run test:interview
 npm run test:citations
 npm run test:explorers
 npm run test:tariffs
+npm run test:layout
 ```
 
 O teste de navegador precisa do servidor ativo e de um Chromium instalado. Aceita `CHROMIUM_PATH` e `TEST_URL`; no Windows procura também uma instalação local do Chrome for Testing headless ou Chrome. Exemplo PowerShell:

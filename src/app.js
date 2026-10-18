@@ -64,7 +64,7 @@ if (renderIndex !== null) {
   }
   function showLanding() {
     if (!landing.children.length) {
-      landing.innerHTML = pages.map((page,index) => pageHTML(page,index)).join('');
+      landing.innerHTML = pages.map((page,index) => pageHTML(page,index,{flow:true})).join('');
       landing.querySelectorAll('.magazine-page').forEach((article,index) => {
         article.id = `landing-${pages[index].id}`;
         const title = article.querySelector('h2');

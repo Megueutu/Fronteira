@@ -11,8 +11,8 @@ try {
   await b.navigate(base+'/?template=landing&page=5');
   await b.waitFor("document.querySelector('#landing-matrix')?.getBoundingClientRect().top<200");
   assert.deepEqual(await b.evaluate("[...document.querySelectorAll('#landing-view .columns p')].map(p=>p.textContent)"),pages.flatMap(page=>page.body));
-  assert.ok(await b.evaluate("[...document.querySelectorAll('#landing-view .columns > .inline-citation')].every(e=>getComputedStyle(e).display!=='none')"));
-  assert.ok(await b.evaluate("[...document.querySelectorAll('#landing-view .columns > .claim-source')].every(e=>e.previousElementSibling.matches('p') && e.querySelector('strong'))"));
+  assert.ok(await b.evaluate("[...document.querySelectorAll('#landing-view .reading-passage > .inline-citation')].every(e=>getComputedStyle(e).display!=='none')"));
+  assert.ok(await b.evaluate("[...document.querySelectorAll('#landing-view .reading-passage > .claim-source')].every(e=>e.previousElementSibling.matches('p') && e.querySelector('strong'))"));
   await shot('matrix-desktop');
   for (const width of [768,390,320]) {
     await b.viewport(width,900,width<760);

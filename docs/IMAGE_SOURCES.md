@@ -79,3 +79,7 @@ Os bytes baixados foram preservados, sem recompressão, recorte ou tratamento de
 Cada fotografia do acervo de energia tem legenda completa, autoria e link para a licença na ampliação e na lista de créditos. Os retratos seguem o registro de fornecimento pelo grupo descrito acima. Não há imagens geradas por IA apresentadas como documentação de fatos. Uma foto de torres de resfriamento não é prova automática de que o local seja uma central nuclear, nem permite concluir o nível de emissão ou risco.
 
 O portal de imprensa da Eletronuclear foi localizado como referência possível. Não foram baixadas fotografias institucionais presumindo uma autorização geral de uso. Os dois registros de Angra vieram de arquivos com licença individual explícita no Commons.
+
+## Fotografias na leitura da Página inteira (18/10/2026)
+
+Sete fotografias do acervo existente foram acrescentadas ao fluxo das matérias: Angra no editorial; costa no território; torres de resfriamento na segurança; canteiro de Angra 3 no sistema-mundo; painel de controle na soberania; transmissão na opinião pública; eólica no balanço. As legendas repetem os limites documentados do registro histórico ou ilustrativo, sem apresentá-las como novas evidências de localização, segurança ou impacto. Autoria, página de origem e licença aparecem sob cada figura e na ampliação. Não houve download, licença nova ou uso das imagens BY-ND da entrevista nesses recortes.

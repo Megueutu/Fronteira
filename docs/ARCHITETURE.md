@@ -113,6 +113,18 @@ Não há editor, importação de PDF, vídeo, capa com abertura/fechamento artic
 
 ## Complementos de 18/10/2026
 
+### Distribuição editorial na Página inteira
+
+O responsável apontou grandes vazios ao lado dos textos na versão local da porta 5500. O título lateral e a coluna única à direita deram lugar a um cabeçalho de matéria, seguido de texto que ocupa a largura disponível em duas colunas balanceadas. Em até 760 px, o corpo volta a uma coluna. Sumário e referências conservam uma coluna introdutória e seus próprios componentes.
+
+`showLanding` chama `pageHTML` com `{flow:true}`. Essa opção agrupa cada parágrafo e sua fonte em `.reading-passage` e insere fotografias editoriais em sete matérias. Os parágrafos originais, sua sequência e as referências foram preservados. O texto pode continuar na coluna seguinte; fontes e fotografias não são cortadas entre colunas. A legenda identifica contexto, autoria, licença e link de origem. Cada imagem amplia o original correto e devolve foco ao fechar.
+
+A opção é exclusiva da composição em fluxo. O HTML paginado, a leitura ampliada e as vinte texturas mantêm sua composição anterior. A capa conserva sua arte e animação. As quatro fotografias de abertura existentes ocupam a largura da matéria na Página inteira. Não houve biblioteca, texto de pesquisa ou asset novo.
+
+Pesquisa técnica: [MDN, balanceamento de colunas](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Multicol_layout/Spanning_balancing_columns), [MDN, break-inside](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/break-inside) e [W3C WAI, imagens informativas](https://www.w3.org/WAI/tutorials/images/informative/). Implementação com CSS multicol e HTML próprios. `npm run test:layout` confere largura ocupada, texto nos dois lados, conteúdo preservado, fotos/fontes e cinco larguras. O servidor estático da porta 4317 é preferível para capturas automáticas, pois gravações em `artifacts/` podem disparar a recarga do Live Server da porta 5500.
+
+### Tarifas e limpeza da interface
+
 As tarifas vêm do PDF fornecido, p. 24, §5.1/Tabela 2. O gráfico de intervalos usa escala de 0 a R$ 1,60/kWh; a opção de consumo multiplica os mesmos limites por 50–500 kWh. Não calcula a fatura final. A fonte Meutudo tem cabeçalhos mínima/máxima invertidos na página consultada; os limites seguem a ordenação numérica da tabela do PDF. Fonte original, PDF e esclarecimento da ANEEL ficam próximos. O componente não representa médias regionais nem dados em tempo real.
 
 A capa deixou de oferecer a faixa “Explore as fotografias”, também retirada do hotspot 3D; as fotografias ainda podem ser ampliadas. A posição do hotspot do sumário é calculada pelo índice editorial, mesmo quando é o único botão da abertura. Disciplina e escola foram retiradas da interface pública das duas edições. O arquivo autocontido Energia Atômica tem gráfico/tabela de tarifas com estado preservado na ampliação. O build inclui `edicoes/`, sem incluir os documentos de pesquisa ou artefatos locais; teste dedicado: `npm run test:tariffs`.

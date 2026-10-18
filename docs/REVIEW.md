@@ -195,6 +195,16 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Limpeza complementar (2026-10-18).** Removidas as duas menções restantes à disciplina e ao instituto na prévia pública de design (`previews/index.html`). A edição principal e a Energia Atômica já estavam sem esses créditos. A busca nos arquivos publicados confirmou a ausência das expressões; `npm test`: 22/22. Os documentos originais de pesquisa e o histórico editorial foram preservados. Não houve alteração em `src/` nem necessidade de regenerar texturas.
 
+## Distribuição editorial em Página inteira (2026-10-18)
+
+**Pedido implementado.** Após revisão da versão local na porta 5500, os títulos e linhas finas passaram ao topo da matéria. O corpo ocupa a largura em duas colunas no desktop/tablet e uma no celular, em vez de permanecer à direita com um grande espaço vazio à esquerda. Todos os parágrafos e suas fontes foram preservados. A continuação de texto entre colunas segue a leitura editorial; fontes e figuras não são cortadas. Os quadros de argumentos também distribuem suas listas de fontes em duas colunas no desktop.
+
+**Fotografias.** Sete imagens já licenciadas foram distribuídas no fluxo: editorial, território, segurança, sistema-mundo, soberania, opinião pública e balanço. Cada uma identifica contexto histórico/ilustrativo, autor, licença e página de origem. As quatro fotos de abertura existentes usam a largura da matéria. Ampliação e retorno do foco conferidos para as sete imagens; não houve asset novo ou alteração nas fotos institucionais BY-ND.
+
+**Verificação.** `npm test`: 22/22. Passaram `test:layout`, `test:landing`, `test:citations`, `test:explorers` e `test:interview`. O teste de composição verifica texto nos dois lados e largura completa em dezessete matérias, conteúdo e ordem originais, fotos/fontes, ampliação/foco e ausência de transbordamento em 1440, 1024, 768, 390 e 320 px. Sumário e referências mantêm sua composição própria. Capturas das dezenove seções após a capa e do celular foram revisadas; evidências em `artifacts/layout/`.
+
+**Paginação e limites.** A nova distribuição é exclusiva de Página inteira; a capa, a entrevista e as composições paginadas foram preservadas. Vinte texturas regeneradas e vinte PNGs revisados, com os mesmos sete alertas históricos (06, 08, 09, 10, 13, 14 e 18) e saída 1 do gerador, sem novo alerta ou imagem ausente. Não foi declarado aprovado o teste geral `test:browser`, sujeito aos limites anteriores. Próximo passo: revisão visual pelo grupo na janela e no aparelho que usará para apresentar a revista.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.
