@@ -29,7 +29,7 @@ try {
     results.push(layout);
     console.log(`${name}: ${layout.contentBottom <= layout.tailTop - 10 && layout.tailBottom <= 1064 && !layout.horizontal && !layout.missingImages ? 'OK' : 'REVIEW'} (content ${Math.round(layout.contentBottom)} / footer ${Math.round(layout.tailTop)})`);
   }
-  const source = await Promise.all(['src/content.js','src/data.js','src/styles.css'].map(async name=>(await readFile(new URL(`../${name}`,import.meta.url),'utf8')).replaceAll('\r\n','\n')));
+  const source = await Promise.all(['src/content.js','src/data.js','src/styles.css','src/citations.js'].map(async name=>(await readFile(new URL(`../${name}`,import.meta.url),'utf8')).replaceAll('\r\n','\n')));
   await writeFile(new URL('../assets/textures/MANIFEST.json',import.meta.url),JSON.stringify({pages:pages.length,width:1140,height:1596,sha256:createHash('sha256').update(source.join('')).digest('hex')},null,2)+'\n');
   const prior = selected.length ? JSON.parse(await readFile(new URL('../artifacts/page-layout.json',import.meta.url),'utf8').catch(()=>'[]')).filter(row=>!selected.includes(row.index)) : [];
   await writeFile(new URL('../artifacts/page-layout.json',import.meta.url),JSON.stringify([...prior,...results].sort((a,b)=>a.index-b.index),null,2));

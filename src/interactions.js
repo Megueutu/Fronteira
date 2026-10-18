@@ -1,5 +1,6 @@
 import { pages, pageHTML, photos, artworks, chapters, references, referenceHTML, escapeHTML, teamMembers, teamHTML, interviewPhotos, interviewHTML, interviewEntryHTML } from './content.js';
 import { chartHTML, fuelSteps, reactorSteps, calculateScenario, scenarios, timeline, timelineHTML, decimal } from './data.js';
+import { citationHTML, visualEvidence, sourcePanelHTML } from './citations.js';
 
 export function createInteractions(onJump) {
   const dialog = document.querySelector('#interaction-dialog');
@@ -60,9 +61,9 @@ export function createInteractions(onJump) {
     } else if (type === 'diagram' || type === 'cycle') {
       title = type === 'cycle' ? 'O caminho do combustível.' : 'Do reator à rede.';
       currentSteps = type === 'cycle' ? fuelSteps : reactorSteps;
-      markup = stepsHTML(currentSteps) + `<p class="source-note">Esquema conceitual simplificado, sem escala física. Fontes: INB e AIEA; consulte as referências da edição.</p>`;
+      markup = stepsHTML(currentSteps) + citationHTML(visualEvidence[type === 'cycle' ? 'cycle' : 'reactor']);
     } else if (type === 'calculator') {
-      title = 'Laboratório de cenários.'; scenario = { ...scenarios[1], investment: 23.9 }; markup = scenarioHTML();
+      title = 'Laboratório de cenários.'; scenario = { ...scenarios[1], investment: 23.9 }; markup = scenarioHTML() + citationHTML(visualEvidence.payback);
     } else if (type === 'timeline') {
       title = 'Seis trajetórias, diferentes contextos.';
       markup = `<p class="dialog-intro">Recortes históricos com data. Selecione um país para conhecer o contexto e a fonte.</p>${timelineHTML()}<div class="timeline-detail" role="status" id="timeline-detail"></div>`;
@@ -71,7 +72,7 @@ export function createInteractions(onJump) {
       markup = `<p class="dialog-intro">Marque os critérios que você já consegue discutir. Este quadro é uma ferramenta de leitura, sem pontuação a favor ou contra a tecnologia.</p><div class="evaluation-list">${['Qual problema energético se pretende resolver?','Quais alternativas e prazos foram comparados?','Quem paga em cada cenário?','Como resíduos e descomissionamento serão financiados?','Quem fiscaliza e publica os resultados?','Como os benefícios e impactos se distribuem?','Quais dependências o projeto reduz ou cria?'].map((label,i) => `<label><input type="checkbox" data-evaluate="${i}"><span>${label}</span></label>`).join('')}</div><p id="evaluation-status" role="status">0 de 7 critérios explorados. Suas marcações permanecem apenas nesta janela.</p>`;
     } else if (type === 'sources') {
       title = 'Fontes para continuar a leitura.';
-      markup = `${page.refs?.length ? `<h3>Nesta página</h3><ol class="references-list">${referenceHTML(page.refs)}</ol>` : ''}<details ${page.refs?.length ? '' : 'open'}><summary>Todas as referências da edição</summary><ol class="references-list">${referenceHTML([],true)}</ol></details><p class="source-note">Fontes consultadas e contexto da pesquisa: 16/10/2026. Os exemplos internacionais são datados; as hipóteses financeiras pertencem ao estudo do grupo.</p>`;
+      markup = `${sourcePanelHTML(page,pageIndex)}${page.refs?.length ? `<h3>Nesta página</h3><ol class="references-list">${referenceHTML(page.refs)}</ol>` : ''}<details ${page.refs?.length ? '' : 'open'}><summary>Todas as referências da edição</summary><ol class="references-list">${referenceHTML([],true)}</ol></details><p class="source-note">Os exemplos internacionais são datados; as hipóteses financeiras pertencem ao estudo do grupo. Fontes e locais de consulta revisados em 17/10/2026.</p>`;
     } else if (type === 'credits') {
       title = 'Quem fez estas imagens.';
       markup = `<p class="dialog-intro">Os arquivos foram redimensionados e têm recortes de exibição. Fotografias conservam as licenças de seus autores; nenhuma implica apoio dos fotógrafos às conclusões da revista.</p><div class="photo-credits">${artworks.map(art => `<div><img src="${art.src}" alt="${escapeHTML(art.title)}" loading="lazy"><p>${escapeHTML(art.caption)}<br><a href="${art.url}" target="_blank" rel="noopener">${escapeHTML(art.credit)} ↗</a><br><a href="${art.licenseUrl}" target="_blank" rel="noopener">${escapeHTML(art.license)}</a></p></div>`).join('')}</div><h3>Retratos dos integrantes</h3><p class="source-note">Fotografias fornecidas pelo grupo para uso nesta revista. Fotógrafo não informado.</p>${teamHTML()}`;
@@ -84,6 +85,11 @@ export function createInteractions(onJump) {
       title = page.note?.title || 'Energia, sociedade e escolhas.';
       markup = `<p class="note-body">${escapeHTML(page.note?.text || 'Geração, rede, distribuição, capacidade de pagamento e participação são dimensões relacionadas. Nenhuma fonte, sozinha, resolve todos esses problemas. A revista reúne esses critérios ao longo dos cinco temas.')}</p>${page.id === 'editorial' ? `<h3>Fluxograma do editorial</h3>${flowHTML(['Defender acesso à energia e autonomia tecnológica','Relacionar geração, distribuição e tarifas com Milton Santos e Maria Laura Silveira','Discutir capacidade produtiva e dependência com Wallerstein','Propor planejamento público, capacitação e ampliação industrial','Vincular financiamento a metas e prestação de contas'])}` : ''}${page.refs?.length ? `<h3>Fontes desta leitura</h3><ol class="references-list">${referenceHTML(page.refs)}</ol>` : ''}`;
     }
+    if (type === 'chart') markup += citationHTML(visualEvidence.matrix);
+    if (type === 'checklist') markup += citationHTML({kind:'Critérios elaborados pelo grupo, com base em',sources:page.refs.map(id=>({id}))});
+    if (!['index','interview','member','image','carousel','chart','diagram','cycle','calculator','timeline','checklist','sources','credits','linear','read'].includes(type)) {
+      markup += citationHTML({kind:'Nota da edição: síntese e interpretação com base em',sources:(page.refs || []).map(id=>({id}))});
+    }
     content.innerHTML = `<h2 id="dialog-title">${title}</h2>${markup}`;
     if (!dialog.open) dialog.showModal();
     closeButton.focus(); dialog.scrollTop = 0;
@@ -92,7 +98,7 @@ export function createInteractions(onJump) {
   }
   function setEvent(index) {
     const event = timeline[index], ref = references.find(ref => ref.id === event.ref);
-    content.querySelector('#timeline-detail').innerHTML = `<span class="eyebrow">${event.country} · ${event.year}</span><h3>${event.title}</h3><p>${event.text}</p><a href="${ref.url}" target="_blank" rel="noopener">Consultar a fonte ↗</a>`;
+    content.querySelector('#timeline-detail').innerHTML = `<span class="eyebrow">${event.country} · ${event.year}</span><h3>${event.title}</h3><p>${event.text}</p>${citationHTML({kind:'Fonte do recorte histórico',sources:[{id:event.ref}]})}`;
     content.querySelectorAll('[data-event]').forEach(button => button.setAttribute('aria-pressed',String(Number(button.dataset.event) === index)));
   }
   function close() {

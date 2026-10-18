@@ -53,7 +53,7 @@ test('payback respeita unidades, sensibilidade e hipóteses inválidas', () => {
 });
 
 test('as vinte texturas correspondem ao conteúdo e à composição versionados', async () => {
-  const source = await Promise.all(['src/content.js','src/data.js','src/styles.css'].map(async name=>(await readFile(new URL(`../${name}`,import.meta.url),'utf8')).replaceAll('\r\n','\n')));
+  const source = await Promise.all(['src/content.js','src/data.js','src/styles.css','src/citations.js'].map(async name=>(await readFile(new URL(`../${name}`,import.meta.url),'utf8')).replaceAll('\r\n','\n')));
   const manifest = JSON.parse(await readFile(new URL('../assets/textures/MANIFEST.json',import.meta.url),'utf8'));
   assert.equal(manifest.pages,pages.length);
   assert.equal(manifest.sha256,createHash('sha256').update(source.join('')).digest('hex'),'regenere as texturas após alterar conteúdo ou diagramação');

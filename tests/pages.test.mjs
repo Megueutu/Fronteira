@@ -8,6 +8,7 @@ test('pages build relocates resources and only publishes website files', async (
   const read = name => readFile(new URL(`../_site/${name}`, import.meta.url), 'utf8');
   assert.match(await read('index.html'), /src="\/Fronteira\/src\/app.js"/);
   assert.match(await read('src/content.js'), /`\/Fronteira\/assets\/photos\//);
+  assert.match(await read('src/citations.js'), /https:\/\/github.com\/Megueutu\/Fronteira\/blob\/main\/pesquisa\//);
   assert.match(await read('src/webgl-scene.js'), /`\/Fronteira\/assets\/textures\//);
   assert.match(await read('previews/index.html'), /href="\/Fronteira\/\?template=3d"/);
   assert.match(await read('src/app.js'), /from ['"]\.\/content.js['"]/);

@@ -9,6 +9,7 @@ Aplicação estática com JavaScript, HTML/CSS e WebGL nativos, sem bibliotecas,
 | Arquivo | Responsabilidade |
 | --- | --- |
 | `src/content.js` | Vinte páginas, imagens, bibliografia, destinos do sumário e composição HTML. |
+| `src/citations.js` | Catálogo de fontes, localizadores por parágrafo e gráfico, distinção entre fontes e análise do grupo, painel da abertura. |
 | `src/interview.js` | Perfil, fontes, sínteses e roteiro da entrevista com Adolfo Braid; sem citações literais atribuídas às notas. |
 | `src/data.js` | Dados da matriz, fórmulas e cenários, etapas e recortes históricos. |
 | `src/app.js` | Página atual, modos, navegação, URL, enquadramento, teclado, toque e falhas. |
@@ -59,6 +60,10 @@ Botões HTML são projetados sobre a faixa de ação das páginas e ocultados du
 Falha ao iniciar ou perda de contexto WebGL mostra a composição HTML e mantém a navegação. Não há recuperação automática do contexto perdido. Não se afirmam FPS, consumo energético ou compatibilidade em hardware real.
 
 ## Interações e acessibilidade
+
+Desde 17/10/2026, `src/citations.js` associa cada parágrafo de pesquisa a fontes e localizadores (seção, tabela, artigo ou conceito). A leitura em Página inteira, a leitura contínua e o HTML móvel exibem a origem imediatamente após o trecho; gráficos, esquemas, cenários e países da linha do tempo também têm fontes próximas. No HTML fixo e no 3D, um painel abaixo da abertura identifica os trechos e suas fontes sem acrescentar texto à textura ou alterar a paginação. A lista acompanha a navegação. O botão de fontes abre o mesmo detalhamento. Interpretações, propostas e registros de edição recebem atribuição explícita; não são apresentados como conclusões de uma instituição externa.
+
+Os cenários apontam para o estudo ABNT revisto do grupo, §7/Tabelas 4 e 5. A entrevista aponta para as seções correspondentes do registro consolidado, já versionado no repositório público, e distingue notas, slides e análise do grupo. Biografia de Milton Santos não é usada como fonte de seus conceitos; a referência aponta à síntese do grupo em §3.3, identificando os livros e a ausência de páginas confirmadas. Páginas de livros ou relatórios não registradas no acervo não foram inventadas. O manifesto das texturas passa a incluir também `src/citations.js`.
 
 A entrevista de Adolfo Braid usa um único renderer `interviewHTML`, em `src/content.js`, com conteúdo em `src/interview.js`. Aparece como suplemento após a página 17 na landing e na leitura contínua, sem alterar a lista de vinte páginas ou o manifesto de quantidade. As camadas de entrevista e fotografia reutilizam o histórico de diálogos, Escape e devolução de foco. Sumário e ação da página 17 abrem a entrevista também no HTML e no 3D. `interview=adolfo` na URL abre a camada diretamente. Os destinos da landing são procurados por `data-page-index`, pois há um suplemento entre os artigos numerados; a posição no array de filhos deixou de ser um índice editorial válido.
 

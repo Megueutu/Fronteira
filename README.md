@@ -42,6 +42,7 @@ npm test
 npm run test:browser
 npm run test:landing
 npm run test:interview
+npm run test:citations
 ```
 
 O teste de navegador precisa do servidor ativo e de um Chromium instalado. Aceita `CHROMIUM_PATH` e `TEST_URL`; no Windows procura também uma instalação local do Chrome for Testing headless ou Chrome. Exemplo PowerShell:
@@ -55,7 +56,7 @@ Capturas e relatórios ficam em `artifacts/`, ignorado pelo Git. Os testes headl
 
 ## Atualizar a edição
 
-Conteúdo, fontes, fotos e composição: `src/content.js`. Dados e fórmulas: `src/data.js`. Tokens e componentes: `src/styles.css`. Depois de alterar a composição, regenere as texturas com o servidor ativo:
+Conteúdo, fotos e composição: `src/content.js`. Catálogo de fontes e associação por trecho: `src/citations.js`. Dados e fórmulas: `src/data.js`. Tokens e componentes: `src/styles.css`. As fontes aparecem abaixo dos trechos na leitura fluida e abaixo da abertura nos modos fixos. Depois de alterar a composição, regenere as texturas com o servidor ativo:
 
 ```sh
 npm run render:textures

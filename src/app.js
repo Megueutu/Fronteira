@@ -1,5 +1,6 @@
 import { pages, pageHTML, clampSpread, formatPages, interviewHTML } from './content.js';
 import { createInteractions } from './interactions.js';
+import { sourcePanelHTML } from './citations.js';
 
 const renderIndex = new URLSearchParams(location.search).get('render');
 if (renderIndex !== null) {
@@ -23,6 +24,11 @@ if (renderIndex !== null) {
   const single = () => mode === 'landing' || (mobile.matches && mode === 'html');
   const spread = () => Math.floor(pageIndex / 2);
   const previous = document.querySelector('#previous'), next = document.querySelector('#next');
+  const sourcePanel = document.createElement('section');
+  sourcePanel.id = 'reader-sources'; sourcePanel.className = 'reader-sources';
+  sourcePanel.setAttribute('aria-label','Fontes dos trechos desta abertura');
+  document.querySelector('.navigation').after(sourcePanel);
+  let sourceSelection = '';
   function update() {
     previous.disabled = turning || (single() ? pageIndex === 0 : spread() === 0);
     next.disabled = turning || (single() ? pageIndex === pages.length - 1 : spread() === clampSpread(999));
@@ -32,6 +38,15 @@ if (renderIndex !== null) {
     document.querySelector('.nav-caption').textContent = mode === 'landing' ? 'Seções' : 'Páginas';
     stage.setAttribute('aria-busy',String(turning));
     stage.classList.toggle('turning',turning);
+    const sourceKey = `${mode}:${single() ? pageIndex : spread()*2}:${single()}`;
+    sourcePanel.hidden = mode === 'landing';
+    if (sourceKey !== sourceSelection) {
+      sourceSelection = sourceKey;
+      const first = single() ? pageIndex : spread()*2;
+      const blocks = pages.slice(first,first+(single()?1:2)).map((page,i)=>sourcePanelHTML(page,first+i)).join('');
+      sourcePanel.innerHTML = blocks ? `<h2>De onde vêm as informações desta abertura</h2><p>Fontes por trecho, com o local da informação no site ou documento. As interpretações e propostas são identificadas como trabalho do grupo.</p><div class="spread-evidence">${blocks}</div>` : '';
+      sourcePanel.hidden ||= !blocks;
+    } else if (!sourcePanel.children.length) sourcePanel.hidden = true;
     document.querySelector('#reading-progress').style.width = `${(single() ? pageIndex + 1 : Math.min(spread() * 2 + 2,pages.length)) / pages.length * 100}%`;
     const url = new URL(location.href); url.searchParams.set('template',mode); url.searchParams.set('page',String(pageIndex + 1)); if (mode === 'landing') url.hash = ''; history.replaceState(null,'',url);
   }

@@ -105,7 +105,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .page-subtitle { font: 19px/1.38 var(--serif); margin: 0 0 23px; color: var(--muted); max-width: 96%; text-align: left; }
 .columns { column-count: 2; column-gap: 28px; column-fill: balance; }
 .columns p { font: 18px/1.55 var(--serif); margin: 0 0 13px; text-align: justify; text-justify: inter-word; hyphens: auto; overflow-wrap: break-word; orphans: 3; widows: 3; }
-.columns p:last-child { margin-bottom: 0; }
+.columns p:last-of-type { margin-bottom: 0; }
 .page-tail { margin-top: 22px; flex-shrink: 0; }
 .page-action { width: 100%; min-height: 46px; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: transparent; padding: 10px 0; display: flex; align-items: center; justify-content: space-between; text-align: left; font: 14px var(--sans); color: var(--green); }
 .page-action:hover { background: var(--soft); }
@@ -254,6 +254,33 @@ summary { cursor: pointer; padding: 15px 0; color: var(--green); font-size: 15px
 .render-document { width: 760px; height: 1064px; background: white; }
 .render-document > .magazine-page { margin: 0; }
 .noscript-message { padding: 30px; }
+
+/* Sources stay next to passages in flowing reading, and below the fixed spread. */
+.claim-source { margin: 12px 0 24px; padding: 12px 0 12px 14px; border-left: 2px solid var(--line); color: var(--muted); font: 13px/1.6 var(--sans); text-align: left; overflow-wrap: anywhere; }
+.claim-source > strong { display: block; margin-bottom: 6px; color: var(--green); font-size: 12px; }
+.claim-source-item { display: block; margin-top: 10px; }
+.claim-source-item:first-of-type { margin-top: 0; }
+.claim-source-item a { font: inherit; font-weight: 600; }
+.source-location, .claim-source-item small { display: block; }
+.claim-source-item small { font-size: 11px; }
+.inline-citation { display: none; }
+:is(.landing-view,.linear-content,.html-book.single-page) .inline-citation { display: block; }
+:is(.landing-view,.linear-content,.html-book.single-page) .columns p:has(+ .inline-citation) { margin-bottom: 8px; }
+.landing-view .page-main > .visual-source { grid-column: 1 / -1; width: 100%; max-width: 1100px; justify-self: center; margin-top: -12px; }
+.balance-box > .claim-source { grid-column: 1 / -1; margin-bottom: 0; }
+.reader-sources { padding: 32px; background: var(--paper); border-top: 1px solid var(--line); }
+.reader-sources > h2 { margin: 0 0 12px; font: normal 28px/1.25 var(--serif); }
+.reader-sources > p { max-width: 800px; color: var(--muted); font: 14px/1.6 var(--sans); }
+.spread-evidence { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 40px; }
+.page-evidence { min-width: 0; }
+.page-evidence h3 { font: normal 24px/1.3 var(--serif); }
+.evidence-entry h4 { margin: 24px 0 8px; font: 600 14px/1.5 var(--sans); }
+.reference-location { color: var(--muted); margin-top: 6px; font-size: 12px; }
+.interview-profile + .claim-source { margin-top: 0; }
+@media (max-width: 760px) {
+  .spread-evidence { grid-template-columns: minmax(0,1fr); gap: 16px; }
+  .reader-sources { padding: 28px 20px; }
+}
 
 /* Página inteira: a mesma edição em seções de largura fluida. */
 body[data-reader-mode="landing"] .reader { max-width: none; }
