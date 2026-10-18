@@ -27,7 +27,7 @@ O workflow [Deploy GitHub Pages](.github/workflows/pages.yml) executa os testes,
 ## Ler e explorar
 
 - Botões e setas do teclado viram páginas. Home volta à capa; End vai ao fim.
-- No 3D, os controles abaixo da abertura indicam a página e abrem seus recursos ou fontes, sem cobrir o papel.
+- No 3D, os controles abaixo da abertura abrem as fontes de cada página. Gráficos, notas e demais recursos ficam em “Ampliar leitura”.
 - O sumário leva a uma seção. “Ler esta abertura” amplia o conteúdo em HTML; “Leitura contínua” reúne as 20 páginas.
 - Fotografias ampliam, a galeria aceita botões e setas e cada imagem tem contexto, autoria e licença.
 - O gráfico da matriz permite filtros. Diagramas revelam etapas. O laboratório de payback permite mudar premissas. A linha do tempo abre seis trajetórias e suas fontes.

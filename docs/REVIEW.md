@@ -243,6 +243,12 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Validação.** `test:reactor` passou: quatro etapas ilustradas, cinco explicações, fonte, seleção única, teclado/foco, cinco larguras (1440/1024/768/390/320), leitura ampliada a partir do 3D e movimento reduzido. Capturas de desktop e celular revisadas em `artifacts/reactor/`. `npm test`: 23/23. Vinte texturas regeneradas para sincronizar o manifesto de `src/explorers.js` e vinte PNGs conferidos; permanecem somente os sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18), com saída 1 do gerador. Próximo passo: revisão dos desenhos pelo responsável na revista publicada.
 
+## Remoção das chamadas de ação no 3D (2026-10-18)
+
+**Implementado.** Removidas chamadas como “Compare as fontes no gráfico” do rodapé impresso nas texturas e da faixa de controles do 3D, a pedido do responsável. A faixa mantém apenas a consulta às fontes por página. Gráficos, notas, calculadora e entrevista continuam disponíveis em “Ampliar leitura” e nos demais modos. A chamada é ocultada somente na geração de texturas, preservando suas medidas para não alterar a paginação.
+
+**Validação.** `npm test`: 23/23. Passaram `test:3d`, `test:sources`, `test:citations`, `test:explorers` e `test:interview`. Conferidas ausência das chamadas no 3D, fontes e retorno do foco, leitura ampliada e recursos em camadas, seis larguras, dez aberturas, virada, movimento reduzido, cache de duas texturas e fallback WebGL. Vinte texturas regeneradas e vinte PNGs revisados, com os mesmos sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18) e saída 1 do gerador, sem novo alerta. Capturas finais em `artifacts/reader-3d/`. Próximo passo: revisão da remoção na versão publicada.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

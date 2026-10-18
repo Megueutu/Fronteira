@@ -11,7 +11,12 @@ const frame=async name=>{
   await writeFile(`artifacts/reader-3d/${name}.png`,await b.screenshot({clip:{x:0,y:await b.evaluate('scrollY'),width:await b.evaluate('innerWidth'),height:await b.evaluate('innerHeight')}}));
 };
 try {
-  await b.viewport(1440,1000);await b.navigate(base+'/?template=3d&page=15');await idle();
+  await b.viewport(1440,1000);await b.navigate(base+'/?render=4');
+  await b.waitFor(`document.body.dataset.ready==='true'`);
+  assert.equal(await b.evaluate(`getComputedStyle(document.querySelector('.page-action')).visibility`),'hidden');
+  assert.equal(await b.evaluate(`getComputedStyle(document.querySelector('.page-bottom')).visibility`),'visible');
+  await b.navigate(base+'/?template=3d&page=15');await idle();
+  assert.ok(await b.evaluate(`[...document.querySelectorAll('#hotspots button')].every(button=>button.dataset.action==='sources')`));
   const measurements=[];
   for(const [width,height] of [[1896,1080],[1440,1000],[1024,900],[768,900],[390,844],[320,700]]) {
     await b.viewport(width,height,width<=760);
@@ -32,7 +37,7 @@ try {
   await writeFile('artifacts/reader-3d/layout.json',JSON.stringify(measurements,null,2));
   await b.viewport(1440,1000);
   await b.evaluate(`document.querySelector('.hotspot[data-page="14"]').focus()`);await b.key(' ','Space',32);
-  await b.waitFor(`document.querySelector('#interaction-dialog').open && document.querySelector('#timeline-detail')`);
+  await b.waitFor(`document.querySelector('#interaction-dialog').open && document.querySelector('.source-catalog')`);
   await b.key('Escape','Escape',27);
   await b.waitFor(`!document.querySelector('#interaction-dialog').open && document.activeElement.matches('.hotspot[data-page="14"]')`);
   await b.click('.spread-source-action[data-page="15"]');
@@ -52,12 +57,12 @@ try {
   assert.equal(await b.evaluate(`document.querySelector('.hotspot').dataset.page`),'1');
   for(let spread=1;spread<10;spread++) {
     await b.click('#next');await idle();
-    assert.deepEqual(await b.evaluate(`[...document.querySelectorAll('.spread-action-number')].map(el=>el.textContent)`),[String(spread*2+1).padStart(2,'0'),String(spread*2+2).padStart(2,'0')]);
+    assert.deepEqual(await b.evaluate(`[...document.querySelectorAll('#hotspots button')].map(el=>el.dataset.page)`),[String(spread*2),String(spread*2+1)]);
   }
   await b.click('#read-spread');await b.waitFor(`document.querySelectorAll('.linear-page').length===2`);
   await b.key('Escape','Escape',27);await b.waitFor(`!document.querySelector('#interaction-dialog').open`);
   await b.evaluate(`document.querySelector('#book-canvas').getContext('webgl').getExtension('WEBGL_lose_context').loseContext()`);
   await b.waitFor(`!document.querySelector('#stage-error').hidden && !document.querySelector('#html-view').hidden`);
   assert.deepEqual(b.errors,[]);assert.deepEqual(b.requests,[]);
-  console.log('PASS: fitted 3D spread, controls outside the paper, source links, keyboard/focus, 6 widths, all 10 spreads, real turn, reduced motion, texture cache, reading and WebGL fallback.');
+  console.log('PASS: no action callouts on 3D paper or below it, source links, keyboard/focus, 6 widths, 10 spreads, real turn, reduced motion, texture cache, reading and WebGL fallback.');
 } finally {await b.close();}

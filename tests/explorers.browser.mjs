@@ -119,9 +119,9 @@ try {
  await b.click('[data-mode="3d"]');
  await b.click('#open-index');await b.click('dialog [data-jump="11"]');
  await b.waitFor("document.querySelector('#book-canvas').dataset.textureCount==='2' && document.querySelector('#loading').hidden");
- await b.click('.hotspot[data-action=calculator]');
+ await b.click('#read-spread');await b.click('dialog [data-page="11"][data-action=calculator]');
  assert.equal(await b.evaluate("document.querySelectorAll('dialog [data-payback-base]').length"),2);
- await close();
+ await close();await close();
  await b.click('#read-spread');
  assert.equal(await b.evaluate("document.querySelectorAll('dialog [data-explorer=payback]').length"),0);
  await close();

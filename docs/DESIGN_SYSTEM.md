@@ -40,7 +40,7 @@ O suplemento de entrevista usa a mesma base branca e verde `#1E7349`, Georgia e 
 
 O átomo decorativo da capa usa três elipses e um núcleo fixo. A bolinha menor começa na curva superior esquerda, centrada no traço, e percorre a elipse inclinada em 35° em oito segundos, com velocidade constante via SVG `animateMotion`. O caminho compartilha centro e raios com o arco (50, 50; 44 × 17). Em movimento reduzido, impressão e geração de texturas, só a bolinha estática aparece na posição inicial. HTML, Página inteira e leitura contínua usam a animação; o 3D mantém a composição estática da textura.
 
-- Botão de página: ação principal com divisores finos, texto verde e seta. No 3D, os controles ficam abaixo da abertura, associados pelo número da página.
+- Botão de página: ação principal com divisores finos, texto verde e seta no HTML. No 3D, a chamada de ação foi retirada; a leitura ampliada oferece os recursos.
 - Fotografia: botão de ampliação, contexto e crédito; ampliação com legenda completa e links de autoria/licença.
 - Quadro de equilíbrio: duas áreas com a mesma importância, sem oposição “verde bom / vermelho ruim”.
 - Dialog: título acessível, foco inicial no fechamento, Escape, foco devolvido ao acionador e histórico para interações abertas da leitura contínua.
@@ -145,4 +145,4 @@ A janela de fontes usa cartões verticais com identificação do documento, dom�
 
 Abertura quase frontal, ajustada ao espaço disponível, com lombada discreta, bordas de papel sem impressão repetida e sombra suave no fundo verde existente. A câmera recua durante a virada e retorna ao enquadramento de leitura. A densidade do canvas fica entre 1,5 e 2; isso não representa uma medição de desempenho ou garantia de legibilidade de texto pequeno em celulares.
 
-Os controles ficam em dois grupos sob a abertura, fora da área impressa. Cada grupo mostra número da página em Arial 12 px, ação em Arial 13 px com seta e botão de fontes com livro. Fundo branco, borda `--line`, raio de 8 px, hover em `--soft` e foco verde. Todos os botões têm ao menos 44 × 44 px. No celular, os grupos empilham, com ação de 12 px e quebra de linha; a altura do palco acompanha a largura para reduzir espaço vazio. Na capa, o acesso ao sumário conserva a associação à página 02. Fontes e recursos reutilizam os diálogos com Escape e retorno do foco.
+As chamadas de ação foram removidas da textura e da faixa sob a abertura em 18/10/2026. A faixa mantém apenas “Fontes da página NN”, em Arial 13 px, com livro, fundo branco, borda `--line`, raio de 8 px, hover em `--soft` e foco verde. Os dois acessos ficam lado a lado no desktop e empilhados no celular, com pelo menos 44 px de altura. O número da página e a consulta às fontes permanecem no rodapé impresso. As ações de gráficos, notas e entrevista ficam disponíveis em “Ampliar leitura”, usando os diálogos existentes. A área antes ocupada pela chamada impressa é preservada para não alterar texto ou paginação.

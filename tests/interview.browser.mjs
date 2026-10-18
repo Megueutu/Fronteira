@@ -66,9 +66,9 @@ try {
     await browser.waitFor(`document.body.dataset.readerMode==="${mode}" && document.querySelector("#stage")?.getAttribute("aria-busy")==="false"`);
     if(mode==='3d') {
       await browser.waitFor('document.querySelector("#loading").hidden && document.querySelectorAll(".hotspot").length===2');
-      await browser.click('.hotspot[data-action="interview"]');
+      await browser.click('#read-spread');await browser.click('dialog [data-page="16"][data-action="interview"]');
       await browser.waitFor('document.querySelector("dialog.interview-dialog")?.open');
-      await close();
+      await close();await close();
     }
     await browser.click('#open-index');
     await browser.click('dialog .interview-entry');

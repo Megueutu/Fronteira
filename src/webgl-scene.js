@@ -76,8 +76,8 @@ export async function create3DReader(onLost) {
     hotspots.style.width = `${Math.min(width,Math.max(320,right.x-left.x))}px`;
   }
   function makeHotspots() {
-    hotspots.setAttribute('role','group'); hotspots.setAttribute('aria-label','Recursos das páginas desta abertura');
-    hotspots.innerHTML = getSpread(spread).map((page,i) => page.id==='cover' ? '' : `<div class="spread-action" data-side="${i===0?'left':'right'}"><span class="spread-action-number" aria-label="Página ${spread*2+i+1}">${String(spread*2+i+1).padStart(2,'0')}</span><button type="button" class="hotspot" data-action="${page.action.type}" data-page="${spread*2+i}"><span>${page.action.label}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button><button type="button" class="spread-source-action" data-action="sources" data-page="${spread*2+i}" aria-label="Fontes da página ${spread*2+i+1}" aria-haspopup="dialog" title="Fontes da página ${spread*2+i+1}"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button></div>`).join(''); updateHotspots();
+    hotspots.setAttribute('role','group'); hotspots.setAttribute('aria-label','Fontes das páginas desta abertura');
+    hotspots.innerHTML = getSpread(spread).map((page,i) => page.id==='cover' ? '' : `<button type="button" class="hotspot spread-source-action" data-side="${i===0?'left':'right'}" data-action="sources" data-page="${spread*2+i}" aria-haspopup="dialog"><span>Fontes da página ${String(spread*2+i+1).padStart(2,'0')}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button>`).join(''); updateHotspots();
   }
   function render(now = performance.now()) {
     if (lost || !matrix) return;

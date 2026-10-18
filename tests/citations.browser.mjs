@@ -34,9 +34,9 @@ try {
   await b.click('#next');
   await b.waitFor("document.querySelector('#stage').getAttribute('aria-busy')==='false'");
   assert.ok(await b.evaluate("document.querySelector('#reader-sources').textContent.includes('Uma decisão de Estado')"));
-  await b.click('.hotspot[data-action="timeline"]');
+  await b.click('#read-spread');await b.click('dialog [data-page="14"][data-action="timeline"]');
   for (let i=0;i<6;i++) { await b.click(`[data-event="${i}"]`); assert.ok(await b.evaluate("document.querySelector('#timeline-detail .source-location')?.textContent.length>20")); }
-  await b.click('#close-dialog');
+  await b.click('#close-dialog');await b.click('#close-dialog');
   await b.click('[data-mode="html"]');
   assert.ok(await b.evaluate("!document.querySelector('#reader-sources').hidden"));
   await b.click('#read-spread');
