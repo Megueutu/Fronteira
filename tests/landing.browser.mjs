@@ -4,7 +4,7 @@ import { pages, photos, teamMembers } from '../src/content.js';
 
 const base = process.env.TEST_URL || 'http://127.0.0.1:3000';
 const browser = await launchBrowser({timeout:180000});
-const atPage = index => browser.waitFor(`new URL(location.href).searchParams.get('page')==='${index}'`);
+const atPage = index => browser.waitFor(`history.state?.reader?.page===${index} && location.search==='' && location.hash===''`);
 try {
   await browser.viewport(1440,1000);
   await browser.navigate(base + '/?template=landing&page=13');

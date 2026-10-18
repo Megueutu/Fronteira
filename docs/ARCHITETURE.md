@@ -8,6 +8,8 @@ Aplicação estática com JavaScript, HTML/CSS e WebGL nativos, sem bibliotecas,
 
 A interface foi extraída da Energia Atômica para `index.html`, `src/reader-shell.css` e `src/reader-shell.js`. O CSS é restrito à interface e não altera a composição das páginas ou os hashes de suas texturas. O sumário usa o mesmo diálogo nativo e histórico de foco das interações, apresentado como painel lateral. O fundo orgânico reutiliza a implementação existente; fica estático em 3D e com movimento reduzido e pausa quando a aba está oculta. A edição autocontida anterior permanece no histórico do Git, não como uma segunda aplicação.
 
+Por esclarecimento do responsável em 2026-10-18, a URL visível fica somente na raiz, sem `template`, `page` ou fragmentos. Parâmetros de links existentes são consumidos apenas na abertura; cada atualização grava modo e página em `history.state.reader` e remove a busca e o fragmento com `replaceState`. Isso preserva o prefixo `/Fronteira/` do Pages. Um novo carregamento da raiz inicia na capa em HTML.
+
 | Arquivo | Responsabilidade |
 | --- | --- |
 | `src/content.js` | Vinte páginas, imagens, bibliografia, destinos do sumário e composição HTML. |
@@ -46,7 +48,7 @@ No celular, o HTML mostra uma página em fluxo vertical, com corpo de 18 px e um
 
 Implementado em 2026-10-17 a pedido do responsável. `?template=landing` abre a edição como site: capa com título e fotografia lado a lado no desktop; vinte artigos em fluxo, com títulos laterais, texto legível e sumário em cartões. No celular, os blocos empilham. Esse modo não usa a escala fixa de impressão nem a textura WebGL.
 
-`src/app.js` compõe `#landing-view` uma única vez com a mesma função `pageHTML`, acrescenta IDs de destino e um título principal `h1`, e reutiliza a delegação de interações existente. A seleção é sincronizada por um `IntersectionObserver` com a faixa visível abaixo da barra fixa. Sumário, Home/End e setas levam à seção; o destino recebe foco programático no título. A URL mantém `template=landing&page=N`. Ao sair, a posição é ajustada ao par de páginas quando necessário. Zoom de página e a ampliação de abertura ficam ocultos nesse modo; as ampliações de fotos, gráficos e notas continuam disponíveis.
+`src/app.js` compõe `#landing-view` uma única vez com a mesma função `pageHTML`, acrescenta IDs de destino e um título principal `h1`, e reutiliza a delegação de interações existente. A seleção é sincronizada por um `IntersectionObserver` com a faixa visível abaixo da barra fixa. Sumário, Home/End e setas levam à seção; o destino recebe foco programático no título. Desde 2026-10-18, modo e página ficam em `history.state.reader`, mantendo a URL somente na raiz. Ao sair, a posição é ajustada ao par de páginas quando necessário. Zoom de página e a ampliação de abertura ficam ocultos nesse modo; as ampliações de fotos, gráficos e notas continuam disponíveis.
 
 Foram consultados os guias de [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) e [scroll-margin-top](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/scroll-margin-top) da MDN. A implementação usa APIs nativas do navegador e os componentes e assets locais; não incorpora código externo nem nova biblioteca.
 

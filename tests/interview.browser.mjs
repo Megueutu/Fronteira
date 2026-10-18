@@ -51,9 +51,9 @@ try {
 
   // O suplemento não pode deslocar os destinos das páginas posteriores.
   await browser.click('#next');
-  await browser.waitFor('new URL(location.href).searchParams.get("page")==="18" && document.activeElement.id==="landing-title-17"');
+  await browser.waitFor('history.state?.reader?.page===18 && document.activeElement.id==="landing-title-17"');
   await browser.click('#previous');
-  await browser.waitFor('new URL(location.href).searchParams.get("page")==="17"');
+  await browser.waitFor('history.state?.reader?.page===17');
   await browser.evaluate('document.querySelector("#interview-adolfo").scrollIntoView({block:"start"})');
   await visitInlineImages();
   await capture('inline-desktop');

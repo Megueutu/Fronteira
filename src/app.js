@@ -53,7 +53,8 @@ if (renderIndex !== null) {
       sourcePanel.hidden ||= !blocks;
     } else if (!sourcePanel.children.length) sourcePanel.hidden = true;
     document.querySelector('#reading-progress').style.width = `${(single() ? pageIndex + 1 : Math.min(spread() * 2 + 2,pages.length)) / pages.length * 100}%`;
-    const url = new URL(location.href); url.searchParams.set('template',mode); url.searchParams.set('page',String(pageIndex + 1)); if (mode === 'landing') url.hash = ''; history.replaceState(null,'',url);
+    // Links antigos são lidos na abertura; a navegação mantém apenas a raiz visível.
+    history.replaceState({ ...history.state, reader: { mode, page: pageIndex + 1 } },'',location.pathname);
   }
   function observeLanding() {
     landingObserver?.disconnect();

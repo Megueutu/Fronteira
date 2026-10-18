@@ -22,9 +22,9 @@ try {
   }
   await b.viewport(1440,900);
   await b.click('#open-index'); await b.click('dialog [data-jump="11"]');
-  await b.waitFor("new URL(location.href).searchParams.get('page')==='12'");
+  await b.waitFor("history.state?.reader?.page===12");
   await b.click('#next');
-  await b.waitFor("new URL(location.href).searchParams.get('page')==='13'");
+  await b.waitFor("history.state?.reader?.page===13");
   await b.click('#landing-payback [data-action="calculator"]');
   assert.ok(await b.evaluate("document.querySelector('dialog [data-source-id=group]').textContent.includes('Tabela 4')"));
   await b.click('#close-dialog');

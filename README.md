@@ -10,11 +10,11 @@ Requer Node.js 22 ou superior. Não há dependências para instalar.
 npm start
 ```
 
-Abra [a revista](http://localhost:3000). O modo inicial é **Revista**, com páginas HTML interativas. A barra oferece também 3D e rolagem contínua; os três modos pertencem à mesma revista e conservam a posição de leitura. `?page=13` abre a região correspondente da edição.
+Abra [a revista](http://localhost:3000). O modo inicial é **Revista**, com páginas HTML interativas. A barra oferece também 3D e rolagem contínua; os três modos pertencem à mesma revista e conservam a posição de leitura. O endereço permanece apenas na raiz, sem parâmetros ou fragmentos, inclusive ao navegar. Links antigos como `?page=13` são aceitos na abertura e depois normalizados; a posição é mantida no estado do leitor, não na URL. Recarregar a raiz volta à capa.
 
 Desde 2026-10-18, a raiz reúne o conteúdo da Fronteira com a interface da Energia Atômica: barra compacta, ícones Material Symbols, controles de zoom, sumário lateral e fundo orgânico. O endereço antigo `edicoes/energia-atomica.html` apenas redireciona para a raiz e conserva parâmetros de leitura; links `#pN` são mapeados ao assunto correspondente. O redirecionamento também funciona em `/Fronteira/` no GitHub Pages. Não há uma segunda edição independente.
 
-O seletor também oferece [Página inteira](http://localhost:3000/?template=landing): a edição em formato de site, com capa ampla e vinte seções em rolagem contínua. Sumário e botões levam diretamente às seções; a URL acompanha a leitura. `?template=landing&page=13` abre a seção correspondente à página 13. A troca entre os três modos conserva a posição editorial, ajustada ao par no 3D/HTML desktop.
+O seletor também oferece Página inteira: a edição em formato de site, com capa ampla e vinte seções em rolagem contínua. Sumário e botões levam diretamente às seções; a posição acompanha a leitura no estado interno, com o endereço limpo. Links antigos com `?template=landing&page=13` continuam abrindo a seção correspondente. A troca entre os três modos conserva a posição editorial, ajustada ao par no 3D/HTML desktop.
 
 A entrevista com Adolfo Braid é um suplemento após a página 17 em Página inteira e na leitura contínua. O sumário e a ação da página 17 abrem a seção completa nos três modos. `?template=landing&page=17&interview=adolfo` abre diretamente a entrevista, com trajetória, sínteses das respostas, roteiro completo e fotografias institucionais creditadas. As vinte páginas originais são preservadas.
 

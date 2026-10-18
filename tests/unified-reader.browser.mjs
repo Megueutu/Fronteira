@@ -9,6 +9,7 @@ try {
   await browser.viewport(1440,1000);
   await browser.navigate(base+'/');
   await browser.waitFor("document.body?.dataset.readerMode==='html' && document.querySelectorAll('#html-book>article').length===2");
+  assert.equal(await browser.evaluate('location.pathname+location.search+location.hash'),new URL(base).pathname);
   await browser.evaluate("Promise.all([...document.querySelectorAll('#html-book img')].map(image=>image.decode()))");
   await writeFile('artifacts/unified/desktop.png',await browser.screenshot());
   await browser.click('#open-index');
@@ -32,6 +33,7 @@ try {
   await browser.click('[data-mode="3d"]');
   await browser.waitFor("document.querySelector('#loading').hidden && document.querySelector('#book-canvas').dataset.textureCount==='2'");
   assert.equal(await browser.evaluate("document.querySelector('#stage-error').hidden"),true);
+  assert.equal(await browser.evaluate('location.search+location.hash'),'');
   await writeFile('artifacts/unified/3d.png',await browser.screenshot());
   for (const width of [1024,768,390,320]) {
     await browser.viewport(width,844,width<760);
@@ -47,6 +49,7 @@ try {
   await browser.navigate(base+'/edicoes/energia-atomica.html?template=html&page=13');
   await browser.waitFor("location.pathname.endsWith('/') && document.querySelector('#page-status')?.textContent==='13 / 20'");
   assert.equal(await browser.evaluate("document.querySelectorAll('#html-book>article').length"),1);
+  assert.equal(await browser.evaluate('location.search+location.hash'),'');
   assert.deepEqual(browser.errors,[]);
   assert.deepEqual(browser.requests.filter(request=>!request.url.endsWith('/favicon.ico')),[]);
   console.log('PASS: unified root, Material toolbar, drawer/focus, zoom, three reading modes, responsive controls and legacy redirect.');

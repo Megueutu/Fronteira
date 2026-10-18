@@ -72,7 +72,7 @@ try {
  await close();
 
  await visit(root.world);
- await b.waitFor("new URL(location.href).searchParams.get('page')==='16'");
+ await b.waitFor("history.state?.reader?.page===16");
  const worldPage=await b.evaluate('location.search');
  await b.evaluate(`document.querySelector('${root.world} .explorer-track').focus({preventScroll:true})`);
  await b.key('ArrowRight','ArrowRight',39);
@@ -132,7 +132,7 @@ try {
  assert.equal(await b.evaluate("document.querySelectorAll('dialog [data-explorer=tariffs]').length"),1);
  await close();
  await b.key('Home','Home',36);
- await b.waitFor("new URL(location.href).searchParams.get('page')==='1' && document.querySelector('#stage').getAttribute('aria-busy')==='false' && document.querySelector('#loading').hidden && document.querySelectorAll('.hotspot').length===1");
+ await b.waitFor("history.state?.reader?.page===1 && document.querySelector('#stage').getAttribute('aria-busy')==='false' && document.querySelector('#loading').hidden && document.querySelectorAll('.hotspot').length===1");
  assert.equal(await b.evaluate("document.querySelectorAll('.hotspot').length"),1);
  assert.equal(await b.evaluate("document.querySelector('.hotspot').dataset.page"),'1');
  await b.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});

@@ -2,6 +2,8 @@
 
 ## Unificação da interface — 2026-10-18
 
+Esclarecimento posterior: o responsável pediu o endereço vazio após o domínio. O leitor agora mantém somente a raiz na barra de endereço, inclusive ao folhear, trocar modos ou rolar. Links antigos são interpretados na abertura e depois limpos. O estado de modo/página é mantido em memória e em `history.state.reader`; recarregar a raiz abre a capa. Os testes de navegação passaram a verificar esse estado e a ausência de busca/fragmento, em vez de exigir parâmetros visíveis.
+
 Pedido do responsável: usar o layout e os ícones da Energia Atômica com a revista Fronteira, em um único endereço na raiz. Foram preservados conteúdo, 20 páginas, suplemento de Adolfo Braid, fontes, fotografias, composição editorial e os leitores HTML, WebGL e rolagem. A interface passa a ter barra compacta com ícones Material, zoom/restauração/ajuste, navegação, sumário modal lateral, ampliação e fundo orgânico da Energia Atômica. HTML é a opção inicial; o seletor conserva os outros modos e a posição de leitura. O fundo fica estático durante o 3D, para evitar dois loops de animação concorrentes, e respeita movimento reduzido e visibilidade da aba.
 
 `edicoes/energia-atomica.html` agora redireciona para a raiz, preservando parâmetros e traduzindo links antigos `#pN` para o assunto correspondente. O redirecionamento relativo funciona tanto localmente quanto em `/Fronteira/`. O build e o workflow existentes publicam a versão unificada. A implementação antiga de 16 páginas continua disponível no Git, sem uma segunda revista ativa.
