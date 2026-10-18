@@ -64,11 +64,15 @@ As páginas fixas e as texturas mantêm as figuras estáticas. `pageHTML(...,{di
 
 ## Folheamento 3D
 
-WebGL desenha folhas segmentadas com deformação durante a virada, iluminação simplificada e texturas de frente/verso orientadas para a leitura. Camadas sugerem espessura. O enquadramento é fixo, sem câmera livre ou simulação física completa.
+WebGL desenha folhas segmentadas com deformação durante a virada, iluminação simplificada e texturas de frente/verso orientadas para a leitura. Camadas de papel sem texto sugerem espessura, evitando a repetição da impressão nas bordas. O enquadramento é automático, sem câmera livre ou simulação física completa.
 
 Carrega-se o par atual sob demanda. Uma virada mantém os pares de origem e destino; ao terminar, texturas que não pertencem à abertura atual são descartadas. Os testes conferem dois recursos ao estabilizar. Não se carregam as vinte páginas na GPU simultaneamente.
 
-Botões HTML são projetados sobre a faixa de ação das páginas e ocultados durante a virada. O texto das texturas não é selecionável; “Ler esta abertura” abre a composição HTML em tamanho confortável. O 3D mantém duas páginas no celular quando escolhido explicitamente; o modo inicial em uma visita móvel sem preferência na URL é HTML.
+Os controles HTML ficam abaixo do papel, identificados pelo número de página, ação e botão de fontes, e ficam ocultos durante a virada. No desktop acompanham a largura projetada da abertura; no celular empilham com alvos de pelo menos 44 px. O texto das texturas não é selecionável; “Ampliar leitura” abre a composição HTML em tamanho confortável. O 3D mantém duas páginas no celular quando escolhido explicitamente; o modo inicial em uma visita móvel sem preferência na URL é HTML.
+
+Refinamento de 18/10/2026: campo de visão de 20° e inclinação de cerca de 4° reduzem a deformação do texto. A distância considera largura e altura da abertura e aumenta suavemente durante a virada para acomodar a folha levantada. O palco se ajusta à proporção disponível no celular. Sombra externa discreta e sombra junto à lombada mantêm a percepção do papel. O buffer usa densidade entre 1,5 e 2; filtragem anisotrópica, limitada a 4, é opcional conforme a extensão disponível. Não há renderização contínua quando o leitor está parado.
+
+Foram consultadas as câmeras [PerspectiveCamera](https://threejs.org/docs/pages/PerspectiveCamera.html) e [OrthographicCamera](https://threejs.org/docs/pages/OrthographicCamera.html) do Three.js e a documentação MDN de [texturas WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL) e [filtragem anisotrópica](https://developer.mozilla.org/en-US/docs/Web/API/EXT_texture_filter_anisotropic). Mantido o renderer próprio; nenhuma biblioteca, código ou asset externo foi incorporado. `npm run test:3d` confere dez aberturas, seis larguras, fontes, foco, virada, movimento reduzido, cache e perda de contexto. Teste geométrico cobre a folha durante toda a trajetória. Não foram medidos FPS, consumo ou desempenho em hardware físico.
 
 Falha ao iniciar ou perda de contexto WebGL mostra a composição HTML e mantém a navegação. Não há recuperação automática do contexto perdido. Não se afirmam FPS, consumo energético ou compatibilidade em hardware real.
 
@@ -112,6 +116,14 @@ O código da nuvem foi recuperado de ZIP em 2026-10-15. O pacote não preservava
 Não há editor, importação de PDF, vídeo, capa com abertura/fechamento articulados, zoom gestual, arraste contínuo ou rotação livre da cena. Não foram homologados Safari, Firefox, aparelhos físicos, leitores de tela ou impressões do navegador. Os testes atuais são de Chromium headless no Windows com WebGL por software.
 
 ## Complementos de 18/10/2026
+
+### Finalização do acesso às fontes
+
+`sourceButtonHTML` agora usa a mesma contagem consolidada de `pageSourceRecords` tanto no cartão da leitura fluida quanto no rodapé compacto. O rodapé fixo ganhou livro, rótulo de ação, contagem e seta, substituindo a indicação apenas numérica. A introdução das referências explica o acesso pelos botões de cada matéria. Os cartões, localizadores, bibliografia e histórico de diálogos foram preservados.
+
+Pesquisa de interação: [W3C WAI, botões](https://www.w3.org/WAI/ARIA/apg/patterns/button/) e [diálogo modal](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/). Reutilizados o botão e o diálogo nativos, com `aria-haspopup="dialog"`, teclado e retorno do foco; nenhuma biblioteca ou asset externo incorporado. O teste `test:sources` inclui agora a consulta pelo botão compacto do HTML desktop.
+
+Durante a regeneração, o OneDrive causou erros temporários de abertura de JPEGs existentes. `writeGenerated` mantém a comparação de bytes e tenta novamente até cinco vezes em erros de arquivo ocupado/acesso temporário, com espera limitada; erros persistentes continuam sendo propagados. A geração final percorreu as vinte páginas e preservou os sete alertas anteriores.
 
 ### Distribuição editorial na Página inteira
 

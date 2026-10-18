@@ -98,7 +98,8 @@ if (renderIndex !== null) {
     frame.style.width = `${760 * count * scale}px`; frame.style.height = `${1064 * scale}px`;
     book.style.transform = `scale(${scale})`; book.style.width = `${760 * count}px`;
     book.classList.toggle('single-page',single());
-    stage.style.setProperty('--stage-height',`${Math.max(availableHeight + 30,mode === 'html' ? 1064 * scale + 30 : 0)}px`);
+    const stageHeight = mode === '3d' ? Math.min(availableHeight + 96,Math.max(340,stage.clientWidth / 1.43 + 144)) : Math.max(availableHeight + 30,1064 * scale + 30);
+    stage.style.setProperty('--stage-height',`${stageHeight}px`);
   }
   function showHTML(animate = false, direction = 1) {
     if (mode === 'landing') { showLanding(); return; }

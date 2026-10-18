@@ -1,13 +1,13 @@
-import { pages, getSpread } from './content.js';
+import { getSpread } from './content.js';
 import { pageGeometry, projection, projectPoint } from './webgl-reader.js';
 
 const WIDTH = 1.43, HEIGHT = 2;
 const vertexSource = `attribute vec3 position; attribute vec2 uv; attribute vec3 normal;
 uniform mat4 matrix; varying vec2 vUV; varying float light;
-void main(){vUV=uv; light=.94+.06*abs(dot(normalize(normal),normalize(vec3(-.3,.5,1.)))); gl_Position=matrix*vec4(position,1.);}`;
-const fragmentSource = `precision mediump float; uniform sampler2D page; uniform float tint;
+void main(){vUV=uv; light=.985+.015*abs(dot(normalize(normal),normalize(vec3(-.3,.5,1.)))); gl_Position=matrix*vec4(position,1.);}`;
+const fragmentSource = `precision mediump float; uniform sampler2D page; uniform float tint; uniform float paperOnly; uniform float spine;
 varying vec2 vUV; varying float light;
-void main(){vec4 c=texture2D(page,vUV);float gutter=1.-.10*exp(-min(vUV.x,1.-vUV.x)*38.);gl_FragColor=vec4(c.rgb*light*gutter*tint,c.a);}`;
+void main(){vec4 c=mix(texture2D(page,vUV),vec4(.98,.985,.98,1.),paperOnly);float gutter=1.-.08*exp(-abs(vUV.x-spine)*48.);gl_FragColor=vec4(c.rgb*light*gutter*tint,c.a);}`;
 
 export async function create3DReader(onLost) {
   const canvas = document.querySelector('#book-canvas'), hotspots = document.querySelector('#hotspots');
@@ -29,6 +29,9 @@ export async function create3DReader(onLost) {
     const loc = gl.getAttribLocation(program,attribute); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);
   }
   const matrixLocation = gl.getUniformLocation(program,'matrix'), tintLocation = gl.getUniformLocation(program,'tint');
+  const paperLocation = gl.getUniformLocation(program,'paperOnly'), spineLocation = gl.getUniformLocation(program,'spine');
+  const anisotropy = gl.getExtension('EXT_texture_filter_anisotropic');
+  const filtering = anisotropy ? Math.min(4,gl.getParameter(anisotropy.MAX_TEXTURE_MAX_ANISOTROPY_EXT)) : 1;
   gl.uniform1i(gl.getUniformLocation(program,'page'),0); gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
   async function ensure(index) {
     if (textures.has(index)) return;
@@ -40,6 +43,7 @@ export async function create3DReader(onLost) {
       gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,image);
       gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+      if (anisotropy) gl.texParameterf(gl.TEXTURE_2D,anisotropy.TEXTURE_MAX_ANISOTROPY_EXT,filtering);
       textures.set(index,texture);
     })();
     pending.set(index,operation);
@@ -54,38 +58,38 @@ export async function create3DReader(onLost) {
   function dimensions() {
     const r = canvas.getBoundingClientRect(); width = r.width; height = r.height;
     if (!width || !height) return false;
-    const ratio = Math.min(devicePixelRatio || 1,2);
-    canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
+    const ratio = Math.min(Math.max(devicePixelRatio || 1,1.5),2);
+    const bufferWidth = Math.round(width * ratio), bufferHeight = Math.round(height * ratio);
+    if (canvas.width !== bufferWidth || canvas.height !== bufferHeight) { canvas.width = bufferWidth; canvas.height = bufferHeight; }
     matrix = projection(width / height); gl.viewport(0,0,canvas.width,canvas.height); gl.uniformMatrix4fv(matrixLocation,false,matrix); return true;
   }
-  function draw(side,index,progress = 0,offset = 0,tint = 1) {
+  function draw(side,index,progress = 0,offset = 0,tint = 1,paperOnly = false) {
     if (!textures.has(index)) return;
     const vertices = pageGeometry(side,progress,offset);
     gl.bindTexture(gl.TEXTURE_2D,textures.get(index)); gl.uniform1f(tintLocation,tint);
+    gl.uniform1f(paperLocation,Number(paperOnly)); gl.uniform1f(spineLocation,(side === 1) === (progress <= .5) ? 0 : 1);
     gl.bufferData(gl.ARRAY_BUFFER,vertices,gl.DYNAMIC_DRAW); gl.drawArrays(gl.TRIANGLES,0,vertices.length / 8);
   }
   function updateHotspots() {
     if (!matrix || !width) return;
-    for (const button of hotspots.children) {
-      const index = Number(button.dataset.page), i = index - spread * 2;
-      const page = pages[index]; if (!page) continue;
-      const x = i === 0 ? -WIDTH * (1 - page.action.x) : WIDTH * page.action.x;
-      const point = projectPoint(matrix,x,HEIGHT * (.5 - page.action.y),.015,width,height);
-      const y = HEIGHT * (.5 - page.action.y);
-      const center = projectPoint(matrix,0,y,0,width,height), edge = projectPoint(matrix,WIDTH,y,0,width,height);
-      button.style.left = `${point.x}px`; button.style.top = `${point.y}px`; button.style.width = `${Math.max(90,(edge.x - center.x) * .90)}px`;
-    }
+    const left = projectPoint(matrix,-WIDTH,-HEIGHT/2,0,width,height), right = projectPoint(matrix,WIDTH,-HEIGHT/2,0,width,height);
+    hotspots.style.width = `${Math.min(width,Math.max(320,right.x-left.x))}px`;
   }
   function makeHotspots() {
-    hotspots.innerHTML = getSpread(spread).map((page,i) => page.id==='cover' ? '' : `<button type="button" class="hotspot" data-action="${page.action.type}" data-page="${spread * 2 + i}">${page.action.label}<span aria-hidden="true">↗</span></button>`).join(''); updateHotspots();
+    hotspots.setAttribute('role','group'); hotspots.setAttribute('aria-label','Recursos das páginas desta abertura');
+    hotspots.innerHTML = getSpread(spread).map((page,i) => page.id==='cover' ? '' : `<div class="spread-action" data-side="${i===0?'left':'right'}"><span class="spread-action-number" aria-label="Página ${spread*2+i+1}">${String(spread*2+i+1).padStart(2,'0')}</span><button type="button" class="hotspot" data-action="${page.action.type}" data-page="${spread*2+i}"><span>${page.action.label}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button><button type="button" class="spread-source-action" data-action="sources" data-page="${spread*2+i}" aria-label="Fontes da página ${spread*2+i+1}" aria-haspopup="dialog" title="Fontes da página ${spread*2+i+1}"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button></div>`).join(''); updateHotspots();
   }
   function render(now = performance.now()) {
     if (lost || !matrix) return;
+    const raw = animation ? Math.min(1,(now - animation.start) / 850) : 0;
+    const progress = raw * raw * (3 - 2 * raw);
+    matrix = projection(width / height,animation ? WIDTH*1.25*Math.sin(progress*Math.PI) : 0);
+    gl.uniformMatrix4fv(matrixLocation,false,matrix);
     gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     const base = animation ? animation.from : spread;
-    for (let i = 4; i >= 1; i--) { draw(-1,base * 2,0,-i * .012,.83 + .025 * i); draw(1,base * 2 + 1,0,-i * .012,.83 + .025 * i); }
+    for (let i = 4; i >= 1; i--) { draw(-1,base * 2,0,-i * .004,.94 + .012 * (4-i),true); draw(1,base * 2 + 1,0,-i * .004,.94 + .012 * (4-i),true); }
     if (!animation) { draw(-1,spread * 2); draw(1,spread * 2 + 1); return; }
-    const raw = Math.min(1,(now - animation.start) / 850), progress = raw * raw * (3 - 2 * raw), forward = animation.to > animation.from;
+    const forward = animation.to > animation.from;
     draw(-1,(forward ? animation.from : animation.to) * 2); draw(1,(forward ? animation.to : animation.from) * 2 + 1);
     const index = forward ? (progress <= .5 ? animation.from * 2 + 1 : animation.to * 2) : (progress <= .5 ? animation.from * 2 : animation.to * 2 + 1);
     draw(forward ? 1 : -1,index,progress,.018);

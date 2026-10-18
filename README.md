@@ -27,6 +27,7 @@ O workflow [Deploy GitHub Pages](.github/workflows/pages.yml) executa os testes,
 ## Ler e explorar
 
 - Botões e setas do teclado viram páginas. Home volta à capa; End vai ao fim.
+- No 3D, os controles abaixo da abertura indicam a página e abrem seus recursos ou fontes, sem cobrir o papel.
 - O sumário leva a uma seção. “Ler esta abertura” amplia o conteúdo em HTML; “Leitura contínua” reúne as 20 páginas.
 - Fotografias ampliam, a galeria aceita botões e setas e cada imagem tem contexto, autoria e licença.
 - O gráfico da matriz permite filtros. Diagramas revelam etapas. O laboratório de payback permite mudar premissas. A linha do tempo abre seis trajetórias e suas fontes.
@@ -49,6 +50,7 @@ npm run test:tariffs
 npm run test:layout
 npm run test:reactor
 npm run test:sources
+npm run test:3d
 ```
 
 O teste de navegador precisa do servidor ativo e de um Chromium instalado. Aceita `CHROMIUM_PATH` e `TEST_URL`; no Windows procura também uma instalação local do Chrome for Testing headless ou Chrome. Exemplo PowerShell:

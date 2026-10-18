@@ -219,6 +219,24 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Validação.** `test:sources` confere nome/contagem no rodapé, teclado, URLs exatas, localizadores, fontes do gráfico de tarifas, histórico de créditos, Escape/foco, larguras 1440/768/390/320 e consulta a partir da leitura 3D. `test:citations` passou. `npm test`: 23/23. Capturas de rodapé e janela em desktop e celular revisadas em `artifacts/sources/`. Vinte texturas regeneradas e vinte PNGs revisados, com os mesmos sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18), sem novo alerta ou imagem ausente. O teste geral de navegador não foi declarado aprovado nesta etapa. Próximo passo: revisão dos localizadores e da apresentação pelo grupo.
 
+## Finalização do rodapé de fontes (2026-10-18)
+
+**Implementado.** O texto compacto “FONTES [5 · 12]” deu lugar a “Ver fontes”, com ícone, contagem consolidada dos documentos e seta. Bordas, fundo, foco e área lógica de 44 px tornam o acesso reconhecível como botão. As margens aproveitam o espaço existente, mantendo os mesmos limites de conteúdo e ações nas páginas fixas. O cartão em fluxo usa “Ver fontes desta matéria”; a introdução da bibliografia descreve esse acesso. Documentos, URLs, localizadores e notas de origem foram preservados.
+
+**Validação.** `npm test`: 23/23. Passaram `test:sources`, `test:citations` e `test:landing`. Conferidos botão compacto, contagem, teclado por Espaço, abertura da janela, Escape e retorno do foco; links exatos e fontes dos gráficos; histórico de créditos; leitura ampliada do 3D; larguras 1440/768/390/320 px. Capturas de cartões e janela em desktop/celular e do rodapé paginado revisadas em `artifacts/sources/`.
+
+**Texturas e continuidade.** Vinte texturas regeneradas, com os vinte PNGs revisados em cinco folhas de conferência. Sem imagens ausentes ou novo alerta; permanecem os sete anteriores (06, 08, 09, 10, 13, 14 e 18), por isso o gerador retorna 1. Incluídas tentativas limitadas de gravação no gerador para arquivos temporariamente ocupados pelo OneDrive. O teste geral de navegador não foi declarado aprovado nesta etapa. Próximo passo: revisão visual pelo responsável e revisão separada das sete pendências anteriores de composição.
+
+## Apresentação da abertura em 3D (2026-10-18)
+
+**Implementado.** A câmera ficou mais frontal e passou a enquadrar a abertura pela largura e pela altura disponíveis, recuando durante a virada para acomodar a folha levantada. A densidade do canvas foi aumentada e há filtragem anisotrópica opcional. As camadas inferiores agora mostram papel sem impressão repetida nas bordas, com sombra externa suave e sombra junto à lombada. O palco móvel acompanha a proporção da abertura.
+
+**Controles.** Ações e fontes ficam abaixo do papel, identificadas pelo número de página, sem cobrir o conteúdo ou o rodapé impresso. Dois grupos lado a lado no desktop e empilhados no celular; botões de ao menos 44 × 44 px, foco e hover. Os controles ficam ocultos durante a virada. Capa/sumário, recursos existentes e histórico de diálogos foram preservados.
+
+**Validação.** `npm test`: 23/23. Passaram `test:3d`, `test:sources`, `test:citations` e `test:landing`. O teste dedicado verificou seis larguras (1896, 1440, 1024, 768, 390 e 320 px), ausência de transbordamento e de controles sobre o papel, abertura de fontes e linha do tempo, teclado/Escape/foco, dez aberturas, virada real, movimento reduzido, duas texturas ao estabilizar, leitura ampliada e fallback por perda de WebGL. A verificação geométrica amostrou 21 posições da folha em ambos os sentidos e três proporções, sem corte no enquadramento. Capturas de desktop, tablet e celular revisadas em `artifacts/reader-3d/`.
+
+**Texturas e continuidade.** Vinte texturas regeneradas e vinte PNGs revisados em cinco folhas de conferência, sem imagens ausentes ou novos alertas. Permanecem os sete anteriores (06, 08, 09, 10, 13, 14 e 18); o gerador conclui com saída 1 por eles. O teste geral `test:browser` não foi declarado aprovado; esta etapa tem teste próprio do 3D. Não foram medidos desempenho, consumo ou compatibilidade em aparelhos físicos. Próximo passo: revisão visual pelo responsável no dispositivo de apresentação; pendências anteriores de composição seguem separadas.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

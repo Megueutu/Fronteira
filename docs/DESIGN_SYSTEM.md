@@ -40,7 +40,7 @@ O suplemento de entrevista usa a mesma base branca e verde `#1E7349`, Georgia e 
 
 O átomo decorativo da capa usa três elipses e um núcleo fixo. A bolinha menor começa na curva superior esquerda, centrada no traço, e percorre a elipse inclinada em 35° em oito segundos, com velocidade constante via SVG `animateMotion`. O caminho compartilha centro e raios com o arco (50, 50; 44 × 17). Em movimento reduzido, impressão e geração de texturas, só a bolinha estática aparece na posição inicial. HTML, Página inteira e leitura contínua usam a animação; o 3D mantém a composição estática da textura.
 
-- Botão de página: ação principal com divisores finos, texto verde e seta. No 3D, botão HTML projetado sobre a posição correspondente.
+- Botão de página: ação principal com divisores finos, texto verde e seta. No 3D, os controles ficam abaixo da abertura, associados pelo número da página.
 - Fotografia: botão de ampliação, contexto e crédito; ampliação com legenda completa e links de autoria/licença.
 - Quadro de equilíbrio: duas áreas com a mesma importância, sem oposição “verde bom / vermelho ruim”.
 - Dialog: título acessível, foco inicial no fechamento, Escape, foco devolvido ao acionador e histórico para interações abertas da leitura contínua.
@@ -135,6 +135,14 @@ Em até 760 px, a sequência fica vertical, com círculos de 64 px e desenhos de
 
 ## Acesso às fontes (18/10/2026)
 
-No fluxo, o botão “Fontes desta matéria” ocupa o rodapé com ícone de livro, contagem e nomes das referências, seta e borda verde. Altura mínima de 88 px, ícone em área de 44 px, título de 16 px e descrição de 13 px. No celular, o ícone usa área de 32 × 36 px dentro do botão, título de 14 px e descrição de 12 px; o alvo permanece maior que 44 px. Nomes podem quebrar linha, sem corte por reticências. Raios de 8 px e cores existentes. Foco visível e hover em `--soft`.
+No fluxo, o botão “Ver fontes desta matéria” ocupa o rodapé com ícone de livro, contagem e nomes das referências, seta e borda verde. Altura mínima de 88 px, ícone em área de 44 px, título de 16 px e descrição de 13 px. No celular, o ícone usa área de 32 × 36 px dentro do botão, título de 14 px e descrição de 12 px; o alvo permanece maior que 44 px. Nomes podem quebrar linha, sem corte por reticências. Raios de 8 px e cores existentes. Foco visível e hover em `--soft`.
+
+Nas páginas fixas, o antigo texto “FONTES [5 · 12]” foi substituído por um botão compacto “Ver fontes”, com livro, contagem de documentos e seta. Altura lógica de 44 px; margens verticais negativas aproveitam o respiro do rodapé sem reduzir a área do texto ou sobrepor a ação acima. O leitor escala o botão junto com a página. A contagem reúne fontes do texto e dos gráficos, como na janela de consulta. Nas páginas sem referências específicas, o rótulo é “Fontes da edição”. A mesma composição aparece nas texturas do 3D; a consulta interativa permanece disponível na leitura HTML ampliada.
 
 A janela de fontes usa cartões verticais com identificação do documento, domínio, localizadores e link de pelo menos 44 px. Título em Georgia, metadados em Arial. Detalhamento por trecho e bibliografia em elementos `details`. Aceitação: contagem corresponde aos documentos da matéria, links apontam às URLs registradas, fonte de gráfico não é omitida, não há localizador redundante nem transbordamento em 1440/768/390/320 px; Escape devolve foco ao botão, inclusive após consultar créditos.
+
+## Apresentação do leitor 3D (18/10/2026)
+
+Abertura quase frontal, ajustada ao espaço disponível, com lombada discreta, bordas de papel sem impressão repetida e sombra suave no fundo verde existente. A câmera recua durante a virada e retorna ao enquadramento de leitura. A densidade do canvas fica entre 1,5 e 2; isso não representa uma medição de desempenho ou garantia de legibilidade de texto pequeno em celulares.
+
+Os controles ficam em dois grupos sob a abertura, fora da área impressa. Cada grupo mostra número da página em Arial 12 px, ação em Arial 13 px com seta e botão de fontes com livro. Fundo branco, borda `--line`, raio de 8 px, hover em `--soft` e foco verde. Todos os botões têm ao menos 44 × 44 px. No celular, os grupos empilham, com ação de 12 px e quebra de linha; a altura do palco acompanha a largura para reduzir espaço vazio. Na capa, o acesso ao sumário conserva a associação à página 02. Fontes e recursos reutilizam os diálogos com Escape e retorno do foco.

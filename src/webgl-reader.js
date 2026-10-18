@@ -5,11 +5,12 @@ function multiply(a, b) {
   for (let c = 0; c < 4; c++) for (let r = 0; r < 4; r++) for (let k = 0; k < 4; k++) out[c * 4 + r] += a[k * 4 + r] * b[c * 4 + k];
   return out;
 }
-export function projection(aspect) {
-  const f = 1 / Math.tan(Math.PI / 9), near = .1, far = 50;
+export function projection(aspect, lift = 0) {
+  const f = 1 / Math.tan(Math.PI / 18), near = .1, far = 50;
   const perspective = new Float32Array([f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, (far + near) / (near - far), -1, 0, 0, 2 * far * near / (near - far), 0]);
-  const angle = -.22, c = Math.cos(angle), s = Math.sin(angle);
-  const tilt = new Float32Array([1, 0, 0, 0, 0, c, s, 0, 0, -s, c, 0, 0, 0, -Math.max(3.25, 4.3 / aspect), 1]);
+  const angle = -.07, c = Math.cos(angle), s = Math.sin(angle);
+  const distance = Math.max(f * WIDTH / aspect, f * HEIGHT / 2) / .92 + Math.abs(s) * HEIGHT / 2 + .03 + lift;
+  const tilt = new Float32Array([1, 0, 0, 0, 0, c, s, 0, 0, -s, c, 0, 0, 0, -distance, 1]);
   return multiply(perspective, tilt);
 }
 export function projectPoint(matrix, x, y, z, width, height) {

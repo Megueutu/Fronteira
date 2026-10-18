@@ -50,7 +50,22 @@ try {
   if(width===390) await frame('dialog-mobile');
   await close();
  }
- await b.viewport(1440,900);await b.click('[data-mode="3d"]');
+ await b.viewport(1440,900);await b.click('[data-mode="html"]');
+ await b.click('#open-index');await b.click('dialog [data-jump="6"]');
+ const compact='.html-book [data-page-index="6"] .source-link';
+ await b.waitFor(`document.querySelector('${compact}')`);
+ assert.notEqual(await b.evaluate(`getComputedStyle(document.querySelector('${compact} .source-compact')).display`),'none');
+ assert.equal(await b.evaluate(`document.querySelector('${compact} .source-count').textContent`),String(expected.length));
+ assert.equal(await b.evaluate(`getComputedStyle(document.querySelector('${compact}')).minHeight`),'44px');
+ assert.ok(await b.evaluate(`(()=>{const button=document.querySelector('${compact}'),footer=button.closest('.page-tail'),action=footer.querySelector('.page-action');return button.getBoundingClientRect().top>=action.getBoundingClientRect().bottom})()`));
+ await frame('footer-paginated');
+ await b.waitFor("!document.querySelector('#interaction-dialog').open");
+ await b.evaluate(`document.querySelector('${compact}').focus({preventScroll:true})`);
+ assert.equal(await b.evaluate(`document.activeElement===document.querySelector('${compact}')`),true,await b.evaluate("document.activeElement.outerHTML"));
+ await b.key(' ','Space',32);await b.waitFor("document.querySelector('.source-catalog')");
+ assert.equal(await b.evaluate("document.querySelectorAll('.source-document').length"),expected.length);
+ await close();assert.ok(await b.evaluate(`document.activeElement===document.querySelector('${compact}')`));
+ await b.click('[data-mode="3d"]');
  await b.click('#open-index');await b.click('dialog [data-jump="6"]');
  await b.waitFor("document.querySelector('#loading').hidden && document.querySelector('#book-canvas').dataset.textureCount==='2'");
  await b.click('#read-spread');await b.click('dialog [data-page-index="6"] .source-link');
@@ -59,5 +74,5 @@ try {
  await b.key('Escape','Escape',27);await b.waitFor("document.querySelector('.linear-content') && document.activeElement.matches('.source-link')");
  await close();
  assert.deepEqual(b.errors,[]);assert.deepEqual(b.requests,[]);
- console.log('PASS: named source footer/count, keyboard/dialog, exact document URLs/locators, tariff evidence, nested credits/focus, responsive bounds and 3D reading.');
+ console.log('PASS: named and compact source footers/counts, keyboard/dialog, exact document URLs/locators, tariff evidence, nested credits/focus, responsive bounds and 3D reading.');
 } finally {await b.close();}

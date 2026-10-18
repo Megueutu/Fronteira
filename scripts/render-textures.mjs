@@ -9,7 +9,13 @@ const selected = process.argv.slice(2).map(value=>Number(value)-1);
 async function writeGenerated(file, data) {
   const previous = await readFile(file).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
   if (previous?.equals(Buffer.isBuffer(data) ? data : Buffer.from(data))) return;
-  await writeFile(file, data);
+  for (let attempt=0; ; attempt++) {
+    try { await writeFile(file, data); return; }
+    catch (error) {
+      if (attempt>=5 || !['EBUSY','EPERM','EACCES','UNKNOWN'].includes(error.code)) throw error;
+      await new Promise(resolve=>setTimeout(resolve,250*(attempt+1)));
+    }
+  }
 }
 await mkdir(new URL('../assets/textures/',import.meta.url),{recursive:true});
 await mkdir(new URL('../artifacts/pages/',import.meta.url),{recursive:true});

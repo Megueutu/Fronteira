@@ -74,13 +74,20 @@ test('folha curva no meio da virada e termina do outro lado sem espelhar o verso
   }
 });
 
-test('projeção mantém hotspots dentro da revista em desktop e celular', () => {
-  for (const [width, height] of [[1200, 600], [340, 540]]) {
-    const matrix = projection(width / height);
-    for (const x of [-.715, .715]) {
-      const p = projectPoint(matrix, x, -.68, .015, width, height);
-      assert.ok(p.x > 0 && p.x < width);
-      assert.ok(p.y > 0 && p.y < height);
+test('enquadramento mantém a abertura e a folha curva inteiras durante a virada', () => {
+  for (const [width, height] of [[1200, 600], [340, 260], [280, 210]]) {
+    for (let sample=0; sample<=20; sample++) {
+      const progress=sample/20;
+      const matrix=projection(width/height,1.43*1.25*Math.sin(progress*Math.PI));
+      for (const side of [-1,1]) {
+        for (const state of [0,progress]) {
+          const vertices=pageGeometry(side,state);
+          for(let i=0;i<vertices.length;i+=8) {
+            const p=projectPoint(matrix,vertices[i],vertices[i+1],vertices[i+2],width,height);
+            assert.ok(p.x>=0 && p.x<=width && p.y>=0 && p.y<=height,JSON.stringify({width,height,progress,p}));
+          }
+        }
+      }
     }
   }
 });
