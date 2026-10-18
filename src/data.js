@@ -1,3 +1,4 @@
+import { citationHTML } from './citations.js';
 export const matrixData = [
   { name: 'Hidrelétrica', value: 51.7, renewable: true },
   { name: 'Eólica', value: 15, renewable: true },
@@ -55,6 +56,6 @@ export const timeline = [
   { country: 'Coreia do Sul', year: '2017 / 2022', title: 'Mudança de orientação', text: 'A política de redução gradual defendida em 2017 deu lugar à retomada da aposta nuclear pelo governo iniciado em 2022, conforme o levantamento do MRE de 2024.', ref: 'korea' },
 ];
 export function timelineHTML(compact = false) {
-  return `<div class="timeline${compact ? ' compact-timeline' : ''}">${timeline.map((event, i) => `<${compact ? 'div' : 'button'} ${compact ? '' : `type="button" data-event="${i}" aria-pressed="${i === 0}"`} class="timeline-item"><span>${event.year}</span><strong>${event.country}</strong><small>${event.title}</small></${compact ? 'div' : 'button'}>`).join('')}</div>`;
+  return `<div class="timeline${compact ? ' compact-timeline' : ''}">${timeline.map((event, i) => `<${compact ? 'div' : 'button'} ${compact ? '' : `type="button" data-event="${i}" aria-pressed="${i === 0}"`} class="timeline-item"><span>${event.year}</span><strong>${event.country}</strong><small>${event.title}</small>${compact ? citationHTML({kind:'Fonte do recorte histórico',sources:[{id:event.ref}]},{className:'inline-citation'}) : ''}</${compact ? 'div' : 'button'}>`).join('')}</div>`;
 }
 export { decimal };

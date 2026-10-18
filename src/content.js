@@ -1,3 +1,4 @@
+import { references, citationHTML, visualEvidence, evidenceFor } from './citations.js';
 import { chartHTML, cycleHTML, scenarioTable, timelineHTML } from './data.js';
 import { adolfoInterview } from './interview.js';
 
@@ -10,33 +11,7 @@ export const teamMembers = [
   { id: 'lucas', name: 'Lucas Lima', portrait: '/assets/team/lucas-lima.jpg' },
 ];
 export const authors = teamMembers.map(member => member.name);
-export const references = [
-  { id: 'epe', name: 'EPE. Anuário Estatístico de Energia Elétrica 2026, ano-base 2025.', url: 'https://dashboard.epe.gov.br/apps/anuario-livro/livro/pt/destaques.html' },
-  { id: 'ben', name: 'EPE. Balanço Energético Nacional 2026, ano-base 2025.', url: 'https://www.epe.gov.br/pt/publicacoes-dados-abertos/publicacoes/balanco-energetico-nacional-2026' },
-  { id: 'sin', name: 'ONS. O Sistema Interligado Nacional.', url: 'https://www.ons.org.br/paginas/sobre-o-sin/o-que-e-o-sin' },
-  { id: 'santos', name: 'SANTOS, Milton. A natureza do espaço. Hucitec, 1996. SANTOS; SILVEIRA. O Brasil: território e sociedade no início do século XXI. Record, 2001. Apoio: biografia do autor.', url: 'https://miltonsantos.com.br/site/biografia/' },
-  { id: 'iaea', name: 'AIEA. What is nuclear energy? The science of nuclear power.', url: 'https://www.iaea.org/newscenter/news/what-is-nuclear-energy-the-science-of-nuclear-power' },
-  { id: 'waste', name: 'AIEA. Spent fuel management.', url: 'https://www.iaea.org/topics/spent-fuel-management' },
-  { id: 'inb', name: 'INB. Ciclo do combustível nuclear.', url: 'https://www.inb.gov.br/Nossas-Atividades/Ciclo-do-combustivel-nuclear' },
-  { id: 'enrichment', name: 'INB. Enriquecimento de urânio e salvaguardas.', url: 'https://www.inb.gov.br/Nossas-Atividades/Ciclo-do-combustivel-nuclear/Enriquecimento' },
-  { id: 'wallerstein', name: 'WALLERSTEIN, Immanuel. The Modern World-System. Academic Press, 1974; World-Systems Analysis: An Introduction. Duke University Press, 2004.', url: 'https://www.dukeupress.edu/world-systems-analysis' },
-  { id: 'critique', name: 'SKOCPOL, Theda. Wallerstein’s World Capitalist System: A Theoretical and Historical Critique. American Journal of Sociology, v. 82, n. 5, 1977.', url: 'https://doi.org/10.1086/226431' },
-  { id: 'cost', name: 'EPE. Nota de esclarecimento sobre Angra 3. 11 abr. 2024.', url: 'https://www.epe.gov.br/pt/imprensa/noticias/nota-de-esclarecimento-abril-de-2024' },
-  { id: 'group', name: 'Pesquisa do grupo. Revista Energia Nuclear Brasil, DOCX e cenários de payback fornecidos pelo grupo. Hipóteses acadêmicas de 2025; não são orçamento ou tarifa vigentes.', url: null },
-  { id: 'weber', name: 'WEBER, Max. Economia e sociedade. Editora UnB, 2004. Referência de apoio: Stanford Encyclopedia of Philosophy, Max Weber.', url: 'https://plato.stanford.edu/entries/weber/' },
-  { id: 'messmer', name: 'INA. Le lancement du nucléaire civil en France en 1974. Arquivo histórico.', url: 'https://www.ina.fr/ina-eclaire-actu/le-lancement-du-nucleaire-civil-en-france-en-1974' },
-  { id: 'germany', name: 'Governo alemão. Encerramento dos últimos reatores, 15 abr. 2023.', url: 'https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Pressemitteilungen/2023/04/20230413-deutschland-beendet-das-zeitalter-der-atomkraft.html' },
-  { id: 'belgium', name: 'Governo belga. Acordo de extensão de Doel 4 e Tihange 3, 2023.', url: 'https://news.belgium.be/nl/engie-en-de-belgische-federale-regering-bereiken-een-akkoord-over-de-verlenging-van-de' },
-  { id: 'japan', name: 'Missão do Japão em Viena. Declaração à AIEA sobre a retomada nuclear, 2015.', url: 'https://www.vie-mission.emb-japan.go.jp/itpr_en/PR14_09_2015_EN_HOD.html' },
-  { id: 'italy', name: 'AIEA. Nuclear Technology Review 2012: referendo italiano de 2011.', url: 'https://www.iaea.org/sites/default/files/gc/gc56inf-3_en.pdf' },
-  { id: 'lithuania', name: 'Parlamento Europeu. Ignalina Nuclear Power Plant, 2011.', url: 'https://www.europarl.europa.eu/doceo/document/E-7-2011-008709_EN.html' },
-  { id: 'korea', name: 'MRE. Transição energética: experiências internacionais, maio de 2024.', url: 'https://www.gov.br/mdic/pt-br/composicao/se/cndi/gts/tematicos/gt-cb/entregas/arquivos/TransicaoEnergeticaExperienciasInternacionaisMREmaio2024.pdf' },
-  { id: 'npt', name: 'ONU. Tratado sobre a Não Proliferação de Armas Nucleares.', url: 'https://www.un.org/en/conf/npt/2010/npttext.shtml' },
-  { id: 'polis', name: 'Instituto Pólis. Justiça energética: relatório de pesquisa, 2024.', url: 'https://escoladeativismo.org.br/wp-content/uploads/2025/04/justica_energetica.pdf' },
-  { id: 'interview', name: 'Pesquisa do grupo. Entrevista com Adolfo Braid: registro consolidado, referência 13/10/2026. Síntese de anotações e slides, com lacunas identificadas; não é transcrição integral.', url: null },
-  { id: 'adolfo-abdan', name: 'ABDAN. Perfil de Adolfo Braid no Nuclear Summit 2026.', url: 'https://abdan.glueup.com/event/nuclear-summit-2026-162855/speakers.html' },
-  { id: 'adolfo-cnen', name: 'CNEN. Participação de Adolfo Braid no projeto brasileiro de microrreator, dezembro de 2025.', url: 'https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/cerimonia-oficial-marca-o-inicio-formal-do-projeto-do-primeiro-microrreator-nuclear-brasileiro' },
-];
+export { references } from './citations.js';
 
 const photo = (file, title, caption, credit, url, license = 'Unsplash', licenseUrl = 'https://unsplash.com/license') => ({ src: `/assets/photos/${file}.jpg`, title, caption, credit, url, license, licenseUrl });
 export const photos = {
@@ -155,6 +130,12 @@ export const pages = [
   { id: 'references', kind: 'references', section: 'REFERÊNCIAS / CONTINUE A LEITURA', title: 'Volte às fontes.', subtitle: 'Fontes institucionais, obras teóricas e documentação da pesquisa.', body: ['Os números entre colchetes nas páginas remetem a esta seleção. Abra a lista completa para acessar os links, os recortes históricos e os créditos. Consulta e revisão desta edição: 16 de outubro de 2026.'], action: action('sources', 'Abra todas as referências') },
 ];
 
+// Keep the page's source button consistent with its paragraph-level evidence.
+for (const page of pages) {
+  const ids = page.body.flatMap((_,i)=>evidenceFor(page.id,i)?.sources.map(source=>source.id) || []);
+  if (ids.length) page.refs = [...new Set([...(page.refs || []),...ids])];
+}
+
 export const chapters = [
   { title: 'Editorial', page: 2, detail: 'Acesso à energia e autonomia tecnológica' },
   { title: 'Um Brasil Desigual', page: 3, detail: 'Panorama, território e Milton Santos' },
@@ -171,7 +152,7 @@ export function getSpread(index) { return pages.slice(clampSpread(index) * 2, cl
 export function formatPages(index) { const start = clampSpread(index) * 2; return `${String(start + 1).padStart(2, '0')} — ${String(Math.min(start + 2, pages.length)).padStart(2, '0')} / ${pages.length}`; }
 export const escapeHTML = text => String(text).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function referenceHTML(ids = [], all = false) {
-  return references.filter(ref => all || ids.includes(ref.id)).map(ref => `<li><span>${references.indexOf(ref) + 1}.</span> ${ref.url ? `<a href="${ref.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(ref.name)} ↗</a>` : escapeHTML(ref.name)}</li>`).join('');
+  return references.filter(ref => all || ids.includes(ref.id)).map(ref => `<li><span>${references.indexOf(ref) + 1}.</span> ${ref.url ? `<a href="${ref.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(ref.name)} ↗</a>` : escapeHTML(ref.name)}${all ? `<div class="reference-location">Local da informação: ${escapeHTML(ref.location)}</div>` : ''}</li>`).join('');
 }
 export function teamHTML() {
   return `<div class="team-grid">${teamMembers.map(member => `<figure class="team-member"><button type="button" class="team-portrait" data-action="member" data-member="${member.id}" aria-label="Ampliar foto de ${escapeHTML(member.name)}"><img src="${member.portrait}" alt="Retrato de ${escapeHTML(member.name)}" width="500" height="500" decoding="async" draggable="false"></button><figcaption>${escapeHTML(member.name)}</figcaption></figure>`).join('')}</div>`;
@@ -182,6 +163,13 @@ export function interviewEntryHTML() {
 export function interviewHTML({ inline = false } = {}) {
   const interview = adolfoInterview;
   const sourceLink = key => `<a href="${interview.sources[key].url}" target="_blank" rel="noopener noreferrer">${escapeHTML(interview.sources[key].label)} ↗</a>`;
+  const recordSource = location => citationHTML({kind:'Fonte das anotações',sources:[{id:'interview',location}]});
+  const careerSources = [
+    [{id:'aeita'}],
+    [{id:'interview',location:'§1, “Trajetória profissional e atuação no ciclo nuclear”.'},{id:'adolfo-abdan'}],
+    [{id:'adolfo-abdan'},{id:'adolfo-cnen'}],
+  ];
+  const analysisSources = [['wallerstein','inb'],['iaea','waste'],['santos','polis'],['cost','group'],['weber','adolfo-cnen']];
   const image = (key, primary = false) => {
     const art = interviewPhotos[key];
     return `<figure class="interview-photo"><button type="button" data-action="image" data-photo-key="${key}" aria-label="Ampliar: ${escapeHTML(art.title)}"><img src="${art.src}" alt="${escapeHTML(art.caption)}" width="${primary ? 1599 : 1600}" height="${primary ? 1066 : 970}" ${inline ? 'loading="lazy"' : ''} decoding="async"><span class="interview-photo-expand" aria-hidden="true">Ampliar ↗</span></button><figcaption>${escapeHTML(art.caption)}<br><a href="${art.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.credit)}</a> · <a href="${art.licenseUrl}" target="_blank" rel="noopener noreferrer">CC BY-ND 3.0</a></figcaption></figure>`;
@@ -189,23 +177,25 @@ export function interviewHTML({ inline = false } = {}) {
   return `<section class="interview-feature" ${inline ? 'id="interview-adolfo" aria-labelledby="interview-adolfo-title"' : 'aria-label="Entrevista com Adolfo Braid"'}>
     <header class="interview-heading"><p class="interview-eyebrow">PESQUISA DE CAMPO · ENTREVISTA DO GRUPO</p><${inline ? 'h2 id="interview-adolfo-title" tabindex="-1"' : 'h3'}>Adolfo Braid</${inline ? 'h2' : 'h3'}><p>${escapeHTML(interview.title)}</p></header>
     <div class="interview-hero"><div class="interview-profile"><p class="interview-eyebrow">QUEM CONVERSOU COM A GENTE</p><h3>${escapeHTML(interview.fullName)}</h3><p class="interview-role">${escapeHTML(interview.role)}</p><p>${escapeHTML(interview.introduction)}</p><a href="${interview.sources.abdan.url}" target="_blank" rel="noopener noreferrer">Perfil profissional e retrato na ABDAN ↗</a></div>${image('adolfoLicensing',true)}</div>
+    ${recordSource('Contexto e alcance; Resumo da conversa; §1 (trajetória), §4 (posição sobre a matriz) e §6 (microrreatores).')}
     <p class="interview-method">${escapeHTML(interview.method)}</p>
-    <div class="interview-body"><aside class="interview-career"><p class="interview-eyebrow">UMA TRAJETÓRIA NO SETOR</p>${interview.career.map(item => `<section><h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.text)}</p>${sourceLink(item.source)}</section>`).join('')}${image('adolfoAmazul')}</aside>
-    <div class="interview-conversation"><h3 class="interview-section-title">As perguntas e o que ficou registrado.</h3>${interview.conversations.map(item => `<article class="interview-answer"><p class="interview-eyebrow">${escapeHTML(item.topic)}</p><h4>${escapeHTML(item.question)}</h4><p>${escapeHTML(item.answer)}</p><p class="interview-record">Síntese das anotações · ${escapeHTML(item.record)}</p><div class="interview-connection"><h5>Como isso entra na nossa pesquisa</h5><p>${escapeHTML(item.reading)}</p><button type="button" data-jump="${item.chapter}">Ler: ${escapeHTML(item.chapterLabel)} ↗</button></div></article>`).join('')}</div></div>
-    <details class="interview-questions"><summary>O roteiro completo: perguntas, respostas e lacunas</summary><p>Organização das perguntas e intenções do roteiro, conforme a seção 10 do registro consolidado. “Sem registro” significa que a resposta não foi localizada nas anotações, e não que a pergunta deixou de ser feita.</p><dl>${interview.questions.map(([question,status,answer]) => `<div><dt>${escapeHTML(question)}</dt><dd><span>${escapeHTML(status)}</span>${escapeHTML(answer)}</dd></div>`).join('')}</dl></details>
+    ${recordSource('“Contexto e alcance deste registro” e “Fontes e como ler as atribuições”: origem [N1], [N2], [S] e [R].')}
+    <div class="interview-body"><aside class="interview-career"><p class="interview-eyebrow">UMA TRAJETÓRIA NO SETOR</p>${interview.career.map((item,i) => `<section><h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.text)}</p>${citationHTML({kind:'Fontes do perfil',sources:careerSources[i]})}</section>`).join('')}${image('adolfoAmazul')}</aside>
+    <div class="interview-conversation"><h3 class="interview-section-title">As perguntas e o que ficou registrado.</h3>${interview.conversations.map((item,i) => `<article class="interview-answer"><p class="interview-eyebrow">${escapeHTML(item.topic)}</p><h4>${escapeHTML(item.question)}</h4><p>${escapeHTML(item.answer)}</p><p class="interview-record">Síntese das anotações · ${escapeHTML(item.record)}</p>${recordSource(item.record)}<div class="interview-connection"><h5>Como isso entra na nossa pesquisa</h5><p>${escapeHTML(item.reading)}</p>${citationHTML({kind:'Análise do grupo, com base em',sources:analysisSources[i].map(id=>({id}))})}<button type="button" data-jump="${item.chapter}">Ler: ${escapeHTML(item.chapterLabel)} ↗</button></div></article>`).join('')}</div></div>
+    <details class="interview-questions"><summary>O roteiro completo: perguntas, respostas e lacunas</summary><p>Organização das perguntas e intenções do roteiro, conforme a seção 10 do registro consolidado. “Sem registro” significa que a resposta não foi localizada nas anotações, e não que a pergunta deixou de ser feita.</p><dl>${interview.questions.map(([question,status,answer]) => `<div><dt>${escapeHTML(question)}</dt><dd><span>${escapeHTML(status)}</span>${escapeHTML(answer)}${recordSource(`§10, roteiro de perguntas: item “${question}”. A situação da resposta é a registrada no quadro do grupo.`)}</dd></div>`).join('')}</dl></details>
     <footer class="interview-sources"><div><h3>O que essa conversa acrescenta</h3><p>A entrevista traz a experiência e a posição de um profissional ligado a um projeto em desenvolvimento. O grupo relaciona essa perspectiva às fontes da revista; propostas, opiniões e estimativas continuam identificadas. O registro não fornece um cálculo de payback nem resolve as dúvidas econômicas de Angra 3.</p><button type="button" data-action="popup" data-page="16">Quatro perguntas antes de compartilhar ↗</button></div><details><summary>Fontes, imagens e critérios de edição</summary><p>Fonte principal: Entrevista com Adolfo Braid — registro consolidado, fornecido pelo grupo. A organização documental contou com auxílio de IA. Datas iniciais da carreira, motivações pessoais e números incertos das notas não foram transformados em fatos confirmados. Retratos e eventos institucionais são referências distintas da entrevista escolar.</p><ul>${Object.keys(interview.sources).map(key => `<li>${sourceLink(key)}</li>`).join('')}</ul><p>As duas fotografias são reproduzidas integralmente, com os créditos e a licença publicados no portal IRD/ANSN. Não receberam recorte, filtro ou alteração de proporção. Fontes consultadas em 17/10/2026.</p></details></footer>
   </section>`;
 }
 export function pageHTML(page, index, { linear = false } = {}) {
   if (page.kind === 'cover') return coverHTML(page, index, linear);
   const image = page.image ? `<figure class="editorial-photo"><button type="button" data-action="image" data-page="${index}" aria-label="Ampliar: ${escapeHTML(page.image.title)}"><img src="${page.image.src}" alt="${escapeHTML(page.image.caption)}" decoding="async" draggable="false"><span class="photo-expand" aria-hidden="true">↗</span></button><figcaption>${escapeHTML(page.image.credit)}${page.image === photos.angra ? ' · Angra, registro histórico (fonte: 2009)' : page.image === photos.construction ? ' · Angra 3, maio de 2015' : ' · imagem ilustrativa'}</figcaption></figure>` : '';
-  const body = `<div class="columns">${page.body.map(text => `<p>${escapeHTML(text)}</p>`).join('')}</div>`;
+  const body = `<div class="columns">${page.body.map((text,i) => `<p>${escapeHTML(text)}</p>${citationHTML(evidenceFor(page.id,i),{className:'inline-citation'})}`).join('')}</div>`;
   const visuals = { matrix: chartHTML(), cycle: cycleHTML(), reactor: '<div class="reactor-strip"><span>Fissão</span><b>→</b><span>Calor</span><b>→</b><span>Vapor</span><b>→</b><span>Eletricidade</span></div>', payback: scenarioTable(), timeline: timelineHTML(true) };
   const contents = page.kind === 'contents' ? `<nav class="page-index" aria-label="Sumário da edição">${chapters.map(ch => `<button type="button" data-jump="${ch.page}"><span>${String(ch.page + 1).padStart(2,'0')}</span><div><strong>${ch.title}</strong><small>${ch.detail}</small></div><b>↗</b></button>`).join('')}</nav><section class="edition-authors" aria-label="Integrantes da pesquisa"><h3>Quem fez esta pesquisa</h3>${teamHTML()}<span>2º ano D · Sociologia · Instituto J&F · São Paulo</span></section>${interviewEntryHTML()}` : '';
   const bibliography = page.kind === 'references' ? `<ol class="bibliography">${referenceHTML(['epe','ben','sin','santos','iaea','waste','inb','enrichment','wallerstein','critique','cost','weber'])}</ol>` : '';
-  const balanceBox = page.balance ? `<aside class="balance-box" aria-label="Argumentos a favor e em debate"><div><h3>A FAVOR</h3><p>${page.balance.favor}</p></div><div><h3>EM DEBATE</h3><p>${page.balance.debate}</p></div></aside>` : '';
+  const balanceBox = page.balance ? `<aside class="balance-box" aria-label="Argumentos a favor e em debate"><div><h3>A FAVOR</h3><p>${page.balance.favor}</p></div><div><h3>EM DEBATE</h3><p>${page.balance.debate}</p></div>${citationHTML({kind:'Síntese do grupo, com base em',sources:(page.refs || []).map(id=>({id}))},{className:'inline-citation'})}</aside>` : '';
   const refNumbers = (page.refs || []).map(id => references.findIndex(ref => ref.id === id) + 1).join(' · ');
-  return `<article class="magazine-page page-${page.kind}${linear ? ' linear-page' : ''}" data-page-index="${index}" aria-label="Página ${index + 1}: ${escapeHTML(page.title.replaceAll('\n',' '))}"><header class="page-top"><span>FRONTEIRA</span><span>${page.section}</span></header><div class="page-main">${page.kicker ? `<p class="kicker">${page.kicker}</p>` : ''}<h2>${page.title.replaceAll('\n','<br>')}</h2><p class="page-subtitle">${page.subtitle}</p>${page.kind === 'cover' ? image + body : page.kind === 'opener' ? image + body : body}${page.visual ? visuals[page.visual] : ''}${contents}${bibliography}${page.quote ? `<blockquote>${page.quote}</blockquote>` : ''}${balanceBox}</div><div class="page-tail"><button type="button" class="page-action" data-action="${page.action.type}" data-page="${index}"><span>${page.action.label}</span><b aria-hidden="true">↗</b></button><footer class="page-bottom"><button type="button" class="source-link" data-action="sources" data-page="${index}" aria-label="Fontes da página ${index + 1}">${refNumbers ? `FONTES [${refNumbers}]` : 'EDIÇÃO INTERATIVA · 2026'}</button><span>${String(index + 1).padStart(2,'0')}</span></footer></div></article>`;
+  return `<article class="magazine-page page-${page.kind}${linear ? ' linear-page' : ''}" data-page-index="${index}" aria-label="Página ${index + 1}: ${escapeHTML(page.title.replaceAll('\n',' '))}"><header class="page-top"><span>FRONTEIRA</span><span>${page.section}</span></header><div class="page-main">${page.kicker ? `<p class="kicker">${page.kicker}</p>` : ''}<h2>${page.title.replaceAll('\n','<br>')}</h2><p class="page-subtitle">${page.subtitle}</p>${page.kind === 'cover' ? image + body : page.kind === 'opener' ? image + body : body}${page.visual ? visuals[page.visual] + citationHTML(visualEvidence[page.visual],{className:'inline-citation visual-source'}) : ''}${contents}${bibliography}${page.quote ? `<blockquote>${page.quote}</blockquote>${citationHTML({kind:'Formulação da edição; interpretação do grupo',sources:page.refs.map(id=>({id}))},{className:'inline-citation'})}` : ''}${balanceBox}</div><div class="page-tail"><button type="button" class="page-action" data-action="${page.action.type}" data-page="${index}"><span>${page.action.label}</span><b aria-hidden="true">↗</b></button><footer class="page-bottom"><button type="button" class="source-link" data-action="sources" data-page="${index}" aria-label="Fontes da página ${index + 1}">${refNumbers ? `FONTES [${refNumbers}]` : 'EDIÇÃO INTERATIVA · 2026'}</button><span>${String(index + 1).padStart(2,'0')}</span></footer></div></article>`;
 }
 
 function coverHTML(page, index, linear) {

@@ -155,6 +155,18 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Texturas e limites.** Vinte texturas regeneradas e vinte PNGs revisados. Sumário com atalho: conteúdo até 931 px, ações a partir de 957 px. Página 17: conteúdo até 945 px. O gerador mantém saída 1 pelos sete alertas anteriores em 06, 08, 09, 10, 13, 14 e 18, sem novo alerta. O teste geral de navegador continua com os limites históricos descritos acima; não foi declarado aprovado nesta etapa. Próximo passo: revisão das sínteses pelo grupo e, se disponíveis, conferência das gravações para acrescentar citações literais e respostas ainda sem registro. Sem nova publicação nesta etapa.
 
+## Fontes junto aos trechos (2026-10-17)
+
+**Pedido implementado.** Informar a origem logo abaixo de cada informação de pesquisa, com site/documento e local de consulta. `src/citations.js` mantém o catálogo e a associação por parágrafo, gráfico e esquema. As notas aparecem após o trecho em Página inteira, leitura contínua e HTML móvel. O 3D e o HTML fixo têm o detalhamento por trecho abaixo da abertura e no botão de fontes. A composição de vinte páginas foi preservada.
+
+**Atribuição.** Os cenários financeiros apontam para §7/Tabelas 4 e 5 do estudo ABNT revisto; as respostas da entrevista apontam para as seções do registro consolidado, distinguindo notas de slides. Formação e função profissional usam AEITA, ABDAN e CNEN. Interpretações sociológicas e propostas recebem rótulo de análise do grupo. A biografia de Milton Santos deixou de ser usada como link de seus conceitos: a nota identifica os livros, a síntese do grupo em §3.3 e a falta de páginas confirmadas. Referências acrescentadas para Fukushima, Chernobyl, ABACC e Santa Quitéria. Não foram inventadas páginas de livros ou PDFs; lacunas de paginação são explícitas.
+
+**Verificação.** `npm test`: 22/22; `test:citations`, `test:landing` e `test:interview` passaram. Conferidos os trechos preservados, links e localizadores no DOM, fontes da calculadora e dos seis países, atualização do painel no HTML/3D, entrevista e larguras 1440/768/390/320 sem transbordamento horizontal. As vinte texturas foram regeneradas e os vinte PNGs revisados; sem imagens ausentes ou novo alerta. O gerador mantém saída 1 pelos sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18). Evidências em `artifacts/citations/`.
+
+**Relato separado do 3D.** A URL publicada foi inspecionada em 1440 × 900, 390 × 844 e 320 × 700, com carregamento e uma virada em cada largura, sem exceções JavaScript ou requisições HTTP com erro. A falha relatada não foi reproduzida; o diagnóstico ainda depende da descrição do comportamento esperado/observado. Não houve alteração especulativa no renderer.
+
+**Próximo passo.** Revisão editorial pelo grupo para completar as páginas das obras originais e conferir as notas da entrevista com o áudio. A checagem dos localizadores não equivale à revisão científica independente de toda a pesquisa.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.
