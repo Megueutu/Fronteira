@@ -14,6 +14,7 @@
     "test:explorers": "node tests/explorers.browser.mjs",
     "test:tariffs": "node tests/tariffs.browser.mjs",
     "test:layout": "node tests/layout.browser.mjs",
+    "test:typography": "node tests/typography.browser.mjs",
     "test:reactor": "node tests/reactor.browser.mjs",
     "test:sources": "node tests/sources.browser.mjs",
     "test:3d": "node tests/reader-3d.browser.mjs",

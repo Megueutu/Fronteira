@@ -24,6 +24,29 @@ Os tokens ficam no início de `src/styles.css`.
 
 Não há download de fontes ou dependência de CDN. A fotografia mantém suas cores; verde não funciona como declaração de que a tecnologia é ambientalmente positiva. “A favor” e “em debate” têm a mesma superfície, tamanho e hierarquia.
 
+## Escala tipográfica fixa
+
+Aplicada em 18/10/2026 ao leitor, às vinte páginas, aos componentes digitais e à entrevista. Georgia e Arial continuam como as duas famílias. A escala é única e reutilizável, definida no início de `src/styles.css`:
+
+| Aplicação | Degraus lógicos em px |
+| --- | --- |
+| Metadados compactos da edição | 10, 11 |
+| Legendas, referências e controles | 12, 13, 14 |
+| Corpo e textos de apoio | 16, 18, 20 |
+| Subtítulos e títulos de componentes | 24, 28, 32 |
+| Títulos de matérias e seções | 40, 48, 56 |
+| Aberturas, marca e números em destaque | 64, 72, 80, 96 |
+
+`--type-step-N` é o valor canônico de cada degrau. `--font-size-N` converte esse valor em px para uso por `font` e `font-size`. Exemplo: `font: normal var(--font-size-28)/1.2 var(--serif)`. Não criar tamanhos literais locais nem novos degraus para acomodar um único elemento; usar os tokens existentes e ajustar a composição.
+
+Os papéis `--font-heading-ui`, `--font-heading-page`, `--font-heading-feature`, `--font-number`, `--font-number-unit` e `--font-cover-display` selecionam degraus dessa escala. Até 1200 px e até 760 px, esses papéis mudam para valores menores da mesma lista. Não há interpolação de tamanhos de texto com `clamp()` ou `vw`. Corpo das matérias em Página inteira: 20 px no desktop e 18 px no celular; corpo das páginas fixas: 18 px, com editorial em 16 px. Quadros de equilíbrio nas páginas fixas usam 14 px; as composições fluidas têm suas variantes da mesma escala.
+
+A colagem da capa é uma composição proporcional de referência 760 × 780, assim como uma página é escalada no leitor 3D. Seus textos usam os mesmos degraus canônicos (72, 40, 16, 24 e 12), convertidos por `calc(var(--type-step-N) * 100cqw / 760)`. Isso escala a composição inteira sem introduzir uma segunda escala tipográfica. Fora dessa arte, os valores computados devem pertencer diretamente à lista fixa.
+
+Manter corpo, título, legenda e controles identificáveis por hierarquia, entrelinha e peso, além do tamanho. Hover, foco, seleção e desabilitação não mudam o degrau. O zoom do leitor e o zoom do navegador continuam disponíveis; controles mantêm área mínima de 44 px. O tamanho lógico dos metadados impressos não deve ser usado para texto narrativo na leitura fluida.
+
+Conferência: `npm run test:typography` mede tamanhos computados, duas famílias, corpo responsivo, proporção e limites dos textos da capa, diálogos e transbordamento em três modos e cinco larguras. Após mudar tokens, regenerar as vinte texturas, conferir os PNGs e executar os testes dos componentes afetados. As referências técnicas consultadas foram [custom properties no MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties) e [type sets do Carbon](https://www.carbondesignsystem.com/building-blocks/foundations/typography/type-sets), sem incorporar fontes, código ou dependências desses sistemas.
+
 ## Composição das páginas
 
 Cada página tem uma área lógica de 760 × 1064 pixels. Margens, títulos, corpo, imagens, quadros e rodapé pertencem à mesma função de composição usada pelos dois modos. Texturas 3D de 1140 × 1596 pixels são geradas em Chromium a partir dessa página, preservando a tipografia e a justificação.
