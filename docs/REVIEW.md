@@ -255,6 +255,12 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Validação.** `npm test`: 23/23. Passaram `test:interview` e `test:citations`: link direto, três modos de leitura, navegação após o suplemento, três eixos e cinco perguntas, fontes, fotografias/créditos, Escape/foco e quatro larguras. Capturas de computador e celular e o trecho do perfil apresentado pelo responsável foram revisados em `artifacts/interview/`. Vinte texturas regeneradas e vinte PNGs conferidos; permanecem os sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18), com saída 1 do gerador, sem novo alerta ou imagem ausente. Próximo passo: revisão editorial pelo grupo; citações literais continuam dependendo da conferência do áudio.
 
+## Imagens de pesquisa na entrevista (2026-10-18)
+
+**Implementado.** Duas imagens acrescentadas a pedido do responsável: protótipo Kilopower/NASA na coluna do perfil e representação digital do MARVEL/DOE-INL na resposta sobre microrreatores e território. Identificação dos projetos e do tipo de imagem, arquivos integrais, dimensões próprias, crédito, condições de uso e ampliação. O renderer e o painel de créditos usam a licença de cada arquivo; as fotos BY-ND do IRD/ANSN continuam integrais. Nenhuma imagem é apresentada como registro da entrevista escolar ou unidade comercial brasileira. Fontes e hashes documentados em `IMAGE_SOURCES.md` e `assets/interview/SOURCES.json`.
+
+**Validação.** `npm test`: 23/23. `test:interview` passou: quatro imagens nos três modos, link direto, destino após o suplemento, retorno entre camadas, Escape/foco, autoria/licença na ampliação, ausência de transbordamento e proporções em 1440/768/390/320 px. Capturas do trecho com microrreator em computador e celular revisadas. Vinte texturas regeneradas e vinte PNGs conferidos; permanecem apenas os sete alertas de composição anteriores (06, 08, 09, 10, 13, 14 e 18), com saída 1 do gerador. Próximo passo: revisão visual pelo responsável na versão publicada.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

@@ -76,6 +76,17 @@ O responsável autorizou pesquisar imagens na internet para a entrevista. Foram 
 
 Os bytes baixados foram preservados, sem recompressão, recorte ou tratamento de cor. A exibição usa largura responsiva e altura proporcional; a ampliação conserva a imagem inteira. URLs diretas, dimensões e SHA-256 estão em [SOURCES.json](../assets/interview/SOURCES.json). As duas fontes foram consultadas em 17/10/2026; os HTMLs usados para conferir os créditos e a licença estão em `artifacts/interview/`. A reprodução não implica apoio do fotógrafo ou dos órgãos às conclusões da revista.
 
+## Imagens de microrreatores e pesquisa (2026-10-18)
+
+A pedido do responsável, duas imagens foram acrescentadas ao suplemento da entrevista. A fotografia do Kilopower acompanha o perfil de pesquisa tecnológica; a representação do MARVEL aparece na resposta sobre microrreatores e território. Ambas têm ampliação e créditos na legenda e no painel geral. São exemplos internacionais identificados, sem atribuir sua fabricação ao projeto brasileiro ou apresentá-los como unidades comerciais brasileiras.
+
+| Arquivo | Conteúdo e crédito | Origem e condição de uso |
+| --- | --- | --- |
+| `assets/interview/kilopower-prototype.jpg` | Protótipo do sistema Kilopower na preparação dos ensaios no centro Glenn em 2017. NASA. 1041 × 1562 px. | [NASA, Kilopower](https://www.nasa.gov/image-article/kilopower-13/). [Diretrizes da NASA](https://www.nasa.gov/nasa-brand-center/images-and-media/): uso educativo e informativo permitido com crédito, sem sugerir apoio institucional. A página credita NASA, sem indicação de material de terceiros. |
+| `assets/interview/marvel-microreactor.jpg` | Representação digital do MARVEL com blindagem removida para mostrar o conjunto interno. U.S. Department of Energy / Idaho National Laboratory. 1599 × 1236 px. | [DOE, imagem 099 013 001](https://www.flickr.com/photos/departmentofenergy/55461564410), publicada em 13/08/2026. A página e seus metadados identificam “United States government work”, com [condições de obras do governo dos EUA](https://www.usa.gov/government-copyright). Usada a variante publicada de aproximadamente 1600 px. |
+
+Arquivos publicados baixados sem edição local, recorte ou filtro. As legendas distinguem fotografia de protótipo e representação digital; o Kilopower é identificado como conceito para aplicações espaciais. Consulta em 18/10/2026; páginas de conferência em `artifacts/microreactors/`, URLs diretas, bytes e SHA-256 em [SOURCES.json](../assets/interview/SOURCES.json). A permissão do DOE foi conferida para este arquivo no Flickr oficial, sem presumir que todo material de terceiros hospedado no energy.gov seja reutilizável.
+
 ## Política de uso
 
 Cada fotografia do acervo de energia tem legenda completa, autoria e link para a licença na ampliação e na lista de créditos. Os retratos seguem o registro de fornecimento pelo grupo descrito acima. Não há imagens geradas por IA apresentadas como documentação de fatos. Uma foto de torres de resfriamento não é prova automática de que o local seja uma central nuclear, nem permite concluir o nível de emissão ou risco.

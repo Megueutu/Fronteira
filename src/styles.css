@@ -831,6 +831,9 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 .interview-career h3, #dialog-content .interview-career h3 { margin: 0 0 12px; font: normal 24px/1.2 var(--serif); }
 .interview-career p:not([class]) { font-size: 16px; line-height: 1.65; }
 .interview-career a { font: 12px/1.6 var(--sans); }
+.interview-feature .interview-research-image { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.interview-research-image h3, #dialog-content .interview-research-image h3 { margin: 0 0 20px; font: normal 26px/1.2 var(--serif); }
+.interview-microreactor > .interview-photo > button { border: 1px solid var(--line); }
 .interview-section-title, #dialog-content h3.interview-section-title { margin: 0 0 28px; font: normal 32px/1.2 var(--serif); }
 .interview-answer { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
 .interview-answer h4 { margin: 0 0 18px; font: normal 28px/1.2 var(--serif); }

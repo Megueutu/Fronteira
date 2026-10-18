@@ -24,5 +24,33 @@
     "accessed": "2026-10-17",
     "modifications": "none; original downloaded bytes, displayed without cropping or filters",
     "credit": "Ana Paula Artaxo / ANSN"
+  },
+  {
+    "file": "assets/interview/kilopower-prototype.jpg",
+    "url": "https://www.nasa.gov/wp-content/uploads/2023/03/grc-2017-c-06920_0.jpg",
+    "source": "https://www.nasa.gov/image-article/kilopower-13/",
+    "license": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "licenseDescription": "Uso educativo e informativo permitido pela NASA · imagem integral",
+    "bytes": 349153,
+    "sha256": "0d879af0ee534bbba046d0755ec5c697d6df0f9e2575eff7ec76e9e2e75081c9",
+    "width": 1041,
+    "height": 1562,
+    "accessed": "2026-10-18",
+    "modifications": "none; downloaded published bytes, displayed without cropping or filters",
+    "credit": "NASA"
+  },
+  {
+    "file": "assets/interview/marvel-microreactor.jpg",
+    "url": "https://live.staticflickr.com/65535/55461564410_be275b52fa_h.jpg",
+    "source": "https://www.flickr.com/photos/departmentofenergy/55461564410",
+    "license": "https://www.usa.gov/government-copyright",
+    "licenseDescription": "Domínio público nos EUA · obra do governo dos Estados Unidos · imagem integral",
+    "bytes": 103755,
+    "sha256": "cb00a00da0025ac7b5b1a1501930a5cb9a82833ec19a80952e1d08914e6aaaf3",
+    "width": 1599,
+    "height": 1236,
+    "accessed": "2026-10-18",
+    "modifications": "none; downloaded published bytes, displayed without cropping or filters",
+    "credit": "U.S. Department of Energy / Idaho National Laboratory"
   }
 ]

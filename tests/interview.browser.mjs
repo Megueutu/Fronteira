@@ -43,6 +43,8 @@ try {
   assert.doesNotMatch(interviewText,/anotações|posição registrada|avaliação registrada|registro consolidado|síntese das|transcrição|organização documental/i);
   assert.match(interviewText,/Braid defende ampliar a participação/);
   assert.match(interviewText,/ainda está em desenvolvimento/);
+  assert.equal(await browser.evaluate('document.querySelectorAll("dialog .interview-photo").length'),4);
+  assert.equal(await browser.evaluate(`document.querySelectorAll('dialog .interview-answer:nth-of-type(3) [data-photo-key="marvel"]').length`),1);
   await capture('dialog-desktop');
   await close();
   await browser.waitFor('!document.querySelector("dialog").open');
@@ -83,6 +85,7 @@ try {
       await browser.waitFor('document.querySelector(".expanded-photo img")?.naturalWidth>0');
       assert.equal(await browser.evaluate('document.querySelector(".expanded-photo img").getAttribute("src")'),interviewPhotos[key].src);
       assert.ok((await browser.evaluate('document.querySelector(".expanded-photo figcaption").textContent')).includes(interviewPhotos[key].credit));
+      assert.ok((await browser.evaluate('document.querySelector(".expanded-photo figcaption").textContent')).includes(interviewPhotos[key].license));
       await close();
       assert.equal(await browser.evaluate(`document.activeElement===document.querySelector('dialog [data-photo-key="${key}"]')`),true);
       assert.equal(await browser.evaluate('document.querySelector("dialog .interview-questions").open'),true);
@@ -103,13 +106,17 @@ try {
     const ratios = await browser.evaluate('[...document.querySelectorAll("#interview-adolfo img")].map(img=>({actual:img.getBoundingClientRect().width/img.getBoundingClientRect().height,natural:img.naturalWidth/img.naturalHeight}))');
     assert.ok(ratios.every(r=>Math.abs(r.actual-r.natural)<.005));
     await capture(`inline-${width}`);
+    if (width === 1440 || width === 390) {
+      await browser.evaluate('document.querySelector("#interview-adolfo .interview-answer:nth-of-type(3)").scrollIntoView({block:"start"}); scrollBy(0,-120)');
+      await capture(`microreactor-${width}`);
+    }
     await browser.click('#open-index');
     await browser.click('dialog .interview-entry');
     assert.equal(await browser.evaluate('document.querySelector("dialog").scrollWidth>document.querySelector("dialog").clientWidth'),false);
     await capture(`dialog-${width}`);
   }
   assert.deepEqual(browser.errors,[]);
-  console.log('PASS: interview deep link, preserved 20 pages, navigation after supplement, HTML/3D/landing entry, both images, credits, nested Escape/focus and four responsive widths.');
+  console.log('PASS: interview deep link, preserved 20 pages, navigation after supplement, HTML/3D/landing entry, four images including microreactor, credits/licenses, nested Escape/focus and four responsive widths.');
 } catch(error) {
   console.log('FAILED:',error.message);
   console.log(await browser.evaluate('JSON.stringify({url:location.href,open:document.querySelector("dialog")?.open,title:document.querySelector("#dialog-title")?.textContent,active:document.activeElement?.outerHTML.slice(0,500),photos:document.querySelectorAll("dialog [data-photo-key]").length,trace:window.interviewTrace})'));
