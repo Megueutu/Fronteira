@@ -6,14 +6,31 @@ const arrow = back => `<svg class="reader-icon${back ? ' arrow-back' : ''}" aria
 const header = (eyebrow,title,intro) => `<header class="explorer-heading"><span>${eyebrow}</span><h3>${title}</h3><p>${intro}</p></header>`;
 
 const reactorDrawings = [
-  '<circle cx="13" cy="36" r="3"/><path d="M19 36h9m7-3 10-13m-10 18 10 13m6-31 8-8m-7 39 8 7"/><circle cx="33" cy="35" r="7"/><circle cx="46" cy="19" r="5"/><circle cx="47" cy="52" r="5"/><circle cx="59" cy="11" r="2"/><circle cx="61" cy="59" r="2"/>',
-  '<path d="M16 14h16v42H16zM21 21v28m6-28v28m14-30c-7 7 7 10 0 17s7 10 0 17m12-34c-7 7 7 10 0 17s7 10 0 17M11 8h26m-26 54h26"/>',
-  '<circle cx="40" cy="36" r="23"/><circle cx="40" cy="36" r="4"/><path d="M37 31 33 17q14-2 16 9l-6 7m-1 8 14 1q-3 14-15 12l-2-11m-5-5-10 11q-10-10-3-19l10 4M5 23h12M3 34h10M5 45h12"/>',
-  '<path d="M17 18h36v36H17zM9 29h8m-8 12h8m36-6h10M24 60h22M28 54v6m14-6v6M23 36c5-15 10 15 16 0s9 0 9 0"/>',
+  `<circle cx="10" cy="48" r="3.5" fill="currentColor" stroke="none"/>
+   <path d="M19 48h17m-5-5 5 5-5 5M42 41l6-6m-6 20 6 6"/>
+   <g fill="currentColor" fill-opacity=".14"><circle cx="59" cy="28" r="13"/><circle cx="59" cy="68" r="13"/></g>
+   <circle cx="59" cy="28" r="13"/><circle cx="59" cy="68" r="13"/>
+   <g fill="currentColor" stroke="none"><circle cx="55" cy="24" r="3"/><circle cx="63" cy="25" r="3"/><circle cx="58" cy="33" r="3"/><circle cx="55" cy="64" r="3"/><circle cx="63" cy="65" r="3"/><circle cx="58" cy="73" r="3"/><circle cx="84" cy="12" r="3"/><circle cx="85" cy="84" r="3"/></g>
+   <path d="m72 21 6-5m-6 59 7 5" stroke-dasharray="2 4"/><path d="M40 30v-6m0 48v-6M46 48h6"/>`,
+  `<rect x="27" y="17" width="38" height="62" rx="15" fill="currentColor" fill-opacity=".12"/>
+   <rect x="27" y="17" width="38" height="62" rx="15"/>
+   <path d="M10 64h28V36a8 8 0 0 1 16 0v28h24M10 59v10m68-10v10M46 17V9h16m3 22h15V18m-5 5 5-5 5 5"/>
+   <path d="M33 51c4-4 8 4 12 0s8 4 12 0" stroke-width="2"/>
+   <path d="M34 83h24"/><path d="M76 43c-4 4 4 7 0 11m8-7c-4 4 4 7 0 11" stroke-width="2"/>`,
+  `<path d="M20 25h9l43 13v24L29 75h-9Z" fill="currentColor" fill-opacity=".12"/>
+   <path d="M20 25h9l43 13v24L29 75h-9Z"/>
+   <path d="M8 50h78m-5-5 5 5-5 5M31 31v38m12-34v30m12-26v22m11-18v14"/>
+   <path d="m31 36 7 5v18l-7 5m12-24 6 4v12l-6 4m12-16 5 3v6l-5 3" stroke-width="2"/>
+   <path d="M10 28h-5m5 11H3M34 74v8m28-14v14M28 82h41"/>`,
+  `<path d="M29 29h32a13 13 0 0 1 13 13v16a13 13 0 0 1-13 13H29a13 13 0 0 1-13-13V42a13 13 0 0 1 13-13Z" fill="currentColor" fill-opacity=".12"/>
+   <path d="M29 29h32a13 13 0 0 1 13 13v16a13 13 0 0 1-13 13H29a13 13 0 0 1-13-13V42a13 13 0 0 1 13-13ZM7 50h9M29 71v9m31-9v9M23 80h44M43 29V18h19"/>
+   <ellipse cx="61" cy="50" rx="8" ry="20"/>
+   <path d="M25 50c4-12 9 12 14 0s9 0 9 0" stroke-width="2.4"/>
+   <path d="m82 13-9 15h10l-9 15"/><path d="m57 13 5 5-5 5"/>`,
 ];
 function reactorExplorerHTML() {
   const labels=[['Fissão','Núcleos se dividem'],['Calor','Água recebe energia'],['Vapor e turbina','O calor vira movimento'],['Eletricidade','Gerador e rede']];
-  return `<section class="digital-feature reactor-explorer" data-explorer="reactor" data-reactor-active="0" aria-label="Da fissão à eletricidade">${header('UMA ENERGIA, VÁRIAS TRANSFORMAÇÕES','Da fissão à eletricidade.','Selecione uma etapa para acompanhar o caminho da energia.')}<ol class="reactor-stages" aria-label="Etapas da geração nuclear">${labels.map(([label,caption],i)=>`<li><button type="button" data-reactor-step="${i}" aria-pressed="${i===0}"><span class="reactor-stage-number">0${i+1}</span><span class="reactor-drawing"><svg viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${reactorDrawings[i]}</svg></span><strong>${label}</strong><small>${caption}</small></button>${i<3?`<span class="reactor-connector" aria-hidden="true">${arrow(false)}</span>`:''}</li>`).join('')}</ol><div class="reactor-detail" role="status" aria-live="polite" aria-atomic="true"><span class="reactor-detail-number" data-reactor-number>01</span><div><h4 data-reactor-title>${reactorSteps[0][0]}</h4><p data-reactor-description>${reactorSteps[0][1]}</p></div></div><div class="reactor-return"><span>Depois de mover a turbina, o vapor é condensado e a água retorna ao ciclo.</span><button type="button" data-reactor-step="4" aria-pressed="false">Resfriamento e controle ${arrow(true)}</button></div><p class="explorer-footnote">Esquema simplificado de um reator de água pressurizada. A turbina move o gerador, que converte movimento em eletricidade.</p>${citationHTML(visualEvidence.reactor)}</section>`;
+  return `<section class="digital-feature reactor-explorer" data-explorer="reactor" data-reactor-active="0" aria-label="Da fissão à eletricidade">${header('UMA ENERGIA, VÁRIAS TRANSFORMAÇÕES','Da fissão à eletricidade.','Selecione uma etapa para acompanhar o caminho da energia.')}<ol class="reactor-stages" aria-label="Etapas da geração nuclear">${labels.map(([label,caption],i)=>`<li><button type="button" data-reactor-step="${i}" aria-pressed="${i===0}"><span class="reactor-stage-number">0${i+1}</span><span class="reactor-drawing"><svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${reactorDrawings[i]}</svg></span><strong>${label}</strong><small>${caption}</small></button>${i<3?`<span class="reactor-connector" aria-hidden="true">${arrow(false)}</span>`:''}</li>`).join('')}</ol><div class="reactor-detail" role="status" aria-live="polite" aria-atomic="true"><span class="reactor-detail-number" data-reactor-number>01</span><div><h4 data-reactor-title>${reactorSteps[0][0]}</h4><p data-reactor-description>${reactorSteps[0][1]}</p></div></div><div class="reactor-return"><span>Depois de mover a turbina, o vapor é condensado e a água retorna ao ciclo.</span><button type="button" data-reactor-step="4" aria-pressed="false">Resfriamento e controle ${arrow(true)}</button></div><p class="explorer-footnote">Esquema simplificado de um reator de água pressurizada. A turbina move o gerador, que converte movimento em eletricidade.</p>${citationHTML(visualEvidence.reactor)}</section>`;
 }
 function updateReactor(root,index) {
   const step=reactorSteps[index]; if(!step) return;

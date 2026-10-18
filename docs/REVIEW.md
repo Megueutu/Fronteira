@@ -237,6 +237,12 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Texturas e continuidade.** Vinte texturas regeneradas e vinte PNGs revisados em cinco folhas de conferência, sem imagens ausentes ou novos alertas. Permanecem os sete anteriores (06, 08, 09, 10, 13, 14 e 18); o gerador conclui com saída 1 por eles. O teste geral `test:browser` não foi declarado aprovado; esta etapa tem teste próprio do 3D. Não foram medidos desempenho, consumo ou compatibilidade em aparelhos físicos. Próximo passo: revisão visual pelo responsável no dispositivo de apresentação; pendências anteriores de composição seguem separadas.
 
+## Refinamento dos ícones de geração (2026-10-18)
+
+**Implementado.** Os quatro ícones foram redesenhados como ilustrações técnicas originais: fragmentos da fissão e partículas, trocador de calor, turbina em corte com pás e eixo e gerador com saída elétrica. Malha SVG comum de 96 × 96, traço uniforme com pontas arredondadas e preenchimento discreto na cor atual. Mantidos verde/branco, tamanhos externos, títulos, explicações, fontes e navegação; os desenhos são ilustrativos e não têm escala física.
+
+**Validação.** `test:reactor` passou: quatro etapas ilustradas, cinco explicações, fonte, seleção única, teclado/foco, cinco larguras (1440/1024/768/390/320), leitura ampliada a partir do 3D e movimento reduzido. Capturas de desktop e celular revisadas em `artifacts/reactor/`. `npm test`: 23/23. Vinte texturas regeneradas para sincronizar o manifesto de `src/explorers.js` e vinte PNGs conferidos; permanecem somente os sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18), com saída 1 do gerador. Próximo passo: revisão dos desenhos pelo responsável na revista publicada.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

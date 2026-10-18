@@ -129,7 +129,7 @@ Em até 1000 px, o cabeçalho empilha e o intervalo das colunas cai para 32 px. 
 
 ## Diagrama da geração (18/10/2026)
 
-O componente usa quatro ilustrações científicas de 72 × 72 em círculos de 104 px, com número de sequência, título em Georgia e linha curta em Arial. Seleção: borda verde, fundo `--soft` e ilustração branca sobre verde. Painel de explicação com número, título e descrição; retorno da água separado do fluxo principal. Raios de 8 px nos controles retangulares; setas do sprite existente. As etapas são botões de pelo menos 44 px e preservam foco ao atualizar a explicação.
+O componente usa quatro ilustrações científicas de 72 × 72 em círculos de 104 px, com número de sequência, título em Georgia e linha curta em Arial. Os SVGs têm malha de 96 × 96, traço principal de 2,8 unidades, pontas e junções arredondadas e preenchimento a 14% ou 12% da cor atual. Os desenhos mostram fragmentos da fissão com partículas, trocador de calor com tubos, turbina em corte com eixo e pás e gerador com carcaça, eixo e saída elétrica. São esquemas ilustrativos, sem escala física. Seleção: borda verde, fundo `--soft` e ilustração branca sobre verde. Painel de explicação com número, título e descrição; retorno da água separado do fluxo principal. Raios de 8 px nos controles retangulares; setas do sprite existente. As etapas são botões de pelo menos 44 px e preservam foco ao atualizar a explicação.
 
 Em até 760 px, a sequência fica vertical, com círculos de 64 px e desenhos de 48 px; as setas apontam para baixo. A mudança de etapa usa `aria-pressed` e anúncio educado, sem avanço automático. Transições de cor respeitam movimento reduzido. A fonte da explicação permanece logo abaixo do esquema.
 
