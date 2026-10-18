@@ -30,6 +30,9 @@ test('financial assumptions cite the group tables and interview answers cite the
   assert.ok((interview.match(/data-source-id="interview"/g)||[]).length>=adolfoInterview.conversations.length+2);
   assert.ok(adolfoInterview.questions.every(item=>!('status' in item) && (item.sources?.length || item.record)));
   assert.doesNotMatch(interview,/<dd><span>|respostas parciais|complementada|síntese disponível|sem resposta|não foi localizada/i);
+  assert.doesNotMatch(interview,/anotações|posição registrada|avaliação registrada|registro consolidado|transcrição|organização documental/i);
+  assert.match(interview,/Braid defende ampliar a participação/);
+  assert.match(interview,/ainda está em desenvolvimento/);
   assert.match(interview,/Análise do grupo, com base em/);
   assert.match(interview,/data-source-id="aeita"/);
   assert.match(interview,/data-source-id="adolfo-abdan"/);

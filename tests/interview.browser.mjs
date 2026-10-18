@@ -39,7 +39,10 @@ try {
   assert.equal(await browser.evaluate('document.querySelectorAll("#landing-view>.magazine-page").length'),20);
   assert.equal(await browser.evaluate('document.querySelectorAll("#landing-view>#interview-adolfo").length'),1);
   assert.deepEqual(await browser.evaluate('[...document.querySelectorAll("#landing-view .columns p")].map(el=>el.textContent)'),pages.flatMap(page=>page.body));
-  assert.ok((await browser.evaluate('document.querySelector("dialog .interview-method").textContent')).includes('sem reprodução de falas literais'));
+  const interviewText = await browser.evaluate('document.querySelector("dialog .interview-feature").textContent');
+  assert.doesNotMatch(interviewText,/anotações|posição registrada|avaliação registrada|registro consolidado|síntese das|transcrição|organização documental/i);
+  assert.match(interviewText,/Braid defende ampliar a participação/);
+  assert.match(interviewText,/ainda está em desenvolvimento/);
   await capture('dialog-desktop');
   await close();
   await browser.waitFor('!document.querySelector("dialog").open');

@@ -65,6 +65,8 @@ Os nomes foram associados aos arquivos fornecidos pelo responsável; não houve 
 
 ## Fotografias da seção Adolfo Braid (2026-10-17)
 
+Para os retratos individuais encontrados em 18/10/2026 e ainda não incorporados por falta de licença/autorização identificada, consulte [PESQUISA_RETRATOS_ADOLFO_BRAID.md](PESQUISA_RETRATOS_ADOLFO_BRAID.md).
+
 O responsável autorizou pesquisar imagens na internet para a entrevista. Foram escolhidos dois registros de eventos institucionais do portal IRD/ANSN. As notícias identificam a participação de Adolfo; as legendas não identificam sua posição na mesa por reconhecimento facial e não apresentam as fotos como registros da entrevista escolar. Não foi incorporado retrato individual da ABDAN/LinkedIn sem licença de redistribuição identificada; o perfil profissional e seu retrato continuam acessíveis pelo link da ABDAN.
 
 | Arquivo | Contexto e crédito | Fonte e licença |

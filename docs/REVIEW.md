@@ -249,6 +249,12 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Validação.** `npm test`: 23/23. Passaram `test:3d`, `test:sources`, `test:citations`, `test:explorers` e `test:interview`. Conferidas ausência das chamadas no 3D, fontes e retorno do foco, leitura ampliada e recursos em camadas, seis larguras, dez aberturas, virada, movimento reduzido, cache de duas texturas e fallback WebGL. Vinte texturas regeneradas e vinte PNGs revisados, com os mesmos sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18) e saída 1 do gerador, sem novo alerta. Capturas finais em `artifacts/reader-3d/`. Próximo passo: revisão da remoção na versão publicada.
 
+## Redação editorial da entrevista (2026-10-18)
+
+**Implementado.** A pedido do responsável, a matéria de Adolfo Braid apresenta diretamente trajetória e posições, sem comentários sobre anotações, sínteses ou organização documental. Retirados o bloco metodológico e as linhas repetidas sob as respostas; revisados perfil, respostas, legendas, encerramento e nomes das fontes. Os links e localizadores permanecem disponíveis. Propostas e opiniões continuam atribuídas ao entrevistado; o projeto de microrreator permanece em desenvolvimento. Não foram criadas falas literais nem acrescentados números ou datas biográficas pendentes de confirmação. O material de pesquisa original e a transparência geral sobre IA foram preservados.
+
+**Validação.** `npm test`: 23/23. Passaram `test:interview` e `test:citations`: link direto, três modos de leitura, navegação após o suplemento, três eixos e cinco perguntas, fontes, fotografias/créditos, Escape/foco e quatro larguras. Capturas de computador e celular e o trecho do perfil apresentado pelo responsável foram revisados em `artifacts/interview/`. Vinte texturas regeneradas e vinte PNGs conferidos; permanecem os sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18), com saída 1 do gerador, sem novo alerta ou imagem ausente. Próximo passo: revisão editorial pelo grupo; citações literais continuam dependendo da conferência do áudio.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

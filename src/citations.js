@@ -21,7 +21,7 @@ export const references = [
   { id: 'korea', name: 'MRE. Transição energética: experiências internacionais, maio de 2024.', url: 'https://www.gov.br/mdic/pt-br/composicao/se/cndi/gts/tematicos/gt-cb/entregas/arquivos/TransicaoEnergeticaExperienciasInternacionaisMREmaio2024.pdf' },
   { id: 'npt', name: 'ONU. Tratado sobre a Não Proliferação de Armas Nucleares.', url: 'https://www.un.org/en/conf/npt/2010/npttext.shtml' },
   { id: 'polis', name: 'Instituto Pólis. Justiça energética: relatório de pesquisa, 2024.', url: 'https://escoladeativismo.org.br/wp-content/uploads/2025/04/justica_energetica.pdf' },
-  { id: 'interview', name: 'Pesquisa do grupo. Entrevista com Adolfo Braid: registro consolidado, referência 13/10/2026. Síntese de anotações e slides, com lacunas identificadas; não é transcrição integral.', url: null },
+  { id: 'interview', name: 'Entrevista com Adolfo Braid. Acervo de pesquisa do grupo, 2026.', url: null },
   { id: 'adolfo-abdan', name: 'ABDAN. Perfil de Adolfo Braid no Nuclear Summit 2026.', url: 'https://abdan.glueup.com/event/nuclear-summit-2026-162855/speakers.html' },
   { id: 'adolfo-cnen', name: 'CNEN. Participação de Adolfo Braid no projeto brasileiro de microrreator, dezembro de 2025.', url: 'https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/cerimonia-oficial-marca-o-inicio-formal-do-projeto-do-primeiro-microrreator-nuclear-brasileiro' },
 ];
@@ -51,7 +51,7 @@ const locations = {
   korea: ['MRE · experiências internacionais (2024)', 'Apresentação de maio de 2024; recorte sobre a Coreia do Sul. Página não registrada na pesquisa.'],
   npt: ['ONU · Tratado de Não Proliferação', 'Artigos II, III e IV: armas, salvaguardas e usos pacíficos.'],
   polis: ['Instituto Pólis · Justiça energética (2024)', 'Relatório de pesquisa; acesso, desigualdade e pobreza energética. Página não registrada na edição de origem.'],
-  interview: ['Grupo · Entrevista com Adolfo Braid', 'Registro consolidado: anotações [N1/N2], slides [S] e roteiro [R]; referência 13/10/2026. Não é transcrição literal.'],
+  interview: ['Entrevista · Adolfo Braid', 'Trajetória profissional, ciclo do combustível, matriz elétrica e propostas de microrreatores. Seções 1, 2, 4, 6 e 7; apresentação na seção 9.'],
   'adolfo-abdan': ['ABDAN · Adolfo Braid', 'Nuclear Summit 2026 → Speakers → Adolfo Braid; função profissional e projetos citados no perfil.'],
   'adolfo-cnen': ['CNEN · projeto de microrreator', 'Notícia sobre o início formal do projeto; passagem que identifica a participação de Adolfo Braid.'],
 };
