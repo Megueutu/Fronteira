@@ -193,6 +193,8 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Texturas e limites.** Vinte texturas regeneradas e vinte PNGs revisados; permanecem os mesmos sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18), por isso o gerador retorna saída 1. Nenhum novo alerta de composição ou imagem ausente. O teste geral `test:browser` continua sujeito aos limites históricos registrados acima e não foi declarado aprovado nesta etapa. Evidências em `artifacts/explorers/`, `artifacts/tariffs/` e `artifacts/citations/`. Próximo passo: revisão editorial dos dados e das simulações pelo grupo; homologação em aparelhos físicos permanece pendente.
 
+**Limpeza complementar (2026-10-18).** Removidas as duas menções restantes à disciplina e ao instituto na prévia pública de design (`previews/index.html`). A edição principal e a Energia Atômica já estavam sem esses créditos. A busca nos arquivos publicados confirmou a ausência das expressões; `npm test`: 22/22. Os documentos originais de pesquisa e o histórico editorial foram preservados. Não houve alteração em `src/` nem necessidade de regenerar texturas.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.
