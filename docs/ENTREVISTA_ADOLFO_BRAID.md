@@ -10,7 +10,7 @@ Seção implementada em 2026-10-17, após autorização do responsável para usa
 
 1. **Apresentação e trajetória.** Formação, ciclo do combustível/equipamentos e pesquisa em microrreatores, com fontes identificadas. Fotos institucionais integrais, com ampliação e créditos; retrato individual acessível por link no perfil da ABDAN.
 2. **A conversa do grupo.** Data, formato da entrevista e participantes, quando informados, seguidos das perguntas efetivamente feitas e das respostas correspondentes.
-3. **Sínteses das respostas.** Cinco eixos em destaque e roteiro expansível com as dezessete perguntas/intensões mapeadas no documento. Não há falas literais atribuídas às notas; as respostas são paráfrases identificadas.
+3. **Sínteses das respostas.** Cinco eixos em destaque e seleção expansível com dez perguntas que têm conteúdo registrado ou complementado por fontes identificadas. A pedido do responsável, foram retirados os sete itens sem resposta, cálculo ou explicação registrada. Respostas parciais continuam sinalizadas. Não há falas literais atribuídas às notas; as respostas são paráfrases identificadas.
 4. **Relação com a pesquisa.** Para cada resposta selecionada, explicar que argumento ela esclarece, apoia, questiona ou deixa em aberto. Relacionar aos cinco temas apenas quando o conteúdo da resposta permitir; distinguir experiência pessoal, opinião e afirmações verificáveis.
 5. **Fonte e edição.** Registrar a origem do material e indicar cortes ou condensações. Quando houver gravação, anotar os tempos dos trechos utilizados; quando houver respostas por escrito, conservar a versão recebida.
 

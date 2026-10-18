@@ -167,6 +167,12 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Próximo passo.** Revisão editorial pelo grupo para completar as páginas das obras originais e conferir as notas da entrevista com o áudio. A checagem dos localizadores não equivale à revisão científica independente de toda a pesquisa.
 
+## Seleção das perguntas registradas (2026-10-17)
+
+**Pedido implementado.** Retirados os sete itens da lista da entrevista que estavam classificados como “Sem registro”, “Sem resposta direta”, “Sem cálculo registrado” ou “Sem explicação registrada”. A seção agora se chama “Perguntas com respostas registradas” e mostra dez perguntas com conteúdo recuperado ou complementado por fontes identificadas. As respostas parciais mantêm seu rótulo. O registro documental original foi preservado; não foram criadas respostas para preencher os itens retirados.
+
+**Verificação.** `npm test`: 22/22; `test:interview` passou, incluindo a contagem de dez perguntas, ausência dos rótulos sem resposta e remoção da pergunta sobre o momento mais marcante. Navegação, imagens, fontes, foco/Escape e quatro larguras conferidos. Vinte texturas regeneradas e vinte PNGs revisados; permanecem os sete alertas de composição anteriores, sem novo alerta. Capturas da seleção de perguntas em desktop e celular em `artifacts/interview/`. Próximo passo: revisão das respostas mantidas pelo grupo.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { pages, pageHTML, interviewHTML } from '../src/content.js';
 import { references, pageEvidence, citationHTML, sourcePanelHTML } from '../src/citations.js';
+import { adolfoInterview } from '../src/interview.js';
 
 test('every research paragraph has a source locator or an explicit editorial attribution',()=>{
   for (const page of pages.filter(page=>!['cover','contents','references'].includes(page.kind))) {
@@ -26,7 +27,8 @@ test('financial assumptions cite the group tables and interview answers cite the
   assert.match(finance,/Tabela 4.*Tabela 5/);
   assert.match(finance,/Hipóteses do exercício de 2025/);
   const interview=interviewHTML();
-  assert.ok((interview.match(/data-source-id="interview"/g)||[]).length>=24);
+  assert.ok((interview.match(/data-source-id="interview"/g)||[]).length>=adolfoInterview.questions.length+7);
+  assert.ok(adolfoInterview.questions.every(([,status])=>!/^sem /i.test(status)));
   assert.match(interview,/Análise do grupo, com base em/);
   assert.match(interview,/data-source-id="aeita"/);
   assert.match(interview,/data-source-id="adolfo-abdan"/);

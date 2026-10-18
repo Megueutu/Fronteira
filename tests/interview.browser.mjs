@@ -54,7 +54,9 @@ try {
   await capture('inline-desktop');
   await browser.click('#interview-adolfo .interview-questions summary');
   assert.equal(await browser.evaluate('document.querySelector("#interview-adolfo .interview-questions").open'),true);
-  assert.ok((await browser.evaluate('document.querySelector("#interview-adolfo .interview-questions").textContent')).includes('energia solar'));
+  assert.equal(await browser.evaluate('document.querySelectorAll("#interview-adolfo .interview-questions dl > div").length'),10);
+  assert.ok(await browser.evaluate('[...document.querySelectorAll("#interview-adolfo .interview-questions dd > span")].every(e=>!/^sem /i.test(e.textContent))'));
+  assert.ok(!(await browser.evaluate('document.querySelector("#interview-adolfo .interview-questions").textContent')).includes('momento mais marcante'));
   await browser.click('#interview-adolfo .interview-questions summary');
 
   for (const mode of ['landing','html','3d']) {
