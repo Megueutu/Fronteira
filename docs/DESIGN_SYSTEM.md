@@ -51,6 +51,10 @@ O átomo decorativo da capa usa três elipses e um núcleo fixo. A bolinha menor
 
 ## Validação e manutenção
 
+### Aplicações de dados e carrosséis (2026-10-17)
+
+Painéis brancos com borda `--line`, raio fixo de 12 px e controles com raio de 8 px, mantendo Georgia para títulos e Arial para controles e dados. Os atalhos junto aos títulos mostram a ação disponível. O número em destaque da matriz corresponde à fonte selecionada; filtros não mudam o denominador nem a escala. O simulador reúne controles, resultado e barras comparativas, com fórmula e fontes próximas. Os carrosséis têm navegação manual, indicadores e foco verde; fotos conservam proporção, contexto e crédito. Ao reduzir a largura, painéis e legendas empilham e os controles continuam utilizáveis. As versões fixas conservam seus gráficos estáticos e a leitura ampliada oferece os componentes digitais.
+
 ### Retratos dos integrantes (2026-10-17)
 
 O sumário apresenta os seis integrantes em `.team-grid`, com fotografia quadrada, nome e botão de ampliação. `teamMembers`, em `src/content.js`, mantém a associação explícita entre nome e arquivo; `authors` deriva desses registros. Davi de Oliveira foi confirmado pelo responsável apesar do arquivo original se chamar `davi-silva.jpeg`.

@@ -1,4 +1,12 @@
 import { citationHTML } from './citations.js';
+// Pesquisa ABNT fornecida, p. 24, §5.1, Tabela 2 (compilação Meutudo, 2026).
+export const regionalTariffs = [
+  {region:'Sudeste',min:.578,max:1.484},
+  {region:'Nordeste',min:.588,max:1.044},
+  {region:'Sul',min:.413,max:1.033},
+  {region:'Norte',min:.641,max:.938},
+  {region:'Centro-Oeste',min:.678,max:.878},
+];
 export const matrixData = [
   { name: 'Hidrelétrica', value: 51.7, renewable: true },
   { name: 'Eólica', value: 15, renewable: true },

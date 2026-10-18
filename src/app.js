@@ -1,12 +1,13 @@
 import { pages, pageHTML, clampSpread, formatPages, interviewHTML } from './content.js';
 import { createInteractions } from './interactions.js';
 import { sourcePanelHTML } from './citations.js';
+import { createExplorers, refreshExplorers } from './explorers.js';
 
 const renderIndex = new URLSearchParams(location.search).get('render');
 if (renderIndex !== null) {
   const index = Math.max(0,Math.min(pages.length - 1,Number(renderIndex) || 0));
   document.body.className = 'render-document';
-  document.body.innerHTML = pageHTML(pages[index],index);
+  document.body.innerHTML = pageHTML(pages[index],index,{digital:false});
   await Promise.all([...document.images].map(img => img.decode().catch(() => {})));
   await document.fonts.ready;
   document.body.dataset.ready = 'true';
@@ -19,6 +20,7 @@ if (renderIndex !== null) {
   let mode = ['html','3d','landing'].includes(params.get('template')) ? params.get('template') : mobile.matches ? 'html' : '3d';
   let pageIndex = Math.max(0,Math.min(pages.length - 1,(Number(params.get('page')) || 1) - 1));
   let zoom = 1, turning = false, turnId = 0, modeId = 0, renderer, rendererPromise, failed = false, timer;
+  createExplorers();
   const interactions = createInteractions(jump);
   let landingObserver;
   const single = () => mode === 'landing' || (mobile.matches && mode === 'html');
@@ -78,7 +80,7 @@ if (renderIndex !== null) {
       actions.innerHTML = '<button type="button" data-jump="1">Explore a edição <svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button><span>20 páginas · 5 temas</span>';
       cover.querySelector('.page-main').append(actions);
     }
-    observeLanding();
+    observeLanding(); refreshExplorers(landing);
   }
   function scrollLanding({ focus = false } = {}) {
     const article = landing.querySelector(`[data-page-index="${pageIndex}"]`);
@@ -104,8 +106,8 @@ if (renderIndex !== null) {
     clearTimeout(timer);
     const start = single() ? pageIndex : spread() * 2;
     const selection = pages.slice(start,start + (single() ? 1 : 2));
-    book.innerHTML = selection.map((page,i) => pageHTML(page,start + i)).join('');
-    layout();
+    book.innerHTML = selection.map((page,i) => pageHTML(page,start + i,{digital:single()})).join('');
+    layout(); refreshExplorers(book);
     if (animate && !single() && !matchMedia('(prefers-reduced-motion: reduce)').matches && old) {
       const sheet = document.createElement('div'); sheet.className = `turn-sheet ${direction > 0 ? 'forward' : 'backward'}`; sheet.inert = true; sheet.setAttribute('aria-hidden','true'); sheet.append(old); book.append(sheet); timer = setTimeout(() => sheet.remove(),600);
     }
@@ -174,14 +176,14 @@ if (renderIndex !== null) {
   document.querySelector('#zoom-out').addEventListener('click',() => { zoom = Math.max(.85,zoom - .15); layout(); document.querySelector('#zoom-status').textContent = `${Math.round(zoom * 100)}%`; });
   document.querySelector('#fullscreen').addEventListener('click',async () => { try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); } catch { document.querySelector('#fullscreen').textContent = 'Indisponível'; } });
   document.addEventListener('keydown',event => {
-    if (interactions.isOpen() || event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input,textarea,select,[contenteditable]')) return;
+    if (event.defaultPrevented || interactions.isOpen() || event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input,textarea,select,[contenteditable],[data-explorer]')) return;
     if (['ArrowRight','ArrowLeft'].includes(event.key)) { event.preventDefault(); navigate(event.key === 'ArrowRight' ? 1 : -1); }
     if (event.key === 'Home') { event.preventDefault(); jump(0); }
     if (event.key === 'End') { event.preventDefault(); jump(pages.length - 1); }
   });
   let pointer;
   stage.addEventListener('pointerdown',event => {
-    if (!event.isPrimary || event.target.closest('button,a,input,select') || (event.pointerType === 'mouse' && mode === 'html')) return;
+    if (!event.isPrimary || event.target.closest('button,a,input,select,[data-explorer]') || (event.pointerType === 'mouse' && mode === 'html')) return;
     pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
   });
   stage.addEventListener('pointerup',event => { if (!pointer || pointer.id !== event.pointerId) return; const dx = event.clientX - pointer.x,dy = event.clientY - pointer.y; pointer = null; if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.5) navigate(dx < 0 ? 1 : -1); });

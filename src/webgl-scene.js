@@ -66,8 +66,9 @@ export async function create3DReader(onLost) {
   }
   function updateHotspots() {
     if (!matrix || !width) return;
-    for (const [i,button] of [...hotspots.children].entries()) {
-      const page = pages[spread * 2 + i]; if (!page) continue;
+    for (const button of hotspots.children) {
+      const index = Number(button.dataset.page), i = index - spread * 2;
+      const page = pages[index]; if (!page) continue;
       const x = i === 0 ? -WIDTH * (1 - page.action.x) : WIDTH * page.action.x;
       const point = projectPoint(matrix,x,HEIGHT * (.5 - page.action.y),.015,width,height);
       const y = HEIGHT * (.5 - page.action.y);
@@ -76,7 +77,7 @@ export async function create3DReader(onLost) {
     }
   }
   function makeHotspots() {
-    hotspots.innerHTML = getSpread(spread).map((page,i) => `<button type="button" class="hotspot" data-action="${page.action.type}" data-page="${spread * 2 + i}">${page.action.label}<span aria-hidden="true">↗</span></button>`).join(''); updateHotspots();
+    hotspots.innerHTML = getSpread(spread).map((page,i) => page.id==='cover' ? '' : `<button type="button" class="hotspot" data-action="${page.action.type}" data-page="${spread * 2 + i}">${page.action.label}<span aria-hidden="true">↗</span></button>`).join(''); updateHotspots();
   }
   function render(now = performance.now()) {
     if (lost || !matrix) return;

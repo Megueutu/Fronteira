@@ -22,7 +22,7 @@ Site: [megueutu.github.io/Fronteira](https://megueutu.github.io/Fronteira/).
 
 O workflow [Deploy GitHub Pages](.github/workflows/pages.yml) executa os testes, gera o site e publica a `main` a cada push. Também pode ser iniciado manualmente em Actions. Nas configurações do repositório, Pages deve usar **GitHub Actions** como origem. Outras branches não são publicadas automaticamente; a nova identidade visual chegará ao site quando for incorporada à `main`.
 
-`npm run build:pages` gera `_site/`, usando `BASE_PATH` para adaptar imagens, texturas, scripts e links ao endereço da publicação. O workflow obtém esse caminho da configuração do Pages. Somente `index.html`, `src/`, `assets/` e `previews/` entram no pacote; documentos locais e artefatos de teste ficam fora. As texturas já versionadas são reutilizadas.
+`npm run build:pages` gera `_site/`, usando `BASE_PATH` para adaptar imagens, texturas, scripts e links ao endereço da publicação. O workflow obtém esse caminho da configuração do Pages. Somente `index.html`, `src/`, `assets/`, `previews/` e `edicoes/` entram no pacote; documentos locais e artefatos de teste ficam fora. As texturas já versionadas são reutilizadas.
 
 ## Ler e explorar
 
@@ -30,6 +30,7 @@ O workflow [Deploy GitHub Pages](.github/workflows/pages.yml) executa os testes,
 - O sumário leva a uma seção. “Ler esta abertura” amplia o conteúdo em HTML; “Leitura contínua” reúne as 20 páginas.
 - Fotografias ampliam, a galeria aceita botões e setas e cada imagem tem contexto, autoria e licença.
 - O gráfico da matriz permite filtros. Diagramas revelam etapas. O laboratório de payback permite mudar premissas. A linha do tempo abre seis trajetórias e suas fontes.
+- Na leitura em fluxo, os recursos aparecem junto às matérias: carrosséis de fotos e países, seleção de fontes da matriz, controles de payback e comparação de tarifas com consumo ajustável. No 3D, use “Ler esta abertura” para explorar esses componentes.
 - Notas, fluxogramas, referências e o quadro de avaliação complementam a leitura. Escape fecha uma camada e o foco retorna ao acionador.
 - Em HTML no desktop há zoom; no celular, uma página em fluxo legível. Deslizes por toque disparam a troca. O gesto não acompanha continuamente o dedo.
 
@@ -43,6 +44,8 @@ npm run test:browser
 npm run test:landing
 npm run test:interview
 npm run test:citations
+npm run test:explorers
+npm run test:tariffs
 ```
 
 O teste de navegador precisa do servidor ativo e de um Chromium instalado. Aceita `CHROMIUM_PATH` e `TEST_URL`; no Windows procura também uma instalação local do Chrome for Testing headless ou Chrome. Exemplo PowerShell:
@@ -56,7 +59,7 @@ Capturas e relatórios ficam em `artifacts/`, ignorado pelo Git. Os testes headl
 
 ## Atualizar a edição
 
-Conteúdo, fotos e composição: `src/content.js`. Catálogo de fontes e associação por trecho: `src/citations.js`. Dados e fórmulas: `src/data.js`. Tokens e componentes: `src/styles.css`. As fontes aparecem abaixo dos trechos na leitura fluida e abaixo da abertura nos modos fixos. Depois de alterar a composição, regenere as texturas com o servidor ativo:
+Conteúdo, fotos e composição: `src/content.js`. Catálogo de fontes e associação por trecho: `src/citations.js`. Dados e fórmulas: `src/data.js`. Carrosséis e aplicações de dados na leitura: `src/explorers.js`. Tokens e componentes: `src/styles.css`. As fontes aparecem abaixo dos trechos na leitura fluida e abaixo da abertura nos modos fixos. Depois de alterar a composição, regenere as texturas com o servidor ativo:
 
 ```sh
 npm run render:textures

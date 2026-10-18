@@ -12,8 +12,10 @@ test('pages build relocates resources and only publishes website files', async (
   assert.match(await read('src/webgl-scene.js'), /`\/Fronteira\/assets\/textures\//);
   assert.match(await read('previews/index.html'), /href="\/Fronteira\/\?template=3d"/);
   assert.match(await read('src/app.js'), /from ['"]\.\/content.js['"]/);
+  assert.match(await read('edicoes/energia-atomica.html'), /data-tariff-view="chart"/);
+  assert.match(await read('src/explorers.js'), /from ['"]\.\/data.js['"]/);
   const files = await readdir(new URL('../_site/', import.meta.url));
-  assert.deepEqual(files.sort(), ['.nojekyll', 'assets', 'index.html', 'previews', 'src'].sort());
+  assert.deepEqual(files.sort(), ['.nojekyll', 'assets', 'edicoes', 'index.html', 'previews', 'src'].sort());
   // A second build must not retain the project prefix or files from the first.
   execFileSync(process.execPath, ['scripts/build-pages.mjs'], { env: { ...process.env, BASE_PATH: '/' } });
   assert.match(await read('index.html'), /src="\/src\/app.js"/);

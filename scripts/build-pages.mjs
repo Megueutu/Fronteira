@@ -14,7 +14,7 @@ if (path.dirname(output) !== path.resolve(root) || path.basename(output) !== '_s
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 // Explicit allowlist: never publish local documents, test artifacts or Git files.
-for (const entry of ['index.html', 'src', 'assets', 'previews']) {
+for (const entry of ['index.html', 'src', 'assets', 'previews', 'edicoes']) {
   await cp(path.join(root, entry), path.join(output, entry), { recursive: true });
 }
 async function rewrite(directory) {

@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {launchBrowser} from '../scripts/chromium.mjs';
+const b=await launchBrowser({timeout:180000});
+const base=process.env.TEST_URL || 'http://127.0.0.1:4317';
+await mkdir('artifacts/tariffs',{recursive:true});
+try {
+ await b.viewport(1600,1200);
+ await b.navigate(base+'/edicoes/energia-atomica.html#p6');
+ await b.waitFor("document.querySelector('#tariffs .expand-btn') && document.querySelectorAll('#tariffs .tariff-range-row').length===5");
+ await b.evaluate('document.fonts.ready');
+ assert.equal(await b.evaluate("document.querySelector('#tariffs [data-tariff-panel=table]').hidden"),true);
+ await b.click('#tariffs [data-tariff-view=table]');
+ assert.equal(await b.evaluate("document.querySelector('#tariffs [data-tariff-panel=chart]').hidden"),true);
+ assert.equal(await b.evaluate("getComputedStyle(document.querySelector('#tariffs table')).display"),'table');
+ await b.click('#tariffs [data-tariff-view=chart]');
+ assert.equal(await b.evaluate("document.querySelector('#tariffs [data-tariff-panel=chart]').hidden"),false);
+ await b.evaluate("document.querySelector('#p6').scrollIntoView({block:'start',behavior:'instant'})");
+ await b.evaluate('new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))');
+ const clip=await b.evaluate("(()=>{const r=document.querySelector('#p6').getBoundingClientRect();return{x:r.left+scrollX,y:r.top+scrollY,width:r.width,height:r.height}})()");
+ await writeFile('artifacts/tariffs/edition-page6.png',await b.screenshot({clip}));
+ assert.ok(await b.evaluate("(()=>{const p=document.querySelector('#p6').getBoundingClientRect(),chart=document.querySelector('#tariffs').getBoundingClientRect();return chart.bottom<p.bottom})()"));
+ await b.click('#tariffs .tariff-range-row .dnum');
+ await b.waitFor("document.querySelector('#viewer').open && document.querySelector('#viewer-stage #tariffs')");
+ await b.click('#tariffs [data-tariff-view=table]');
+ assert.equal(await b.evaluate("document.querySelector('#tariffs [data-tariff-panel=table]').hidden"),false);
+ await b.click('#viewer-close');
+ await b.waitFor("!document.querySelector('#viewer').open && document.querySelector('#p6 #tariffs')");
+ await b.click('#tariffs [data-tariff-view=chart]');
+ await b.viewport(390,1000,true);
+ await b.evaluate("document.querySelector('#tariffs').scrollIntoView({block:'start',behavior:'instant'})");
+ assert.ok(await b.evaluate('document.documentElement.scrollWidth<=innerWidth'));
+ assert.ok(await b.evaluate("(()=>{const e=document.querySelector('#tariffs');return e.scrollWidth<=e.clientWidth})()"));
+ const capture=await b.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});
+ await writeFile('artifacts/tariffs/edition-mobile.png',Buffer.from(capture.data,'base64'));
+ assert.deepEqual(b.errors,[]);
+ console.log('PASS: standalone tariff chart/table toggle, sourced ranges, page bounds, data expansion, controls in viewer, mobile bounds.');
+} finally {await b.close();}

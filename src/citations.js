@@ -63,6 +63,9 @@ for (const ref of references) {
   if (ref.id === 'santos') { ref.url = researchURL + 'ApostaEnergiaNuclearBrasilABNT%20revisto.docx'; ref.name = 'SANTOS, Milton. A natureza do espaço (1996). SANTOS; SILVEIRA. O Brasil: território e sociedade no início do século XXI (2001). Obras indicadas na pesquisa, §3.3; link para o documento do grupo, sem paginação confirmada dos livros.'; }
 }
 references.push(
+  {id:'tariff-study',short:'Pesquisa do grupo · PDF ABNT',name:'Pesquisa do grupo. Aposta Energia Nuclear Brasil, PDF ABNT. Tarifas por região.',url:researchURL+'Aposta_Energia_Nuclear_Brasil_ABNT.pdf',location:'Página 24, §5.1, Tabela 2; gráfico na p. 25, Figura 7. Valores da compilação Meutudo de 2026, reproduzidos conforme a pesquisa.'},
+  {id:'tariff-compilation',short:'Meutudo · tabela por região (2026)',name:'Meutudo. Tabela de consumo de energia elétrica (Luz) 2026, 14 jan. 2026.',url:'https://meutudo.com.br/blog/tabelas/tabela-de-consumo-de-energia-eletrica-luz/',location:'Seção “Tabelas de Tarifas de Energia Elétrica (Luz) por Região”. Limites ordenados conforme a Tabela 2 do PDF; a página consultada apresenta os títulos mínima/máxima invertidos.'},
+  {id:'aneel-tariffs',short:'ANEEL · Ranking das tarifas',name:'ANEEL. Ranking das Tarifas.',url:'https://www.gov.br/aneel/pt-br/assuntos/tarifas/ranking-das-tarifas',location:'Texto introdutório: unidades em R$/kWh e itens não contemplados nas tarifas homologadas, como tributos, iluminação pública e bandeiras.'},
   {id:'fukushima',short:'AIEA · Fukushima Daiichi',name:'AIEA. Fukushima Daiichi Nuclear Accident.',url:'https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident',location:'Dossiê sobre o acidente de março de 2011, resposta e lições de segurança.'},
   {id:'aeita',short:'AEITA · formação de Adolfo Braid',name:'AEITA. Apresentação profissional de Adolfo Braid.',url:'https://pt.linkedin.com/posts/aeita_nesta-sexta-feira-2111-%C3%A0s-18h-hor%C3%A1rio-activity-7396519091383042048-_j4Q',location:'Publicação de divulgação da palestra; apresentação da formação no IME, Berkeley e COPPE/UFRJ.'},
   {id:'chernobyl',short:'AIEA · Chernobyl',name:'AIEA. Twenty Years After the Chernobyl Accident.',url:'https://www.iaea.org/newscenter/news/twenty-years-after-the-chernobyl-accident',location:'Texto sobre o acidente de abril de 1986, suas consequências e as lições para segurança.'},
@@ -98,6 +101,7 @@ export const pageEvidence = {
   credits: [evidence(study('Documento acadêmico fornecido pelo grupo; sumário e capítulos 1–9.')),{kind:'Registro do processo de edição da revista',sources:[]},{kind:'Registro de revisão: dados oficiais, hipóteses e interpretações separados',sources:[]},{kind:'Registro editorial: versão do responsável de 17/10/2026 e créditos das imagens',sources:[]}],
 };
 export const visualEvidence = {
+  tariffs: {...evidence('tariff-study','tariff-compilation'),kind:'Dados reproduzidos da pesquisa'},
   matrix: evidence(c('epe','Destaques → Geração de Eletricidade; dados por fonte reproduzidos na pesquisa, §3.1, Tabela 1.'),study('§3.1, Tabela 1: participação por fonte em 2025.')),
   reactor: evidence(c('iaea','Seções “What is nuclear fission?” e “How does a nuclear power plant work?”; esquema simplificado pela edição.')),
   cycle: evidence('inb','waste'),

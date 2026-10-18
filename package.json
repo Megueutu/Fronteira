@@ -11,6 +11,8 @@
     "test:landing": "node tests/landing.browser.mjs",
     "test:interview": "node tests/interview.browser.mjs",
     "test:citations": "node tests/citations.browser.mjs",
+    "test:explorers": "node tests/explorers.browser.mjs",
+    "test:tariffs": "node tests/tariffs.browser.mjs",
     "render:textures": "node scripts/render-textures.mjs",
     "build:pages": "node scripts/build-pages.mjs"
   },

@@ -209,3 +209,9 @@ A licença CC BY permite adaptação com indicação, e os créditos informam �
 ## Próximo passo
 
 O grupo revisa o arquivo, principalmente a reportagem 2 e as condensações, e indica as próximas mudanças.
+
+## Atualização implementada em 18/10/2026
+
+Na página 6, a tabela de tarifas passou a ter uma visualização em intervalos, com escala de 0 a R$ 1,60/kWh e alternância Gráfico/Tabela. Os cinco limites vêm do PDF ABNT fornecido, p. 24, §5.1/Tabela 2, com links ao documento e à compilação Meutudo de 2026 logo abaixo. Os números permitem ampliar a figura com a região em destaque; os controles continuam funcionando no diálogo.
+
+Foram retiradas as menções à disciplina e ao instituto na capa, apresentação, ficha e assinatura. O HTML continua autocontido e passou a integrar o artefato de publicação em `edicoes/energia-atomica.html`. `test:tariffs` confere alternância, fontes, ampliação, estado no diálogo e limites em desktop/celular; a captura da página 6 foi revisada. Os documentos originais da pesquisa foram preservados.

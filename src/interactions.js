@@ -1,6 +1,7 @@
 import { pages, pageHTML, photos, artworks, chapters, references, referenceHTML, escapeHTML, teamMembers, teamHTML, interviewPhotos, interviewHTML, interviewEntryHTML } from './content.js';
 import { chartHTML, fuelSteps, reactorSteps, calculateScenario, scenarios, timeline, timelineHTML, decimal } from './data.js';
 import { citationHTML, visualEvidence, sourcePanelHTML } from './citations.js';
+import { paybackBarsHTML, updatePaybackBars, refreshExplorers } from './explorers.js';
 
 export function createInteractions(onJump) {
   const dialog = document.querySelector('#interaction-dialog');
@@ -29,6 +30,7 @@ export function createInteractions(onJump) {
     content.querySelector('#operating-value').textContent = `${decimal(scenario.operating,0)}% da receita`;
     content.querySelector('#result-years').textContent = decimal(result.years);
     content.querySelector('#result-cash').textContent = `Fluxo anual simplificado: R$ ${decimal(result.cash,2)} bilhões. Geração: ${decimal(result.generation / 1e6,2)} milhões de MWh/ano.`;
+    updatePaybackBars(content,scenario);
   }
   function open(type, pageIndex = 0, trigger, pushHistory = true) {
     const page = pages[pageIndex] || pages[0];
@@ -63,7 +65,7 @@ export function createInteractions(onJump) {
       currentSteps = type === 'cycle' ? fuelSteps : reactorSteps;
       markup = stepsHTML(currentSteps) + citationHTML(visualEvidence[type === 'cycle' ? 'cycle' : 'reactor']);
     } else if (type === 'calculator') {
-      title = 'Laboratório de cenários.'; scenario = { ...scenarios[1], investment: 23.9 }; markup = scenarioHTML() + citationHTML(visualEvidence.payback);
+      title = 'Laboratório de cenários.'; scenario = { ...scenarios[1], investment: 23.9 }; markup = scenarioHTML() + paybackBarsHTML(scenario) + citationHTML(visualEvidence.payback);
     } else if (type === 'timeline') {
       title = 'Seis trajetórias, diferentes contextos.';
       markup = `<p class="dialog-intro">Recortes históricos com data. Selecione um país para conhecer o contexto e a fonte.</p>${timelineHTML()}<div class="timeline-detail" role="status" id="timeline-detail"></div>`;
@@ -92,6 +94,7 @@ export function createInteractions(onJump) {
     }
     content.innerHTML = `<h2 id="dialog-title">${title}</h2>${markup}`;
     if (!dialog.open) dialog.showModal();
+    refreshExplorers(content);
     closeButton.focus(); dialog.scrollTop = 0;
     if (type === 'calculator') updateScenario();
     if (type === 'timeline') setEvent(0);
@@ -105,6 +108,7 @@ export function createInteractions(onJump) {
     if (history.length) {
       const prior = history.pop(); content.replaceChildren(...prior.nodes); dialog.className = prior.className;
       ({ gallery, slideIndex, currentSteps, scenario } = prior); dialog.scrollTop = prior.scroll;
+      refreshExplorers(content);
       if (prior.trigger?.isConnected) prior.trigger.focus(); else closeButton.focus();
     } else dialog.close();
   }

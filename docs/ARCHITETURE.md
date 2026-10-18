@@ -12,6 +12,7 @@ Aplicação estática com JavaScript, HTML/CSS e WebGL nativos, sem bibliotecas,
 | `src/citations.js` | Catálogo de fontes, localizadores por parágrafo e gráfico, distinção entre fontes e análise do grupo, painel da abertura. |
 | `src/interview.js` | Perfil, fontes, sínteses e roteiro da entrevista com Adolfo Braid; sem citações literais atribuídas às notas. |
 | `src/data.js` | Dados da matriz, fórmulas e cenários, etapas e recortes históricos. |
+| `src/explorers.js` | Carrosséis na leitura, exploração da matriz, simulador e gráfico comparativo de payback; controles e estado por componente. |
 | `src/app.js` | Página atual, modos, navegação, URL, enquadramento, teclado, toque e falhas. |
 | `src/interactions.js` | Galeria, notas, ampliação, sumário, fontes, diagramas, cenários e leitura ampliada. |
 | `src/styles.css` | Tokens, composições editoriais, colunas, responsividade, foco e camadas. |
@@ -48,6 +49,18 @@ Implementado em 2026-10-17 a pedido do responsável. `?template=landing` abre a 
 Foram consultados os guias de [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) e [scroll-margin-top](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/scroll-margin-top) da MDN. A implementação usa APIs nativas do navegador e os componentes e assets locais; não incorpora código externo nem nova biblioteca.
 
 O teste `npm run test:landing` cobre link direto, quantidade de seções, sumário, foco, atualização durante rolagem, troca de modos e limites responsivos. Capturas e medições da revisão ficam em `artifacts/landing/`.
+
+## Aplicações na leitura (2026-10-17)
+
+`src/explorers.js` acrescenta cinco componentes em Página inteira, HTML móvel, leitura contínua e leitura ampliada: ensaio fotográfico na página 04, exploração da matriz na 05, simulador de payback na 13, faixas de tarifas na 14 e carrossel internacional na 16. Atalhos junto aos títulos levam ao componente e dão foco a seus controles. O texto original e as fontes dos parágrafos permanecem no percurso.
+
+Os componentes usam os dados e fórmulas de `src/data.js` e as fotografias já licenciadas do acervo. A matriz mantém a escala de 0 a 51,7% e o denominador nacional ao filtrar; o filtro Renováveis reúne somente as quatro fontes assim identificadas na tabela. O simulador compara R$ 23,9 bilhões e R$ 35,9 bilhões sob as mesmas premissas, em eixo fixo de 0 a 30 anos. A calculadora modal também passou a mostrar esse gráfico, disponível pelos hotspots do 3D. Cada instância tem estado no próprio DOM; não existem IDs de formulário duplicados entre leitura e diálogos.
+
+Os carrosséis usam rolagem horizontal nativa e CSS Scroll Snap, com botões, indicadores, contagem, teclado e itens inativos `inert`. Não há avanço automático. A navegação local não vira a página da revista; gestos sobre o componente não disparam a virada do HTML móvel. O estado é mantido ao ampliar uma foto e retornar à leitura. Controles e gráficos respeitam movimento reduzido.
+
+Pesquisa técnica: [W3C WAI, carrosséis](https://www.w3.org/WAI/tutorials/carousels/), [MDN, Scroll Snap](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/scroll-snap-type) e [MDN, input range](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range). Implementação própria com DOM/CSS nativos; não foi copiado código externo nem acrescentada biblioteca ou fotografia. As licenças das imagens continuam em [IMAGE_SOURCES.md](IMAGE_SOURCES.md).
+
+As páginas fixas e as texturas mantêm as figuras estáticas. `pageHTML(...,{digital:false})` evita montar os componentes e suas imagens lazy na geração das texturas e no HTML desktop fixo. Os módulos ficam disponíveis na ampliação/rolagem. O manifesto de origem inclui `src/explorers.js`. Teste de fluxo: `npm run test:explorers`.
 
 ## Folheamento 3D
 
@@ -97,3 +110,9 @@ A implementação atual conserva o renderer nativo e resolve a divergência entr
 O código da nuvem foi recuperado de ZIP em 2026-10-15. O pacote não preservava o commit `0f36176`, por isso a recuperação recebeu novo commit sobre a main inicial. A publicação pelo Git local passou a funcionar nesta máquina.
 
 Não há editor, importação de PDF, vídeo, capa com abertura/fechamento articulados, zoom gestual, arraste contínuo ou rotação livre da cena. Não foram homologados Safari, Firefox, aparelhos físicos, leitores de tela ou impressões do navegador. Os testes atuais são de Chromium headless no Windows com WebGL por software.
+
+## Complementos de 18/10/2026
+
+As tarifas vêm do PDF fornecido, p. 24, §5.1/Tabela 2. O gráfico de intervalos usa escala de 0 a R$ 1,60/kWh; a opção de consumo multiplica os mesmos limites por 50–500 kWh. Não calcula a fatura final. A fonte Meutudo tem cabeçalhos mínima/máxima invertidos na página consultada; os limites seguem a ordenação numérica da tabela do PDF. Fonte original, PDF e esclarecimento da ANEEL ficam próximos. O componente não representa médias regionais nem dados em tempo real.
+
+A capa deixou de oferecer a faixa “Explore as fotografias”, também retirada do hotspot 3D; as fotografias ainda podem ser ampliadas. A posição do hotspot do sumário é calculada pelo índice editorial, mesmo quando é o único botão da abertura. Disciplina e escola foram retiradas da interface pública das duas edições. O arquivo autocontido Energia Atômica tem gráfico/tabela de tarifas com estado preservado na ampliação. O build inclui `edicoes/`, sem incluir os documentos de pesquisa ou artefatos locais; teste dedicado: `npm run test:tariffs`.

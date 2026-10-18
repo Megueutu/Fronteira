@@ -11,7 +11,7 @@ try {
   await b.navigate(base+'/?template=landing&page=5');
   await b.waitFor("document.querySelector('#landing-matrix')?.getBoundingClientRect().top<200");
   assert.deepEqual(await b.evaluate("[...document.querySelectorAll('#landing-view .columns p')].map(p=>p.textContent)"),pages.flatMap(page=>page.body));
-  assert.ok(await b.evaluate("[...document.querySelectorAll('#landing-view .inline-citation')].every(e=>getComputedStyle(e).display!=='none')"));
+  assert.ok(await b.evaluate("[...document.querySelectorAll('#landing-view .columns > .inline-citation')].every(e=>getComputedStyle(e).display!=='none')"));
   assert.ok(await b.evaluate("[...document.querySelectorAll('#landing-view .columns > .claim-source')].every(e=>e.previousElementSibling.matches('p') && e.querySelector('strong'))"));
   await shot('matrix-desktop');
   for (const width of [768,390,320]) {
@@ -40,7 +40,7 @@ try {
   await b.click('[data-mode="html"]');
   assert.ok(await b.evaluate("!document.querySelector('#reader-sources').hidden"));
   await b.click('#read-spread');
-  assert.ok(await b.evaluate("[...document.querySelectorAll('.linear-content .inline-citation')].every(e=>getComputedStyle(e).display!=='none')"));
+  assert.ok(await b.evaluate("[...document.querySelectorAll('.linear-content .columns > .inline-citation')].every(e=>getComputedStyle(e).display!=='none')"));
   await b.click('#close-dialog');
   await b.click('#open-index');await b.click('dialog [data-action=interview]');
   assert.ok(await b.evaluate("document.querySelectorAll('dialog .interview-answer [data-source-id=interview]').length===3"));

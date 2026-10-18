@@ -181,6 +181,18 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Continuidade.** O registro original da pesquisa é preservado. A seleção publicada contém somente respostas sustentadas pelo material disponível. Próximo passo: revisão da seleção final pelo grupo.
 
+## Recursos interativos e tarifas (2026-10-18)
+
+**Implementado.** Cinco componentes na leitura: carrossel de fotografias (04), matriz com filtros e seleção por fonte (05), simulador com controles e comparação de investimentos (13), tarifas com consumo ajustável (14) e carrossel de seis países (16). Há atalhos próximos aos títulos, fontes junto aos dados, controles por teclado, foco preservado ao ampliar fotografias e ausência de avanço automático. As setas e os gestos dentro dos componentes não viram a revista. A calculadora modal também mostra o gráfico de payback. No 3D, os recursos em fluxo ficam disponíveis em “Ler esta abertura” e na leitura contínua; as texturas conservam a composição estática.
+
+**Tarifas.** Valores conferidos no PDF fornecido, p. 24, §5.1/Tabela 2, e na compilação Meutudo de 2026. O gráfico apresenta limites, sem sugerir médias regionais ou atualização em tempo real. A simulação calcula consumo × tarifa e explicita que não calcula a fatura final. As colunas da página Meutudo estavam rotuladas em ordem inversa à dos valores; mantida a ordenação mínima/máxima do PDF, com nota na fonte. O gráfico da edição autocontida Energia Atômica oferece alternância Gráfico/Tabela e ampliação por região, com fontes abaixo. O build inclui essa edição em `edicoes/`.
+
+**Limpeza solicitada.** Removida a faixa “Explore as fotografias” da capa e o hotspot correspondente no 3D; o botão do sumário permanece corretamente posicionado. Removidas as menções à disciplina e ao instituto na interface pública das duas edições. Os documentos originais da pesquisa foram preservados.
+
+**Validação.** `npm test`: 22/22. Passaram `test:explorers`, `test:tariffs`, `test:landing`, `test:citations` e `test:interview`. Conferidos os cálculos e filtros, unidades, limites de consumo e payback, navegação local por teclado e rolagem nativa, foco/Escape, estado independente entre instâncias, fontes e créditos, HTML/3D e larguras de 1440/768/390/320 px sem transbordamento horizontal nos componentes. A edição autocontida foi conferida em 1600 e 390 px. Capturas dos cinco componentes, da página 6 da Energia Atômica e da folha de vinte páginas foram revisadas.
+
+**Texturas e limites.** Vinte texturas regeneradas e vinte PNGs revisados; permanecem os mesmos sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18), por isso o gerador retorna saída 1. Nenhum novo alerta de composição ou imagem ausente. O teste geral `test:browser` continua sujeito aos limites históricos registrados acima e não foi declarado aprovado nesta etapa. Evidências em `artifacts/explorers/`, `artifacts/tariffs/` e `artifacts/citations/`. Próximo passo: revisão editorial dos dados e das simulações pelo grupo; homologação em aparelhos físicos permanece pendente.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

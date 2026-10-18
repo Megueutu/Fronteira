@@ -15,7 +15,8 @@ try {
   await imagesReady();
   assert.equal(await b.evaluate("document.querySelector('#previous').disabled"),true);
   await capture('edition-html-cover');
-  await b.click('[data-page="0"][data-action="carousel"]');
+  await b.click('#next'); await idle();
+  await b.click('[data-page="3"][data-action="carousel"]');
   assert.equal(await b.evaluate('document.activeElement.id'),'close-dialog');
   await b.click('[data-dialog-slide="1"]');
   assert.equal(await b.evaluate("document.querySelector('#slide-status').textContent"),'2 / 9');
@@ -23,6 +24,7 @@ try {
   await b.waitFor("!document.querySelector('dialog').open");
   await b.waitFor("document.activeElement.dataset.action === 'carousel'");
   assert.equal(await b.evaluate('document.activeElement.dataset.action'),'carousel');
+  await b.key('Home','Home',36); await idle();
   await b.click('[data-page-index="0"] .editorial-photo button');
   await b.waitFor("document.querySelector('.expanded-photo img')?.naturalWidth > 0");
   assert.equal(await b.evaluate("document.querySelector('.expanded-photo img').naturalWidth > 0"),true);
@@ -81,10 +83,10 @@ try {
   await writeFile(new URL('../artifacts/reader-layout.json',import.meta.url),JSON.stringify(layouts,null,2));
   await b.key('Home','Home',36); await idle();
   await b.click('[data-mode="3d"]');
-  await b.waitFor("document.querySelectorAll('.hotspot').length===2 && document.querySelector('#loading').hidden");
+  await b.waitFor("document.querySelectorAll('.hotspot').length===1 && document.querySelector('#loading').hidden");
   assert.equal(await b.evaluate("document.querySelector('#stage-error').hidden"),true);
   await capture('edition-3d-cover');
-  await b.click('.hotspot[data-action="carousel"]'); await b.click('#close-dialog');
+  assert.equal(await b.evaluate("document.querySelector('.hotspot').dataset.page"),'1');
   for(let spread=1;spread<10;spread++) { await b.click('#next'); await idle(); await b.waitFor("document.querySelector('#book-canvas').dataset.textureCount==='2'"); }
   assert.equal(await b.evaluate("document.querySelector('#page-status').textContent"),'19 — 20 / 20');
   await b.click('.hotspot[data-action="sources"]');

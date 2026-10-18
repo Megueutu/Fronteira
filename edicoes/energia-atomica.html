@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1d7449">
-  <meta name="description" content="Energia Atômica, edição 01: revista do 2º ano D do Instituto J&F sobre a aposta brasileira na energia nuclear.">
+  <meta name="description" content="Energia Atômica, edição 01: revista digital sobre a aposta brasileira na energia nuclear.">
   <title>Energia Atômica</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d7449'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Arial' font-weight='900' font-size='36' fill='%23fff'%3EA%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -366,6 +366,13 @@ a { color: var(--md-sys-color-primary); text-underline-offset: 2px; }
 .segmented button[aria-checked="true"]:hover { background: color-mix(in srgb, var(--md-sys-color-on-secondary-container) var(--md-sys-state-hover), var(--md-sys-color-secondary-container)); }
 
 /* Gráficos */
+.tariff-range-row { display:grid; grid-template-columns:1fr auto; gap:4px 12px; margin:10px 0; font-size:12px; line-height:1.4; }
+.tariff-range-row > span { font-variant-numeric:tabular-nums; }
+.tariff-range-row > div { grid-column:1/-1; position:relative; height:8px; background:var(--md-sys-color-surface-container-low); }
+.tariff-range-row i { display:block; position:absolute; height:100%; background:var(--md-sys-color-primary); border-inline:2px solid currentColor; }
+.tariff-range-axis { display:flex; justify-content:space-between; border-top:1px solid currentColor; padding-top:4px; font-size:11px; }
+#tariffs [hidden] { display:none !important; }
+
 .chart-card { margin: 0; background: var(--md-sys-color-surface-container-low); }
 .chart-card figcaption { display: grid; gap: 2px; }
 .chart-card figcaption span { font: var(--type-label-medium); font-weight: 400; color: var(--md-sys-color-on-surface-variant); }
@@ -981,7 +988,7 @@ body[data-layout="focus"] .fab { display: none; }
     <!-- 01 · CAPA -->
     <section class="page cover" id="p1" data-section="Capa" aria-labelledby="cover-title">
       <div class="cover-copy">
-        <div class="edition-meta"><span>Fronteira · Sociologia</span><span>Nº 01 / Outubro 2026</span></div>
+        <div class="edition-meta"><span>Fronteira · Revista digital</span><span>Nº 01 / Outubro 2026</span></div>
         <h1 class="cover-name" id="cover-title">ENERGIA<br><span>ATÔMICA</span></h1>
         <div class="cover-story">
           <p class="label">Reportagem especial</p>
@@ -989,7 +996,7 @@ body[data-layout="focus"] .fab { display: none; }
           <p>O que o Brasil ganha e o que arrisca ao investir na energia do átomo.</p>
         </div>
         <a class="edition-link" href="#p3">Explore esta edição <svg class="icon" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a>
-        <div class="cover-bottom"><span>Instituto J&amp;F · 2º ano D</span><span>16 páginas interativas</span></div>
+        <div class="cover-bottom"><span>Pesquisa e edição do grupo</span><span>16 páginas interativas</span></div>
       </div>
       <div class="cover-images">
         <p class="cover-image-heading">Três usinas.<br>Uma escolha de país.</p>
@@ -1004,7 +1011,7 @@ body[data-layout="focus"] .fab { display: none; }
     <section class="page" id="p2" data-section="Integrantes" aria-labelledby="t-p2">
       <svg class="xs deco deco-tr" viewBox="0 0 100 100" data-shape="burst" data-morph="cookie12" aria-hidden="true"><path/></svg>
       <h1 class="headline" id="t-p2">Quem fez esta edição</h1>
-      <p class="standfirst">Seis estudantes do 2º ano D do Instituto J&amp;F, em São Paulo, pesquisaram a aposta brasileira na energia nuclear para o trabalho de Reportagem da disciplina de Sociologia, sob orientação da professora Maria Antônia.</p>
+      <p class="standfirst">Seis estudantes, em São Paulo, pesquisaram a aposta brasileira na energia nuclear, sob orientação da professora Maria Antônia.</p>
 
       <ul class="members">
         <li><svg class="xs avatar" viewBox="0 0 100 100" data-shape="cookie9" data-morph="flower" aria-hidden="true"><path/><text x="50" y="58" text-anchor="middle">DO</text></svg><strong>Davi de Oliveira</strong><span>Pesquisa e reportagem</span></li>
@@ -1019,9 +1026,7 @@ body[data-layout="focus"] .fab { display: none; }
         <article class="card filled">
           <h2 class="title-medium">A turma</h2>
           <dl class="facts">
-            <div><dt>Escola</dt><dd>Instituto J&amp;F</dd></div>
             <div><dt>Turma</dt><dd>2º ano D</dd></div>
-            <div><dt>Disciplina</dt><dd>Sociologia</dd></div>
             <div><dt>Orientação</dt><dd>Professora Maria Antônia</dd></div>
             <div><dt>Local e ano</dt><dd>São Paulo, SP · 2026</dd></div>
           </dl>
@@ -1071,7 +1076,7 @@ body[data-layout="focus"] .fab { display: none; }
         <p>O segundo compromisso envolve transformar conhecimento científico em capacidade produtiva. Na teoria do sistema-mundo de Immanuel Wallerstein, a concentração de atividades de maior valor tecnológico ajuda a explicar a dependência entre países. O Brasil possui tecnologia própria de enriquecimento de urânio, mas sua escala industrial ainda exige a contratação de parte desse serviço no exterior. Assim, avanços científicos coexistem com dependências produtivas: sem capacidade suficiente para processar o combustível, fornecedores estrangeiros atendem parte da demanda. Investimentos em pesquisa, formação profissional e ampliação industrial podem reduzir essas limitações.</p>
         <p>Portanto, o Ministério de Minas e Energia, em parceria com o Ministério da Ciência, Tecnologia e Inovação, deve planejar a expansão com critérios públicos de financiamento. Os projetos devem prever avaliações de segurança, gestão de rejeitos e impactos tarifários, além de melhorias nas redes, priorizando localidades com interrupções frequentes. Paralelamente, editais devem financiar capacitação e ampliação industrial, com metas anuais e prestação de contas. A liberação dos recursos deve depender do cumprimento dessas metas, para fortalecer a autonomia tecnológica e distribuir os benefícios energéticos.</p>
       </div>
-      <p class="signature">Texto do grupo · 2º ano D · Instituto J&amp;F</p>
+      <p class="signature">Texto do grupo</p>
       <nav class="page-route" aria-label="Navegação da página 4"><a href="#p1">Capa</a><a href="#p3">Sumário <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow_forward"/></svg></a><span>04 / 16</span></nav>
     </section>
 
@@ -1125,7 +1130,16 @@ body[data-layout="focus"] .fab { display: none; }
         </article>
         <figure class="card outlined table-card" id="tariffs">
           <figcaption class="title-small">Tarifas de energia por região (R$/kWh)</figcaption>
-          <table>
+          <div class="chip-set" role="group" aria-label="Visualização das tarifas"><button type="button" class="chip" data-tariff-view="chart" aria-pressed="true">Gráfico</button><button type="button" class="chip" data-tariff-view="table" aria-pressed="false">Tabela</button></div>
+          <div class="tariff-range-chart" data-tariff-panel="chart" role="img" aria-label="Tarifas mínima e máxima por região; escala de zero a 1,6 reais por kWh">
+            <div class="tariff-range-row" data-key="Sudeste"><strong>Sudeste</strong><button type="button" class="dnum" data-chart="tariffs" data-emph="Sudeste" data-info="Faixa mínima e máxima na compilação de 2026, em R$/kWh." data-src="Pesquisa ABNT, p. 24, Tabela 2">0,578 – 1,484</button><div aria-hidden="true"><i style="left:36.12499999999999%;width:56.625%"></i></div></div>
+            <div class="tariff-range-row" data-key="Nordeste"><strong>Nordeste</strong><button type="button" class="dnum" data-chart="tariffs" data-emph="Nordeste" data-info="Faixa mínima e máxima na compilação de 2026, em R$/kWh." data-src="Pesquisa ABNT, p. 24, Tabela 2">0,588 – 1,044</button><div aria-hidden="true"><i style="left:36.74999999999999%;width:28.500000000000004%"></i></div></div>
+            <div class="tariff-range-row" data-key="Sul"><strong>Sul</strong><button type="button" class="dnum" data-chart="tariffs" data-emph="Sul" data-info="Faixa mínima e máxima na compilação de 2026, em R$/kWh." data-src="Pesquisa ABNT, p. 24, Tabela 2">0,413 – 1,033</button><div aria-hidden="true"><i style="left:25.8125%;width:38.74999999999999%"></i></div></div>
+            <div class="tariff-range-row" data-key="Norte"><strong>Norte</strong><button type="button" class="dnum" data-chart="tariffs" data-emph="Norte" data-info="Faixa mínima e máxima na compilação de 2026, em R$/kWh." data-src="Pesquisa ABNT, p. 24, Tabela 2">0,641 – 0,938</button><div aria-hidden="true"><i style="left:40.0625%;width:18.562499999999996%"></i></div></div>
+            <div class="tariff-range-row" data-key="Centro-Oeste"><strong>Centro-Oeste</strong><button type="button" class="dnum" data-chart="tariffs" data-emph="Centro-Oeste" data-info="Faixa mínima e máxima na compilação de 2026, em R$/kWh." data-src="Pesquisa ABNT, p. 24, Tabela 2">0,678 – 0,878</button><div aria-hidden="true"><i style="left:42.375%;width:12.499999999999996%"></i></div></div>
+            <div class="tariff-range-axis" aria-hidden="true"><span>0</span><span>0,4</span><span>0,8</span><span>1,2</span><span>1,6</span></div>
+          </div>
+          <table data-tariff-panel="table" hidden>
             <thead><tr><th scope="col">Região</th><th scope="col">Mínima</th><th scope="col">Máxima</th></tr></thead>
             <tbody>
               <tr data-key="Sudeste"><th scope="row">Sudeste</th><td>0,578</td><td>1,484</td></tr>
@@ -1135,7 +1149,7 @@ body[data-layout="focus"] .fab { display: none; }
               <tr data-key="Centro-Oeste"><th scope="row">Centro-Oeste</th><td>0,678</td><td>0,878</td></tr>
             </tbody>
           </table>
-          <p class="note">Compilação Meutudo, 2026, por distribuidora.</p>
+          <p class="note">Limites da compilação de 2026; não são médias nem tarifas vigentes. Fonte: <a href="https://github.com/Megueutu/Fronteira/blob/main/pesquisa/Aposta_Energia_Nuclear_Brasil_ABNT.pdf" target="_blank" rel="noopener noreferrer">pesquisa ABNT, p. 24, §5.1, Tabela 2</a>, com dados da <a href="https://meutudo.com.br/blog/tabelas/tabela-de-consumo-de-energia-eletrica-luz/" target="_blank" rel="noopener noreferrer">Meutudo, tarifas por região</a>.</p>
         </figure>
       </div>
       <p class="sources">Fontes: ONS e reportagens sobre o apagão de 2023; MME (jan. 2026); IBGE (2024); IEMA; IPEC/Instituto Pólis (2023-2024); SANTOS, M.; SILVEIRA, M. L. O Brasil: território e sociedade no início do século XXI, 2001. Foto: Matthew Henry/Unsplash, ilustrativa.</p>
@@ -2379,6 +2393,14 @@ zoomControls();
 watchPages();
 updateCurrent(current);
 })();
+
+document.addEventListener('click', event => {
+  const button = event.target.closest('[data-tariff-view]');
+  if (!button) return;
+  const card = button.closest('#tariffs');
+  card.querySelectorAll('[data-tariff-view]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  card.querySelectorAll('[data-tariff-panel]').forEach(panel => { panel.hidden = panel.dataset.tariffPanel !== button.dataset.tariffView; });
+});
   </script>
 </body>
 </html>
