@@ -39,7 +39,7 @@ try{
         assert.ok(eyebrow.bottom<=title.top&&title.bottom<=deck.top&&deck.bottom<=callout.top,'cover text does not overlap');
         if(mode==='landing'){
           const editorial=`#landing-${pages[pageIndexForId('editorial')].id}`;
-          const body=await browser.evaluate(`parseFloat(getComputedStyle(document.querySelector('${editorial} .reading-passage > p')).fontSize)`);
+          const body=await browser.evaluate(`parseFloat(getComputedStyle(document.querySelector('${editorial} .columns p')).fontSize)`);
           assert.equal(body,16);
         }else{
           const count=await browser.evaluate("document.querySelectorAll('#html-book>article').length");assert.equal(count,1);
@@ -58,7 +58,7 @@ try{
     await browser.waitFor(`!!document.querySelector('#html-book>[data-page-index="${width<=760?pageIndexForId('editorial'):opening.leftIndex}"]')`);
     const columns=await browser.evaluate("[...document.querySelectorAll('#html-book .columns')].filter(el=>el.querySelector('p')).map(el=>({count:getComputedStyle(el).columnCount,fill:getComputedStyle(el).columnFill,align:getComputedStyle(el.querySelector('p')).textAlign}))");
     assert.ok(columns.length);
-    for(const item of columns){assert.equal(item.count,width<=760?'1':'2');assert.equal(item.fill,'balance');if(width>760)assert.equal(item.align,'justify');}
+    for(const item of columns){assert.equal(item.count,'2');assert.equal(item.fill,'balance');assert.equal(item.align,'justify');}
   }
   assert.deepEqual(browser.errors,[]);
   await writeFile('artifacts/typography/REPORT.json',JSON.stringify(report,null,2));

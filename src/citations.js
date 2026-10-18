@@ -124,7 +124,7 @@ function pageVisualRecords(page) {
   return visualEvidence[page.visual] ? [visualEvidence[page.visual]] : [];
 }
 export function pageSourceRecords(page) {
-  const records=[...paragraphRecords(page).filter(Boolean),...pageVisualRecords(page)];
+  const records=[...paragraphRecords(page).filter(Boolean),...pageVisualRecords(page),...(page.enrichment?[{kind:'Leitura complementar',sources:page.enrichment.refs.map(id=>({id}))}]:[])];
   const ids=[...new Set([...(page.refs || []),...records.flatMap(record=>record.sources.map(source=>source.id))])];
   return ids.map(id=>{
     const ref=references.find(item=>item.id===id);

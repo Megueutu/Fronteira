@@ -8,7 +8,7 @@ const renderIndex = new URLSearchParams(location.search).get('render');
 if (renderIndex !== null) {
   const index = Math.max(0,Math.min(pages.length - 1,Number(renderIndex) || 0));
   const sprite=document.querySelector('.reader-icon-sprite')?.outerHTML || '';
-  document.body.className = 'render-document';
+  document.body.className = 'render-document page-surface';
   document.body.innerHTML = sprite + pageHTML(pages[index],index,{digital:false});
   await Promise.all([...document.images].map(img => img.decode().catch(() => {})));
   await document.fonts.ready;
@@ -18,6 +18,7 @@ if (renderIndex !== null) {
   const stage = document.querySelector('#stage');
   const book = document.querySelector('#html-book');
   const landing = document.querySelector('#landing-view');
+  book.classList.add('page-surface'); landing.classList.add('page-surface');
   const mobile = matchMedia('(max-width: 760px)');
   const params = new URLSearchParams(location.search);
   let mode = ['html','3d','landing'].includes(params.get('template')) ? params.get('template') : 'html';
@@ -70,7 +71,7 @@ if (renderIndex !== null) {
   }
   function showLanding() {
     if (!landing.children.length) {
-      landing.innerHTML = pages.map((page,index) => pageHTML(page,index,{flow:true})).join('');
+      landing.innerHTML = pages.map((page,index) => `<div class="page-frame">${pageHTML(page,index)}</div>`).join('');
       landing.querySelectorAll('.magazine-page').forEach((article,index) => {
         article.id = `landing-${pages[index].id}`;
         const title = article.querySelector('h2') || article.insertBefore(Object.assign(document.createElement('h2'),{textContent:pages[index].readingLabel || pages[index].title,className:'sr-only'}),article.firstChild);
@@ -78,24 +79,23 @@ if (renderIndex !== null) {
         article.setAttribute('aria-labelledby',title.id); article.removeAttribute('aria-label');
         article.querySelectorAll('img').forEach(img => { img.loading = index === 0 ? 'eager' : 'lazy'; });
       });
-      const cover = landing.firstElementChild;
-      const oldTitle = cover.querySelector('h2'), title = document.createElement('h1');
-        title.id = oldTitle.id; title.className = oldTitle.className; title.tabIndex = -1; title.innerHTML = oldTitle.innerHTML; oldTitle.replaceWith(title);
-      const actions = document.createElement('div'); actions.className = 'landing-cover-actions';
-      actions.innerHTML = `<button type="button" data-jump="${pages.findIndex(page=>page.id==='contents')}">Explore a edição <svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button><span>5 temas · entrevista</span>`;
-      cover.querySelector('.page-main').append(actions);
+
     }
     observeLanding(); refreshExplorers(landing);
   }
   function scrollLanding({ focus = false } = {}) {
     const article = landing.querySelector(`[data-page-index="${pageIndex}"]`);
-    article.scrollIntoView({block:'start'});
+    window.scrollTo({top:Math.max(0,scrollY+article.getBoundingClientRect().top-document.querySelector('#reader-toolbar').offsetHeight-16),behavior:'instant'});
     if (focus) article.querySelector('h1,h2').focus({preventScroll:true});
   }
   function layout() {
     stage.style.scrollMarginTop = `${document.querySelector('#reader-toolbar').offsetHeight + 16}px`;
-    document.querySelector('#zoom-controls').hidden = mode !== 'html' || mobile.matches;
-    if (mode === 'landing') { observeLanding(); return; }
+    document.querySelector('#zoom-controls').hidden = mode === '3d';
+    if (mode === 'landing') {
+      const scale=Math.min(1,Math.max(240,landing.clientWidth-32)/760)*zoom;
+      landing.style.setProperty('--page-scale',scale);
+      observeLanding(); return;
+    }
     const availableWidth = Math.max(300,stage.clientWidth - (mobile.matches ? 20 : 70));
     const availableHeight = Math.max(430,Math.min(950,innerHeight - (mobile.matches ? 200 : 190)));
     const count = selectedPages().length;
@@ -113,7 +113,7 @@ if (renderIndex !== null) {
     const old = [...book.querySelectorAll(':scope > article')].at(direction > 0 ? -1 : 0)?.cloneNode(true);
     clearTimeout(timer);
     const selection = selectedPages();
-    book.innerHTML = selection.map(page => pageHTML(page,pages.indexOf(page),{digital:single()})).join('');
+    book.innerHTML = selection.map(page => pageHTML(page,pages.indexOf(page),{digital:false})).join('');
     layout(); refreshExplorers(book);
     if (animate && !single() && !matchMedia('(prefers-reduced-motion: reduce)').matches && old) {
       const sheet = document.createElement('div'); sheet.className = `turn-sheet ${direction > 0 ? 'forward' : 'backward'}`; sheet.inert = true; sheet.setAttribute('aria-hidden','true'); sheet.append(old); book.append(sheet); timer = setTimeout(() => sheet.remove(),600);
@@ -161,10 +161,10 @@ if (renderIndex !== null) {
     document.querySelector('#html-view').hidden = mode !== 'html';
     document.querySelector('#webgl-view').hidden = mode !== '3d';
     document.querySelector('#stage-error').hidden = true; stage.classList.remove('graphics-failed');
-    document.querySelector('#zoom-controls').hidden = mode !== 'html';
+    document.querySelector('#zoom-controls').hidden = mode === '3d';
     document.querySelector('#loading').hidden = mode !== '3d';
     showHTML(); update();
-    if (mode === 'landing') { const target = pageIndex; requestAnimationFrame(() => { pageIndex = target; scrollLanding(); update(); }); return; }
+    if (mode === 'landing') { const target = pageIndex; layout(); requestAnimationFrame(() => { pageIndex = target; scrollLanding(); update(); }); return; }
     if (previousMode === 'landing') document.querySelector('#reader-toolbar').scrollIntoView({block:'start'});
     if (mode === 'html') return;
     try {
@@ -180,9 +180,14 @@ if (renderIndex !== null) {
   document.querySelector('#read-linear').addEventListener('click',event => interactions.open('linear',pageIndex,event.currentTarget));
   document.querySelector('#read-spread').addEventListener('click',event => interactions.open('read',pageIndex,event.currentTarget));
   document.querySelector('#go-cover').addEventListener('click',() => jump(0));
-  document.querySelector('#zoom-in').addEventListener('click',() => { zoom = Math.min(1.5,zoom + .15); layout(); document.querySelector('#zoom-status').textContent = `${Math.round(zoom * 100)}%`; });
-  document.querySelector('#zoom-out').addEventListener('click',() => { zoom = Math.max(.85,zoom - .15); layout(); document.querySelector('#zoom-status').textContent = `${Math.round(zoom * 100)}%`; });
-  for (const id of ['zoom-reset','zoom-fit']) document.querySelector(`#${id}`).addEventListener('click',() => { zoom = 1; layout(); document.querySelector('#zoom-status').textContent = '100%'; });
+  function applyZoom(value) {
+    const target=pageIndex; zoom=value; layout();
+    document.querySelector('#zoom-status').textContent=`${Math.round(zoom*100)}%`;
+    if(mode==='landing')requestAnimationFrame(()=>{pageIndex=target;scrollLanding();update();});
+  }
+  document.querySelector('#zoom-in').addEventListener('click',()=>applyZoom(Math.min(3,zoom+.15)));
+  document.querySelector('#zoom-out').addEventListener('click',()=>applyZoom(Math.max(.5,zoom-.15)));
+  for(const id of ['zoom-reset','zoom-fit'])document.querySelector(`#${id}`).addEventListener('click',()=>applyZoom(1));
   document.querySelector('#fullscreen').addEventListener('click',async () => { try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); } catch { const button=document.querySelector('#fullscreen'); button.title='Tela cheia indisponível neste navegador'; button.disabled=true; } });
   document.addEventListener('keydown',event => {
     if (event.defaultPrevented || interactions.isOpen() || event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input,textarea,select,[contenteditable],[data-explorer]')) return;

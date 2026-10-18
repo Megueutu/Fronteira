@@ -12,7 +12,7 @@ try {
   await b.waitFor(`document.body?.dataset.readerMode==='${mode}'&&document.querySelector('#stage')?.getAttribute('aria-busy')==='false'`);
   if(mode==='3d') await b.waitFor("document.querySelector('#loading').hidden");
   if(mode==='landing') {
-   assert.equal(await b.evaluate("document.querySelectorAll('#landing-view>.page-interview').length"),1);
+   assert.equal(await b.evaluate("document.querySelectorAll('#landing-view .page-interview').length"),1);
    await b.click('#landing-interview-profile .supplement-open');
   } else if(mode==='html') await b.click('#html-book .supplement-open');
   else await b.click('.hotspot[data-action=interview]');

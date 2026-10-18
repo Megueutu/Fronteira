@@ -86,7 +86,7 @@ export function createInteractions(onJump) {
     } else if (type === 'linear' || type === 'read') {
       title = type === 'read' ? 'Leia esta abertura.' : 'A edição no seu ritmo.';
       const selection = type === 'read' ? getSpread(spreadForPage(pageIndex)) : pages;
-      markup = `<div class="linear-content">${selection.map(p => pageHTML(p,pages.indexOf(p),{linear:true})).join('')}</div>`;
+      markup = `<div class="linear-content">${selection.map(p => pageHTML(p,pages.indexOf(p),{linear:true,digital:true})).join('')}</div>`;
     } else {
       title = page.note?.title || 'Energia, sociedade e escolhas.';
       const note=(page.note?.text || 'Geração, rede, distribuição, capacidade de pagamento e participação são dimensões relacionadas. Nenhuma fonte, sozinha, resolve todos esses problemas. A revista reúne esses critérios ao longo dos cinco temas.').replace('na página 19','no expediente');

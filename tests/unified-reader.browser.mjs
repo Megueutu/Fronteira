@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
-import { mkdir,writeFile } from 'node:fs/promises';
+import { mkdir } from 'node:fs/promises';
 import { launchBrowser } from '../scripts/chromium.mjs';
 import { pages, pageIndexForId, formatPages, spreadForPage, formatPage } from '../src/content.js';
 
 const base = (process.env.TEST_URL || 'http://localhost:3000').replace(/\/$/,'');
 const browser = await launchBrowser({timeout:240000});
 await mkdir('artifacts/unified',{recursive:true});
+
 try {
   await browser.viewport(1440,1000);
   await browser.navigate(base+'/');
@@ -16,12 +17,12 @@ try {
   assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(0));
   assert.ok(await browser.evaluate("parseFloat(getComputedStyle(document.querySelector('.reading-actions')).borderRadius)>100"));
   await browser.evaluate("Promise.all([...document.querySelectorAll('#html-book img')].map(image=>image.decode()))");
-  await writeFile('artifacts/unified/desktop.png',await browser.screenshot());
+
   await browser.click('#open-index');
   await browser.waitFor("document.querySelector('#interaction-dialog').classList.contains('contents-drawer')");
   assert.equal(await browser.evaluate("document.querySelector('#open-index').getAttribute('aria-expanded')"),'true');
   assert.equal(await browser.evaluate("document.querySelector('#interaction-dialog').getBoundingClientRect().left"),0);
-  await writeFile('artifacts/unified/contents.png',await browser.screenshot());
+
   await browser.key('Escape','Escape',27);
   await browser.waitFor("document.activeElement.id==='open-index'");
   assert.equal(await browser.evaluate("document.querySelector('#open-index').getAttribute('aria-expanded')"),'false');
@@ -34,13 +35,13 @@ try {
   await browser.click('#next');
   await browser.waitFor("document.querySelector('#stage').getAttribute('aria-busy')==='false'");
   await browser.click('[data-mode="landing"]');
-  await browser.waitFor(`document.querySelectorAll('#landing-view>.magazine-page').length===${pages.length}`);
+  await browser.waitFor(`document.querySelectorAll('#landing-view .magazine-page').length===${pages.length}`);
   await browser.click('[data-mode="3d"]');
   await browser.waitFor("document.querySelector('#loading').hidden && document.querySelector('#book-canvas').dataset.textureCount==='2'");
   assert.equal(await browser.evaluate("document.querySelector('#stage-error').hidden"),true);
   assert.equal(await browser.evaluate('location.search+location.hash'),'');
   assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(spreadForPage(pageIndexForId('inside-front'))));
-  await writeFile('artifacts/unified/3d.png',await browser.screenshot());
+  // The dedicated 3D suite captures the canvas in a fresh browser scene.
   for (const width of [1024,768,390,320]) {
     await browser.viewport(width,844,width<760);
     await browser.click('[data-mode="html"]');
@@ -50,7 +51,7 @@ try {
       const a=controls[i],b=controls[j];
       assert.ok(!(a.x<b.right-1&&a.right>b.x+1&&a.y<b.bottom-1&&a.bottom>b.y+1),`overlap ${width}: ${a.id}/${b.id}`);
     }
-    if(width===390) await writeFile('artifacts/unified/mobile.png',await browser.screenshot());
+
   }
   const target=pageIndexForId('payback'),folioCount=pages.filter(page=>page.folio).length;
   await browser.navigate(base+`/edicoes/energia-atomica.html?template=html&page=${target+1}`);

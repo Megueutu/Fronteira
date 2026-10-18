@@ -1,5 +1,17 @@
 # Revisão da revista
 
+## Composição canônica — 2026-10-19
+Validação desta rodada: 22 testes unitários/build passaram, incluindo preservação editorial e integridade do manifesto. A geração das 28 texturas passou sem transbordamento; os PNGs foram conferidos em conjunto. `test:canonical` comparou a geometria de todas as faces no render, HTML e rolagem em desktop/celular e verificou zoom com posição preservada. Passaram também `test:browser`, `test:explorers`, `test:landing`, `test:unified`, `test:3d`, `test:interview` e `test:typography`. Os exploradores e suas fontes são testados pela mesma suíte de ações nos três modos. O teste de interface mantém as asserções de troca de modo, foco e limites; capturas ficam nas suítes de páginas, composição, entrevista e 3D, pois capturas redundantes após alternâncias geraram timeout no Chromium com WebGL por software. Não houve homologação em hardware físico, Safari ou Firefox. Próximo passo: revisão editorial e visual pelo responsável na edição publicada.
+
+Decisão vigente: HTML, rolagem e texturas 3D compartilham `pageHTML` e a superfície de 760 × 1064 px, inclusive no celular. A folha é reduzida ou ampliada proporcionalmente; as regras antigas de recomposição exclusiva por modo abaixo ficam como histórico. A rolagem usa molduras dimensionadas e transformação CSS, com zoom de 50% a 300%, preservando a página em leitura. A leitura ampliada em diálogo continua fluida para acessibilidade.
+
+As ações principais e as fontes também estão disponíveis em controles HTML no 3D. As texturas incluem as mesmas chamadas visuais. A animação da capa permanece exclusiva do HTML; sua composição estática é compartilhada.
+
+`src/editorial-panels.js` acrescenta explicações sobre matriz, geração/distribuição, combustível, custos, payback, planejamento, comparações e critérios do balanço. São sínteses do material existente, com fontes associadas; os parágrafos originais são preservados. Permanecem 20 páginas de conteúdo e 28 faces físicas. Não foram acrescentadas bibliotecas ou imagens.
+
+A implementação foi executada em 19/10/2026. Por pedido explícito do responsável, os novos commits registram autor e committer em 18/10/2026 às 12h, UTC−03, sem reescrever o histórico anterior.
+
+
 ## Redesign visual e físico — 2026-10-18
 
 Implementado conforme a rodada aprovada em [EDITORIAL_REVIEW.md](EDITORIAL_REVIEW.md): título Energia Nuclear no Brasil, marca Fronteira fornecida, foto institucional única de Angra em alta resolução, Inter Variable local e capas sem fólio. A redistribuição preserva a redação e integra a entrevista em uma sequência de 36 faces e 19 aberturas. As quatro faces de capa fazem parte desse total; capa e quarta capa aparecem isoladas. O registro anterior de vinte páginas abaixo descreve a versão histórica.

@@ -14,6 +14,7 @@
     "test:citations": "node tests/citations.browser.mjs",
     "test:explorers": "node tests/explorers.browser.mjs",
     "test:tariffs": "node tests/unified-tariffs.browser.mjs",
+    "test:canonical": "node tests/canonical.browser.mjs",
     "test:layout": "node tests/layout.browser.mjs",
     "test:typography": "node tests/typography.browser.mjs",
     "test:cover": "node tests/cover.browser.mjs",

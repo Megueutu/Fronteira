@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 
 export const textureSources = [
-  'src/content.js','src/data.js','src/styles.css','src/citations.js','src/explorers.js',
+  'src/app.js','src/editorial-panels.js','src/content.js','src/data.js','src/styles.css','src/citations.js','src/explorers.js',
   'src/editorial-cover.js','src/interview-pages.js','src/interview.js','src/pagination.js','src/icons.js',
   'assets/fonts/InterVariable.woff2','assets/fonts/InterVariable-Italic.woff2',
   'assets/branding/fronteira.svg','assets/photos/angra-cover.jpg','assets/qr/site.svg','assets/qr/barcode.svg',

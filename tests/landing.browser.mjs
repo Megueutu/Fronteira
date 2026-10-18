@@ -11,12 +11,12 @@ const atPage = index => browser.waitFor(`history.state?.reader?.page===${index} 
 try {
   await browser.viewport(1440,1000);
   await browser.navigate(base + `/?template=landing&page=${index('payback')+1}`);
-  await browser.waitFor(`document.querySelectorAll('#landing-view>.magazine-page').length===${pages.length}`);
+  await browser.waitFor(`document.querySelectorAll('#landing-view .magazine-page').length===${pages.length}`);
   await browser.waitFor("document.querySelector('#landing-payback').getBoundingClientRect().top<200");
   await atPage(index('payback')+1);
   assert.equal(await browser.evaluate("document.querySelector('#stage').hidden"),true);
-  assert.equal(await browser.evaluate("document.querySelector('#zoom-controls').hidden"),true);
-  assert.equal(await browser.evaluate("document.querySelectorAll('#landing-view h1').length"),1);
+  assert.equal(await browser.evaluate("document.querySelector('#zoom-controls').hidden"),false);
+  assert.equal(await browser.evaluate("document.querySelectorAll('#landing-cover .cover-photograph').length"),1);
 
   assert.equal(await browser.evaluate("document.querySelectorAll('#landing-team .team-member').length"),6);
   for (const member of teamMembers) {
@@ -44,7 +44,7 @@ try {
   await browser.waitFor("!document.querySelector('#html-view').hidden");
   assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(spreadForPage(index('public'))));
   await browser.click('[data-mode="3d"]');
-  await browser.waitFor("document.querySelector('#loading').hidden && document.querySelectorAll('.hotspot').length===2");
+  await browser.waitFor("document.querySelector('#loading').hidden && document.querySelectorAll('.page-hotspot-group').length===2");
   await browser.click('[data-mode="landing"]');
   await atPage(openingStart+1);
   await browser.waitFor(`document.querySelector('#landing-${pages[openingStart].id}').getBoundingClientRect().top<200`);
@@ -58,7 +58,7 @@ try {
   for (const width of [1440,768,390,320]) {
     await browser.viewport(width,1000);
     await browser.waitFor("document.documentElement.scrollWidth<=document.documentElement.clientWidth");
-    assert.equal(await browser.evaluate("document.querySelectorAll('#landing-view>.magazine-page').length"),pages.length);
+    assert.equal(await browser.evaluate("document.querySelectorAll('#landing-view .magazine-page').length"),pages.length);
   }
   assert.deepEqual(browser.errors,[]);
   console.log('PASS: landing deep link, physical faces, index/focus, scroll state, HTML/3D switching and responsive bounds.');

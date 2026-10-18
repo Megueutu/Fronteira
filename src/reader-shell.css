@@ -141,3 +141,9 @@
 .contents-drawer .dialog-index button { min-width: 0; }
 .contents-drawer .dialog-index button > span { min-width: 0; flex: 1; overflow-wrap: anywhere; }
 .contents-drawer .dialog-index button > b { max-width: 76px; font-size: 12px; overflow-wrap: anywhere; }
+/* Zoom também é navegação de leitura em telas pequenas. */
+@media (max-width:860px) {
+ .top-app-bar .zoom-control:not([hidden]) { display: flex; order: 3; margin: 0 auto; }
+}
+.hotspot > span { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width:760px) { .page-hotspot-group[data-side="right"] { grid-column: auto; } }

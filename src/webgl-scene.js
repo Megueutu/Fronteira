@@ -78,9 +78,15 @@ export async function create3DReader(onLost) {
     hotspots.style.width = `${Math.min(width,Math.max(320,right.x-left.x))}px`;
   }
   function makeHotspots() {
-    hotspots.setAttribute('role','group'); hotspots.setAttribute('aria-label','Fontes das páginas desta abertura');
+    hotspots.setAttribute('role','group'); hotspots.setAttribute('aria-label','Interações das páginas desta abertura');
     const opening=getOpening(spread);
-    hotspots.innerHTML = [['left',opening.leftIndex],['right',opening.rightIndex]].map(([side,index]) => index===null || (!pages[index].folio && !pages[index].supplement) ? '' : `<button type="button" class="hotspot spread-source-action" data-side="${side}" data-action="${pages[index].supplement ? 'interview' : 'sources'}" data-page="${index}" aria-haspopup="dialog"><span>${pages[index].supplement ? 'Entrevista completa' : 'Fontes da página '+String(pages[index].folio).padStart(2,'0')}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button>`).join(''); updateHotspots();
+    hotspots.innerHTML = [['left',opening.leftIndex],['right',opening.rightIndex]].map(([side,index]) => {
+      if(index===null || (!pages[index].folio && !pages[index].supplement))return '';
+      const page=pages[index];
+      const primary=page.supplement ? {type:'interview',label:'Entrevista completa'} : page.action;
+      const button=(type,label,kind)=>`<button type="button" class="hotspot ${kind}" data-side="${side}" data-action="${type}" data-page="${index}" aria-haspopup="dialog"><span>${label}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-${type==='sources'?'menu_book':'arrow_forward'}"/></svg></button>`;
+      return `<div class="page-hotspot-group" data-page="${index}" data-side="${side}">${button(primary.type,primary.label,'spread-page-action')}${page.folio ? button('sources','Fontes da página '+String(page.folio).padStart(2,'0'),'spread-source-action') : ''}</div>`;
+    }).join(''); updateHotspots();
   }
   const centerOf = value => { const opening=getOpening(value); return opening.leftIndex===null ? WIDTH/2 : opening.rightIndex===null ? -WIDTH/2 : 0; };
   function render(now = performance.now()) {

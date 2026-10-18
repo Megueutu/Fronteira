@@ -3,6 +3,8 @@
   "width": 1140,
   "height": 1596,
   "sources": [
+    "src/app.js",
+    "src/editorial-panels.js",
     "src/content.js",
     "src/data.js",
     "src/styles.css",
@@ -20,5 +22,5 @@
     "assets/qr/site.svg",
     "assets/qr/barcode.svg"
   ],
-  "sha256": "e673ff0309c62d3dded07f0e7d9ecd025a033554dd239007a09ea64871bcba33"
+  "sha256": "278a5c3ac57323d63c9569854a1b8f86b0b9d4420058e1916852123a3443b5df"
 }

@@ -73,8 +73,8 @@ try {
   }
   assert.equal(layouts.length,pages.length);assert.equal(await b.evaluate("document.querySelector('#next').disabled"),true);
   await writeFile('artifacts/reader-layout.json',JSON.stringify(layouts,null,2));
-  await visit('cover','landing');assert.equal(await b.evaluate("document.querySelectorAll('#landing-view>.magazine-page').length"),pages.length);
-  await b.click('#landing-matrix [data-matrix-filter="nuclear"]');assert.equal(await b.evaluate("document.querySelector('#landing-matrix [data-explorer=matrix]').dataset.matrixFilter"),'nuclear');await clean();
+  await visit('cover','landing');assert.equal(await b.evaluate("document.querySelectorAll('#landing-view .magazine-page').length"),pages.length);
+  await b.click('#landing-matrix [data-action=chart]'); await b.waitFor("document.querySelector('dialog').open"); await close(); await clean();
   await visit('cover','3d');await b.waitFor("document.querySelector('#book-canvas').dataset.textureCount==='1'");
   assert.equal(await b.evaluate("document.querySelectorAll('.hotspot').length"),0);assert.equal(await b.evaluate("document.querySelector('#stage-error').hidden"),true);await capture('edition-3d-cover');
   for(let spread=1;spread<spreadCount;spread++){await b.click('#next');await idle();const count=spread===spreadCount-1?1:2;await b.waitFor(`document.querySelector('#book-canvas').dataset.textureCount==='${count}'`);assert.equal(await b.evaluate("document.querySelector('#page-status').textContent"),formatPages(spread));}

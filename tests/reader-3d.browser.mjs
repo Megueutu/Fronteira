@@ -29,7 +29,7 @@ try {
   for(let opening=2;opening<spreadCount;opening++) {
     await browser.click('#next');await idle(getSpread(opening).length);
     const expected=getSpread(opening).filter(page=>page.folio || page.supplement).map(page=>String(pages.indexOf(page)));
-    assert.deepEqual(await browser.evaluate("[...document.querySelectorAll('.hotspot')].map(button=>button.dataset.page)"),expected);
+    assert.deepEqual(await browser.evaluate("[...document.querySelectorAll('.page-hotspot-group')].map(button=>button.dataset.page)"),expected);
     assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(opening));
   }
   await closedBounds(-1);await capture('back-cover');
@@ -46,10 +46,10 @@ try {
     assert.ok(bounds.tray.left>=0&&bounds.tray.right<=width,'source controls stay inside viewport');
   }
   await browser.viewport(1440,1000);
-  await browser.click(`.hotspot[data-page="${target}"]`);
+  await browser.click(`.hotspot[data-action="sources"][data-page="${target}"]`);
   await browser.waitFor("document.querySelector('.source-catalog')");
   await browser.key('Escape','Escape',27);
-  await browser.waitFor(`document.activeElement.matches('.hotspot[data-page="${target}"]')`);
+  await browser.waitFor(`document.activeElement.matches('.hotspot[data-action="sources"][data-page="${target}"]')`);
   await browser.click('#read-spread');
   assert.equal(await browser.evaluate("document.querySelectorAll('.linear-page').length"),getSpread(opening).length);
   await browser.key('Escape','Escape',27);
