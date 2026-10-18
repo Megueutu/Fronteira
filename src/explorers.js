@@ -1,9 +1,28 @@
-import { matrixData, regionalTariffs, scenarios, calculateScenario, timeline, decimal } from './data.js';
+import { matrixData, regionalTariffs, reactorSteps, scenarios, calculateScenario, timeline, decimal } from './data.js';
 import { citationHTML, visualEvidence } from './citations.js';
 
 const escape = value => String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const arrow = back => `<svg class="reader-icon${back ? ' arrow-back' : ''}" aria-hidden="true"><use href="#ui-arrow_forward"/></svg>`;
 const header = (eyebrow,title,intro) => `<header class="explorer-heading"><span>${eyebrow}</span><h3>${title}</h3><p>${intro}</p></header>`;
+
+const reactorDrawings = [
+  '<circle cx="13" cy="36" r="3"/><path d="M19 36h9m7-3 10-13m-10 18 10 13m6-31 8-8m-7 39 8 7"/><circle cx="33" cy="35" r="7"/><circle cx="46" cy="19" r="5"/><circle cx="47" cy="52" r="5"/><circle cx="59" cy="11" r="2"/><circle cx="61" cy="59" r="2"/>',
+  '<path d="M16 14h16v42H16zM21 21v28m6-28v28m14-30c-7 7 7 10 0 17s7 10 0 17m12-34c-7 7 7 10 0 17s7 10 0 17M11 8h26m-26 54h26"/>',
+  '<circle cx="40" cy="36" r="23"/><circle cx="40" cy="36" r="4"/><path d="M37 31 33 17q14-2 16 9l-6 7m-1 8 14 1q-3 14-15 12l-2-11m-5-5-10 11q-10-10-3-19l10 4M5 23h12M3 34h10M5 45h12"/>',
+  '<path d="M17 18h36v36H17zM9 29h8m-8 12h8m36-6h10M24 60h22M28 54v6m14-6v6M23 36c5-15 10 15 16 0s9 0 9 0"/>',
+];
+function reactorExplorerHTML() {
+  const labels=[['Fissão','Núcleos se dividem'],['Calor','Água recebe energia'],['Vapor e turbina','O calor vira movimento'],['Eletricidade','Gerador e rede']];
+  return `<section class="digital-feature reactor-explorer" data-explorer="reactor" data-reactor-active="0" aria-label="Da fissão à eletricidade">${header('UMA ENERGIA, VÁRIAS TRANSFORMAÇÕES','Da fissão à eletricidade.','Selecione uma etapa para acompanhar o caminho da energia.')}<ol class="reactor-stages" aria-label="Etapas da geração nuclear">${labels.map(([label,caption],i)=>`<li><button type="button" data-reactor-step="${i}" aria-pressed="${i===0}"><span class="reactor-stage-number">0${i+1}</span><span class="reactor-drawing"><svg viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${reactorDrawings[i]}</svg></span><strong>${label}</strong><small>${caption}</small></button>${i<3?`<span class="reactor-connector" aria-hidden="true">${arrow(false)}</span>`:''}</li>`).join('')}</ol><div class="reactor-detail" role="status" aria-live="polite" aria-atomic="true"><span class="reactor-detail-number" data-reactor-number>01</span><div><h4 data-reactor-title>${reactorSteps[0][0]}</h4><p data-reactor-description>${reactorSteps[0][1]}</p></div></div><div class="reactor-return"><span>Depois de mover a turbina, o vapor é condensado e a água retorna ao ciclo.</span><button type="button" data-reactor-step="4" aria-pressed="false">Resfriamento e controle ${arrow(true)}</button></div><p class="explorer-footnote">Esquema simplificado de um reator de água pressurizada. A turbina move o gerador, que converte movimento em eletricidade.</p>${citationHTML(visualEvidence.reactor)}</section>`;
+}
+function updateReactor(root,index) {
+  const step=reactorSteps[index]; if(!step) return;
+  root.dataset.reactorActive=String(index);
+  root.querySelectorAll('[data-reactor-step]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.reactorStep)===index)));
+  root.querySelector('[data-reactor-number]').textContent=String(index+1).padStart(2,'0');
+  root.querySelector('[data-reactor-title]').textContent=step[0];
+  root.querySelector('[data-reactor-description]').textContent=step[1];
+}
 
 function carouselHTML(kind,title,intro,slides) {
   return `<section class="digital-feature explorer-carousel" data-explorer="carousel" data-carousel-index="0" role="region" aria-roledescription="carrossel" aria-label="${title}">${header(kind,title,intro)}<div class="explorer-track" tabindex="0" aria-label="Use as setas do teclado ou deslize para navegar">${slides.map((slide,i)=>`<article class="explorer-slide" role="group" aria-roledescription="slide" aria-label="${i+1} de ${slides.length}" data-slide-title="${escape(slide.title)}" ${i ? 'inert' : ''}>${slide.html}</article>`).join('')}</div><div class="explorer-carousel-controls"><button type="button" data-carousel-move="-1" aria-label="Item anterior" disabled>${arrow(true)}</button><span class="explorer-carousel-status" role="status" aria-live="polite" aria-atomic="true">1 / ${slides.length} · ${escape(slides[0].title)}</span><button type="button" data-carousel-move="1" aria-label="Próximo item">${arrow(false)}</button></div><div class="explorer-dots" role="group" aria-label="Escolha um item">${slides.map((slide,i)=>`<button type="button" data-carousel-go="${i}" aria-label="${i+1}. ${escape(slide.title)}" aria-pressed="${i===0}"><span></span></button>`).join('')}</div></section>`;
@@ -61,6 +80,7 @@ function updateTariffs(root,mode=root.dataset.tariffMode) {
 }
 
 export function explorerHTML(pageId,photos) {
+  if (pageId==='reactor') return reactorExplorerHTML();
   if (pageId==='unequal') return photoCarouselHTML(photos);
   if (pageId==='matrix') return matrixExplorerHTML();
   if (pageId==='payback') return paybackExplorerHTML();
@@ -117,7 +137,7 @@ export function refreshExplorers(container=document) {
     const page=root.closest('.magazine-page');
     if (page && !page.querySelector('.digital-entry')) {
       const button=document.createElement('button'); button.type='button'; button.className='digital-entry';
-      button.textContent=root.dataset.explorer==='matrix' ? 'Explore o gráfico ↓' : root.dataset.explorer==='tariffs' ? 'Compare as tarifas ↓' : root.dataset.explorer==='payback' ? 'Experimente o simulador ↓' : root.querySelector('.explorer-photo') ? 'Percorra as fotografias ↓' : 'Compare os países ↓';
+      button.textContent=root.dataset.explorer==='reactor' ? 'Explore o caminho da energia ↓' : root.dataset.explorer==='matrix' ? 'Explore o gráfico ↓' : root.dataset.explorer==='tariffs' ? 'Compare as tarifas ↓' : root.dataset.explorer==='payback' ? 'Experimente o simulador ↓' : root.querySelector('.explorer-photo') ? 'Percorra as fotografias ↓' : 'Compare os países ↓';
       page.querySelector('.page-subtitle').after(button);
     }
   });
@@ -132,6 +152,7 @@ export function createExplorers() {
       return;
     }
     const root=event.target.closest('[data-explorer]'); if (!root) return;
+    const reactorStep=event.target.closest('[data-reactor-step]'); if(reactorStep) updateReactor(root,Number(reactorStep.dataset.reactorStep));
     const tariffMode=event.target.closest('button[data-tariff-mode]'); if (tariffMode) updateTariffs(root,tariffMode.dataset.tariffMode);
     const filter=event.target.closest('button[data-matrix-filter]');
     if (filter) updateMatrix(root,filter.dataset.matrixFilter,root.dataset.matrixSelected);
@@ -153,6 +174,13 @@ export function createExplorers() {
     if (Number(root.dataset.carouselIndex)!==index) setSlide(root,index,false);
   },true);
   document.addEventListener('keydown',event=>{
+    const reactor=event.target.closest('[data-explorer=reactor]');
+    if (reactor && ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key) && !event.altKey && !event.ctrlKey && !event.metaKey) {
+      event.preventDefault();
+      const current=Number(event.target.closest('[data-reactor-step]')?.dataset.reactorStep ?? reactor.dataset.reactorActive);
+      const index=event.key==='Home'?0:event.key==='End'?4:Math.max(0,Math.min(4,current+(['ArrowRight','ArrowDown'].includes(event.key)?1:-1)));
+      updateReactor(reactor,index);reactor.querySelector(`[data-reactor-step="${index}"]`).focus({preventScroll:true});return;
+    }
     const root=event.target.closest('[data-explorer=carousel]');
     if (!root || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key) || event.altKey || event.ctrlKey || event.metaKey) return;
     event.preventDefault();

@@ -205,6 +205,12 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Paginação e limites.** A nova distribuição é exclusiva de Página inteira; a capa, a entrevista e as composições paginadas foram preservadas. Vinte texturas regeneradas e vinte PNGs revisados, com os mesmos sete alertas históricos (06, 08, 09, 10, 13, 14 e 18) e saída 1 do gerador, sem novo alerta ou imagem ausente. Não foi declarado aprovado o teste geral `test:browser`, sujeito aos limites anteriores. Próximo passo: revisão visual pelo grupo na janela e no aparelho que usará para apresentar a revista.
 
+## Diagrama interativo da geração nuclear (2026-10-18)
+
+**Implementado.** A faixa simples ganhou quatro etapas ilustradas selecionáveis, painel de explicação e controle de resfriamento/retorno da água. Os textos reutilizam `reactorSteps`, com a fonte da AIEA logo abaixo. Desenhos científicos em SVG feitos no código e setas do sprite existente; nenhuma biblioteca ou imagem nova. No desktop a sequência é horizontal; no celular, vertical. O diagrama aparece em Página inteira, HTML móvel e leituras ampliada/contínua, inclusive a partir do 3D; a composição fixa conserva a faixa compacta.
+
+**Validação.** `test:reactor` cobre as cinco explicações, seleção única, foco, teclado sem virada de página, fonte, controles de pelo menos 44 px, larguras 1440/1024/768/390/320, leitura pelo 3D e movimento reduzido. Capturas de desktop e celular revisadas em `artifacts/reactor/`. `npm test`: 22/22; `test:explorers` passou. Vinte texturas regeneradas e vinte PNGs revisados; os mesmos sete alertas históricos permanecem, sem novo alerta ou imagem ausente. O teste geral de navegador não foi declarado aprovado nesta etapa. Próximo passo: revisão do diagrama pelo grupo.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

@@ -15,9 +15,9 @@ const close=async()=>{await b.key('Escape','Escape',27);await b.evaluate('new Pr
 try {
  await b.viewport(1440,1100);
  await b.navigate(base+'/?template=landing&page=5');
- await b.waitFor("document.querySelectorAll('#landing-view [data-explorer]').length===5");
+ await b.waitFor("document.querySelectorAll('#landing-view [data-explorer]').length===6");
  assert.equal(await b.evaluate('document.querySelectorAll("#landing-view>.magazine-page").length'),20);
- assert.equal(await b.evaluate('document.querySelectorAll("#landing-view .digital-entry").length'),5);
+ assert.equal(await b.evaluate('document.querySelectorAll("#landing-view .digital-entry").length'),6);
  assert.equal(await b.evaluate('document.querySelector("#landing-cover .page-action")'),null);
  assert.ok(await b.evaluate('!document.body.innerText.match(/sociologia|instituto j&f/i)'));
  await b.click('#landing-matrix .digital-entry');

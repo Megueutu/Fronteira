@@ -126,3 +126,9 @@ A Página inteira usa largura máxima de 1360 px por matéria, com 48 px de resp
 As fontes ficam após o trecho correspondente, com domínio na mesma linha do link quando há espaço. Nos quadros de debate e após citações, as listas de fontes usam duas colunas no desktop e uma no celular, evitando uma lista longa ao lado de uma área vazia. O texto pode continuar na coluna seguinte; notas de fonte e fotografias não são fragmentadas. Figuras inseridas na leitura têm proporção 16:10, legenda de contexto e links de crédito/licença. Fotografias de abertura usam faixa 3:1 no desktop. As ampliações mostram o original com seu contexto.
 
 Em até 1000 px, o cabeçalho empilha e o intervalo das colunas cai para 32 px. Em até 760 px, o texto passa a uma coluna, 18 px, alinhado à esquerda, e as aberturas usam 16:10. Capa, gráficos e carrosséis preservam seus componentes e controles. Aceitação: texto presente nos dois lados em desktop; nenhum corte de fonte/foto; conteúdo integral; foco de volta à fotografia ampliada; sem transbordamento em 1440, 1024, 768, 390 e 320 px.
+
+## Diagrama da geração (18/10/2026)
+
+O componente usa quatro ilustrações científicas de 72 × 72 em círculos de 104 px, com número de sequência, título em Georgia e linha curta em Arial. Seleção: borda verde, fundo `--soft` e ilustração branca sobre verde. Painel de explicação com número, título e descrição; retorno da água separado do fluxo principal. Raios de 8 px nos controles retangulares; setas do sprite existente. As etapas são botões de pelo menos 44 px e preservam foco ao atualizar a explicação.
+
+Em até 760 px, a sequência fica vertical, com círculos de 64 px e desenhos de 48 px; as setas apontam para baixo. A mudança de etapa usa `aria-pressed` e anúncio educado, sem avanço automático. Transições de cor respeitam movimento reduzido. A fonte da explicação permanece logo abaixo do esquema.
