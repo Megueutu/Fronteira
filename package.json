@@ -15,6 +15,7 @@
     "test:tariffs": "node tests/tariffs.browser.mjs",
     "test:layout": "node tests/layout.browser.mjs",
     "test:reactor": "node tests/reactor.browser.mjs",
+    "test:sources": "node tests/sources.browser.mjs",
     "render:textures": "node scripts/render-textures.mjs",
     "build:pages": "node scripts/build-pages.mjs"
   },

@@ -118,8 +118,32 @@ export function citationHTML(record, {className='',label} = {}) {
     return `<span class="claim-source-item" data-source-id="${escape(id)}"><a href="${escape(ref.url)}" target="_blank" rel="noopener noreferrer">${escape(ref.short)} ↗</a><span class="source-location">${escape(location || ref.location)}</span><small>${escape(host)}</small></span>`;
   }).join('')}</div>`;
 }
+function pageVisualRecords(page) {
+  if(page.id==='who-pays') return [visualEvidence.tariffs,{kind:'Composição da conta',sources:[{id:'aneel-tariffs'}]}];
+  return visualEvidence[page.visual] ? [visualEvidence[page.visual]] : [];
+}
+export function pageSourceRecords(page) {
+  const records=[...(pageEvidence[page.id] || []),...pageVisualRecords(page)];
+  const ids=[...new Set([...(page.refs || []),...records.flatMap(record=>record.sources.map(source=>source.id))])];
+  return ids.map(id=>{
+    const ref=references.find(item=>item.id===id);
+    const locations=[...new Set(records.flatMap(record=>record.sources.filter(source=>source.id===id).map(source=>source.location || ref.location)))];
+    const specific=locations.filter(location=>!locations.some(other=>other.length>location.length && other.startsWith(location.replace(/[.;]\s*$/,''))));
+    return {...ref,locations:specific.length?specific:[ref.location]};
+  });
+}
+export function sourceButtonHTML(page,index) {
+  const used=pageSourceRecords(page),count=used.length || references.length;
+  const names=[...new Set(used.map(ref=>ref.short.split(' · ')[0]))];
+  const preview=used.length ? names.slice(0,3).join(' · ')+(names.length>3?` · +${names.length-3}`:'') : 'Bibliografia e documentos da pesquisa';
+  const numbers=(page.refs || []).map(id=>references.findIndex(ref=>ref.id===id)+1).join(' · ');
+  return `<button type="button" class="source-link" data-action="sources" data-page="${index}" aria-label="Fontes da página ${index+1}" aria-haspopup="dialog"><span class="source-compact">${numbers?`FONTES [${numbers}]`:'EDIÇÃO INTERATIVA · 2026'}</span><span class="source-card-icon" aria-hidden="true"><svg class="reader-icon"><use href="#ui-menu_book"/></svg></span><span class="source-card-copy"><strong>${used.length?'Fontes desta matéria':'Fontes da edição'}</strong><small>${count} ${count===1?'referência':'referências'} · ${escape(preview)}</small></span><svg class="reader-icon source-card-arrow" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button>`;
+}
+export function sourceCardsHTML(page) {
+  return `<div class="source-catalog">${pageSourceRecords(page).map(ref=>`<article class="source-document" data-document-source="${ref.id}"><header><span class="source-reference-number" aria-label="Referência ${references.findIndex(item=>item.id===ref.id)+1}">${references.findIndex(item=>item.id===ref.id)+1}</span><div><h3>${escape(ref.short)}</h3><small>${escape(new URL(ref.url).hostname.replace(/^www\./,''))}</small></div></header><p>${escape(ref.name)}</p><div class="source-document-locations"><strong>Onde encontrar a informação</strong><ul>${ref.locations.map(location=>`<li>${escape(location)}</li>`).join('')}</ul></div><a class="source-document-open" href="${escape(ref.url)}" target="_blank" rel="noopener noreferrer">Abrir fonte original <svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></a></article>`).join('')}</div>`;
+}
 export function sourcePanelHTML(page,index) {
   const records=pageEvidence[page.id] || [];
   if (!records.length) return '';
-  return `<section class="page-evidence"><h3>${String(index+1).padStart(2,'0')} · ${escape(page.title.replaceAll('\n',' '))}</h3>${records.map((record,i)=>`<div class="evidence-entry"><h4>Trecho ${i+1} · ${escape(page.body[i].split(/[.!?]/)[0])}</h4>${citationHTML(record)}</div>`).join('')}${visualEvidence[page.visual] ? citationHTML(visualEvidence[page.visual],{label:'Gráfico ou esquema'}) : ''}${page.balance ? citationHTML(analysis(...(page.refs || [])),{label:'Balanço: síntese do grupo com base em'}) : ''}</section>`;
+  return `<section class="page-evidence"><h3>${String(index+1).padStart(2,'0')} · ${escape(page.title.replaceAll('\n',' '))}</h3>${records.map((record,i)=>`<div class="evidence-entry"><h4>Trecho ${i+1} · ${escape(page.body[i].split(/[.!?]/)[0])}</h4>${citationHTML(record)}</div>`).join('')}${pageVisualRecords(page).map(record=>citationHTML(record,{label:'Gráfico ou esquema'})).join('')}${page.balance ? citationHTML(analysis(...(page.refs || [])),{label:'Balanço: síntese do grupo com base em'}) : ''}</section>`;
 }

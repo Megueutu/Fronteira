@@ -132,3 +132,9 @@ Em até 1000 px, o cabeçalho empilha e o intervalo das colunas cai para 32 px. 
 O componente usa quatro ilustrações científicas de 72 × 72 em círculos de 104 px, com número de sequência, título em Georgia e linha curta em Arial. Seleção: borda verde, fundo `--soft` e ilustração branca sobre verde. Painel de explicação com número, título e descrição; retorno da água separado do fluxo principal. Raios de 8 px nos controles retangulares; setas do sprite existente. As etapas são botões de pelo menos 44 px e preservam foco ao atualizar a explicação.
 
 Em até 760 px, a sequência fica vertical, com círculos de 64 px e desenhos de 48 px; as setas apontam para baixo. A mudança de etapa usa `aria-pressed` e anúncio educado, sem avanço automático. Transições de cor respeitam movimento reduzido. A fonte da explicação permanece logo abaixo do esquema.
+
+## Acesso às fontes (18/10/2026)
+
+No fluxo, o botão “Fontes desta matéria” ocupa o rodapé com ícone de livro, contagem e nomes das referências, seta e borda verde. Altura mínima de 88 px, ícone em área de 44 px, título de 16 px e descrição de 13 px. No celular, o ícone usa área de 32 × 36 px dentro do botão, título de 14 px e descrição de 12 px; o alvo permanece maior que 44 px. Nomes podem quebrar linha, sem corte por reticências. Raios de 8 px e cores existentes. Foco visível e hover em `--soft`.
+
+A janela de fontes usa cartões verticais com identificação do documento, domínio, localizadores e link de pelo menos 44 px. Título em Georgia, metadados em Arial. Detalhamento por trecho e bibliografia em elementos `details`. Aceitação: contagem corresponde aos documentos da matéria, links apontam às URLs registradas, fonte de gráfico não é omitida, não há localizador redundante nem transbordamento em 1440/768/390/320 px; Escape devolve foco ao botão, inclusive após consultar créditos.

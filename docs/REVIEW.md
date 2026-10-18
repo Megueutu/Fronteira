@@ -211,6 +211,14 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 
 **Validação.** `test:reactor` cobre as cinco explicações, seleção única, foco, teclado sem virada de página, fonte, controles de pelo menos 44 px, larguras 1440/1024/768/390/320, leitura pelo 3D e movimento reduzido. Capturas de desktop e celular revisadas em `artifacts/reactor/`. `npm test`: 22/22; `test:explorers` passou. Vinte texturas regeneradas e vinte PNGs revisados; os mesmos sete alertas históricos permanecem, sem novo alerta ou imagem ausente. O teste geral de navegador não foi declarado aprovado nesta etapa. Próximo passo: revisão do diagrama pelo grupo.
 
+## Consulta às fontes com nomes e documentos (2026-10-18)
+
+**Implementado.** O acesso numérico pequeno ganhou um botão com título, contagem, nomes das referências e ícone de livro nas composições em fluxo. A janela mostra documentos com domínio, referência completa, local da informação e link original. O detalhamento por trecho, a bibliografia geral e os créditos das fotografias foram preservados. Os modos fixos conservam o rodapé compacto.
+
+**Integridade.** A lista da matéria reúne as fontes dos parágrafos e dos gráficos. O catálogo de tarifas passou a incluir PDF ABNT, Meutudo e ANEEL. IDs repetidos e localizadores que apenas repetem uma versão mais específica foram consolidados. Não houve pesquisa nova ou invenção de páginas de documentos.
+
+**Validação.** `test:sources` confere nome/contagem no rodapé, teclado, URLs exatas, localizadores, fontes do gráfico de tarifas, histórico de créditos, Escape/foco, larguras 1440/768/390/320 e consulta a partir da leitura 3D. `test:citations` passou. `npm test`: 23/23. Capturas de rodapé e janela em desktop e celular revisadas em `artifacts/sources/`. Vinte texturas regeneradas e vinte PNGs revisados, com os mesmos sete alertas anteriores (06, 08, 09, 10, 13, 14 e 18), sem novo alerta ou imagem ausente. O teste geral de navegador não foi declarado aprovado nesta etapa. Próximo passo: revisão dos localizadores e da apresentação pelo grupo.
+
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.

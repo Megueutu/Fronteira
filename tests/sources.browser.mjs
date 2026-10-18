@@ -1,0 +1,63 @@
+import assert from 'node:assert/strict';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {launchBrowser} from '../scripts/chromium.mjs';
+import {pages} from '../src/content.js';
+import {pageSourceRecords} from '../src/citations.js';
+const b=await launchBrowser({timeout:180000});
+const base=process.env.TEST_URL || 'http://127.0.0.1:4317';
+const root='#landing-reactor .source-link';
+await mkdir('artifacts/sources',{recursive:true});
+const frame=async name=>{
+ await b.evaluate('new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))');
+ const result=await b.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});
+ await writeFile(`artifacts/sources/${name}.png`,Buffer.from(result.data,'base64'));
+};
+const close=async()=>{await b.key('Escape','Escape',27);await b.waitFor("!document.querySelector('#interaction-dialog').open");};
+try {
+ await b.viewport(1440,900);await b.navigate(base+'/?template=landing&page=7');
+ await b.waitFor(`document.querySelector('${root} .source-card-copy')`);
+ const expected=pageSourceRecords(pages[6]);
+ assert.ok((await b.evaluate(`document.querySelector('${root}').innerText`)).includes(`${expected.length} referências`));
+ assert.ok((await b.evaluate(`document.querySelector('${root}').innerText`)).includes('AIEA'));
+ assert.equal(await b.evaluate(`getComputedStyle(document.querySelector('${root} .source-compact')).display`),'none');
+ assert.equal(await b.evaluate(`document.querySelector('${root}').getAttribute('aria-haspopup')`),'dialog');
+ await b.evaluate(`document.querySelector('${root}').scrollIntoView({block:'center',behavior:'instant'})`);
+ await frame('footer-desktop');
+ await b.evaluate(`document.querySelector('${root}').focus({preventScroll:true})`);
+ await b.key(' ','Space',32);
+ await b.waitFor("document.querySelector('#interaction-dialog').open && document.querySelector('.source-catalog')");
+ assert.equal(await b.evaluate("document.querySelectorAll('.source-document').length"),expected.length);
+ assert.deepEqual(await b.evaluate("[...document.querySelectorAll('.source-document-open')].map(link=>link.href)"),expected.map(ref=>ref.url));
+ assert.ok(await b.evaluate("[...document.querySelectorAll('.source-document')].every(card=>card.querySelector('.source-document-locations li') && card.querySelector('header small').textContent)"));
+ await frame('dialog-desktop');
+ await b.click('.source-passages summary');
+ assert.ok(await b.evaluate("document.querySelector('.source-passages').open && document.querySelector('.source-passages .evidence-entry').textContent.includes('Trecho 1')"));
+ await b.click('.sources-photo-link');await b.waitFor("document.querySelector('.photo-credits')");
+ await b.key('Escape','Escape',27);
+ await b.waitFor("document.querySelector('.source-catalog') && document.activeElement.matches('.sources-photo-link')");
+ await close();assert.equal(await b.evaluate(`document.activeElement===document.querySelector('${root}')`),true);
+ await b.click('#landing-who-pays .source-link');
+ for(const id of ['tariff-study','tariff-compilation','aneel-tariffs']) assert.ok(await b.evaluate(`!!document.querySelector('.source-document[data-document-source="${id}"]')`));
+ await close();
+ for(const width of [768,390,320]) {
+  await b.viewport(width,900,width<760);
+  assert.ok(await b.evaluate('document.documentElement.scrollWidth<=innerWidth'),`page at ${width}`);
+  assert.ok(await b.evaluate(`(()=>{const button=document.querySelector('${root}');return button.scrollWidth<=button.clientWidth && button.getBoundingClientRect().height>=44})()`));
+  await b.evaluate(`document.querySelector('${root}').scrollIntoView({block:'center',behavior:'instant'})`);
+  if(width===390) await frame('footer-mobile');
+  await b.click(root);
+  assert.ok(await b.evaluate("(()=>{const dialog=document.querySelector('#interaction-dialog');return dialog.scrollWidth<=dialog.clientWidth})()"),`dialog at ${width}`);
+  if(width===390) await frame('dialog-mobile');
+  await close();
+ }
+ await b.viewport(1440,900);await b.click('[data-mode="3d"]');
+ await b.click('#open-index');await b.click('dialog [data-jump="6"]');
+ await b.waitFor("document.querySelector('#loading').hidden && document.querySelector('#book-canvas').dataset.textureCount==='2'");
+ await b.click('#read-spread');await b.click('dialog [data-page-index="6"] .source-link');
+ await b.waitFor("document.querySelector('.source-catalog')");
+ assert.equal(await b.evaluate("document.querySelectorAll('.source-document').length"),expected.length);
+ await b.key('Escape','Escape',27);await b.waitFor("document.querySelector('.linear-content') && document.activeElement.matches('.source-link')");
+ await close();
+ assert.deepEqual(b.errors,[]);assert.deepEqual(b.requests,[]);
+ console.log('PASS: named source footer/count, keyboard/dialog, exact document URLs/locators, tariff evidence, nested credits/focus, responsive bounds and 3D reading.');
+} finally {await b.close();}

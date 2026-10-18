@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { pages, pageHTML, interviewHTML } from '../src/content.js';
-import { references, pageEvidence, citationHTML, sourcePanelHTML } from '../src/citations.js';
+import { references, pageEvidence, citationHTML, sourcePanelHTML, pageSourceRecords } from '../src/citations.js';
 import { adolfoInterview } from '../src/interview.js';
 
 test('every research paragraph has a source locator or an explicit editorial attribution',()=>{
@@ -37,4 +37,17 @@ test('financial assumptions cite the group tables and interview answers cite the
 });
 test('source locators are escaped when inserted into markup',()=>{
   assert.ok(citationHTML({kind:'Fonte',sources:[{id:'inb',location:'<texto> & "aspas"'}]}).includes('&lt;texto&gt; &amp; &quot;aspas&quot;'));
+});
+test('page source catalog includes interactive graphs and keeps specific locators without repetition',()=>{
+  const tariffs=pageSourceRecords(pages.find(page=>page.id==='who-pays'));
+  for(const id of ['tariff-study','tariff-compilation','aneel-tariffs']) assert.ok(tariffs.some(ref=>ref.id===id));
+  const reactor=pageSourceRecords(pages.find(page=>page.id==='reactor'));
+  const iaea=reactor.find(ref=>ref.id==='iaea');
+  assert.equal(iaea.locations.length,1);
+  assert.match(iaea.locations[0],/esquema simplificado/);
+  for(const page of pages) {
+    const refs=pageSourceRecords(page);
+    assert.equal(new Set(refs.map(ref=>ref.id)).size,refs.length);
+    assert.ok(refs.every(ref=>ref.locations.length && ref.locations.every(Boolean)));
+  }
 });

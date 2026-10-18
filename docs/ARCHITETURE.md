@@ -136,3 +136,11 @@ A faixa Fissão → Calor → Vapor → Eletricidade foi substituída, nas compo
 Os desenhos científicos em SVG são originais; as setas de interface usam o sprite Material Symbols existente. Botões nativos com `aria-pressed`, região de explicação anunciada, foco visível, teclado local e movimento reduzido. Setas/Home/End não viram a revista durante a interação. Quatro etapas em linha no desktop; sequência vertical no celular. A composição fixa mantém a faixa compacta e o 3D oferece o diagrama em “Ler esta abertura”.
 
 Fonte: [AIEA, funcionamento de uma central nuclear](https://www.iaea.org/newscenter/news/what-is-nuclear-energy-the-science-of-nuclear-power), seções “What is nuclear fission?” e “How does a nuclear power plant work?”, citada junto ao componente. Referência técnica: [W3C WAI, padrão de botões](https://www.w3.org/WAI/ARIA/apg/patterns/button/). Sem biblioteca ou asset externo novo. Validação dedicada: `npm run test:reactor`.
+
+## Consulta às fontes por matéria (18/10/2026)
+
+`sourceButtonHTML` substitui o rodapé numérico por um acesso com título, quantidade de referências e nomes de fontes nas composições em fluxo, HTML móvel e leitura ampliada. Os modos fixos mantêm o texto compacto para preservar a paginação. O botão continua usando o diálogo nativo e informa `aria-haspopup="dialog"`.
+
+`pageSourceRecords` reúne referências declaradas, evidências dos parágrafos e fontes dos gráficos. Inclui o PDF, a compilação e a explicação da ANEEL do gráfico de tarifas, antes ausentes da lista da matéria. A agregação elimina IDs duplicados e mantém o localizador mais específico quando um texto apenas amplia o mesmo local. Não foram criadas fontes ou páginas de consulta.
+
+A janela começa com documentos organizados em cartões: nome, domínio, referência completa, locais de consulta e link original. A relação por trecho permanece em “Onde cada fonte aparece no texto”; a bibliografia completa e os créditos fotográficos continuam acessíveis. A consulta às fotos usa o histórico de diálogos existente, com Escape e retorno ao foco anterior. Referência técnica: [MDN, elemento dialog](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog). Ícones do sprite já licenciado; sem biblioteca, asset ou dado de pesquisa novo. Teste dedicado: `npm run test:sources`.
