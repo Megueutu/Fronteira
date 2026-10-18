@@ -2,6 +2,7 @@ import { pages, pageHTML, clampSpread, formatPages, interviewHTML } from './cont
 import { createInteractions } from './interactions.js';
 import { sourcePanelHTML } from './citations.js';
 import { createExplorers, refreshExplorers } from './explorers.js';
+import { initializeBackground } from './reader-shell.js';
 
 const renderIndex = new URLSearchParams(location.search).get('render');
 if (renderIndex !== null) {
@@ -12,12 +13,13 @@ if (renderIndex !== null) {
   await document.fonts.ready;
   document.body.dataset.ready = 'true';
 } else {
+  initializeBackground();
   const stage = document.querySelector('#stage');
   const book = document.querySelector('#html-book');
   const landing = document.querySelector('#landing-view');
   const mobile = matchMedia('(max-width: 760px)');
   const params = new URLSearchParams(location.search);
-  let mode = ['html','3d','landing'].includes(params.get('template')) ? params.get('template') : mobile.matches ? 'html' : '3d';
+  let mode = ['html','3d','landing'].includes(params.get('template')) ? params.get('template') : 'html';
   let pageIndex = Math.max(0,Math.min(pages.length - 1,(Number(params.get('page')) || 1) - 1));
   let zoom = 1, turning = false, turnId = 0, modeId = 0, renderer, rendererPromise, failed = false, timer;
   createExplorers();
@@ -36,6 +38,7 @@ if (renderIndex !== null) {
     next.disabled = turning || (single() ? pageIndex === pages.length - 1 : spread() === clampSpread(999));
     document.querySelector('#page-status').textContent = single() ? `${String(pageIndex + 1).padStart(2,'0')} / ${pages.length}` : formatPages(spread());
     document.querySelector('#section-label').textContent = pages[pageIndex].section;
+    initializeBackground.setSection?.(pageIndex);
     document.querySelector('.context-label').textContent = mode === 'landing' ? 'Nesta seção' : 'Nesta abertura';
     document.querySelector('.nav-caption').textContent = mode === 'landing' ? 'Seções' : 'Páginas';
     stage.setAttribute('aria-busy',String(turning));
@@ -88,6 +91,7 @@ if (renderIndex !== null) {
     if (focus) article.querySelector('h1,h2').focus({preventScroll:true});
   }
   function layout() {
+    stage.style.scrollMarginTop = `${document.querySelector('#reader-toolbar').offsetHeight + 16}px`;
     document.querySelector('#zoom-controls').hidden = mode !== 'html' || mobile.matches;
     if (mode === 'landing') { observeLanding(); return; }
     const availableWidth = Math.max(300,stage.clientWidth - (mobile.matches ? 20 : 70));
@@ -132,7 +136,8 @@ if (renderIndex !== null) {
     showHTML(); update();
     if (mode === 'landing') { const target = pageIndex; requestAnimationFrame(() => { pageIndex = target; scrollLanding({focus:true}); update(); }); return; }
     if (mode === '3d' && renderer && !failed) { try { await renderer.show(spread()); } catch { showGraphicsError(); } }
-    document.querySelector('#read-spread').focus();
+    stage.scrollIntoView({block:'start',behavior:'instant'});
+    document.querySelector('#reader-toolbar').focus({preventScroll:true});
   }
   function showGraphicsError() {
     if (mode !== '3d') return;
@@ -147,6 +152,7 @@ if (renderIndex !== null) {
     const previousMode = mode;
     landingObserver?.disconnect();
     mode = value; turning = false; ++turnId; renderer?.cancel();
+    initializeBackground.setMode?.(mode);
     document.body.dataset.readerMode = mode;
     stage.hidden = mode === 'landing'; landing.hidden = mode !== 'landing';
     if (!single()) pageIndex = Math.floor(pageIndex / 2) * 2;
@@ -175,6 +181,7 @@ if (renderIndex !== null) {
   document.querySelector('#go-cover').addEventListener('click',() => jump(0));
   document.querySelector('#zoom-in').addEventListener('click',() => { zoom = Math.min(1.5,zoom + .15); layout(); document.querySelector('#zoom-status').textContent = `${Math.round(zoom * 100)}%`; });
   document.querySelector('#zoom-out').addEventListener('click',() => { zoom = Math.max(.85,zoom - .15); layout(); document.querySelector('#zoom-status').textContent = `${Math.round(zoom * 100)}%`; });
+  for (const id of ['zoom-reset','zoom-fit']) document.querySelector(`#${id}`).addEventListener('click',() => { zoom = 1; layout(); document.querySelector('#zoom-status').textContent = '100%'; });
   document.querySelector('#fullscreen').addEventListener('click',async () => { try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); } catch { document.querySelector('#fullscreen').textContent = 'Indisponível'; } });
   document.addEventListener('keydown',event => {
     if (event.defaultPrevented || interactions.isOpen() || event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input,textarea,select,[contenteditable],[data-explorer]')) return;

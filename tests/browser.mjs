@@ -16,14 +16,14 @@ try {
   assert.equal(await b.evaluate("document.querySelector('#previous').disabled"),true);
   await capture('edition-html-cover');
   await b.click('#next'); await idle();
-  await b.click('[data-page="3"][data-action="carousel"]');
+  await b.click('#read-spread');
   assert.equal(await b.evaluate('document.activeElement.id'),'close-dialog');
-  await b.click('[data-dialog-slide="1"]');
-  assert.equal(await b.evaluate("document.querySelector('#slide-status').textContent"),'2 / 9');
+  await b.click('dialog [data-carousel-go="1"]');
+  assert.equal(await b.evaluate("document.querySelector('dialog [data-explorer=carousel]').dataset.carouselIndex"),'1');
   await b.key('Escape','Escape',27);
   await b.waitFor("!document.querySelector('dialog').open");
-  await b.waitFor("document.activeElement.dataset.action === 'carousel'");
-  assert.equal(await b.evaluate('document.activeElement.dataset.action'),'carousel');
+  await b.waitFor("document.activeElement.id === 'read-spread'");
+  assert.equal(await b.evaluate('document.activeElement.id'),'read-spread');
   await b.key('Home','Home',36); await idle();
   await b.click('[data-page-index="0"] .editorial-photo button');
   await b.waitFor("document.querySelector('.expanded-photo img')?.naturalWidth > 0");
@@ -75,7 +75,7 @@ try {
   for(let spread=0;spread<10;spread++) {
     await idle();
     const pageLayouts=await b.evaluate("[...document.querySelectorAll('#html-book > article')].map(p=>{const m=p.querySelector('.page-main'),t=p.querySelector('.page-tail');return {page:Number(p.dataset.pageIndex)+1,contentBottom:Math.max(...[...m.children].map(e=>e.getBoundingClientRect().bottom)),tailTop:t.getBoundingClientRect().top,justify:getComputedStyle(p.querySelector('.columns p')).textAlign}})");
-    for(const layout of pageLayouts) { assert.ok(layout.contentBottom < layout.tailTop,JSON.stringify(layout)); assert.equal(layout.justify,'justify'); }
+    for(const layout of pageLayouts) { assert.ok(layout.contentBottom < layout.tailTop,JSON.stringify(layout)); assert.equal(layout.justify,layout.page===1?'left':'justify'); }
     layouts.push(...pageLayouts);
     if(spread<9) { await b.click('#next'); await idle(); }
   }

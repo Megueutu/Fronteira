@@ -1,5 +1,9 @@
 # Energia Atômica
 
+## Unificação em 2026-10-18 — estado vigente
+
+O responsável pediu juntar a interface desta revista ao conteúdo e aos leitores da Fronteira. Agora há uma única revista na raiz. Barra, ícones, sumário lateral e fundo orgânico foram reaproveitados; o conteúdo principal continua com 20 páginas e a entrevista. `edicoes/energia-atomica.html` é somente um redirecionamento que preserva parâmetros e traduz os links antigos por página. As regras de HTML autocontido e de 16 páginas abaixo são históricas e foram substituídas por essa decisão. A implementação completa anterior pode ser recuperada pelo Git. A manutenção atual é descrita em [ARCHITETURE.md](ARCHITETURE.md).
+
 Status: em revisão com o responsável desde 2026-10-16. É uma revista separada da edição Fronteira de 20 páginas, que continua intacta na raiz do projeto.
 
 ## Onde fica e como versionar

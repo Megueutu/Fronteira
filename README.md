@@ -10,7 +10,9 @@ Requer Node.js 22 ou superior. Não há dependências para instalar.
 npm start
 ```
 
-Abra [a revista](http://localhost:3000). No desktop, o modo inicial é 3D; no celular, páginas HTML legíveis. Links diretos: [3D](http://localhost:3000/?template=3d) e [HTML](http://localhost:3000/?template=html). `?page=13` abre a região correspondente da edição.
+Abra [a revista](http://localhost:3000). O modo inicial é **Revista**, com páginas HTML interativas. A barra oferece também 3D e rolagem contínua; os três modos pertencem à mesma revista e conservam a posição de leitura. `?page=13` abre a região correspondente da edição.
+
+Desde 2026-10-18, a raiz reúne o conteúdo da Fronteira com a interface da Energia Atômica: barra compacta, ícones Material Symbols, controles de zoom, sumário lateral e fundo orgânico. O endereço antigo `edicoes/energia-atomica.html` apenas redireciona para a raiz e conserva parâmetros de leitura; links `#pN` são mapeados ao assunto correspondente. O redirecionamento também funciona em `/Fronteira/` no GitHub Pages. Não há uma segunda edição independente.
 
 O seletor também oferece [Página inteira](http://localhost:3000/?template=landing): a edição em formato de site, com capa ampla e vinte seções em rolagem contínua. Sumário e botões levam diretamente às seções; a URL acompanha a leitura. `?template=landing&page=13` abre a seção correspondente à página 13. A troca entre os três modos conserva a posição editorial, ajustada ao par no 3D/HTML desktop.
 
@@ -20,7 +22,7 @@ A entrevista com Adolfo Braid é um suplemento após a página 17 em Página int
 
 Site: [megueutu.github.io/Fronteira](https://megueutu.github.io/Fronteira/).
 
-O workflow [Deploy GitHub Pages](.github/workflows/pages.yml) executa os testes, gera o site e publica a `main` a cada push. Também pode ser iniciado manualmente em Actions. Nas configurações do repositório, Pages deve usar **GitHub Actions** como origem. Outras branches não são publicadas automaticamente; a nova identidade visual chegará ao site quando for incorporada à `main`.
+O workflow [Deploy GitHub Pages](.github/workflows/pages.yml) executa os testes, gera o site e publica a `main` a cada push. Também pode ser iniciado manualmente em Actions. Nas configurações do repositório, Pages deve usar **GitHub Actions** como origem. A publicação abre a revista unificada na raiz do projeto; outras branches não são publicadas automaticamente.
 
 `npm run build:pages` gera `_site/`, usando `BASE_PATH` para adaptar imagens, texturas, scripts e links ao endereço da publicação. O workflow obtém esse caminho da configuração do Pages. Somente `index.html`, `src/`, `assets/`, `previews/` e `edicoes/` entram no pacote; documentos locais e artefatos de teste ficam fora. As texturas já versionadas são reutilizadas.
 
@@ -42,6 +44,7 @@ O 3D usa folhas segmentadas que curvam durante a virada e camadas HTML para inte
 ```sh
 npm test
 npm run test:browser
+npm run test:unified
 npm run test:landing
 npm run test:interview
 npm run test:citations
@@ -64,7 +67,7 @@ Capturas e relatórios ficam em `artifacts/`, ignorado pelo Git. Os testes headl
 
 ## Atualizar a edição
 
-Conteúdo, fotos e composição: `src/content.js`. Catálogo de fontes e associação por trecho: `src/citations.js`. Dados e fórmulas: `src/data.js`. Carrosséis e aplicações de dados na leitura: `src/explorers.js`. Tokens e componentes: `src/styles.css`. As fontes aparecem abaixo dos trechos na leitura fluida e abaixo da abertura nos modos fixos. Depois de alterar a composição, regenere as texturas com o servidor ativo:
+Interface de navegação: `index.html`, `src/reader-shell.css` e `src/reader-shell.js`. Conteúdo, fotos e composição: `src/content.js`. Catálogo de fontes e associação por trecho: `src/citations.js`. Dados e fórmulas: `src/data.js`. Carrosséis e aplicações de dados na leitura: `src/explorers.js`. Tokens e componentes das páginas: `src/styles.css`. As fontes aparecem abaixo dos trechos na leitura fluida e abaixo da abertura nos modos fixos. Depois de alterar a composição, regenere as texturas com o servidor ativo:
 
 ```sh
 npm run render:textures
@@ -81,7 +84,7 @@ O comando captura as 20 páginas, verifica limites de composição e grava JPEGs
 - [Design system](docs/DESIGN_SYSTEM.md).
 - [Revisão e decisões de edição](docs/REVIEW.md).
 - [Fotografias e licenças](docs/IMAGE_SOURCES.md).
-- [Energia Atômica](docs/ENERGIA_ATOMICA.md): um único arquivo, `edicoes/energia-atomica.html`, que abre direto no navegador; as versões ficam nos commits.
+- [Histórico da Energia Atômica](docs/ENERGIA_ATOMICA.md) e da unificação com a Fronteira; versões anteriores ficam nos commits.
 - [Créditos da referência visual](docs/THIRD_PARTY_NOTICES.md).
 
 O estudo anterior permanece em [previews/index.html](http://localhost:3000/previews/index.html) como histórico da direção; a edição está na página principal. Não há editor de conteúdo, importação de PDF ou vídeo nesta versão.

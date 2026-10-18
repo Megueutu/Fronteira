@@ -37,10 +37,11 @@ export function createInteractions(onJump) {
     if (dialog.open && pushHistory) history.push({ nodes: [...content.childNodes], className: dialog.className, scroll: dialog.scrollTop, trigger, gallery, slideIndex, currentSteps, scenario: { ...scenario } });
     if (!dialog.open) origin = trigger || document.activeElement;
     gallery = null;
-    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : '';
+    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : '';
+    document.querySelector('#open-index').setAttribute('aria-expanded',String(type === 'index'));
     let title = '', markup = '';
     if (type === 'index') {
-      title = 'Escolha por onde começar.';
+      title = 'Sumário da edição';
       markup = `<nav class="dialog-index" aria-label="Sumário">${chapters.map(ch => `<button type="button" data-jump="${ch.page}"><b>${String(ch.page + 1).padStart(2,'0')}</b><span>${ch.title}<small>${ch.detail}</small></span><i aria-hidden="true">↗</i></button>`).join('')}</nav><details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>`;
       markup += interviewEntryHTML();
     } else if (type === 'interview') {
@@ -108,6 +109,7 @@ export function createInteractions(onJump) {
   function close() {
     if (history.length) {
       const prior = history.pop(); content.replaceChildren(...prior.nodes); dialog.className = prior.className;
+      document.querySelector('#open-index').setAttribute('aria-expanded',String(dialog.classList.contains('contents-drawer')));
       ({ gallery, slideIndex, currentSteps, scenario } = prior); dialog.scrollTop = prior.scroll;
       refreshExplorers(content);
       if (prior.trigger?.isConnected) prior.trigger.focus(); else closeButton.focus();
@@ -119,7 +121,7 @@ export function createInteractions(onJump) {
     if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); close(); }
   });
   dialog.addEventListener('cancel',event => { event.preventDefault(); close(); });
-  dialog.addEventListener('close',() => { history = []; gallery = null; if (origin?.isConnected) origin.focus(); });
+  dialog.addEventListener('close',() => { document.querySelector('#open-index').setAttribute('aria-expanded','false'); history = []; gallery = null; if (origin?.isConnected) origin.focus(); });
   dialog.addEventListener('click',event => {
     if (event.target !== dialog) return;
     const r = dialog.getBoundingClientRect();

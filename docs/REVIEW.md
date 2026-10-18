@@ -1,5 +1,15 @@
 # Revisão da edição de 20 páginas
 
+## Unificação da interface — 2026-10-18
+
+Pedido do responsável: usar o layout e os ícones da Energia Atômica com a revista Fronteira, em um único endereço na raiz. Foram preservados conteúdo, 20 páginas, suplemento de Adolfo Braid, fontes, fotografias, composição editorial e os leitores HTML, WebGL e rolagem. A interface passa a ter barra compacta com ícones Material, zoom/restauração/ajuste, navegação, sumário modal lateral, ampliação e fundo orgânico da Energia Atômica. HTML é a opção inicial; o seletor conserva os outros modos e a posição de leitura. O fundo fica estático durante o 3D, para evitar dois loops de animação concorrentes, e respeita movimento reduzido e visibilidade da aba.
+
+`edicoes/energia-atomica.html` agora redireciona para a raiz, preservando parâmetros e traduzindo links antigos `#pN` para o assunto correspondente. O redirecionamento relativo funciona tanto localmente quanto em `/Fronteira/`. O build e o workflow existentes publicam a versão unificada. A implementação antiga de 16 páginas continua disponível no Git, sem uma segunda revista ativa.
+
+O CSS e o JavaScript da interface ficam em `src/reader-shell.*`; as páginas em `src/content.js`, os dados e `src/styles.css` não foram alterados. O teste de integridade confirmou que as vinte texturas continuam sincronizadas. Os testes da antiga aplicação autocontida foram substituídos por verificações do leitor unificado e dos redirecionamentos. O teste geral de navegador foi atualizado para o carrossel inline e o alinhamento da capa que já existiam no conteúdo recebido por pull.
+
+Validação: 14 testes unitários/build passaram. `test:unified` passou no Chromium headless: raiz em HTML, três modos, sumário/Escape/foco, zoom, controles sem sobreposição em 1440/1024/768/390/320 px e redirecionamento. `test:browser` passou para as vinte páginas, interações, cache de texturas, movimento reduzido e fallback WebGL. `test:landing` passou para navegação, foco, posição de rolagem e troca de modos. `test:tariffs` passou para faixas, unidades, consumo e limites responsivos. Capturas de desktop, sumário, 3D e celular em `artifacts/unified/` foram inspecionadas. Isso não constitui homologação de dispositivos físicos ou outros navegadores.
+
 Data: 2026-10-16. Esta revisão registra decisões concretas de conteúdo, composição e funcionamento. Não constitui certificação científica, financeira ou de acessibilidade.
 
 ## Revisão do escopo

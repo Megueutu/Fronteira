@@ -12,7 +12,9 @@ test('pages build relocates resources and only publishes website files', async (
   assert.match(await read('src/webgl-scene.js'), /`\/Fronteira\/assets\/textures\//);
   assert.match(await read('previews/index.html'), /href="\/Fronteira\/\?template=3d"/);
   assert.match(await read('src/app.js'), /from ['"]\.\/content.js['"]/);
-  assert.match(await read('edicoes/energia-atomica.html'), /data-tariff-view="chart"/);
+  assert.match(await read('edicoes/energia-atomica.html'), /location.replace\(destination.href\)/);
+  assert.match(await read('index.html'), /href="\/Fronteira\/src\/reader-shell.css"/);
+  assert.match(await read('src/reader-shell.js'), /export function initializeBackground/);
   assert.match(await read('src/explorers.js'), /from ['"]\.\/data.js['"]/);
   const files = await readdir(new URL('../_site/', import.meta.url));
   assert.deepEqual(files.sort(), ['.nojekyll', 'assets', 'edicoes', 'index.html', 'previews', 'src'].sort());

@@ -1,5 +1,9 @@
 # Design system da edição
 
+## Interface unificada em 2026-10-18
+
+Por pedido do responsável, a revista na raiz mantém as páginas, a tipografia editorial e os leitores da Fronteira, mas adota a interface da Energia Atômica: barra compacta em superfície neutra, seleção tonal verde, ícones Material Symbols Rounded locais, zoom, sumário lateral e fundo orgânico. A referência é [ENERGIA_ATOMICA_DESIGN_SYSTEM.md](ENERGIA_ATOMICA_DESIGN_SYSTEM.md); as regras da interface ficam em `src/reader-shell.css`, sem alterar o layout das páginas. O modo inicial passa a ser HTML. Os raios dos controles permanecem fixos em todos os estados. Abaixo de 860 px a barra ocupa duas linhas e o zoom é ocultado; os três modos continuam acessíveis. O conteúdo anterior deste documento descreve a composição editorial que foi preservada.
+
 Status: aplicado à edição de 20 páginas, conforme autorização do responsável em 2026-10-16. O estudo anterior está em [DESIGN_PROPOSAL.md](DESIGN_PROPOSAL.md).
 
 ## Referência e identidade

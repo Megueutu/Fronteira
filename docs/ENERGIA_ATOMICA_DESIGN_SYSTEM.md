@@ -1,5 +1,7 @@
 # Design system da Energia Atômica
 
+Atualização de 2026-10-18: este documento é a referência de origem da **interface** agora integrada à revista na raiz. Barra, controles, ícones e fundo foram reaproveitados em `index.html` e `src/reader-shell.*`. O frame, o conteúdo autocontido, os dados `.dnum` e a paginação de 16 páginas descritos abaixo pertencem à versão histórica; a revista unificada conserva o conteúdo e a composição da Fronteira, em [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md). Não há mais duas revistas independentes.
+
 Status: requisitos recebidos e adaptação HTML implementada em 2026-10-17. Referência vigente para `edicoes/energia-atomica.html`. Substitui o frame A4 e a exceção tipográfica da capa registrados em 2026-10-16; o histórico permanece nos commits e em [ENERGIA_ATOMICA.md](ENERGIA_ATOMICA.md).
 
 ## 1. Direção e referência

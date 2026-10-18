@@ -1,10 +1,12 @@
 # Arquitetura da revista interativa
 
-Status: edição de 20 páginas implementada em 2026-10-16. Mantém-se a grafia solicitada deste arquivo. Consulte [REVIEW.md](REVIEW.md) para decisões de revisão e limites de validação.
+Status: edição de 20 páginas implementada em 2026-10-16; interface e rotas unificadas em 2026-10-18. Mantém-se a grafia solicitada deste arquivo. Consulte [REVIEW.md](REVIEW.md) para decisões de revisão e limites de validação.
 
 ## Estrutura
 
-Aplicação estática com JavaScript, HTML/CSS e WebGL nativos, sem bibliotecas, fontes remotas ou instalação de dependências. Node.js 22 ou superior serve os arquivos com `npm start`. O build `npm run build:pages` gera `_site/` e adapta os caminhos da raiz ao `BASE_PATH` de publicação. O workflow `.github/workflows/pages.yml` testa e publica a `main` no GitHub Pages a cada push, com acionamento manual disponível. Apenas arquivos do site entram no artefato; a branch da nova identidade visual permanece independente até sua integração à `main`.
+Aplicação estática com JavaScript, HTML/CSS e WebGL nativos, sem bibliotecas, fontes remotas ou instalação de dependências. Node.js 22 ou superior serve os arquivos com `npm start`. O build `npm run build:pages` gera `_site/` e adapta os caminhos da raiz ao `BASE_PATH` de publicação. O workflow `.github/workflows/pages.yml` testa e publica a `main` no GitHub Pages a cada push, com acionamento manual disponível. Apenas arquivos do site entram no artefato. A revista unificada abre na raiz e usa HTML como modo inicial, mantendo 3D e rolagem como opções. O antigo endereço `edicoes/energia-atomica.html` contém somente um redirecionamento relativo, que conserva o prefixo do Pages, os parâmetros e o assunto dos links antigos `#pN`.
+
+A interface foi extraída da Energia Atômica para `index.html`, `src/reader-shell.css` e `src/reader-shell.js`. O CSS é restrito à interface e não altera a composição das páginas ou os hashes de suas texturas. O sumário usa o mesmo diálogo nativo e histórico de foco das interações, apresentado como painel lateral. O fundo orgânico reutiliza a implementação existente; fica estático em 3D e com movimento reduzido e pausa quando a aba está oculta. A edição autocontida anterior permanece no histórico do Git, não como uma segunda aplicação.
 
 | Arquivo | Responsabilidade |
 | --- | --- |
