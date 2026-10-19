@@ -223,3 +223,14 @@ Após revisão do responsável, o título da capa passa para o bloco superior di
 ## Capa e quarta capa (2026-10-19)
 
 Decisão aceita e implementada: capa e quarta capa passam a usar Montserrat local (`assets/fonts/MontserratVariable.woff2`, OFL), título em caixa alta com 128 px na composição de 760 × 1064, painel verde escuro com o texto de apoio e faixa inferior com marca da editora centralizada, edição e código de barras. O fundo é uma lava lamp em WebGL2 (`src/lava-lamp.js`), adaptada do shader `metaballs` do Paper Shaders (Apache-2.0; licença e NOTICE em `assets/third-party/paper-shaders/`). O mapa do Brasil (`src/brasil-dots.js`, 491 pontos extraídos de `brasilpontilhado.svg`) é desenhado em canvas 2D. A fotografia única aparece em duas janelas orgânicas recortadas por `clip-path`. Sem movimento (`prefers-reduced-motion`) ou nas texturas 3D, ambos os canvases usam um quadro fixo. A quarta capa reutiliza lava lamp e mapa, com a marca centralizada. O restante da revista segue em Inter.
+
+## Requisitos técnicos da revista (auditoria de 20/10/2026)
+
+- **Frame:** a composição de cada página é fixa em 760 × 1064 px; a abertura dupla ocupa 1520 × 1064 px e o leitor a escala para caber em um frame de 1440 × 1024 px sem rolagem horizontal.
+- **Famílias tipográficas (máximo 2):** Inter (interface e miolo) e Montserrat (capa e contracapa).
+- **Escala de tamanhos de fonte:** 10, 11, 12, 13, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 96 px, mais 128 px exclusivo do título da capa.
+- **Componentes reutilizáveis:** botão em pílula, botão circular de ícone, cartão de 18 px, selo de seção, chip de filtro, popup, cartão de fonte (popover) e bloco de imagem com legenda.
+- **Cores (cinco principais, além de neutros):** verde #1d7449, verde escuro #0a3d26, lima #a6d63a, azul-petróleo #0a8a9a (somente na lava lamp da capa) e amarelo #e8c93a (somente no destaque do yellow cake). Neutros: #1d1d1f, #6e6e73, #d2d2d7, #e0e0e0, #f5f5f7 e branco.
+- **Imagens:** todas exibidas com `object-fit` (sem distorção) e sem ampliação acima da resolução original.
+- **Protótipo e links internos:** navegação entre capa, sumário e matérias pelo leitor; o sumário (página e painel lateral) leva à primeira página de cada seção.
+

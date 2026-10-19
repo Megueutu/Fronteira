@@ -6,9 +6,9 @@
 .unified-reader {
   --ui-surface: var(--ds-parchment);
   --ui-control: 44px;
-  --cover-blob-1: #c6e8ce;
-  --cover-blob-2: #6ba27e;
-  --cover-blob-3: #44845e;
+  --cover-blob-1: #e4f1e8;
+  --cover-blob-2: #1d7449;
+  --cover-blob-3: #1d7449;
   background: var(--ui-surface);
 }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
