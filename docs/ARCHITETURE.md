@@ -6,12 +6,12 @@ Decisão vigente: HTML, rolagem e texturas 3D compartilham `pageHTML` e a superf
 
 As ações principais e as fontes também estão disponíveis em controles HTML no 3D. As texturas incluem as mesmas chamadas visuais. A animação da capa permanece exclusiva do HTML; sua composição estática é compartilhada.
 
-`src/editorial-panels.js` acrescenta explicações sobre matriz, geração/distribuição, combustível, custos, payback, planejamento, comparações e critérios do balanço. São sínteses do material existente, com fontes associadas; os parágrafos originais são preservados. Permanecem 20 páginas de conteúdo e 28 faces físicas. Não foram acrescentadas bibliotecas ou imagens.
+`src/editorial-panels.js` acrescenta explicações sobre matriz, geração/distribuição, combustível, custos, payback, planejamento, comparações e critérios do balanço. São sínteses do material existente, com fontes associadas; os parágrafos originais são preservados. Permanecem 20 páginas de conteúdo e 24 faces físicas. Não foram acrescentadas bibliotecas ou imagens.
 
 A implementação foi executada em 19/10/2026. Por pedido explícito do responsável, os novos commits registram autor e committer em 18/10/2026 às 12h, UTC−03, sem reescrever o histórico anterior.
 
 
-Atualização de 2026-10-19: **18 páginas de conteúdo**, em **28 faces físicas / 15 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas no desktop e alinhadas à esquerda no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
+Atualização de 2026-10-19: **18 páginas de conteúdo**, em **24 faces físicas / 13 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas no desktop e alinhadas à esquerda no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
 
 ## Revisão física vigente — 36 faces e 19 aberturas
 

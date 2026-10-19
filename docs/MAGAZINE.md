@@ -1,6 +1,6 @@
 # Estrutura editorial da edição
 
-Atualização de 2026-10-19: **18 páginas de conteúdo**, em **28 faces físicas / 15 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas na composição fixa, com escala proporcional também no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
+Atualização de 2026-10-19: **18 páginas de conteúdo**, em **24 faces físicas / 13 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas na composição fixa, com escala proporcional também no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
 
 ## Edição vigente — 36 faces
 

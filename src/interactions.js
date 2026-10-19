@@ -1,5 +1,5 @@
 import { uiIcon } from './icons.js';
-import { pages, pageHTML, getSpread, spreadForPage, photos, artworks, contentsHTML, references, referenceHTML, escapeHTML, teamMembers, teamHTML, interviewPhotos, interviewHTML } from './content.js';
+import { pages, pageHTML, getSpread, spreadForPage, photos, artworks, contentsHTML, chapters, interviewEntryHTML, references, referenceHTML, escapeHTML, teamMembers, teamHTML, interviewPhotos, interviewHTML } from './content.js';
 import { chartHTML, fuelSteps, reactorSteps, calculateScenario, scenarios, timeline, timelineHTML, decimal } from './data.js';
 import { citationHTML, visualEvidence, sourcePanelHTML, pageSourceRecords, sourceCardsHTML } from './citations.js';
 import { paybackBarsHTML, updatePaybackBars, refreshExplorers } from './explorers.js';
@@ -10,12 +10,14 @@ export function createInteractions(onJump) {
   const dialog = document.querySelector('#interaction-dialog');
   const content = document.querySelector('#dialog-content');
   const closeButton = document.querySelector('#close-dialog');
-  let origin, history = [], gallery = null, slideIndex = 0;
-  const photoHTML = art => `<figure class="expanded-photo"><img src="${art.src}" alt="${escapeHTML(art.caption)}"><figcaption>${escapeHTML(art.caption)}<br><a href="${art.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.credit)} ${uiIcon("arrow_forward")}</a> · <a href="${art.licenseUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.license)}</a></figcaption></figure>`;
+  let origin, history = [], gallery = null, slideIndex = 0, retitle = false;
+  const photoHTML = art => `<figure class="expanded-photo"><div class="photo-stage"><img src="${art.src}" alt="${escapeHTML(art.caption)}"></div><figcaption><p class="photo-caption">${escapeHTML(art.caption)}</p><p class="photo-credit"><a href="${art.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.credit)} ${uiIcon("arrow_forward")}</a><span aria-hidden="true">·</span><a href="${art.licenseUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.license)}</a></p></figcaption></figure>`;
+  const galleryControlsHTML = () => `<div class="gallery-controls"><button type="button" data-dialog-slide="-1" aria-label="Fotografia anterior">${uiIcon("arrow_back")}</button><span id="slide-status" role="status">${slideIndex + 1} / ${gallery.length}</span><button type="button" data-dialog-slide="1" aria-label="Próxima fotografia">${uiIcon("arrow_forward")}</button></div>`;
   function setSlide(index) {
     slideIndex = (index + gallery.length) % gallery.length;
     content.querySelector('#gallery-photo').innerHTML = photoHTML(gallery[slideIndex]);
     content.querySelector('#slide-status').textContent = `${slideIndex + 1} / ${gallery.length}`;
+    if (retitle) content.querySelector('#dialog-title').textContent = gallery[slideIndex].title;
   }
   function stepsHTML(steps) {
     return `<div class="step-tabs" role="group" aria-label="Escolha uma etapa">${steps.map((step, i) => `<button type="button" data-step="${i}" aria-pressed="${i === 0}"><span>${i + 1}</span>${step[0]}</button>`).join('')}</div><div class="step-detail" role="status"><h3 id="step-title">${steps[0][0]}</h3><p id="step-text">${steps[0][1]}</p></div>`;
@@ -39,10 +41,10 @@ export function createInteractions(onJump) {
     const page = pages[pageIndex] || pages[0];
     const zoomSource = type === 'zoom' ? trigger?.closest('[data-zoom-target]') : null;
     if (type === 'zoom' && !zoomSource) return;
-    if (dialog.open && pushHistory) history.push({ nodes: [...content.childNodes], className: dialog.className, scroll: dialog.scrollTop, trigger, gallery, slideIndex, currentSteps, scenario: { ...scenario } });
+    if (dialog.open && pushHistory) history.push({ nodes: [...content.childNodes], className: dialog.className, scroll: dialog.scrollTop, trigger, gallery, slideIndex, retitle, currentSteps, scenario: { ...scenario } });
     if (!dialog.open) origin = trigger || document.activeElement;
-    gallery = null;
-    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : type === 'zoom' ? 'chart-zoom-dialog' : '';
+    gallery = null; retitle = false;
+    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : type === 'zoom' ? 'chart-zoom-dialog' : ['image','member','carousel'].includes(type) ? 'lightbox-dialog' : '';
     document.querySelector('#open-index').setAttribute('aria-expanded',String(type === 'index'));
     let title = '', markup = '';
     if (type === 'zoom') {
@@ -51,9 +53,8 @@ export function createInteractions(onJump) {
       title = 'Vídeo da revista';
       markup = `<button type="button" class="video-poster" data-video="${VIDEO_ID}" aria-label="Reproduzir o vídeo da revista"><img src="https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg'"><span class="video-play">${uiIcon('play_arrow')}</span></button><p class="video-link"><a href="https://youtu.be/${VIDEO_ID}" target="_blank" rel="noopener noreferrer">Abrir no YouTube ${uiIcon('arrow_forward')}</a></p>`;
     } else if (type === 'index') {
-      title = 'Sumário da edição';
-      markup = `${contentsHTML({drawer:true})}<details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>`;
-
+      title = 'Sumário';
+      markup = `${contentsHTML({drawer:true})}<details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>${interviewEntryHTML()}`;
     } else if (type === 'interview') {
       title = 'Conversa com Adolfo Braid';
       markup = interviewHTML();
@@ -64,10 +65,13 @@ export function createInteractions(onJump) {
       markup = `<figure class="expanded-photo member-photo"><img src="${member.portrait}" alt="Retrato de ${escapeHTML(member.name)}"><figcaption>${escapeHTML(member.name)} · Integrante da pesquisa.<br>Fotografia fornecida pelo grupo para esta revista. Fotógrafo não informado.</figcaption></figure>`;
     } else if (type === 'image') {
       const art = photos[trigger?.dataset.photoKey] || interviewPhotos[trigger?.dataset.photoKey] || page.image || photos.angra;
-      title = art.title; markup = photoHTML(art);
+      title = art.title;
+      const group = [artworks, Object.values(interviewPhotos)].find(list => list.includes(art));
+      if (group?.length > 1) { gallery = group; slideIndex = group.indexOf(art); retitle = true; markup = `<div id="gallery-photo">${photoHTML(art)}</div>${galleryControlsHTML()}`; }
+      else markup = photoHTML(art);
     } else if (type === 'carousel') {
       title = 'Paisagens da energia.'; gallery = artworks; slideIndex = 0;
-      markup = `<div id="gallery-photo">${photoHTML(gallery[0])}</div><div class="gallery-controls"><button type="button" data-dialog-slide="-1" aria-label="Fotografia anterior">${uiIcon("arrow_back")}</button><span id="slide-status" role="status">1 / ${gallery.length}</span><button type="button" data-dialog-slide="1" aria-label="Próxima fotografia">${uiIcon("arrow_forward")}</button></div>`;
+      markup = `<div id="gallery-photo">${photoHTML(gallery[0])}</div>${galleryControlsHTML()}`;
     } else if (type === 'chart') {
       title = 'Matriz elétrica em camadas.';
       markup = `<p class="dialog-intro">Geração nacional em 2025. Selecione um grupo; a escala das barras permanece a mesma.</p><div class="chart-filters" role="group" aria-label="Filtrar fontes"><button type="button" data-filter="all" aria-pressed="true">Todas</button><button type="button" data-filter="renewable" aria-pressed="false">Renováveis</button><button type="button" data-filter="nuclear" aria-pressed="false">Nuclear</button></div><div id="interactive-chart" role="region" aria-live="polite" aria-label="Gráfico por fonte">${chartHTML()}</div><p class="source-note">A nuclear aparece com 2,0%; “outras”, com 1,5%. Fonte: <a href="${references[0].url}" target="_blank" rel="noopener">EPE, Anuário 2026 ${uiIcon("arrow_forward")}</a>. Valores também disponíveis como texto em cada linha.</p>`;
@@ -115,6 +119,12 @@ export function createInteractions(onJump) {
     }
     if (!dialog.open) dialog.showModal();
     refreshExplorers(content);
+    if (type === 'index') {
+      // Capítulo em leitura: último cujo início não passa da página atual.
+      const current = chapters.filter(chapter => chapter.page <= pageIndex).pop() || chapters[0];
+      const active = content.querySelector(`[data-jump="${current.page}"]`);
+      active?.setAttribute('aria-current','page');
+    }
     closeButton.focus(); dialog.scrollTop = 0;
     if (type === 'calculator') updateScenario();
     if (type === 'timeline') setEvent(0);
@@ -128,7 +138,7 @@ export function createInteractions(onJump) {
     if (history.length) {
       const prior = history.pop(); content.replaceChildren(...prior.nodes); dialog.className = prior.className;
       document.querySelector('#open-index').setAttribute('aria-expanded',String(dialog.classList.contains('contents-drawer')));
-      ({ gallery, slideIndex, currentSteps, scenario } = prior); dialog.scrollTop = prior.scroll;
+      ({ gallery, slideIndex, retitle, currentSteps, scenario } = prior); dialog.scrollTop = prior.scroll;
       refreshExplorers(content);
       if (prior.trigger?.isConnected) prior.trigger.focus(); else closeButton.focus();
     } else dialog.close();
@@ -139,7 +149,24 @@ export function createInteractions(onJump) {
     if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); close(); }
   });
   dialog.addEventListener('cancel',event => { event.preventDefault(); close(); });
-  dialog.addEventListener('close',() => { if (dialog.classList.contains('video-dialog')) content.replaceChildren(); document.querySelector('#open-index').setAttribute('aria-expanded','false'); history = []; gallery = null; if (origin?.isConnected) origin.focus(); });
+  // Foco preso: Tab e Shift+Tab circulam entre os controles da janela.
+  dialog.addEventListener('keydown',event => {
+    if (event.key !== 'Tab') return;
+    const items = [...dialog.querySelectorAll('button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), summary, [tabindex]:not([tabindex="-1"])')].filter(el => el.getClientRects().length && !el.closest('[inert]'));
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+  // Gesto de arrastar na imagem ampliada: anterior e próxima.
+  let swipeX = null;
+  content.addEventListener('pointerdown',event => { swipeX = gallery && event.pointerType === 'touch' && event.target.closest('.photo-stage') ? event.clientX : null; });
+  content.addEventListener('pointerup',event => {
+    if (swipeX === null || !gallery) return;
+    const delta = event.clientX - swipeX; swipeX = null;
+    if (Math.abs(delta) > 48) setSlide(slideIndex + (delta < 0 ? 1 : -1));
+  });
+  dialog.addEventListener('close',() => { if (dialog.classList.contains('video-dialog')) content.replaceChildren(); document.querySelector('#open-index').setAttribute('aria-expanded','false'); history = []; gallery = null; retitle = false; if (origin?.isConnected) origin.focus(); });
   dialog.addEventListener('click',event => {
     if (event.target !== dialog) return;
     const r = dialog.getBoundingClientRect();

@@ -1,0 +1,35 @@
+/* Tokens de interface derivados do design system da Apple (awesome-design-md/apple/DESIGN.md),
+   com o verde da revista no lugar do Action Blue: um único acento para todo elemento interativo.
+   Fotografia em primeiro plano; o cromo da interface recua. Sem sombras em botões e cartões. */
+:root {
+  --ds-accent: #1d7449;
+  --ds-accent-hover: #17603b;
+  --ds-accent-focus: #25905a;
+  --ds-accent-on-dark: #8fd06a;
+  --ds-accent-soft: #e4f1e8;
+  --ds-ink: #1d1d1f;
+  --ds-ink-80: #333333;
+  --ds-ink-48: #6e6e73;
+  --ds-canvas: #ffffff;
+  --ds-parchment: #f5f5f7;
+  --ds-pearl: #fafafc;
+  --ds-tile-dark: #272729;
+  --ds-hairline: #e0e0e0;
+  --ds-divider-soft: #f0f0f0;
+  --ds-chip: #d2d2d7a3;
+  --ds-radius-sm: 8px;
+  --ds-radius-md: 11px;
+  --ds-radius-lg: 18px;
+  --ds-radius-pill: 9999px;
+  --ds-space-xxs: 4px;
+  --ds-space-xs: 8px;
+  --ds-space-sm: 12px;
+  --ds-space-md: 17px;
+  --ds-space-lg: 24px;
+  --ds-space-xl: 32px;
+  --ds-space-xxl: 48px;
+  --ds-product-shadow: 3px 5px 30px 0 #00000038;
+  --ds-press: scale(.95);
+  --ds-blur: saturate(180%) blur(20px);
+  --ds-tight: -.022em;
+}

@@ -5,8 +5,11 @@
   <meta name="description" content="Fronteira: revista interativa sobre energia nuclear no Brasil. Dezoito páginas, cinco temas e uma entrevista, para ler e explorar.">
   <title>Energia Nuclear no Brasil — Editora Fronteira</title>
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/src/design-tokens.css">
   <link rel="stylesheet" href="/src/styles.css">
+  <link rel="stylesheet" href="/src/magazine-design.css">
   <link rel="stylesheet" href="/src/reader-shell.css">
+  <link rel="stylesheet" href="/src/dialog-design.css">
 </head>
 <body class="unified-reader">
   <a class="skip-link" href="#reader-toolbar">Ir para os controles de leitura</a>
@@ -39,35 +42,41 @@
   <symbol id="ui-fullscreen_exit" viewBox="0 -960 960 960"><path d="M253-253H150q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h133q12.75 0 21.38 8.62Q313-295.75 313-283v133q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-103Zm454 0v103q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-133q0-12.75 8.63-21.38Q664.25-313 677-313h133q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H707ZM253-707v-103q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v133q0 12.75-8.62 21.37Q295.75-647 283-647H150q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h103Zm454 0h103q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H677q-12.75 0-21.37-8.63Q647-664.25 647-677v-133q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v103Z"/></symbol>
 </svg>
   <header class="top-app-bar reader-toolbar" id="reader-toolbar" tabindex="-1" aria-label="Controles da revista">
-    <div class="tool-group" role="group" aria-label="Início e sumário">
-      <button type="button" class="icon-button" id="open-index" aria-label="Abrir sumário" title="Abrir sumário" aria-haspopup="dialog" aria-expanded="false" aria-controls="interaction-dialog"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu"/></svg></button>
-      <button class="icon-button" id="go-cover" title="Voltar à capa" aria-label="Voltar à capa"><svg class="reader-icon" aria-hidden="true"><use href="#ui-home"/></svg></button><span id="section-label" class="sr-only"></span><span class="context-label sr-only">Nesta abertura</span>
+    <div class="toolbar-zone toolbar-start">
+      <div class="tool-group toolbar-menu" role="group" aria-label="Sumário">
+        <button type="button" class="icon-button" id="open-index" aria-label="Abrir sumário" title="Abrir sumário" aria-haspopup="dialog" aria-expanded="false" aria-controls="interaction-dialog"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu"/></svg></button><span id="section-label" class="sr-only"></span><span class="context-label sr-only">Nesta abertura</span>
+      </div>
+      <div class="toolbar-view">
+        <div class="layout-switch tool-group template-tabs" role="group" aria-label="Modo de leitura">
+          <button type="button" data-mode="landing" aria-pressed="false" aria-label="Rolagem: leitura em página inteira" title="Rolagem"><svg class="reader-icon" aria-hidden="true"><use href="#ui-view_agenda"/></svg></button>
+          <button type="button" data-mode="html" aria-pressed="true" aria-label="Revista: páginas HTML interativas" title="Revista"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button>
+          <button type="button" data-mode="3d" aria-pressed="false" aria-label="Revista 3D: folheamento com páginas curvas" title="Revista 3D"><svg class="reader-icon" aria-hidden="true"><use href="#ui-view_in_ar"/></svg></button>
+        </div>
+        <div id="zoom-controls" class="zoom-control tool-group" role="group" aria-label="Tamanho das páginas">
+          <button type="button" class="icon-button" id="zoom-out" aria-label="Diminuir páginas" title="Diminuir páginas"><svg class="reader-icon" aria-hidden="true"><use href="#ui-zoom_out"/></svg></button>
+          <button type="button" id="zoom-reset" class="zoom-value" title="Tamanho padrão" aria-label="Voltar ao tamanho padrão"><span id="zoom-status">100%</span></button>
+          <button type="button" class="icon-button" id="zoom-in" aria-label="Ampliar páginas" title="Ampliar páginas"><svg class="reader-icon" aria-hidden="true"><use href="#ui-zoom_in"/></svg></button>
+          <button type="button" class="icon-button" id="zoom-fit" aria-label="Ajustar páginas à tela" title="Ajustar páginas à tela"><svg class="reader-icon" aria-hidden="true"><use href="#ui-fit_screen"/></svg></button>
+        </div>
+      </div>
     </div>
-    <div class="layout-switch tool-group template-tabs" role="group" aria-label="Modo de leitura">
-      <button type="button" data-mode="landing" aria-pressed="false" aria-label="Rolagem: leitura em página inteira" title="Rolagem"><svg class="reader-icon" aria-hidden="true"><use href="#ui-view_agenda"/></svg></button>
-      <button type="button" data-mode="html" aria-pressed="true" aria-label="Revista: páginas HTML interativas" title="Revista"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button>
-      <button type="button" data-mode="3d" aria-pressed="false" aria-label="Revista 3D: folheamento com páginas curvas" title="Revista 3D"><svg class="reader-icon" aria-hidden="true"><use href="#ui-view_in_ar"/></svg></button>
-    </div>
-    <div id="zoom-controls" class="zoom-control tool-group" role="group" aria-label="Tamanho das páginas">
-      <button type="button" class="icon-button" id="zoom-out" aria-label="Diminuir páginas" title="Diminuir páginas" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-zoom_out"/></svg></button>
-      <button type="button" id="zoom-reset" class="zoom-value" title="Tamanho padrão" aria-label="Voltar ao tamanho padrão"><span id="zoom-status">100%</span></button>
-      <button type="button" class="icon-button" id="zoom-in" aria-label="Ampliar páginas" title="Ampliar páginas" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-zoom_in"/></svg></button>
-      <button type="button" class="icon-button" id="zoom-fit" aria-label="Ajustar páginas à tela" title="Ajustar páginas à tela" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-fit_screen"/></svg></button>
-    </div>
-    <div class="app-actions tool-group" role="group" aria-label="Navegação da revista">
-      <button type="button" class="icon-button" id="previous" aria-label="Páginas anteriores" title="Páginas anteriores" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_back"/></svg></button>
-      <span class="position-chip"><span class="page-counter" id="page-status" role="status" aria-live="polite" aria-atomic="true">01 / 36</span></span><span class="nav-caption sr-only">Páginas</span>
-      <button type="button" class="icon-button" id="next" aria-label="Próximas páginas" title="Próximas páginas" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button>
-    </div>
-    <div class="tool-group reading-actions" role="group" aria-label="Opções de leitura">
-      <button type="button" id="read-spread" class="icon-button" aria-label="Ampliar leitura" title="Ampliar leitura"><svg class="reader-icon" aria-hidden="true"><use href="#ui-center_focus_strong"/></svg></button>
-      <button type="button" id="read-linear" class="icon-button" aria-label="Leitura contínua" title="Leitura contínua"><svg class="reader-icon" aria-hidden="true"><use href="#ui-article"/></svg></button>
-    </div>
-    <div class="tool-group reference-actions" role="group" aria-label="Referências e tela cheia">
-      <button type="button" class="icon-button" data-action="video" aria-label="Assistir ao vídeo da revista" title="Assistir ao vídeo" aria-haspopup="dialog"><svg class="reader-icon" aria-hidden="true"><use href="#ui-smart_display"/></svg></button>
-      <button type="button" class="icon-button" data-action="credits" aria-label="Fotografias e créditos" title="Fotografias e créditos" aria-haspopup="dialog"><svg class="reader-icon" aria-hidden="true"><use href="#ui-info"/></svg></button>
-      <button type="button" class="icon-button" data-action="sources" aria-label="Fontes da edição" title="Fontes da edição" aria-haspopup="dialog"><svg class="reader-icon" aria-hidden="true"><use href="#ui-bar_chart"/></svg></button>
-      <button type="button" class="icon-button" id="fullscreen" aria-label="Alternar tela cheia" title="Alternar tela cheia" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-open_in_full"/></svg></button>
+    <button type="button" class="toolbar-brand" id="go-cover" aria-label="Editora Fronteira, voltar à capa" title="Voltar à capa"><span class="brand-mark" aria-hidden="true"></span></button>
+    <div class="toolbar-zone toolbar-end">
+      <div class="app-actions tool-group" role="group" aria-label="Navegação da revista">
+        <button type="button" class="icon-button" id="previous" aria-label="Páginas anteriores" title="Páginas anteriores"><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_back"/></svg></button>
+        <span class="position-chip"><span class="page-counter" id="page-status" role="status" aria-live="polite" aria-atomic="true">01 / 36</span></span><span class="nav-caption sr-only">Páginas</span>
+        <button type="button" class="icon-button" id="next" aria-label="Próximas páginas" title="Próximas páginas"><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button>
+      </div>
+      <div class="tool-group reading-actions" role="group" aria-label="Opções de leitura">
+        <button type="button" id="read-spread" class="icon-button" aria-label="Ampliar leitura" title="Ampliar leitura"><svg class="reader-icon" aria-hidden="true"><use href="#ui-center_focus_strong"/></svg></button>
+        <button type="button" id="read-linear" class="icon-button" aria-label="Leitura contínua" title="Leitura contínua"><svg class="reader-icon" aria-hidden="true"><use href="#ui-article"/></svg></button>
+      </div>
+      <div class="tool-group reference-actions" role="group" aria-label="Referências e tela cheia">
+        <button type="button" class="icon-button" data-action="video" aria-label="Assistir ao vídeo da revista" title="Assistir ao vídeo" aria-haspopup="dialog"><svg class="reader-icon" aria-hidden="true"><use href="#ui-smart_display"/></svg></button>
+        <button type="button" class="icon-button" data-action="credits" aria-label="Fotografias e créditos" title="Fotografias e créditos" aria-haspopup="dialog"><svg class="reader-icon" aria-hidden="true"><use href="#ui-info"/></svg></button>
+        <button type="button" class="icon-button" data-action="sources" aria-label="Fontes da edição" title="Fontes da edição" aria-haspopup="dialog"><svg class="reader-icon" aria-hidden="true"><use href="#ui-bar_chart"/></svg></button>
+        <button type="button" class="icon-button" id="fullscreen" aria-label="Alternar tela cheia" title="Alternar tela cheia"><svg class="reader-icon" aria-hidden="true"><use href="#ui-open_in_full"/></svg></button>
+      </div>
     </div>
   </header>
   <main>
@@ -79,7 +88,7 @@
     </section>
   </main>
   <footer class="site-footer" id="edition-footer"><img class="footer-logo" src="/assets/branding/fronteira.svg" alt="Editora Fronteira" width="136" height="18"></footer>
-  <dialog id="interaction-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span>FRONTEIRA / EXPLORE</span><button type="button" class="icon-button" id="close-dialog" aria-label="Fechar janela" title="Fechar janela" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-close"/></svg></button></div><div id="dialog-content"></div></dialog>
+  <dialog id="interaction-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><button type="button" class="icon-button" id="close-dialog" aria-label="Fechar janela" title="Fechar janela" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-close"/></svg></button></div><div id="dialog-content"></div></dialog>
   <noscript><p class="noscript-message">Ative o JavaScript para folhear a revista. As fontes também estão no <a href="https://github.com/Megueutu/Fronteira">repositório do projeto</a>.</p></noscript>
   <script type="module" src="/src/app.js"></script>
 </body>

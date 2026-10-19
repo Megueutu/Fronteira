@@ -1,5 +1,5 @@
 {
-  "pages": 28,
+  "pages": 24,
   "width": 1140,
   "height": 1596,
   "sources": [
@@ -8,6 +8,8 @@
     "src/content.js",
     "src/data.js",
     "src/styles.css",
+    "src/design-tokens.css",
+    "src/magazine-design.css",
     "src/citations.js",
     "src/explorers.js",
     "src/editorial-cover.js",
@@ -25,5 +27,5 @@
     "assets/qr/site.svg",
     "assets/qr/barcode.svg"
   ],
-  "sha256": "78f1b32e9902c936928a1664d77de89a94d579f19b6059cd90f219fda76b47de"
+  "sha256": "84a83428e383e4a746c7d5d8f5aa7b233dfc8c7dbd1c51d0c3d33de67f937bc9"
 }

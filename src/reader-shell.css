@@ -1,19 +1,11 @@
-/* Interface compartilhada: Energia Atômica + leitor editorial Fronteira.
-   Estas regras não alteram a composição das páginas nem suas texturas. */
+/* Interface compartilhada: leitor editorial Fronteira.
+   Barra superior no design system da edição (src/design-tokens.css, derivado do design system da Apple):
+   superfície translúcida com blur e fio inferior, três zonas (início, logotipo, leitura), grupos em pílula
+   parchment, botões redondos sem borda e ícones Material Rounded de 24 px. Estado ativo = fundo accent-soft
+   com ícone verde, em todo o produto. Estas regras não alteram a composição das páginas nem suas texturas. */
 .unified-reader {
-  --md-sys-color-primary: #1d7449;
-  --md-sys-color-on-surface: #202623;
-  --md-sys-color-on-surface-variant: #525955;
-  --md-sys-color-surface-container: #eceeec;
-  --md-sys-color-surface-container-low: #f4f5f4;
-  --md-sys-color-secondary-container: #c6e8ce;
-  --ui-surface: #f6f7f6;
-  --ui-hover: #2026230f;
-  --ui-group: #e6e9e6;
-  --ui-active: #dcefe1;
-  --ui-on-active: #005a35;
+  --ui-surface: var(--ds-parchment);
   --ui-control: 44px;
-  --md-sys-color-primary-fixed-dim: #9cc5a8;
   --cover-blob-1: #c6e8ce;
   --cover-blob-2: #6ba27e;
   --cover-blob-3: #44845e;
@@ -22,123 +14,94 @@
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .unified-reader main, .unified-reader .site-footer { position: relative; z-index: 1; }
 .unified-reader .reader { max-width: 1800px; }
+
+/* Barra: [início + visualização] · [logotipo] · [navegação + leitura + referências]. */
 .top-app-bar.reader-toolbar {
-  position: sticky; top: 0; z-index: 20; display: flex;
-  align-items: center; gap: 8px; min-height: 72px; padding: 8px 16px;
-  background: var(--ui-surface);
-  border-bottom: 1px solid #e4e7e4;
-  color: var(--md-sys-color-on-surface); font-family: var(--sans);
+  position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+  align-items: center; column-gap: var(--ds-space-sm); min-height: 64px; padding: 10px var(--ds-space-md);
+  background: color-mix(in srgb, var(--ds-canvas) 80%, transparent);
+  -webkit-backdrop-filter: var(--ds-blur); backdrop-filter: var(--ds-blur);
+  border-bottom: 1px solid var(--ds-hairline);
+  color: var(--ds-ink); font-family: var(--sans);
 }
+.top-app-bar:focus-visible { outline: none; }
+.toolbar-zone { display: flex; align-items: center; gap: var(--ds-space-xs); min-width: 0; }
+.toolbar-start { justify-self: start; }
+.toolbar-end { justify-self: end; }
+.toolbar-view { display: flex; align-items: center; gap: var(--ds-space-xs); }
+.top-app-bar .tool-group { display: flex; align-items: center; gap: 2px; padding: var(--ds-space-xxs); border-radius: var(--ds-radius-pill); background: var(--ds-parchment); }
 .top-app-bar .reader-icon { width: 24px; height: 24px; }
-.top-app-bar .icon-button, .top-app-bar .layout-switch button, .top-app-bar .zoom-value, .dialog-top .icon-button {
-  width: var(--ui-control); height: var(--ui-control); min-width: var(--ui-control); min-height: var(--ui-control); padding: 0; border: 0;
-  display: grid; place-items: center; border-radius: 999px;
-  background: transparent; color: var(--md-sys-color-on-surface-variant);
-  transition: background .15s, color .15s;
+
+/* Botões: círculos sem borda; hover tonal; press = escala do sistema. */
+.top-app-bar .icon-button, .top-app-bar .layout-switch button, .top-app-bar .zoom-value {
+  width: 40px; height: 40px; min-width: 40px; min-height: 40px; padding: 0; border: 0;
+  display: grid; place-items: center; border-radius: var(--ds-radius-pill);
+  background: transparent; color: var(--ds-ink-80); font-family: var(--sans);
+  transition: background-color .15s, color .15s, transform .12s;
 }
-.top-app-bar .icon-button:hover:not(:disabled), .top-app-bar .layout-switch button:hover, .top-app-bar .zoom-value:hover, .dialog-top .icon-button:hover { background: var(--ui-hover); }
-.top-app-bar .icon-button:active:not(:disabled) { background: #20262320; }
-.top-app-bar .icon-button:disabled { opacity: .38; }
-.top-app-bar button[aria-pressed=true] { background: #fff; color: var(--ui-on-active); box-shadow: 0 1px 2px #1026191f; }
-.top-app-bar .app-title { display: grid; gap: 3px; min-width: 100px; max-width: 250px; }
-.app-title #go-cover { border: 0; background: none; padding: 0; text-align: left; font: 700 18px/1.3 var(--sans); }
-.app-title #section-label { font: 400 12px/1.4 var(--sans); letter-spacing: 0; color: #525955; }
-.top-app-bar .tool-group { display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; background: var(--ui-group); }
-.top-app-bar .layout-switch { margin-left: auto; }
-.top-app-bar .tool-group .icon-button, .top-app-bar .layout-switch button, .top-app-bar .zoom-value { width: 40px; height: 40px; min-width: 40px; min-height: 40px; }
-.top-app-bar .layout-switch button[aria-pressed=true] { background: var(--ui-active); }
-.top-app-bar .tool-group .zoom-value { width: auto; min-width: 52px; padding: 0 8px; font: 500 14px/1 var(--sans); font-variant-numeric: tabular-nums; }
-.top-app-bar .page-counter { min-width: 0; text-align: center; font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; color: #525955; white-space: nowrap; }
-.position-chip { display: inline-flex; align-items: center; justify-content: center; min-width: 72px; min-height: 40px; padding: 0 10px; color: #525955; }
+.top-app-bar .icon-button:hover:not(:disabled), .top-app-bar .layout-switch button:hover, .top-app-bar .zoom-value:hover { background: var(--ds-hairline); }
+.top-app-bar button:active:not(:disabled) { transform: var(--ds-press); }
+.top-app-bar button:disabled { opacity: .38; }
+.top-app-bar button[aria-pressed=true], .top-app-bar button[aria-expanded=true] { background: var(--ds-accent-soft); color: var(--ds-accent); }
+.top-app-bar button:focus-visible, .dialog-top button:focus-visible { outline: 2px solid var(--ds-accent-focus); outline-offset: 2px; }
+.top-app-bar .tool-group .zoom-value { width: auto; min-width: 52px; padding: 0 var(--ds-space-xs); font: 600 14px/1 var(--sans); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.top-app-bar .page-counter { min-width: 0; text-align: center; font: 600 14px/1 var(--sans); font-variant-numeric: tabular-nums; color: var(--ds-ink-48); white-space: nowrap; }
+.position-chip { display: inline-flex; align-items: center; justify-content: center; min-width: 72px; min-height: 40px; padding: 0 10px; color: var(--ds-ink-48); }
+
+/* Logotipo da editora no centro: o SVG é branco, então vira máscara tonal; continua sendo o botão #go-cover. */
+.toolbar-brand { justify-self: center; display: grid; place-items: center; min-width: 132px; height: 44px; padding: 0 var(--ds-space-sm); border: 0; border-radius: var(--ds-radius-pill); background: transparent; cursor: pointer; transition: background-color .15s, transform .12s; }
+.toolbar-brand:hover { background: var(--ds-parchment); }
+.toolbar-brand:active { transform: var(--ds-press); }
+.toolbar-brand:focus-visible { outline: 2px solid var(--ds-accent-focus); outline-offset: 2px; }
+.brand-mark { display: block; width: 108px; height: 14px; background: var(--ds-ink); -webkit-mask: url(/assets/branding/fronteira.svg) center / contain no-repeat; mask: url(/assets/branding/fronteira.svg) center / contain no-repeat; }
+
 .unified-reader .stage { background: transparent; border: 0; border-radius: 0; }
-.unified-reader .book-frame { box-shadow: 0 2px 6px #10261912, 0 16px 48px -12px #10261938; }
-.unified-reader .reading-progress { height: 2px; background: #c4c9c580; }
-.unified-reader .reading-progress i { background: #1d7449; }
-.unified-reader .site-footer { display: flex; justify-content: center; padding: 28px 16px 40px; border: 0; background: var(--ui-surface); }
-.unified-reader .footer-logo { display: block; width: 136px; height: auto; filter: brightness(0); opacity: .75; }
-.unified-reader #interaction-dialog { border-radius: 28px; }
-.unified-reader .dialog-top { background: #f4f5f4; color: #525955; }
-.unified-reader #close-dialog { border: 0; }
-.unified-reader #interaction-dialog.contents-drawer {
-  inset: 0 auto 0 0; margin: 0; width: min(400px, 92vw); max-width: 100%;
-  height: 100dvh; max-height: 100dvh; border-radius: 0 16px 16px 0;
-  background: #f4f5f4;
-}
-.contents-drawer #dialog-content { padding: 24px 16px; }
-.contents-drawer #dialog-title { margin: 0 8px 24px; font: 600 24px/1.3 var(--sans); }
-.contents-drawer .dialog-index { gap: 4px; }
-.contents-drawer .dialog-index button { min-height: 56px; padding: 14px 16px; border: 0; border-radius: 12px; background: transparent; gap: 12px; }
-.contents-drawer .dialog-index button:hover, .contents-drawer .dialog-index button[aria-current] { background: #c6e8ce; }
-.contents-drawer .dialog-index button b { font-size: 14px; color: #005a35; }
-.contents-drawer .dialog-index button span { font-size: 16px; }
-.contents-drawer .dialog-index button > span { font-family: var(--sans); }
-.contents-drawer .dialog-index button small { font-size: 12px; line-height: 1.5; }
-.contents-drawer .dialog-index .reader-icon { width: 18px; height: 18px; }
-.contents-drawer details { margin: 24px 8px; font-size: 14px; }
-.contents-drawer .interview-entry { margin-top: 24px; }
-@media (max-width: 1150px) {
+.unified-reader .book-frame { box-shadow: var(--ds-product-shadow); }
+.unified-reader .reading-progress { height: 2px; background: var(--ds-hairline); }
+.unified-reader .reading-progress i { background: var(--ds-accent); }
+.unified-reader .site-footer { display: flex; justify-content: center; padding: var(--ds-space-xl) var(--ds-space-md) 40px; border: 0; background: var(--ui-surface); }
+.unified-reader .footer-logo { display: block; width: 136px; height: auto; filter: brightness(0); opacity: .6; }
+
+/* Telas médias e estreitas: primeira linha com início, logotipo centralizado e equilíbrio; grupos quebram abaixo. */
+@media (max-width: 1120px) {
+  .top-app-bar.reader-toolbar { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ds-space-xs); padding: 8px var(--ds-space-sm); }
+  .toolbar-zone { display: contents; }
+  .top-app-bar .toolbar-menu { order: 1; flex: 1 1 calc(50% - 82px); justify-content: flex-start; width: fit-content; background: transparent; padding: 0; }
+  .toolbar-brand { order: 2; flex: none; }
+  .top-app-bar.reader-toolbar::before { content: ''; order: 3; flex: 1 1 calc(50% - 82px); }
+  .toolbar-view { order: 4; }
+  .toolbar-end > * { order: 5; }
+  .top-app-bar .toolbar-menu .icon-button { background: var(--ds-parchment); }
+  .top-app-bar .toolbar-menu .icon-button[aria-expanded=true] { background: var(--ds-accent-soft); }
 }
 @media (max-width: 860px) {
-  .top-app-bar.reader-toolbar { flex-wrap: wrap; gap: 4px; padding: 6px 8px; }
-  .top-app-bar .zoom-control { display: none; }
-  .top-app-bar.reader-toolbar { justify-content: center; }
-  .top-app-bar .layout-switch { margin-left: 0; }
-  .top-app-bar .page-counter { min-width: 0; font-size: 12px; }
-  }
+  .top-app-bar .page-counter { font-size: 12px; }
+}
+/* Zoom também é navegação de leitura em telas pequenas. */
+@media (max-width: 860px) {
+  .top-app-bar .zoom-control:not([hidden]) { display: flex; }
+}
 @media (max-width: 580px) {
   .unified-reader { --ui-control: 36px; }
   .top-app-bar.reader-toolbar { position: static; }
   .top-app-bar .tool-group { gap: 0; padding: 3px; }
-  .top-app-bar .tool-group .icon-button, .top-app-bar .layout-switch button, .top-app-bar .zoom-value { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
+  .top-app-bar .icon-button, .top-app-bar .layout-switch button, .top-app-bar .zoom-value, .top-app-bar .tool-group .icon-button { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
   .top-app-bar .tool-group .zoom-value { width: auto; min-width: 44px; }
   .position-chip { min-width: 56px; padding: 0 6px; }
+  .toolbar-view { flex-wrap: wrap; justify-content: center; }
 }
 @media print {
   .top-app-bar.reader-toolbar { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .top-app-bar *, .contents-drawer * { transition: none; }
+  .top-app-bar *, .toolbar-brand { transition: none; }
 }
 
-/* A editora acompanha o título da revista sem disputar sua hierarquia. */
-.app-title #go-cover { display: flex; align-items: center; gap: 8px; min-width: 0; width: 100%; }
-.app-title #go-cover img { width: 24px; height: 24px; object-fit: contain; flex: none; }
-.app-title #go-cover > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-@media (max-width: 860px) {
- .top-app-bar .app-title { min-width: 0; overflow: hidden; }
- .app-title #go-cover { font-size: 16px; }
-}
-
-/* Rótulos de produção não usam os fólios do conteúdo. */
-.contents-drawer .dialog-index button { min-width: 0; }
-.contents-drawer .dialog-index button > span { min-width: 0; flex: 1; overflow-wrap: anywhere; }
-.contents-drawer .dialog-index button > b { max-width: 76px; font-size: 12px; overflow-wrap: anywhere; }
-/* Zoom também é navegação de leitura em telas pequenas. */
-@media (max-width:860px) {
- .top-app-bar .zoom-control:not([hidden]) { display: flex; }
-}
 .hotspot > span { min-width: 0; overflow-wrap: anywhere; }
 @media (max-width:760px) { .page-hotspot-group[data-side="right"] { grid-column: auto; } }
-.top-app-bar .layout-switch .reader-icon { display: block; width: 24px; height: 24px; }
 
 /* Altura guiada pela janela: o zoom do navegador reduz a altura em px CSS e a revista acompanha. */
 .unified-reader .stage { padding-block: 12px; }
 .unified-reader .webgl-view { height: 100%; }
 @media (max-height: 640px) { .top-app-bar.reader-toolbar { position: static; } }
-
-/* Vídeo da revista: janela grande no centro, com o banner do vídeo antes de carregar o player. */
-.unified-reader #interaction-dialog.video-dialog { width: min(1180px, 94vw); max-width: 94vw; padding: 0; border-radius: 24px; overflow: hidden; background: #0b1d14; color: #fff; }
-.video-dialog .dialog-top { background: #0b1d14; color: #cfe6c4; }
-.video-dialog #close-dialog { color: #fff; }
-.video-dialog #dialog-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.video-dialog #dialog-content { padding: 0; }
-.video-dialog .video-poster, .video-dialog .video-frame { position: relative; display: block; width: min(100%, calc((86dvh - 120px) * 16 / 9)); aspect-ratio: 16 / 9; margin: 0 auto; padding: 0; border: 0; background: #000; cursor: pointer; }
-.video-dialog .video-poster img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.video-dialog .video-play { position: absolute; inset: 0; margin: auto; width: 96px; height: 96px; display: grid; place-items: center; border-radius: 999px; background: #1d7449; color: #fff; box-shadow: 0 8px 32px #0008; transition: transform .15s, background .15s; }
-.video-dialog .video-play .reader-icon { width: 56px; height: 56px; }
-.video-dialog .video-poster:hover .video-play { transform: scale(1.08); background: #25905a; }
-.video-dialog .video-frame { cursor: default; }
-.video-dialog .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.video-dialog .video-link { margin: 0; padding: 14px 24px 18px; text-align: center; font: 500 14px/1.4 var(--sans); }
-.video-dialog .video-link a { color: #d8f08a; display: inline-flex; align-items: center; gap: 6px; }
-.video-dialog .video-link .reader-icon { width: 18px; height: 18px; }
+.top-app-bar .tool-group, .top-app-bar .layout-switch.template-tabs { border: 0; box-shadow: none; }

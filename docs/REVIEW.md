@@ -4,7 +4,7 @@
 
 Pedido implementado após revisão por subagente: retirada da ação “Pausar formas”, título alinhado à esquerda com escala maior e caixa natural, chamadas na coluna direita, recortes orgânicos afastados do título e faixa inferior clara para a marca e o código de barras. A fotografia institucional única, o QR e o movimento reduzido foram preservados. Não foram incorporados novos assets ou bibliotecas.
 
-O sumário impresso e o painel lateral usam `contentsHTML`: mesma estrutura, hierarquia, faixas de páginas, ícones e nove destinos. Expediente foi retirado dos sumários; sua página de transparência e créditos permanece na edição. A entrada duplicada da entrevista foi removida. Mantidas as 20 páginas de conteúdo e 28 faces físicas.
+O sumário impresso e o painel lateral usam `contentsHTML`: mesma estrutura, hierarquia, faixas de páginas, ícones e nove destinos. Expediente foi retirado dos sumários; sua página de transparência e créditos permanece na edição. A entrada duplicada da entrevista foi removida. Mantidas as 20 páginas de conteúdo e 24 faces físicas.
 
 ## Composição canônica — 2026-10-19
 Validação desta rodada: 22 testes unitários/build passaram, incluindo preservação editorial e integridade do manifesto. A geração das 28 texturas passou sem transbordamento; os PNGs foram conferidos em conjunto. `test:canonical` comparou a geometria de todas as faces no render, HTML e rolagem em desktop/celular e verificou zoom com posição preservada. Passaram também `test:browser`, `test:explorers`, `test:landing`, `test:unified`, `test:3d`, `test:interview` e `test:typography`. Os exploradores e suas fontes são testados pela mesma suíte de ações nos três modos. O teste de interface mantém as asserções de troca de modo, foco e limites; capturas ficam nas suítes de páginas, composição, entrevista e 3D, pois capturas redundantes após alternâncias geraram timeout no Chromium com WebGL por software. Não houve homologação em hardware físico, Safari ou Firefox. Próximo passo: revisão editorial e visual pelo responsável na edição publicada.
@@ -13,7 +13,7 @@ Decisão vigente: HTML, rolagem e texturas 3D compartilham `pageHTML` e a superf
 
 As ações principais e as fontes também estão disponíveis em controles HTML no 3D. As texturas incluem as mesmas chamadas visuais. A animação da capa permanece exclusiva do HTML; sua composição estática é compartilhada.
 
-`src/editorial-panels.js` acrescenta explicações sobre matriz, geração/distribuição, combustível, custos, payback, planejamento, comparações e critérios do balanço. São sínteses do material existente, com fontes associadas; os parágrafos originais são preservados. Permanecem 20 páginas de conteúdo e 28 faces físicas. Não foram acrescentadas bibliotecas ou imagens.
+`src/editorial-panels.js` acrescenta explicações sobre matriz, geração/distribuição, combustível, custos, payback, planejamento, comparações e critérios do balanço. São sínteses do material existente, com fontes associadas; os parágrafos originais são preservados. Permanecem 20 páginas de conteúdo e 24 faces físicas. Não foram acrescentadas bibliotecas ou imagens.
 
 A implementação foi executada em 19/10/2026. Por pedido explícito do responsável, os novos commits registram autor e committer em 18/10/2026 às 12h, UTC−03, sem reescrever o histórico anterior.
 
@@ -331,11 +331,11 @@ A suíte de tipografia passou nos três modos e em cinco larguras após corrigir
 
 ## Vinte páginas de conteúdo — 2026-10-19
 
-O responsável definiu as faixas do roteiro oral e esclareceu que capa, contracapas, sumário e produção não entram na contagem. Implementadas vinte páginas numeradas em 28 faces físicas e quinze aberturas, com o mapa em [PRESENTATION.md](PRESENTATION.md). Foram reunidas as continuações de segurança, soberania, distribuição dos custos e expediente. O editorial permanece integral: três parágrafos na página 2 e o fechamento na página 20. A entrada do suplemento não recebe fólio; a entrevista integral continua disponível por camada HTML, inclusive por botão sobre o leitor 3D.
+O responsável definiu as faixas do roteiro oral e esclareceu que capa, contracapas, sumário e produção não entram na contagem. Implementadas vinte páginas numeradas em 24 faces físicas e quinze aberturas, com o mapa em [PRESENTATION.md](PRESENTATION.md). Foram reunidas as continuações de segurança, soberania, distribuição dos custos e expediente. O editorial permanece integral: três parágrafos na página 2 e o fechamento na página 20. A entrada do suplemento não recebe fólio; a entrevista integral continua disponível por camada HTML, inclusive por botão sobre o leitor 3D.
 
 Corpo fixo de 16 px / 1,45, margens menores, colunas balanceadas e justificadas. Na rolagem o corpo também usa 16 px; no celular permanece alinhado à esquerda. Caixas complementares já existentes aparecem nas matérias de desigualdade, território, sistema-mundo e opinião pública. Não houve corte dos parágrafos originais, das respostas ou das referências da entrevista. O roteiro de leitura tem atribuição editorial explícita.
 
-As 28 faces foram medidas e inspecionadas em PNG e contact sheet: imagens carregadas, ausência de transbordamento e espaço antes dos rodapés. As texturas antigas 29–36 foram removidas. O sumário, os rodapés e o contador distinguem fólios de posições físicas. Foram corrigidos os limites do sumário em 320 px e migradas as expectativas dos testes para a nova numeração.
+As 24 faces foram medidas e inspecionadas em PNG e contact sheet: imagens carregadas, ausência de transbordamento e espaço antes dos rodapés. As texturas antigas 29–36 foram removidas. O sumário, os rodapés e o contador distinguem fólios de posições físicas. Foram corrigidos os limites do sumário em 320 px e migradas as expectativas dos testes para a nova numeração.
 
 Validação final: 22 testes unitários/build passaram. Passaram o teste geral de navegador e as onze suítes de interface, rolagem, suplemento, citações, exploradores, tarifas, layout, tipografia, reator, fontes e 3D. A checagem do suplemento percorreu quatro fotografias, fontes, Escape e retorno do foco nos três modos e em três larguras móveis. Chromium headless com WebGL por software; sem homologação em aparelhos físicos ou outros navegadores.
 

@@ -8,7 +8,7 @@ test('presentation has exactly nineteen numbered content pages with the agreed t
  assert.deepEqual(contentPages.map(page=>page.id),blocks.flat());
  assert.deepEqual(contentPages.map(page=>page.folio),Array.from({length:18},(_,index)=>index+1));
  for(const page of pages.filter(page=>!page.contentPage)) assert.equal(page.folio,null,page.id);
- assert.equal(pages.length,28);
+ assert.equal(pages.length,24);
  assert.equal(formatPage(contentPages[3]),'04 / 18');
  assert.equal(formatPages(0),'Capa');
  assert.ok(formatPages(spreadForPage(pageIndexForId('unequal'))).includes('03'));

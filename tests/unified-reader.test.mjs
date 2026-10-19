@@ -41,12 +41,12 @@ test('physical edition has complete signatures, isolated covers and stable desti
   assert.deepEqual(getSpread(0).map(page=>page.id),['cover']);
   assert.deepEqual(getSpread(spreadCount-1).map(page=>page.id),['back-cover']);
   assert.deepEqual(Array.from({length:spreadCount},(_,i)=>getSpread(i)).flat().map(page=>page.id),pages.map(page=>page.id));
-  for(const id of ['cover','inside-front','contents','team','editorial','unequal','reactor','uranium','payback','messmer','interview-profile','balance','inside-back','back-cover']) {
+  for(const id of ['cover','inside-front','contents','team','editorial','unequal','reactor','uranium','payback','messmer','interview-profile','balance','back-cover']) {
     const index=pageIndexForId(id);
     assert.ok(index>=0,id);
     assert.ok(getSpread(spreadForPage(index)).includes(pages[index]),id);
   }
-  for(const id of ['cover','inside-front','inside-back','back-cover']) {
+  for(const id of ['cover','inside-front','back-cover']) {
     const index=pageIndexForId(id),page=pages[index];
     assert.equal(page.folio,null,id);
     assert.doesNotMatch(pageHTML(page,index),/class="page-(?:top|bottom|tail)"/,id);
