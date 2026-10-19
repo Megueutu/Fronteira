@@ -188,3 +188,11 @@ A janela de fontes usa cartões verticais com identificação do documento, dom�
 Abertura quase frontal, ajustada ao espaço disponível, com lombada discreta, bordas de papel sem impressão repetida e sombra suave no fundo verde existente. A câmera recua durante a virada e retorna ao enquadramento de leitura. A densidade do canvas fica entre 1,5 e 2; isso não representa uma medição de desempenho ou garantia de legibilidade de texto pequeno em celulares.
 
 As chamadas de ação foram removidas da textura e da faixa sob a abertura em 18/10/2026. A faixa mantém apenas “Fontes da página NN”, em Arial 13 px, com livro, fundo branco, borda `--line`, raio de 8 px, hover em `--soft` e foco verde. Os dois acessos ficam lado a lado no desktop e empilhados no celular, com pelo menos 44 px de altura. O número da página e a consulta às fontes permanecem no rodapé impresso. As ações de gráficos, notas e entrevista ficam disponíveis em “Ampliar leitura”, usando os diálogos existentes. A área antes ocupada pela chamada impressa é preservada para não alterar texto ou paginação.
+
+## Capa orgânica — 2026-10-19
+
+Referência escolhida pelo responsável: capa Brasil Nuclear enviada em `image 2.png`. A composição usa desenho SVG próprio, sem copiar logotipo, fotografias ou textos da referência. Uma única fotografia institucional de Angra permanece fixa e contínua sob todas as aberturas orgânicas. O verde varia até um tom claro na base, com acentos lima e petróleo. Título, chamadas, marca, QR e código de barras permanecem legíveis e imóveis.
+
+As máscaras e formas têm animação CSS lenta, reação suave ao ponteiro e botão de pausa. A animação para fora da viewport, em aba oculta e com movimento reduzido. O ponteiro não interfere no gesto de leitura em telas touch. A textura do 3D e a impressão usam uma composição estática determinística; movimento e reação ao ponteiro ficam na capa HTML, na rolagem e na leitura ampliada. O fundo externo da interface continua estático.
+
+A implementação usa SVG e CSS nativos: [máscaras SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/mask) e [movimento reduzido](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40media/prefers-reduced-motion). Nenhum código de terceiros foi incorporado nesta etapa.

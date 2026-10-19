@@ -16,6 +16,7 @@
     "test:tariffs": "node tests/unified-tariffs.browser.mjs",
     "test:layout": "node tests/layout.browser.mjs",
     "test:typography": "node tests/typography.browser.mjs",
+    "test:cover": "node tests/cover.browser.mjs",
     "test:reactor": "node tests/reactor.browser.mjs",
     "test:sources": "node tests/sources.browser.mjs",
     "test:3d": "node tests/reader-3d.browser.mjs",

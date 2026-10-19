@@ -2,6 +2,7 @@ import { pages, pageHTML, getSpread, spreadForPage, clampSpread, formatPages } f
 import { createInteractions } from './interactions.js';
 import { sourcePanelHTML } from './citations.js';
 import { createExplorers, refreshExplorers } from './explorers.js';
+import { installCoverMotion } from './cover-motion.js';
 
 const renderIndex = new URLSearchParams(location.search).get('render');
 if (renderIndex !== null) {
@@ -13,6 +14,7 @@ if (renderIndex !== null) {
   await document.fonts.ready;
   document.body.dataset.ready = 'true';
 } else {
+  installCoverMotion();
   const stage = document.querySelector('#stage');
   const book = document.querySelector('#html-book');
   const landing = document.querySelector('#landing-view');

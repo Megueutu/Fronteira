@@ -294,3 +294,13 @@ Resultado da rodada final: `npm test` passou os sete testes; `npm run render:tex
 ## Limites remanescentes
 
 Safari, Firefox, toque físico e leitores de tela não foram homologados. O 3D continua com texto em textura e não oferece seleção direta; existem caminhos HTML para a leitura. Não há capa articulada, arraste contínuo, editor, importação de PDF ou vídeo. A checagem desta edição é proporcional ao trabalho escolar e não equivale a uma auditoria independente de toda a pesquisa original.
+
+## Revisão da capa orgânica — 2026-10-19
+
+O responsável escolheu a referência Brasil Nuclear enviada como imagem e pediu a fotografia de Angra uniforme em todos os recortes, com formas em movimento de lâmpada de lava. Foi implementada uma máscara SVG original sobre uma única fotografia contínua. O restante da revista, as quatro faces de capa e o conteúdo editorial permanecem preservados; a mudança visual concentra-se na capa frontal.
+
+No HTML há movimento lento, resposta ao ponteiro e pausa manual. As janelas têm limites para não atravessar os textos. QR e código de barras são imóveis e têm espaços separados também no celular. Fora da viewport, em aba oculta ou com movimento reduzido, o movimento para. No 3D e na impressão, a composição usa a mesma arte em estado estático.
+
+Validação: todas as 36 faces foram renderizadas, medidas e conferidas em contact sheet. O teste específico da capa passou em 1440, 390 e 320 px: uma única foto, máscara animada, resposta ao ponteiro, pausa, movimento reduzido, ausência de transbordamento e separação entre QR e código de barras. O QR foi decodificado corretamente no PNG e na textura JPEG. Os 20 testes unitários/build passaram, incluindo preservação editorial e sincronização das texturas. Não se mediu desempenho em hardware real.
+
+A suíte de tipografia também passou nos três modos e em cinco larguras, incluindo capa, colunas e diálogos.

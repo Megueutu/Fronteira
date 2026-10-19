@@ -89,3 +89,5 @@ O comando captura as 36 faces, verifica limites de composição e grava JPEGs em
 - [Créditos da referência visual](docs/THIRD_PARTY_NOTICES.md).
 
 O estudo anterior permanece em [previews/index.html](http://localhost:3000/previews/index.html) como histórico da direção; a edição está na página principal. Não há editor de conteúdo, importação de PDF ou vídeo nesta versão.
+
+A capa frontal possui formas orgânicas com uma única fotografia contínua de Angra. Em HTML, rolagem e leitura ampliada, as formas têm movimento suave e botão de pausa; a preferência por movimento reduzido é respeitada. O 3D usa a mesma arte estática. Verificação específica: `npm run test:cover`, com o servidor ativo.

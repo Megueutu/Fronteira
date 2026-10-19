@@ -1019,3 +1019,43 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 :is(.render-document,.html-book:not(.single-page)) .page-team .team-member figcaption { font-size: var(--font-size-16); line-height: 1.5; margin-top: 10px; }
 :is(.render-document,.html-book:not(.single-page)) :is([data-page-id="safety"],[data-page-id="sovereignty"],[data-page-id="who-pays"]) .editorial-photo img { height: 280px; }
 :is(.render-document,.html-book:not(.single-page)) [data-page-id="interview-matrix"] .interview-page-photo img { max-height: 320px; }
+
+/* Capa orgânica: uma fotografia contínua, revelada por janelas em movimento. */
+.edition-cover .cover-artwork::after { background: none; }
+.cover-lava { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+.edition-cover .cover-photograph { filter: saturate(.82); }
+.edition-cover .cover-copy { top: 5%; }
+.edition-cover .page-main .cover-title { font-size: calc(var(--type-step-72) * 100cqw / 760); font-weight: 800; letter-spacing: -.045em; text-transform: uppercase; }
+.edition-cover .cover-title > span { display: block; margin-top: .8cqw; font-size: .45em; font-weight: 500; letter-spacing: .015em; text-transform: none; }
+.edition-cover .cover-deck { margin: 5cqw 0 0 auto; max-width: 43%; font-weight: 500; text-align: right; }
+.edition-cover .cover-lower { top: 48%; bottom: auto; left: 52%; display: block; }
+.edition-cover .cover-callout { text-align: right; }
+.edition-cover .cover-callout strong { font-size: calc(var(--type-step-28) * 100cqw / 760); }
+.edition-cover .cover-qr { position: absolute; top: 44cqw; right: 0; width: 24cqw; max-width: 128px; box-sizing: border-box; }
+.edition-cover .cover-imprint { bottom: 5.8%; align-items: center; }
+.edition-cover .publisher-brand { width: 33%; }
+.cover-motion-toggle { position: absolute; right: 6.3%; top: 2%; border: 1px solid #ffffff70; border-radius: 999px; background: #06643d; color: white; font: 500 12px/1.2 var(--sans); min-height: 44px; padding: 8px 12px; cursor: pointer; }
+.cover-motion-toggle:hover { background: #094b32; }
+.cover-motion-toggle:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+.lava-response { transform: translate(var(--lava-x,0px),var(--lava-y,0px)); transition: transform 1.4s ease-out; }
+.lava-window, .lava-accent { transform-box: fill-box; transform-origin: center; animation: cover-lava-float 18s ease-in-out infinite alternate; animation-play-state: paused; }
+.lava-window-b { animation-duration: 23s; animation-direction: alternate-reverse; }
+.lava-window-c { animation-duration: 27s; }
+.lava-accent-a { animation-duration: 21s; }
+.lava-accent-b { animation-duration: 26s; animation-direction: alternate-reverse; }
+.lava-accent-c { animation-duration: 16s; animation-direction: alternate-reverse; }
+.edition-cover[data-cover-active="true"] :is(.lava-window,.lava-accent) { animation-play-state: running; }
+.edition-cover[data-cover-paused="true"] :is(.lava-window,.lava-accent), .cover-motion-hidden :is(.lava-window,.lava-accent) { animation-play-state: paused; }
+@keyframes cover-lava-float { from { transform: translate(0,0) rotate(-3deg) scale(1,.97); } to { transform: translate(8px,-22px) rotate(4deg) scale(.96,1.07); } }
+.render-document :is(.lava-window,.lava-accent) { animation: none; }
+.render-document .cover-motion-toggle, .turning .cover-motion-toggle { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .edition-cover :is(.lava-window,.lava-accent) { animation: none; }
+  .edition-cover .lava-response { transform: none; transition: none; }
+  .cover-motion-toggle { display: none; }
+}
+@media print { .cover-motion-toggle { display: none; } .edition-cover :is(.lava-window,.lava-accent) { animation: none; } }
+.edition-cover .cover-qr { top: 38cqw; }
+.edition-cover .cover-deck, .edition-cover .cover-callout { color: #103d26; }
+.edition-cover .cover-imprint .publisher-brand { filter: brightness(0); opacity: .8; }
+.edition-cover .cover-qr { top: 35cqw; width: 17cqw; max-width: none; padding: 1cqw; gap: .65cqw; }
