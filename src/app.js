@@ -2,6 +2,8 @@ import { pages, pageHTML, getSpread, spreadForPage, clampSpread, formatPages, fo
 import { createInteractions } from './interactions.js';
 import { createExplorers, refreshExplorers } from './explorers.js';
 import { installCoverMotion, mountCoverCanvases } from './cover-motion.js';
+import { fitPageText, installPageFit } from './page-fit.js';
+import { installInlineRefs } from './inline-refs.js';
 
 const renderIndex = new URLSearchParams(location.search).get('render');
 if (renderIndex !== null) {
@@ -10,12 +12,16 @@ if (renderIndex !== null) {
   document.body.className = 'render-document page-surface';
   document.body.innerHTML = sprite + pageHTML(pages[index],index,{digital:false});
   mountCoverCanvases(document);
+  fitPageText(document);
   await Promise.all([...document.images].map(img => img.decode().catch(() => {})));
   await document.fonts.ready;
+  fitPageText(document);
   await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve,250))));
   document.body.dataset.ready = 'true';
 } else {
   installCoverMotion();
+  installPageFit();
+  installInlineRefs();
   const stage = document.querySelector('#stage');
   const book = document.querySelector('#html-book');
   const landing = document.querySelector('#landing-view');

@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { pages, pageHTML, photos, interviewPhotos, interviewSections, interviewHTML } from '../src/content.js';
 import { adolfoInterview } from '../src/interview.js';
 import { evidenceFor } from '../src/citations.js';
+import { inlineRefs, popupLabels } from '../src/inline-refs.js';
 
 // Captured before visual repagination. This fixture is independent of the renderer.
 const original = JSON.parse(await readFile(new URL('./fixtures/editorial-original.json',import.meta.url),'utf8'));
@@ -27,7 +28,7 @@ test('a redistribuição preserva integralmente e em ordem os parágrafos das fa
     const refs=new Set(mine.flatMap(entry=>entry.page.refs || []));
     assert.ok((before.refs || []).every(ref=>refs.has(ref)),before.id);
     for (const entry of mine) {
-      const html=pageHTML(entry.page,pages.indexOf(entry.page));
+      const html=pageHTML(entry.page,pages.indexOf(entry.page)).replace(/<[^>]*>/g,'');
       for (let i=0;i<entry.body.length;i++) {
         const offset=entry.merged ? (entry.page.sourceParts.find(part=>part.id===entry.id).offset || 0) : (entry.page.sourceParagraphOffset || 0);
         if (entry.merged) assert.deepEqual(entry.page.evidence[entry.start+i],evidenceFor(entry.id,i+offset),`${entry.id}, parágrafo ${i}`);
@@ -65,4 +66,24 @@ test('fotografias de contexto aparecem uma vez na matéria e não nas continuaç
     }
     assert.equal(pages.find(page=>page.id===id+'-continued')?.image,undefined);
   }
+});
+
+test('as âncoras inline só envolvem texto existente e apontam para fontes ligadas ao parágrafo',()=>{
+  const seen=new Set();
+  for (const anchor of inlineRefs) {
+    const page=pages.find(item=>item.id===anchor.pageId);
+    assert.ok(page,anchor.pageId);
+    const key=anchor.pageId+'|'+anchor.phrase;
+    assert.ok(!seen.has(key),'uma ocorrência por termo e página: '+key);
+    seen.add(key);
+    const text=page.body[anchor.p];
+    assert.ok(text?.includes(anchor.phrase),key);
+    const html=pageHTML(page,pages.indexOf(page));
+    assert.ok(html.includes('>'+escape(anchor.phrase)+'</'),'âncora renderizada: '+key);
+    if (anchor.kind==='source') {
+      const record=page.evidence?.[anchor.p] || evidenceFor(page.sourceId || page.id,anchor.p + (page.sourceParagraphOffset || 0));
+      assert.ok(record?.sources.some(source=>source.id===anchor.ref),'fonte ligada ao parágrafo: '+key);
+    } else assert.ok(popupLabels[anchor.action.type],key);
+  }
+  for (const page of pages.filter(item=>item.contentPage)) assert.ok(inlineRefs.filter(a=>a.pageId===page.id).length<=4,page.id);
 });

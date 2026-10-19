@@ -1,12 +1,13 @@
 import { editorialPanels } from './editorial-panels.js';
 import { uiIcon } from './icons.js';
 import { references, citationHTML, visualEvidence, evidenceFor, sourceButtonHTML } from './citations.js';
-import { chartHTML, cycleHTML, scenarioTable, timelineHTML } from './data.js';
+import { chartHTML, cycleHTML, fuelSteps, scenarioTable, timelineHTML } from './data.js';
 import { adolfoInterview } from './interview.js';
 import { explorerHTML } from './explorers.js';
 import { createPagination } from './pagination.js';
 import { createInterviewPages, interviewPageHTML } from './interview-pages.js';
 import { coverHTML, decorativeHTML } from './editorial-cover.js';
+import { linkInlineRefs } from './inline-refs.js';
 
 export const teamMembers = [
   { id: 'davi', name: 'Davi de Oliveira', portrait: '/assets/team/davi-silva.jpg' },
@@ -79,8 +80,9 @@ const originalPages = [
     'No Brasil, a INB atua em Caetité, na Bahia, e na fabricação do combustível em Resende, no Rio de Janeiro. O enriquecimento utiliza ultracentrífugas e é implantado em etapas. Dominar a tecnologia não significa possuir, no mesmo momento, capacidade industrial para atender a toda a demanda.',
     'O concentrado de urânio, conhecido como yellow cake, é o primeiro produto dessa cadeia: um pó amarelado, rico em óxido de urânio (U3O8), obtido em Caetité a partir do minério. Ainda não é combustível. Antes de chegar ao reator, precisa passar por conversão, enriquecimento e fabricação.',
     'A conversão e parte do processamento podem envolver serviços no exterior. Assim, exportar material para processamento e importar combustível não são necessariamente sinais contraditórios: são movimentos de uma cadeia com etapas e capacidades diferentes.',
-    'Santa Quitéria, associado ao depósito de Itataia, no Ceará, aparece como possibilidade de ampliar a oferta. Reserva geológica, licenciamento e produção efetiva são situações distintas: um projeto não é combustível já disponível.'
-  ], visual: 'cycle', refs: ['inb','enrichment','group'], action: action('cycle', 'Percorra o ciclo do combustível') },
+    'Santa Quitéria, associado ao depósito de Itataia, no Ceará, aparece como possibilidade de ampliar a oferta. Reserva geológica, licenciamento e produção efetiva são situações distintas: um projeto não é combustível já disponível.',
+    ...fuelSteps.map(([name, text], i) => `Etapa ${i + 1}, ${name.toLowerCase()}. ${text}`),
+  ], refs: ['inb','enrichment','group'], action: action('cycle', 'Percorra o ciclo do combustível') },
   { id: 'wallerstein', kind: 'essay', section: '03 / SISTEMA-MUNDO', title: 'Em que lugar\no Brasil está?', subtitle: 'Quem foi Wallerstein e por que sua teoria entra nesta discussão.', body: [
     'Immanuel Wallerstein (1930–2019) foi um sociólogo estadunidense. Formado em Columbia, lecionou nessa universidade, na McGill e na Binghamton, onde dirigiu o Centro Fernand Braudel, e atuou em Yale como pesquisador sênior. Em The Modern World-System (1974), formulou a teoria do sistema-mundo.',
     'Wallerstein propôs analisar o capitalismo como uma economia-mundo. Em vez de tratar cada país como uma trajetória isolada, examinou as relações históricas de trabalho, comércio, poder e acumulação que conectam regiões desiguais.',
@@ -146,7 +148,7 @@ const editorial = fromOriginal('editorial');
 const costSource = fromOriginal('cost'), paybackSource = fromOriginal('payback'), balanceSource = fromOriginal('balance');
 const guideEvidence = {kind:'Roteiro editorial da edição',sources:[{id:'group'}]};
 const contentPages = [
-  {...fromOriginal('cover'),id:'opening',kind:'opener',section:'ABERTURA / O PROBLEMA',title:'Eletricidade confiável\npara quem?',subtitle:'Como garantir eletricidade confiável às comunidades remotas, diante das dificuldades de infraestrutura e distribuição?',image:photos.angra,visual:'opening',refs:['group'],evidence:[guideEvidence],action:action('index','Percorra a investigação')},
+  {...fromOriginal('cover'),id:'opening',kind:'opener',section:'ABERTURA / O PROBLEMA',title:'Eletricidade confiável\npara quem?',subtitle:'Como garantir eletricidade confiável às comunidades remotas, diante das dificuldades de infraestrutura e distribuição?',image:photos.angra,refs:['group'],evidence:[guideEvidence],action:action('index','Percorra a investigação')},
   {...editorial},
   ...['unequal','matrix','territory','reactor','safety','wallerstein','sovereignty','uranium'].map(fromOriginal),
   {...paybackSource,id:'payback',section:'04 / CUSTO E PAYBACK',subtitle:'Angra 3 como estudo de caso: explore o cálculo, sem confundir simulação com previsão.',body:[...costSource.body,...paybackSource.body],evidence:[...costSource.body.map((_,i)=>evidenceFor('cost',i)),...paybackSource.body.map((_,i)=>evidenceFor('payback',i))],sourceParts:[{id:'cost',length:costSource.body.length},{id:'payback',length:paybackSource.body.length}],refs:[...new Set([...costSource.refs,...paybackSource.refs])]},
@@ -163,13 +165,13 @@ for (const page of contentPages) {
 }
 const front = [
   {...fromOriginal('cover'),body:[],folio:null,readingLabel:'Capa'},
-  {id:'inside-front',kind:'inside-cover',section:'',title:'Segunda capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Segunda capa'},
+  {id:'inside-front',kind:'inside-cover',section:'',title:'Verso da capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Verso da capa'},
   {...fromOriginal('contents'),showTeam:false,folio:null,readingLabel:'Sumário'},
   {id:'team',kind:'team',section:'PESQUISA E EDIÇÃO',title:'Quem fez esta pesquisa',subtitle:'Pesquisa e edição do grupo, São Paulo',sourceId:'team',body:[],refs:[],action:action('index','Explore a edição'),folio:null,readingLabel:'Equipe'},
 ];
 export const pages = [...front,...contentPages,
   {...fromOriginal('credits'),folio:null,readingLabel:'Expediente'},
-  {id:'back-cover',kind:'back-cover',section:'',title:'Quarta capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Quarta capa'},
+  {id:'back-cover',kind:'back-cover',section:'',title:'Contracapa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Contracapa'},
 ];
 export { contentPages };
 const eyebrows = {
@@ -246,7 +248,8 @@ export function pageHTML(page, index, { linear = false, digital = false } = {}) 
   if (page.kind === 'interview') return interviewPageHTML(page,index,{linear});
   const image = page.image ? `<figure class="editorial-photo"><button type="button" data-action="image" data-page="${index}" aria-label="Ampliar: ${escapeHTML(page.image.title)}"><img src="${page.image.src}" alt="${escapeHTML(page.image.caption)}" decoding="async" draggable="false"><span class="photo-expand" aria-hidden="true">${uiIcon("open_in_full")}</span></button><figcaption>${escapeHTML(page.image.credit)}${['safety','sovereignty','who-pays'].includes(page.id) ? ', '+escapeHTML(page.image.caption) : page.image === photos.angra ? ', Angra, registro histórico (fonte: 2009)' : page.image === photos.construction ? ', Angra 3, maio de 2015' : ', imagem ilustrativa'}</figcaption></figure>` : '';
   const body = `<div class="columns">${page.body.map((text,i) => {
-    const passage=`<p>${escapeHTML(text)}</p>${citationHTML((page.evidence?.[i] || evidenceFor(page.sourceId || page.id,i + (page.sourceParagraphOffset || 0))),{className:'inline-citation'})}`;
+    const evidence=page.evidence?.[i] || evidenceFor(page.sourceId || page.id,i + (page.sourceParagraphOffset || 0));
+    const passage=`<p>${linkInlineRefs(page.id,escapeHTML(text),i,evidence)}</p>${citationHTML(evidence,{className:'inline-citation'})}`;
     return passage;
   }).join('')}</div>`;
   const visuals = { 'editorial-map': '<div class="reading-route"><span>Geração, distribuição e acesso</span><span>Conhecimento, capacidade produtiva e autonomia</span><span>Financiamento, metas públicas e prestação de contas</span></div>', opening: '<div class="reading-route"><span>O problema: acesso confiável</span><span>A investigação: cinco temas</span><span>A avaliação: benefícios e responsabilidades</span></div>', guide: '<div class="topic-guide">'+[['01','Panorama e território','Acesso, matriz elétrica e Milton Santos.'],['02','Funcionamento e segurança','Fissão, geração, resíduos e responsabilidades.'],['03','Urânio e soberania','Combustível, sistema-mundo e autonomia.'],['04','Custos e payback','Angra 3, hipóteses e distribuição dos custos.'],['05','Política e opinião pública','Messmer, experiências internacionais e Weber.']].map(([n,t,d])=>`<section><b>${n}</b><h3>${t}</h3><p>${d}</p></section>`).join('')+'</div>', closing: '<div class="reading-route"><span>Acesso e qualidade do fornecimento</span><span>Capacidade científica e industrial</span><span>Metas públicas e prestação de contas</span></div>', matrix: chartHTML(), cycle: cycleHTML(), reactor: '<div class="reactor-strip"><span>Fissão</span><b>'+uiIcon('arrow_forward')+'</b><span>Calor</span><b>'+uiIcon('arrow_forward')+'</b><span>Vapor</span><b>'+uiIcon('arrow_forward')+'</b><span>Eletricidade</span></div>', payback: scenarioTable(), timeline: timelineHTML(true) };

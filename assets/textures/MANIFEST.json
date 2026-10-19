@@ -18,6 +18,8 @@
     "src/pagination.js",
     "src/icons.js",
     "src/cover-motion.js",
+    "src/page-fit.js",
+    "src/page-refine.css",
     "src/lava-lamp.js",
     "assets/fonts/InterVariable.woff2",
     "assets/fonts/InterVariable-Italic.woff2",
@@ -27,5 +29,5 @@
     "assets/qr/site.svg",
     "assets/qr/barcode.svg"
   ],
-  "sha256": "43f2d9207748537146d7ec90696c73a9e60c666e7a3a53bd1cde28d5d4906073"
+  "sha256": "8fa09e5af500d6e146ab580d0f0168effab5c081a30e54ac9181e086c97c5fd5"
 }

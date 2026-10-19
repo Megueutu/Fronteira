@@ -1,0 +1,7 @@
+/* Texto do miolo ajustado ao espaço (degraus 16, 18 e 20 da escala) e rótulo de seção com mais impacto. */
+.page-surface .magazine-page.magazine-page.magazine-page:not(.linear-page) .page-main .columns p { font-size: var(--body-size, 16px); line-height: var(--body-leading, 1.45); }
+.page-surface .magazine-page.magazine-page.magazine-page:not(.linear-page) .page-main .columns p:not(:last-of-type) { margin-bottom: calc(var(--body-size, 16px) * .8); }
+
+.page-eyebrow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin: 0 0 12px; }
+.page-eyebrow-theme { display: inline-block; padding: 6px 12px; border-radius: var(--ds-radius-pill); background: var(--ds-accent); color: #fff; font: 800 12px/1 var(--sans); letter-spacing: .01em; }
+.page-eyebrow-topic { color: var(--ds-ink); font: 800 14px/1.2 var(--sans); letter-spacing: -.012em; }

@@ -90,7 +90,7 @@ export const pageEvidence = {
   territory: [evidence('sin'),analysis('sin','polis'),analysis('santos'),analysis(study('§3.3 e §5.5, “O caso Belo Monte: custo aqui, benefício ali”.'),'polis')],
   reactor: [evidence('iaea'),evidence(study('§2, descrição do ciclo nuclear e reatores de Angra.'),'iaea')],
   safety: [evidence('iaea','npt'),evidence('waste'),evidence('fukushima','chernobyl',study('§6, impactos dos acidentes nas decisões nacionais.')),analysis('waste','weber')],
-  uranium: [evidence('inb'),evidence('inb'),evidence('inb','enrichment'),evidence(c('inb','Etapa “Conversão”: serviço contratado no exterior.')),evidence('itataia')],
+  uranium: [evidence('inb'),evidence('inb'),evidence('inb','enrichment'),evidence(c('inb','Etapa “Conversão”: serviço contratado no exterior.')),evidence('itataia'),evidence('inb'),evidence(c('inb','Etapa “Conversão”: serviço contratado no exterior.')),evidence('inb','enrichment'),evidence('inb','enrichment'),evidence('waste')],
   wallerstein: [evidence('wallerstein-bio'),evidence('wallerstein'),evidence('wallerstein',theory),analysis('wallerstein','inb'),analysis('wallerstein','enrichment')],
   sovereignty: [evidence('critique'),analysis('wallerstein','critique'),evidence('npt','abacc'),analysis('npt',study('§2, distinção entre propulsão e armamento nuclear.'))],
   cost: [analysis(finance),evidence(finance)],

@@ -1,0 +1,57 @@
+/* Âncoras inline do miolo e cartão global (src/inline-refs.js). O termo não altera peso, tamanho nem quebras de linha. */
+.inline-ref {
+  display: inline;
+  margin: 0; padding: 0; border: 0; background: none;
+  font: inherit; letter-spacing: inherit; word-spacing: inherit; text-align: inherit; line-height: inherit;
+  color: var(--ds-accent, #1d7449);
+  text-decoration: underline solid 1px;
+  text-decoration-color: color-mix(in srgb, var(--ds-accent, #1d7449) 50%, transparent);
+  text-underline-offset: 2px;
+  text-decoration-skip-ink: auto;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.inline-ref-source { cursor: help; }
+.inline-ref:hover, .inline-ref:focus-visible, .inline-ref[aria-describedby] { text-decoration-color: var(--ds-accent, #1d7449); }
+.inline-ref:focus-visible { outline: 2px solid var(--ds-accent-focus, #25905a); outline-offset: 2px; border-radius: 3px; }
+@media (prefers-reduced-motion: no-preference) { .inline-ref { transition: text-decoration-color .15s ease; } }
+
+.inline-ref-popover {
+  position: fixed; z-index: 2147483000; top: 0; left: 0;
+  width: max-content; max-width: min(320px, calc(100vw - 16px));
+  display: grid; gap: 4px; padding: 14px 16px;
+  box-sizing: border-box;
+  background: color-mix(in srgb, var(--ds-canvas, #fff) 94%, transparent);
+  -webkit-backdrop-filter: var(--ds-blur, saturate(180%) blur(20px)); backdrop-filter: var(--ds-blur, saturate(180%) blur(20px));
+  border: 1px solid var(--ds-hairline, #e0e0e0); border-radius: var(--ds-radius-lg, 18px);
+  box-shadow: 0 1px 2px #0000000a;
+  color: var(--ds-ink, #1d1d1f);
+  font: 400 13px/1.4 var(--ds-sans, 'InterVariable', system-ui, sans-serif); letter-spacing: 0; text-align: left; hyphens: manual;
+  visibility: hidden; opacity: 0; pointer-events: none;
+}
+.inline-ref-popover.is-measuring { visibility: hidden; opacity: 0; }
+.inline-ref-popover.is-visible { visibility: visible; opacity: 1; pointer-events: auto; }
+.inline-ref-popover.is-action.is-visible { pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .inline-ref-popover { transition: opacity .14s ease, visibility 0s linear .14s; }
+  .inline-ref-popover.is-visible { transition: opacity .14s ease, visibility 0s; }
+}
+.inline-ref-popover strong { font-size: 14px; font-weight: 600; line-height: 1.3; letter-spacing: var(--ds-tight, -.022em); }
+.inline-ref-popover .inline-ref-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--ds-ink-48, #6e6e73); }
+.inline-ref-popover .inline-ref-note { color: var(--ds-ink-80, #333); display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+.inline-ref-popover .inline-ref-hint { margin-top: 2px; font-size: 12px; color: var(--ds-ink-48, #6e6e73); }
+.inline-ref-popover .inline-ref-link {
+  display: inline-flex; align-items: center; gap: 4px; justify-self: start; margin-top: 4px;
+  font-size: 13px; font-weight: 600; color: var(--ds-accent, #1d7449); text-decoration: none;
+}
+.inline-ref-popover .inline-ref-link:hover { text-decoration: underline; text-underline-offset: 2px; }
+.inline-ref-popover .inline-ref-link:focus-visible { outline: 2px solid var(--ds-accent-focus, #25905a); outline-offset: 2px; border-radius: 4px; }
+.inline-ref-popover .reader-icon { width: 14px; height: 14px; fill: currentColor; }
+
+/* Texturas 3D e impressão: apenas o sublinhado, sem cartão. */
+.render-document .inline-ref { cursor: inherit; }
+@media print {
+  .inline-ref-popover { display: none !important; }
+  .inline-ref { color: inherit; text-decoration-color: currentColor; }
+}

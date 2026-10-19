@@ -235,7 +235,12 @@
         "No Brasil, a INB atua em Caetité, na Bahia, e na fabricação do combustível em Resende, no Rio de Janeiro. O enriquecimento utiliza ultracentrífugas e é implantado em etapas. Dominar a tecnologia não significa possuir, no mesmo momento, capacidade industrial para atender a toda a demanda.",
         "O concentrado de urânio, conhecido como yellow cake, é o primeiro produto dessa cadeia: um pó amarelado, rico em óxido de urânio (U3O8), obtido em Caetité a partir do minério. Ainda não é combustível. Antes de chegar ao reator, precisa passar por conversão, enriquecimento e fabricação.",
         "A conversão e parte do processamento podem envolver serviços no exterior. Assim, exportar material para processamento e importar combustível não são necessariamente sinais contraditórios: são movimentos de uma cadeia com etapas e capacidades diferentes.",
-        "Santa Quitéria, associado ao depósito de Itataia, no Ceará, aparece como possibilidade de ampliar a oferta. Reserva geológica, licenciamento e produção efetiva são situações distintas: um projeto não é combustível já disponível."
+        "Santa Quitéria, associado ao depósito de Itataia, no Ceará, aparece como possibilidade de ampliar a oferta. Reserva geológica, licenciamento e produção efetiva são situações distintas: um projeto não é combustível já disponível.",
+        "Etapa 1, mineração e beneficiamento. A rocha é extraída e processada para obter o concentrado de urânio. Caetité, na Bahia, integra essa etapa da cadeia brasileira.",
+        "Etapa 2, conversão. O concentrado é convertido em uma forma química adequada ao enriquecimento. A cadeia brasileira pode contratar esse serviço no exterior.",
+        "Etapa 3, enriquecimento. A proporção do isótopo urânio-235 é aumentada. A INB utiliza ultracentrífugas em Resende e expande a capacidade por etapas.",
+        "Etapa 4, fabricação. O material é convertido em pó e pastilhas e montado em conjuntos de combustível, sob controle de qualidade.",
+        "Etapa 5, uso e gestão posterior. Depois de utilizado no reator, o combustível requer resfriamento, blindagem, controle e uma estratégia de armazenamento e destinação."
       ],
       "visual": "cycle",
       "refs": [

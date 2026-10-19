@@ -129,3 +129,7 @@ Por pedido do responsável, as sete fotografias do Unsplash acima (`transmission
 | `rua-fiacao-rj.jpg` | Página de tarifas | Junius, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bento_Ribeiro_2.jpg), domínio público por declaração do autor. |
 
 **Direitos das imagens da Eletronuclear:** o portal informa apenas "Todos os direitos reservados © Eletronuclear" e não publica licença de reutilização nem crédito de fotógrafo. As imagens foram usadas por solicitação expressa do responsável, como já ocorre com a capa, sem declarar licença. Procedência não equivale a liberação: recomenda-se pedir autorização à assessoria de imprensa (imprensaeletronuclear@eletronuclear.gov.br) antes de qualquer divulgação pública ampla. As imagens do Commons foram baixadas por `Special:FilePath` em até 1920 px de largura e recomprimidas em JPEG; a licença CC BY-SA exige atribuição (exibida em cada legenda) e o compartilhamento de adaptações sob a mesma licença.
+
+## Bandeiras (flag-icons, MIT)
+
+Bandeiras dos seis países da linha do tempo (Alemanha, Itália, Japão, Bélgica, Lituânia e Coreia do Sul), em SVG 4x3, extraídas de [flag-icons](https://github.com/lipis/flag-icons) (lipis), versão 7.6.0, licença MIT. Arquivos em `assets/flags/` (`de`, `it`, `jp`, `be`, `lt`, `kr`); texto da licença em `assets/third-party/flag-icons/LICENSE`. Sem emojis.

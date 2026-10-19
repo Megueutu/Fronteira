@@ -1,4 +1,4 @@
-import { matrixData, regionalTariffs, reactorSteps, fuelSteps, fuelStages, fuelProject, fuelStageInner, scenarios, calculateScenario, timeline, decimal, zoomButton } from './data.js';
+import { matrixData, regionalTariffs, reactorSteps, fuelSteps, fuelStages, fuelProject, fuelStageInner, scenarios, calculateScenario, timeline, decimal, zoomButton, flagHTML } from './data.js';
 import { citationHTML, visualEvidence } from './citations.js';
 import { uiIcon } from './icons.js';
 
@@ -115,7 +115,7 @@ function photoCarouselHTML(photos) {
 }
 
 function countryCarouselHTML() {
-  return carouselHTML('EXPERIÊNCIAS INTERNACIONAIS','Uma escolha, diferentes trajetórias.','Avance pelos seis países. Cada caso mantém sua data e sua fonte histórica.',timeline.map(event=>({title:event.country,html:`<div class="explorer-country"><div class="explorer-country-date"><span>RECORTE HISTÓRICO</span><strong>${escape(event.year)}</strong><h4>${escape(event.country)}</h4></div><div><h5>${escape(event.title)}</h5><p>${escape(event.text)}</p>${citationHTML({kind:'Fonte deste caso',sources:[{id:event.ref}]})}</div></div>`})));
+  return carouselHTML('EXPERIÊNCIAS INTERNACIONAIS','Uma escolha, diferentes trajetórias.','Avance pelos seis países. Cada caso mantém sua data e sua fonte histórica.',timeline.map(event=>({title:event.country,html:`<div class="explorer-country"><div class="explorer-country-date"><span>RECORTE HISTÓRICO</span><strong>${escape(event.year)}</strong><h4>${flagHTML(event.flag).replace('width="24" height="18"','width="28" height="21"')}${escape(event.country)}</h4></div><div><h5>${escape(event.title)}</h5><p>${escape(event.text)}</p>${citationHTML({kind:'Fonte deste caso',sources:[{id:event.ref}]})}</div></div>`})));
 }
 
 function matrixRowsHTML(filter='all', selected='Nuclear') {
