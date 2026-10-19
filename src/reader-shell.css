@@ -105,3 +105,23 @@
 .unified-reader .webgl-view { height: 100%; }
 @media (max-height: 640px) { .top-app-bar.reader-toolbar { position: static; } }
 .top-app-bar .tool-group, .top-app-bar .layout-switch.template-tabs { border: 0; box-shadow: none; }
+
+/* Mobile: a barra vira um carrossel horizontal de uma linha só, com rolagem por deslize e encaixe suave. */
+@media (max-width: 760px) {
+  .top-app-bar.reader-toolbar {
+    position: sticky; display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: center; gap: var(--ds-space-xs);
+    padding: 8px var(--ds-space-sm); min-height: 60px; overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x proximity; scroll-padding-inline: var(--ds-space-sm); overscroll-behavior-x: contain;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .top-app-bar.reader-toolbar::-webkit-scrollbar { display: none; }
+  .top-app-bar.reader-toolbar::before { display: none; }
+  .toolbar-zone { display: contents; }
+  .top-app-bar.reader-toolbar > *, .toolbar-zone > *, .toolbar-view, .toolbar-view > * { flex: none; scroll-snap-align: start; }
+  .top-app-bar .toolbar-menu { order: 1; flex: none; width: auto; }
+  .toolbar-brand { order: 2; }
+  .toolbar-view { order: 3; flex-wrap: nowrap; justify-content: flex-start; }
+  .toolbar-end > * { order: 4; }
+  .top-app-bar .zoom-control:not([hidden]) { display: flex; order: 3; margin: 0; }
+}
+.top-app-bar .layout-switch .reader-icon { display: block; width: 24px; height: 24px; }

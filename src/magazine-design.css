@@ -15,8 +15,8 @@
 /* ---------- Títulos: display 600, tracking apertado, subtítulo como lead ---------- */
 .magazine-page.magazine-page:not(.page-cover):not(.page-decorative) .page-main > h2,
 .magazine-page.magazine-page .interview-heading > h2 { font-family: var(--ds-display); font-weight: 800; font-optical-sizing: auto; font-variation-settings: 'opsz' 32; letter-spacing: -.03em; line-height: 1.1; text-wrap: balance; color: var(--ds-ink); }
-.magazine-page.magazine-page.magazine-page:not(.page-cover):not(.page-decorative) .page-main > h2 { font-size: max(26px, min(34px, calc(684px / (var(--title-chars, 24) * .585)))); white-space: nowrap; margin: 0 0 10px; max-width: none; }
-.page-surface .magazine-page.magazine-page.page-opener .page-main > h2 { font-size: max(28px, min(40px, calc(684px / (var(--title-chars, 24) * .585)))); white-space: nowrap; line-height: 1.1; margin-bottom: 12px; }
+.magazine-page.magazine-page.magazine-page:not(.page-cover):not(.page-decorative) .page-main > h2 { font-size: max(26px, min(34px, calc(684px / (var(--title-chars, 24) * .585)))); white-space: nowrap; margin: 0 0 2px; max-width: none; }
+.page-surface .magazine-page.magazine-page.page-opener .page-main > h2 { font-size: max(28px, min(40px, calc(684px / (var(--title-chars, 24) * .585)))); white-space: nowrap; line-height: 1.1; margin-bottom: 2px; }
 .magazine-page.magazine-page.magazine-page:not(.page-cover):not(.page-decorative) .page-subtitle { margin: 0 0 22px; max-width: 92%; color: var(--ds-ink-48); font: 400 var(--font-size-16)/1.45 var(--sans); letter-spacing: -.01em; text-wrap: pretty; }
 .page-surface .magazine-page.magazine-page.page-opener .page-subtitle { font-size: var(--font-size-18); }
 .page-interview .page-main > h2 { font-weight: 600; }
@@ -264,3 +264,15 @@ body:not(.render-document) .chart-row:nth-child(n+6) .bar-track i { animation-de
 .page-surface .editorial-panel.panel-uranium > div { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ds-space-md); }
 .page-surface .editorial-panel.panel-uranium h4 { margin-bottom: 2px; font-size: var(--font-size-12); }
 .page-surface .editorial-panel.panel-uranium p { font-size: var(--font-size-12); line-height: 1.35; }
+
+/* ---------- Página de equipe: retratos altos em grade 3 × 2, nome em destaque e função discreta ---------- */
+.page-surface .page-team .team-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 22px; margin: 26px 0 0; }
+.page-team .team-member { display: grid; gap: 14px; text-align: left; }
+.page-team .team-portrait { position: relative; aspect-ratio: 4 / 5; border: 0; border-radius: var(--ds-radius-lg); background: var(--ds-parchment); cursor: zoom-in; transition: transform .2s; }
+.page-team .team-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: 50% 24%; }
+.page-team .team-portrait:hover { border: 0; }
+.page-team .team-portrait:active { transform: var(--ds-press); }
+.page-team .team-portrait .photo-expand { position: absolute; right: 10px; bottom: 10px; }
+.page-surface .page-team .team-member figcaption { display: grid; gap: 2px; margin: 0; padding: 0 2px; text-align: left; }
+.page-surface .page-team .team-member figcaption strong { font: 700 17px/1.25 var(--sans); letter-spacing: -.02em; color: var(--ds-ink); }
+.page-surface .page-team .team-member figcaption span { font: 400 13px/1.35 var(--sans); color: var(--ds-ink-48); }

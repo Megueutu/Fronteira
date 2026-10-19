@@ -46,15 +46,17 @@ export function createInteractions(onJump) {
     gallery = null; retitle = false;
     dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : type === 'qr' ? 'qr-dialog' : type === 'zoom' ? 'chart-zoom-dialog' : type === 'cycle' ? 'cycle-dialog' : ['image','member','carousel'].includes(type) ? 'lightbox-dialog' : '';
     document.querySelector('#open-index').setAttribute('aria-expanded',String(type === 'index'));
+    dialog.querySelector('#dialog-external')?.remove();
+    if (type === 'video') closeButton.insertAdjacentHTML('beforebegin',`<a id="dialog-external" class="icon-button" href="https://youtu.be/${VIDEO_ID}" target="_blank" rel="noopener noreferrer" aria-label="Abrir no YouTube" title="Abrir no YouTube">${uiIcon('play_arrow')}</a>`);
     let title = '', markup = '';
     if (type === 'zoom') {
       title = zoomSource.dataset.zoomTitle || 'Gráfico ampliado';
     } else if (type === 'qr') {
       title = 'Edição digital';
-      markup = `<div class="qr-card"><img src="/assets/qr/site.svg" alt="QR code que abre a edição digital da revista" width="260" height="260"><p>Aponte a câmera do celular para abrir a revista.</p><a href="https://megueutu.github.io/Fronteira/" target="_blank" rel="noopener noreferrer">Abrir a edição digital ${uiIcon('arrow_forward')}</a></div>`;
+      markup = `<div class="qr-card"><a class="qr-link" href="https://megueutu.github.io/Fronteira/" target="_blank" rel="noopener noreferrer" aria-label="Abrir a edição digital"><img src="/assets/qr/site.svg" alt="QR code que abre a edição digital da revista" width="260" height="260"></a><p>Aponte a câmera do celular para abrir a revista.</p></div>`;
     } else if (type === 'video') {
       title = 'Vídeo da revista';
-      markup = `<button type="button" class="video-poster" data-video="${VIDEO_ID}" aria-label="Reproduzir o vídeo da revista"><img src="https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg'"><span class="video-play">${uiIcon('play_arrow')}</span></button><p class="video-link"><a href="https://youtu.be/${VIDEO_ID}" target="_blank" rel="noopener noreferrer">Abrir no YouTube ${uiIcon('arrow_forward')}</a></p>`;
+      markup = `<button type="button" class="video-poster" data-video="${VIDEO_ID}" aria-label="Reproduzir o vídeo da revista"><img src="https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg'"><span class="video-play">${uiIcon('play_arrow')}</span></button>`;
     } else if (type === 'index') {
       title = 'Sumário';
       markup = `${contentsHTML({drawer:true})}<details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>${interviewEntryHTML()}`;
@@ -142,7 +144,7 @@ export function createInteractions(onJump) {
   }
   function close() {
     if (history.length) {
-      const prior = history.pop(); content.replaceChildren(...prior.nodes); dialog.className = prior.className;
+      const prior = history.pop(); content.replaceChildren(...prior.nodes); dialog.className = prior.className; dialog.querySelector('#dialog-external')?.remove();
       document.querySelector('#open-index').setAttribute('aria-expanded',String(dialog.classList.contains('contents-drawer')));
       ({ gallery, slideIndex, retitle, currentSteps, scenario } = prior); dialog.scrollTop = prior.scroll;
       refreshExplorers(content);
@@ -172,7 +174,7 @@ export function createInteractions(onJump) {
     const delta = event.clientX - swipeX; swipeX = null;
     if (Math.abs(delta) > 48) setSlide(slideIndex + (delta < 0 ? 1 : -1));
   });
-  dialog.addEventListener('close',() => { if (dialog.classList.contains('video-dialog')) content.replaceChildren(); document.querySelector('#open-index').setAttribute('aria-expanded','false'); history = []; gallery = null; retitle = false; if (origin?.isConnected) origin.focus(); });
+  dialog.addEventListener('close',() => { dialog.querySelector('#dialog-external')?.remove(); if (dialog.classList.contains('video-dialog')) content.replaceChildren(); document.querySelector('#open-index').setAttribute('aria-expanded','false'); history = []; gallery = null; retitle = false; if (origin?.isConnected) origin.focus(); });
   dialog.addEventListener('click',event => {
     if (event.target !== dialog) return;
     const r = dialog.getBoundingClientRect();

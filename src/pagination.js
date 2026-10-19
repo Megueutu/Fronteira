@@ -16,6 +16,6 @@ export function createPagination(pages) {
   const getSpread = value => { const opening = getOpening(value); return [opening.left, opening.right].filter(Boolean); };
   const contentCount = pages.filter(page=>Number.isInteger(page.folio)).length;
   const formatPage = page => Number.isInteger(page.folio) ? `${String(page.folio).padStart(2,'0')} / ${contentCount}` : page.readingLabel;
-  const formatPages = value => { const selection=getSpread(value); return selection.every(page=>Number.isInteger(page.folio)) ? `${selection.map(page=>String(page.folio).padStart(2,'0')).join('–')} / ${contentCount}` : selection.map(formatPage).join(' · '); };
+  const formatPages = value => { const selection=getSpread(value); return selection.every(page=>Number.isInteger(page.folio)) ? `${selection.map(page=>String(page.folio).padStart(2,'0')).join(' e ')} / ${contentCount}` : selection.map(formatPage).join(' · '); };
   return { spreadCount, clampSpread, spreadForPage, getOpening, getSpread, formatPages, formatPage };
 }
