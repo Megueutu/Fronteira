@@ -38,6 +38,7 @@ if (renderIndex !== null) {
   function update() {
     previous.disabled = turning || (single() ? pageIndex === 0 : spread() === 0);
     next.disabled = turning || (single() ? pageIndex === pages.length - 1 : spread() === clampSpread(999));
+    document.querySelector('#read-spread').hidden = selectedPages().every(page => ['cover','back-cover'].includes(page.kind));
     document.querySelector('#page-status').textContent = single() ? formatPage(pages[pageIndex]) : formatPages(spread());
     document.querySelector('#page-status').setAttribute('aria-label',`Posição ${selectedPages().map(page=>pages.indexOf(page)+1).join(' e ')} de ${pages.length}`);
     document.querySelector('#section-label').textContent = pages[pageIndex].section;

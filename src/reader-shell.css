@@ -125,3 +125,4 @@
   .top-app-bar .zoom-control:not([hidden]) { display: flex; order: 3; margin: 0; }
 }
 .top-app-bar .layout-switch .reader-icon { display: block; width: 24px; height: 24px; }
+.top-app-bar [hidden] { display: none !important; }
