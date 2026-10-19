@@ -54,7 +54,6 @@
 .unified-reader .book-frame { box-shadow: 0 2px 6px #10261912, 0 16px 48px -12px #10261938; }
 .unified-reader .reading-progress { height: 2px; background: #c4c9c580; }
 .unified-reader .reading-progress i { background: #1d7449; }
-.unified-reader .reader-sources { margin: 0 24px 24px; border: 1px solid #dfe2df; border-radius: 16px; }
 .unified-reader .site-footer { display: flex; justify-content: center; padding: 28px 16px 40px; border: 0; background: var(--ui-surface); }
 .unified-reader .footer-logo { display: block; width: 136px; height: auto; filter: brightness(0); opacity: .75; }
 .unified-reader #interaction-dialog { border-radius: 28px; }
@@ -85,8 +84,7 @@
   .top-app-bar.reader-toolbar { justify-content: center; }
   .top-app-bar .layout-switch { margin-left: 0; }
   .top-app-bar .page-counter { min-width: 0; font-size: 12px; }
-  .unified-reader .reader-sources { margin: 0 12px 16px; padding: 24px 16px; }
-}
+  }
 @media (max-width: 580px) {
   .unified-reader { --ui-control: 36px; }
   .top-app-bar.reader-toolbar { position: static; }
@@ -122,3 +120,8 @@
 .hotspot > span { min-width: 0; overflow-wrap: anywhere; }
 @media (max-width:760px) { .page-hotspot-group[data-side="right"] { grid-column: auto; } }
 .top-app-bar .layout-switch .reader-icon { display: block; width: 24px; height: 24px; }
+
+/* Altura guiada pela janela: o zoom do navegador reduz a altura em px CSS e a revista acompanha. */
+.unified-reader .stage { padding-block: 12px; }
+.unified-reader .webgl-view { height: 100%; }
+@media (max-height: 640px) { .top-app-bar.reader-toolbar { position: static; } }

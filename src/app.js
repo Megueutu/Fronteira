@@ -1,6 +1,5 @@
 import { pages, pageHTML, getSpread, spreadForPage, clampSpread, formatPages, formatPage } from './content.js';
 import { createInteractions } from './interactions.js';
-import { sourcePanelHTML } from './citations.js';
 import { createExplorers, refreshExplorers } from './explorers.js';
 import { installCoverMotion, mountCoverCanvases } from './cover-motion.js';
 
@@ -34,11 +33,6 @@ if (renderIndex !== null) {
   const firstInOpening = index => pages.indexOf(getSpread(index)[0]);
   const selectedPages = () => single() ? [pages[pageIndex]] : getSpread(spread());
   const previous = document.querySelector('#previous'), next = document.querySelector('#next');
-  const sourcePanel = document.createElement('section');
-  sourcePanel.id = 'reader-sources'; sourcePanel.className = 'reader-sources';
-  sourcePanel.setAttribute('aria-label','Fontes dos trechos desta abertura');
-  document.querySelector('.reading-progress').after(sourcePanel);
-  let sourceSelection = '';
   function update() {
     previous.disabled = turning || (single() ? pageIndex === 0 : spread() === 0);
     next.disabled = turning || (single() ? pageIndex === pages.length - 1 : spread() === clampSpread(999));
@@ -49,14 +43,6 @@ if (renderIndex !== null) {
     document.querySelector('.nav-caption').textContent = mode === 'landing' ? 'Seções' : 'Páginas';
     stage.setAttribute('aria-busy',String(turning));
     stage.classList.toggle('turning',turning);
-    const sourceKey = `${mode}:${single() ? pageIndex : spread()}:${single()}`;
-    sourcePanel.hidden = mode === 'landing';
-    if (sourceKey !== sourceSelection) {
-      sourceSelection = sourceKey;
-      const blocks = selectedPages().map(page=>sourcePanelHTML(page,pages.indexOf(page))).join('');
-      sourcePanel.innerHTML = blocks ? `<h2>De onde vêm as informações desta abertura</h2><p>Fontes por trecho, com o local da informação no site ou documento. As interpretações e propostas são identificadas como trabalho do grupo.</p><div class="spread-evidence">${blocks}</div>` : '';
-      sourcePanel.hidden ||= !blocks;
-    } else if (!sourcePanel.children.length) sourcePanel.hidden = true;
     document.querySelector('#reading-progress').style.width = `${(single() ? pageIndex + 1 : Math.max(...selectedPages().map(page=>pages.indexOf(page)))+1) / pages.length * 100}%`;
     // Links antigos são lidos na abertura; a navegação mantém apenas a raiz visível.
     history.replaceState({ ...history.state, reader: { mode, page: pageIndex + 1 } },'',location.pathname);
@@ -99,7 +85,8 @@ if (renderIndex !== null) {
       observeLanding(); return;
     }
     const availableWidth = Math.max(300,stage.clientWidth - (mobile.matches ? 20 : 70));
-    const availableHeight = Math.max(430,Math.min(950,innerHeight - (mobile.matches ? 200 : 190)));
+    const toolbar = document.querySelector('#reader-toolbar').offsetHeight;
+    const availableHeight = Math.max(260,Math.min(1100,innerHeight - toolbar - 56));
     const count = selectedPages().length;
     const scale = Math.min(availableWidth / (760 * count), availableHeight / 1064) * zoom;
     const frame = document.querySelector('#html-view');
