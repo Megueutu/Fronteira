@@ -32,7 +32,7 @@ try {
   await b.viewport(1440,1100);await visit('cover');await imagesReady();
   assert.equal(await b.evaluate("document.querySelectorAll('#html-book>article').length"),1);
   assert.equal(await b.evaluate("document.querySelector('#previous').disabled"),true);
-  const cover=await b.evaluate(`(()=>{const p=document.querySelector('#html-book .edition-cover'),a=p.getBoundingClientRect(),i=p.querySelector('.cover-photograph').getBoundingClientRect();return {photos:p.querySelectorAll('.cover-photograph').length,folios:p.querySelectorAll('.page-top,.page-bottom,.page-tail').length,fullBleed:Math.abs(a.width-i.width)<1&&Math.abs(a.height-i.height)<1,title:p.querySelector('.cover-title').textContent,qr:p.querySelector('.cover-qr').href,brand:p.querySelector('.publisher-brand').getAttribute('src')}})()`);
+  const cover=await b.evaluate(`(()=>{const p=document.querySelector('#html-book .edition-cover'),a=p.getBoundingClientRect(),i=p.querySelector('.cover-photograph').getBoundingClientRect();return {photos:p.querySelectorAll('.cover-photograph').length,folios:p.querySelectorAll('.page-top,.page-bottom,.page-tail').length,fullBleed:Math.abs(a.width-i.width)<1&&Math.abs(a.height-i.height)<1,title:p.querySelector('.cover-title').textContent,brand:p.querySelector('.publisher-brand').getAttribute('src')}})()`);
   assert.equal(cover.photos,1);assert.equal(cover.folios,0);assert.equal(cover.fullBleed,true);
   assert.equal(cover.title.replace(/\s+/g,''),'EnergiaNuclearnoBrasil');
   assert.ok(cover.brand.endsWith('/assets/branding/fronteira.svg'));

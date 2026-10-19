@@ -1,4 +1,4 @@
-import { matrixData, regionalTariffs, reactorSteps, scenarios, calculateScenario, timeline, decimal, zoomButton } from './data.js';
+import { matrixData, regionalTariffs, reactorSteps, fuelSteps, fuelStages, fuelProject, fuelStageInner, scenarios, calculateScenario, timeline, decimal, zoomButton } from './data.js';
 import { citationHTML, visualEvidence } from './citations.js';
 import { uiIcon } from './icons.js';
 
@@ -40,6 +40,67 @@ function updateReactor(root,index) {
   root.querySelector('[data-reactor-number]').textContent=String(index+1).padStart(2,'0');
   root.querySelector('[data-reactor-title]').textContent=step[0];
   root.querySelector('[data-reactor-description]').textContent=step[1];
+}
+
+/* ---------- Ciclo do combustível: infográfico interativo ---------- */
+const mapNode = (id,steps,x,y,label,anchor,dx) => `<g class="cy-node" data-map-steps="${steps}" data-map="${id}"><circle cx="${x}" cy="${y}" r="7"/><text x="${x+dx}" y="${y+4}" text-anchor="${anchor}">${label}</text></g>`;
+function cycleMapHTML() {
+  return `<figure class="cycle-map"><svg viewBox="0 0 320 232" aria-hidden="true" focusable="false">
+    <defs><marker id="cy-arrow" class="cy-m" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l5 3-5 3"/></marker><marker id="cy-arrow-on" class="cy-m cy-m-on" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l5 3-5 3"/></marker></defs>
+    <path class="cy-seg cy-abroad" data-map-steps="1" d="M142 96Q104 100 80 130"/>
+    <path class="cy-seg cy-abroad" data-map-steps="2" d="M98 160Q150 192 192 168"/>
+    <path class="cy-seg" data-map-steps="4" d="M205 175L248 202"/>
+    <g class="cy-tag" data-map-steps="0 1"><circle cx="40" cy="74" r="5"/><text x="50" y="79">yellow cake</text></g>
+    <g class="cy-node cy-project" data-map-steps="5" data-map="project"><circle cx="262" cy="30" r="8"/><text x="248" y="27" text-anchor="end">Santa Quitéria (CE)</text><text class="cy-sub" x="248" y="43" text-anchor="end">projeto</text></g>
+    ${mapNode('caetite','0',150,92,'Caetité (BA)','start',14)}
+    <g class="cy-node cy-abroad-node" data-map-steps="1" data-map="exterior"><rect x="14" y="134" width="90" height="34" rx="17"/><text x="59" y="156" text-anchor="middle">Exterior</text></g>
+    ${mapNode('resende','2 3',198,170,'Resende (RJ)','start',14)}
+    ${mapNode('angra','4',258,208,'Angra dos Reis (RJ)','end',-14)}
+  </svg><figcaption>Mapa esquemático, sem escala: as posições não representam distâncias.</figcaption></figure>`;
+}
+const cycleItem = index => {
+  if (index === 5) return { number: '★', title: fuelProject.name, text: fuelProject.text, extra: '', place: fuelProject.place, operator: fuelProject.operator, state: fuelProject.state, sources: ['itataia'] };
+  const stage = fuelStages[index];
+  return { number: String(index + 1).padStart(2,'0'), title: fuelSteps[index][0], text: fuelSteps[index][1], extra: stage.extra || '', place: stage.place, operator: stage.operator, state: stage.state, sources: stage.source };
+};
+function cycleDetailHTML(index) {
+  const item = cycleItem(index);
+  const sources = item.sources.map(source => Array.isArray(source) ? { id: source[0], location: source[1] } : { id: source });
+  return `<span class="cycle-detail-number" aria-hidden="true">${item.number}</span><div><h4 id="step-title">${item.title}</h4><p id="step-text">${item.text}</p>${item.extra ? `<p class="cycle-extra">${item.extra}</p>` : ''}<dl class="cycle-facts"><div><dt>Local</dt><dd>${item.place}</dd></div><div><dt>Quem opera</dt><dd>${item.operator}</dd></div><div><dt>Situação</dt><dd>${item.state}</dd></div></dl>${citationHTML({ kind: 'Fonte', sources })}</div>`;
+}
+function cycleExplorerHTML() {
+  return `<section class="digital-feature cycle-explorer" data-explorer="cycle" data-cycle-active="0" aria-label="Ciclo do combustível nuclear no Brasil">${header('DO MINÉRIO AO REATOR','O caminho do combustível.','Selecione uma etapa, ou percorra o ciclo, para ver onde ela acontece e quem a opera.')}<div class="cycle-toolbar"><button type="button" class="cycle-play" data-cycle-play aria-pressed="false">${uiIcon('play_arrow')}<span>Percorrer o ciclo</span></button><p class="cycle-hint">As setas do teclado também trocam de etapa.</p></div><ol class="fuel-flow" aria-label="Etapas do ciclo do combustível">${fuelSteps.map((_,i)=>`<li class="fuel-stage" data-status="${fuelStages[i].status}"><button type="button" class="fuel-card" data-step="${i}" aria-pressed="${i===0}">${fuelStageInner(i)}</button></li>`).join('')}</ol><div class="fuel-notes"><p class="fuel-cake"><i class="cake-dot" aria-hidden="true"></i><span><strong>Yellow cake</strong> · etapa 1 → 2. Pó amarelado, rico em U3O8; ainda não é combustível.</span></p><button type="button" class="fuel-project" data-step="5" aria-pressed="false"><span><strong>Santa Quitéria (Itataia, CE)</strong> · projeto que pode ampliar a oferta; reserva não é produção nem combustível.</span>${arrow(false)}</button></div><div class="cycle-body">${cycleMapHTML()}<div class="cycle-detail" role="status" aria-live="polite" aria-atomic="true">${cycleDetailHTML(0)}</div></div></section>`;
+}
+const cycleTimers = new WeakMap();
+const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+function cyclePlayState(root,playing) {
+  const button = root.querySelector('[data-cycle-play]'), detail = root.querySelector('.cycle-detail');
+  button.setAttribute('aria-pressed',String(playing));
+  button.innerHTML = `${uiIcon(playing ? 'pause' : 'play_arrow')}<span>${playing ? 'Pausar' : reducedMotion() ? 'Próxima etapa' : 'Percorrer o ciclo'}</span>`;
+  detail.setAttribute('aria-live',playing ? 'off' : 'polite');
+}
+function stopCycle(root) {
+  if (!cycleTimers.has(root)) return;
+  clearInterval(cycleTimers.get(root)); cycleTimers.delete(root); cyclePlayState(root,false);
+}
+function updateCycle(root,index) {
+  const last = fuelSteps.length - 1, active = Math.max(0,Math.min(5,index));
+  root.dataset.cycleActive = String(active);
+  root.querySelectorAll('[data-step]').forEach(button => button.setAttribute('aria-pressed',String(Number(button.dataset.step) === active)));
+  root.querySelectorAll('[data-map-steps]').forEach(node => node.classList.toggle('is-active',node.dataset.mapSteps.split(' ').includes(String(active))));
+  root.querySelector('.cycle-detail').innerHTML = cycleDetailHTML(active);
+  if (active >= last) stopCycle(root);
+}
+function toggleCycle(root) {
+  if (cycleTimers.has(root)) { stopCycle(root); return; }
+  const last = fuelSteps.length - 1, current = Number(root.dataset.cycleActive);
+  if (reducedMotion()) { updateCycle(root,current >= last ? 0 : current + 1); return; }
+  if (current >= last) updateCycle(root,0);
+  cyclePlayState(root,true);
+  cycleTimers.set(root,setInterval(() => {
+    if (!root.isConnected) { stopCycle(root); return; }
+    updateCycle(root,Number(root.dataset.cycleActive) + 1);
+  },2800));
 }
 
 function carouselHTML(kind,title,intro,slides) {
@@ -101,8 +162,10 @@ function updateTariffs(root,mode=root.dataset.tariffMode) {
   root.querySelector('[data-tariff-axis]').innerHTML=[0,.4,.8,1.2,1.6].map(v=>`<span>${decimal(v*consumption,mode==='cost'?0:1)}</span>`).join('');
 }
 
+export { cycleExplorerHTML };
 export function explorerHTML(pageId,photos) {
   if (pageId==='reactor') return reactorExplorerHTML();
+  if (pageId==='uranium') return cycleExplorerHTML();
   if (pageId==='unequal') return photoCarouselHTML(photos);
   if (pageId==='matrix') return matrixExplorerHTML();
   if (pageId==='payback') return paybackExplorerHTML();
@@ -175,10 +238,11 @@ export function refreshExplorers(container=document) {
   container.querySelectorAll('[data-explorer]').forEach(root=>{
     if (root.dataset.explorer==='carousel') setSlide(root,Number(root.dataset.carouselIndex));
     if (root.dataset.explorer==='payback') updateLab(root);
+    if (root.dataset.explorer==='cycle') { updateCycle(root,Number(root.dataset.cycleActive)); cyclePlayState(root,cycleTimers.has(root)); }
     const page=root.closest('.magazine-page');
     if (page && !page.querySelector('.digital-entry')) {
       const button=document.createElement('button'); button.type='button'; button.className='digital-entry';
-      const label=root.dataset.explorer==='reactor' ? 'Explore o caminho da energia' : root.dataset.explorer==='matrix' ? 'Explore o gráfico' : root.dataset.explorer==='tariffs' ? 'Compare as tarifas' : root.dataset.explorer==='payback' ? 'Experimente o simulador' : root.querySelector('.explorer-photo') ? 'Percorra as fotografias' : 'Compare os países';
+      const label=root.dataset.explorer==='reactor' ? 'Explore o caminho da energia' : root.dataset.explorer==='cycle' ? 'Percorra o ciclo do combustível' : root.dataset.explorer==='matrix' ? 'Explore o gráfico' : root.dataset.explorer==='tariffs' ? 'Compare as tarifas' : root.dataset.explorer==='payback' ? 'Experimente o simulador' : root.querySelector('.explorer-photo') ? 'Percorra as fotografias' : 'Compare os países';
       button.innerHTML=`<span>${label}</span>${uiIcon('arrow_downward')}`;
       page.querySelector('.page-subtitle').after(button);
     }
@@ -194,6 +258,8 @@ export function createExplorers() {
       return;
     }
     const root=event.target.closest('[data-explorer]'); if (!root) return;
+    const cycleStep=event.target.closest('[data-step]'); if (cycleStep && root.dataset.explorer==='cycle') { stopCycle(root); updateCycle(root,Number(cycleStep.dataset.step)); }
+    if (event.target.closest('[data-cycle-play]')) toggleCycle(root);
     const reactorStep=event.target.closest('[data-reactor-step]'); if(reactorStep) updateReactor(root,Number(reactorStep.dataset.reactorStep));
     const tariffMode=event.target.closest('button[data-tariff-mode]'); if (tariffMode) updateTariffs(root,tariffMode.dataset.tariffMode);
     const filter=event.target.closest('button[data-matrix-filter]');
@@ -222,6 +288,13 @@ export function createExplorers() {
       const current=Number(event.target.closest('[data-reactor-step]')?.dataset.reactorStep ?? reactor.dataset.reactorActive);
       const index=event.key==='Home'?0:event.key==='End'?4:Math.max(0,Math.min(4,current+(['ArrowRight','ArrowDown'].includes(event.key)?1:-1)));
       updateReactor(reactor,index);reactor.querySelector(`[data-reactor-step="${index}"]`).focus({preventScroll:true});return;
+    }
+    const cycle=event.target.closest('[data-explorer=cycle]');
+    if (cycle && event.target.closest('[data-step]') && ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key) && !event.altKey && !event.ctrlKey && !event.metaKey) {
+      event.preventDefault();
+      const current=Math.min(4,Number(event.target.closest('[data-step]').dataset.step));
+      const index=event.key==='Home'?0:event.key==='End'?4:Math.max(0,Math.min(4,current+(['ArrowRight','ArrowDown'].includes(event.key)?1:-1)));
+      stopCycle(cycle);updateCycle(cycle,index);cycle.querySelector(`.fuel-flow [data-step="${index}"]`).focus({preventScroll:true});return;
     }
     const root=event.target.closest('[data-explorer=carousel]');
     if (!root || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key) || event.altKey || event.ctrlKey || event.metaKey) return;

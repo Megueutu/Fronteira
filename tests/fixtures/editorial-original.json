@@ -144,10 +144,6 @@
         "Milton Santos trata o espaço como resultado e condição das relações sociais. Seu meio técnico-científico-informacional permite observar como técnica, ciência, informação e capital se combinam em redes que valorizam alguns lugares mais que outros. Aplicada à energia, essa lente desloca a pergunta: produzir mais para quem, em quais condições e sob qual controle?",
         "Tarifas, renda e continuidade do fornecimento completam a análise. Belo Monte aparece na pesquisa como um convite a comparar onde se concentram os efeitos territoriais de um empreendimento e onde seus benefícios são percebidos. O paralelo não torna hidrelétricas e nucleares equivalentes; ajuda a formular perguntas de justiça territorial para ambas."
       ],
-      "balance": {
-        "favor": "Diversificação e infraestrutura podem apoiar o desenvolvimento regional e a segurança do sistema.",
-        "debate": "Mais geração não assegura distribuição justa, tarifa suportável ou atendimento aos sistemas isolados."
-      },
       "refs": [
         "sin",
         "santos",
@@ -208,10 +204,6 @@
         "Acidentes como Chernobyl e Fukushima marcaram a memória pública e alteraram decisões políticas. Tinham tecnologias, condições e sequências de eventos diferentes. Usá-los como se fossem exemplos idênticos impede compreender as causas; ignorá-los impede aprender com elas.",
         "A fiscalização precisa ter capacidade técnica, transparência e condições para exigir correções. Planos de emergência e comunicação de risco devem ser compreensíveis para a população. Confiança não nasce apenas de dizer que a tecnologia é segura, mas de instituições capazes de demonstrar como os riscos são geridos."
       ],
-      "balance": {
-        "favor": "A operação nuclear oferece geração controlável, com baixa emissão direta de gases de efeito estufa.",
-        "debate": "Resíduos, possíveis acidentes, descomissionamento e fiscalização exigem recursos e compromissos duradouros."
-      },
       "refs": [
         "iaea",
         "waste",
@@ -241,6 +233,7 @@
       "body": [
         "Entre a mina e o reator há mineração e beneficiamento, conversão, enriquecimento e fabricação. Cada etapa exige instalações, conhecimento, controle de qualidade e logística.",
         "No Brasil, a INB atua em Caetité, na Bahia, e na fabricação do combustível em Resende, no Rio de Janeiro. O enriquecimento utiliza ultracentrífugas e é implantado em etapas. Dominar a tecnologia não significa possuir, no mesmo momento, capacidade industrial para atender a toda a demanda.",
+        "O concentrado de urânio, conhecido como yellow cake, é o primeiro produto dessa cadeia: um pó amarelado, rico em óxido de urânio (U3O8), obtido em Caetité a partir do minério. Ainda não é combustível. Antes de chegar ao reator, precisa passar por conversão, enriquecimento e fabricação.",
         "A conversão e parte do processamento podem envolver serviços no exterior. Assim, exportar material para processamento e importar combustível não são necessariamente sinais contraditórios: são movimentos de uma cadeia com etapas e capacidades diferentes.",
         "Santa Quitéria, associado ao depósito de Itataia, no Ceará, aparece como possibilidade de ampliar a oferta. Reserva geológica, licenciamento e produção efetiva são situações distintas: um projeto não é combustível já disponível."
       ],
@@ -302,10 +295,6 @@
         "No setor nuclear, soberania convive com compromissos de uso pacífico, contabilidade de materiais e verificação internacional. O Tratado de Não Proliferação e as salvaguardas distinguem o direito ao uso pacífico das obrigações de não desenvolver armas. O caso brasileiro inclui a ABACC e a AIEA na estrutura de verificação.",
         "O programa de propulsão naval acrescenta questões próprias ao debate. Propulsão nuclear não equivale a armamento nuclear; o controle dos materiais e as regras aplicáveis precisam ser tratados de forma específica. Transformar qualquer aplicação nuclear em prova automática de intenção bélica prejudica a análise."
       ],
-      "balance": {
-        "favor": "Conhecimento, indústria e fornecedores diversificados podem ampliar a capacidade de decisão do país.",
-        "debate": "Autonomia exige escala, recursos, fiscalização e acordos; não decorre apenas de possuir reservas."
-      },
       "refs": [
         "wallerstein",
         "critique",
@@ -389,10 +378,6 @@
         "A EPE esclareceu, em 2024, que sua avaliação então disponível sobre Angra 3 utilizava informações preliminares. O documento é importante por lembrar que projeções têm data, escopo e limitações. Não deve ser convertido em uma conclusão definitiva sobre o orçamento atual.",
         "Há efeitos que o fluxo de caixa de uma usina não mede sozinho: empregos, cadeia de fornecedores, desenvolvimento tecnológico, custos territoriais e distribuição das despesas. Ao comparar com eólica, solar, armazenamento e eficiência energética, é preciso explicitar quais serviços são equivalentes e quais custos de integração estão incluídos."
       ],
-      "balance": {
-        "favor": "A conclusão de uma obra pode aproveitar equipamentos, competências e infraestrutura existentes.",
-        "debate": "Recursos são limitados; atrasos, tarifas e custos de oportunidade precisam entrar na comparação."
-      },
       "refs": [
         "cost",
         "group",
@@ -479,10 +464,6 @@
         "A desinformação cresce quando conceitos diferentes são tratados como equivalentes: radiação, combustível, propulsão e arma nuclear, por exemplo. Também aparece quando benefícios são anunciados sem condições ou quando um acidente é usado para descrever toda instalação, independentemente da tecnologia e do contexto.",
         "O método desta revista é conferir a fonte, distinguir fato e interpretação e dar contexto a números e imagens. Uma pesquisa de opinião precisa informar pergunta, amostra, período e instituição responsável. Na ausência desses elementos, um percentual não deve ser usado como retrato definitivo do que a população pensa."
       ],
-      "balance": {
-        "favor": "Planejamento público, formação técnica e instituições estáveis podem sustentar decisões de longo prazo.",
-        "debate": "Fiscalização independente, participação, transparência e gestão de riscos são condições, não detalhes."
-      },
       "refs": [
         "weber",
         "npt",
@@ -512,10 +493,6 @@
         "Uma posição informada exige explicar qual problema o investimento resolve, compará-lo a alternativas e mostrar quem paga em diferentes cenários. Também exige reconhecer o que ainda é estimativa, o que depende de autorização e o que uma tecnologia não consegue resolver sozinha.",
         "Esta edição não entrega um voto pronto. Oferece critérios para que a escolha possa ser debatida: confiabilidade, clima, custo, prazo, soberania, transparência e justiça social. Uma política energética se torna mais consistente quando suas promessas podem ser confrontadas com evidências e suas responsabilidades permanecem visíveis."
       ],
-      "balance": {
-        "favor": "Geração controlável; diversificação; conhecimento especializado; possibilidades de autonomia industrial.",
-        "debate": "Execução e financiamento; resíduos e risco; capacidade regulatória; distribuição dos custos e alternativas."
-      },
       "refs": [
         "santos",
         "weber",

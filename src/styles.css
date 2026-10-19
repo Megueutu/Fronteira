@@ -905,7 +905,7 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 .page-surface .magazine-page { background-image: none; }
 .stage { justify-content: safe center; }
 .linear-content .digital-feature { display: block; }
-.linear-content .has-digital-visual .page-main > :is(.matrix-chart,.scenario-table,.compact-timeline,.reactor-strip,.visual-source) { display: none; }
+.linear-content .has-digital-visual .page-main > :is(.matrix-chart,.scenario-table,.compact-timeline,.reactor-strip,.fuel-infographic,.visual-source) { display: none; }
 .page-surface { --font-heading-page: var(--font-size-56); --font-heading-feature: var(--font-size-72); --font-number: var(--font-size-80); --font-number-unit: var(--font-size-40); --font-cover-display: var(--font-size-96); }
 .html-book.page-surface > .magazine-page { background-image: none; }
 

@@ -39,8 +39,24 @@ export const reactorSteps = [
   ['Eletricidade e rede', 'O gerador transforma energia mecânica em elétrica. Transformadores e linhas conectam a produção ao sistema.'],
   ['Resfriamento e controle', 'O vapor é condensado e o ciclo continua. Remover calor, controlar materiais e manter barreiras são funções permanentes da instalação.'],
 ];
+/** Metadados de cada etapa de `fuelSteps` (mesma ordem): local, operador e situação, sempre conforme a página "uranium" e as fontes INB. */
+export const fuelStages = [
+  { icon: 'landscape', place: 'Caetité (BA)', operator: 'INB', status: 'br', state: 'No Brasil', map: 'caetite', extra: 'Produto: o concentrado de urânio, conhecido como yellow cake, um pó amarelado rico em óxido de urânio (U3O8). Ainda não é combustível.', source: ['inb'] },
+  { icon: 'science', place: 'Exterior', operator: 'Serviço contratado', status: 'abroad', state: 'No exterior', map: 'exterior', extra: 'A conversão e parte do processamento podem envolver serviços no exterior. A edição não indica em quais países.', source: [['inb', 'Etapa “Conversão”: serviço contratado no exterior.']] },
+  { icon: 'cyclone', place: 'Resende (RJ)', operator: 'INB', status: 'br', state: 'No Brasil, em etapas', map: 'resende', extra: 'Dominar a tecnologia não significa possuir, no mesmo momento, capacidade industrial para atender a toda a demanda.', source: ['inb', 'enrichment'] },
+  { icon: 'factory', place: 'Resende (RJ)', operator: 'INB', status: 'br', state: 'No Brasil', map: 'resende', source: ['inb'] },
+  { icon: 'bolt', place: 'Angra dos Reis (RJ)', operator: 'Eletronuclear · Angra 1 e 2', status: 'br', state: 'No Brasil', map: 'angra', source: ['inb', 'waste'] },
+];
+export const fuelProject = { name: 'Santa Quitéria (Itataia, CE)', place: 'Santa Quitéria (CE)', operator: 'Projeto Santa Quitéria · INB', state: 'Projeto, não combustível disponível', text: 'O projeto, associado ao depósito de Itataia, no Ceará, aparece como possibilidade de ampliar a oferta. Reserva geológica, licenciamento e produção efetiva são situações distintas: um projeto não é combustível já disponível.' };
+const stageIcon = uiIcon;
+/** Conteúdo de um cartão de etapa, compartilhado pela versão estática e pelo explorador. */
+export function fuelStageInner(i) {
+  const stage = fuelStages[i];
+  return `<span class="fuel-top"><span class="fuel-num">${i + 1}</span><span class="fuel-icon">${stageIcon(stage.icon)}</span></span><strong>${fuelSteps[i][0]}</strong><span class="fuel-place">${stageIcon(stage.status === 'abroad' ? 'public' : 'location_on')}<span>${stage.place}</span></span><span class="fuel-op">${stage.operator}</span><span class="fuel-state" data-status="${stage.status}">${stage.state}</span>`;
+}
+/** Infográfico estático (textura, impressão, leitura em página). A versão interativa vive em explorers.js. */
 export function cycleHTML() {
-  return `<ol class="fuel-cycle">${fuelSteps.map((step, i) => `<li><span>${String(i + 1).padStart(2,'0')}</span><strong>${step[0]}</strong></li>`).join('')}</ol>`;
+  return `<figure class="fuel-infographic" aria-label="Ciclo do combustível nuclear no Brasil, em cinco etapas"><ol class="fuel-flow">${fuelSteps.map((_, i) => `<li class="fuel-stage fuel-card" data-status="${fuelStages[i].status}">${fuelStageInner(i)}</li>`).join('')}</ol><div class="fuel-notes"><p class="fuel-cake"><i class="cake-dot" aria-hidden="true"></i><span><strong>Yellow cake</strong> · etapa 1 → 2. Pó amarelado, rico em U3O8; ainda não é combustível.</span></p><p class="fuel-project"><strong>Santa Quitéria (Itataia, CE)</strong> · projeto que pode ampliar a oferta; reserva não é produção nem combustível.</p></div></figure>`;
 }
 export const scenarios = [
   { name: 'Conservador', capacity: 75, tariff: 778.86, operating: 35 },

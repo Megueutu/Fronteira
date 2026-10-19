@@ -384,3 +384,8 @@
 .qr-dialog .qr-card p { margin: 0; color: var(--ds-ink-48); font: 400 15px/1.5 var(--sans); }
 .qr-dialog .qr-card a { display: inline-flex; align-items: center; gap: 6px; color: var(--ds-accent); font: 600 15px/1.4 var(--sans); text-decoration: none; }
 .qr-dialog .qr-card a .reader-icon { width: 18px; height: 18px; }
+
+/* Ciclo do combustível no diálogo: o infográfico ocupa o diálogo, sem cartão duplo nem título repetido. */
+#interaction-dialog.cycle-dialog #dialog-content > .digital-feature { display: block; margin: var(--ds-space-md) 0 0; padding: 0; border: 0; border-radius: 0; background: none; }
+#interaction-dialog.cycle-dialog #dialog-content > .digital-feature .explorer-heading { display: none; }
+#interaction-dialog .cycle-detail .claim-source { margin: var(--ds-space-xs) 0 0; padding: var(--ds-space-sm) 0 0; border: 0; border-top: 1px solid var(--ds-hairline); border-radius: 0; background: none; }

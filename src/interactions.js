@@ -1,8 +1,8 @@
 import { uiIcon } from './icons.js';
 import { pages, pageHTML, getSpread, spreadForPage, photos, artworks, contentsHTML, chapters, interviewEntryHTML, references, referenceHTML, escapeHTML, teamMembers, teamHTML, interviewPhotos, interviewHTML } from './content.js';
-import { chartHTML, fuelSteps, reactorSteps, calculateScenario, scenarios, timeline, timelineHTML, decimal } from './data.js';
+import { chartHTML, reactorSteps, calculateScenario, scenarios, timeline, timelineHTML, decimal } from './data.js';
 import { citationHTML, visualEvidence, sourcePanelHTML, pageSourceRecords, sourceCardsHTML } from './citations.js';
-import { paybackBarsHTML, updatePaybackBars, refreshExplorers } from './explorers.js';
+import { paybackBarsHTML, updatePaybackBars, refreshExplorers, cycleExplorerHTML } from './explorers.js';
 
 const VIDEO_ID = 'z5x1u_tPdKM';
 
@@ -44,7 +44,7 @@ export function createInteractions(onJump) {
     if (dialog.open && pushHistory) history.push({ nodes: [...content.childNodes], className: dialog.className, scroll: dialog.scrollTop, trigger, gallery, slideIndex, retitle, currentSteps, scenario: { ...scenario } });
     if (!dialog.open) origin = trigger || document.activeElement;
     gallery = null; retitle = false;
-    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : type === 'qr' ? 'qr-dialog' : type === 'zoom' ? 'chart-zoom-dialog' : ['image','member','carousel'].includes(type) ? 'lightbox-dialog' : '';
+    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : type === 'qr' ? 'qr-dialog' : type === 'zoom' ? 'chart-zoom-dialog' : type === 'cycle' ? 'cycle-dialog' : ['image','member','carousel'].includes(type) ? 'lightbox-dialog' : '';
     document.querySelector('#open-index').setAttribute('aria-expanded',String(type === 'index'));
     let title = '', markup = '';
     if (type === 'zoom') {
@@ -78,10 +78,13 @@ export function createInteractions(onJump) {
     } else if (type === 'chart') {
       title = 'Matriz elétrica em camadas.';
       markup = `<p class="dialog-intro">Geração nacional em 2025. Selecione um grupo; a escala das barras permanece a mesma.</p><div class="chart-filters" role="group" aria-label="Filtrar fontes"><button type="button" data-filter="all" aria-pressed="true">Todas</button><button type="button" data-filter="renewable" aria-pressed="false">Renováveis</button><button type="button" data-filter="nuclear" aria-pressed="false">Nuclear</button></div><div id="interactive-chart" role="region" aria-live="polite" aria-label="Gráfico por fonte">${chartHTML()}</div><p class="source-note">A nuclear aparece com 2,0%; “outras”, com 1,5%. Fonte: <a href="${references[0].url}" target="_blank" rel="noopener">EPE, Anuário 2026 ${uiIcon("arrow_forward")}</a>. Valores também disponíveis como texto em cada linha.</p>`;
-    } else if (type === 'diagram' || type === 'cycle') {
-      title = type === 'cycle' ? 'O caminho do combustível.' : 'Do reator à rede.';
-      currentSteps = type === 'cycle' ? fuelSteps : reactorSteps;
-      markup = stepsHTML(currentSteps) + citationHTML(visualEvidence[type === 'cycle' ? 'cycle' : 'reactor']);
+    } else if (type === 'cycle') {
+      title = 'O caminho do combustível.';
+      markup = cycleExplorerHTML();
+    } else if (type === 'diagram') {
+      title = 'Do reator à rede.';
+      currentSteps = reactorSteps;
+      markup = stepsHTML(currentSteps) + citationHTML(visualEvidence.reactor);
     } else if (type === 'calculator') {
       title = 'Laboratório de cenários.'; scenario = { ...scenarios[1], investment: 23.9 }; markup = scenarioHTML() + paybackBarsHTML(scenario) + citationHTML(visualEvidence.payback);
     } else if (type === 'timeline') {
@@ -186,7 +189,7 @@ export function createInteractions(onJump) {
     const filter = event.target.closest('[data-filter]');
     if (filter) { content.querySelector('#interactive-chart').innerHTML = chartHTML(filter.dataset.filter); content.querySelectorAll('[data-filter]').forEach(button => button.setAttribute('aria-pressed',String(button === filter))); }
     const step = event.target.closest('[data-step]');
-    if (step) { const selected = currentSteps[Number(step.dataset.step)]; content.querySelector('#step-title').textContent = selected[0]; content.querySelector('#step-text').textContent = selected[1]; content.querySelectorAll('[data-step]').forEach(button => button.setAttribute('aria-pressed',String(button === step))); }
+    if (step && !step.closest('[data-explorer=cycle]')) { const selected = currentSteps[Number(step.dataset.step)]; content.querySelector('#step-title').textContent = selected[0]; content.querySelector('#step-text').textContent = selected[1]; content.querySelectorAll('[data-step]').forEach(button => button.setAttribute('aria-pressed',String(button === step))); }
     const preset = event.target.closest('[data-scenario]');
     if (preset) { scenario = { ...scenarios[Number(preset.dataset.scenario)], investment: scenario.investment }; updateScenario(); content.querySelectorAll('[data-scenario]').forEach(button => button.setAttribute('aria-pressed',String(button === preset))); }
     const time = event.target.closest('[data-event]'); if (time) setEvent(Number(time.dataset.event));
