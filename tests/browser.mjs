@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { mkdir,writeFile } from 'node:fs/promises';
 import { launchBrowser } from '../scripts/chromium.mjs';
-import { pages,pageIndexForId,getOpening,spreadForPage,spreadCount,formatPages } from '../src/content.js';
+import { pages,pageIndexForId,getOpening,spreadForPage,spreadCount,formatPages,formatPage } from '../src/content.js';
 const base=(process.env.TEST_URL||'http://127.0.0.1:3000').replace(/\/$/,'');
 await mkdir('artifacts',{recursive:true});
 const b=await launchBrowser({timeout:300000});
@@ -83,8 +83,8 @@ try {
   await b.evaluate("document.querySelector('#book-canvas').getContext('webgl').getExtension('WEBGL_lose_context').loseContext()");await b.waitFor("!document.querySelector('#stage-error').hidden");await b.click('#next');await idle();
   assert.equal(await b.evaluate("Number(document.querySelector('#html-book>article').dataset.pageIndex)"),pageIndexForId('back-cover'));await clean();
   await b.viewport(390,844,true);await visit('cover');await imagesReady();assert.equal(await b.evaluate("document.querySelectorAll('#html-book>article').length"),1);assert.ok(await b.evaluate('document.documentElement.scrollWidth<=innerWidth'));await capture('edition-mobile-cover');
-  await b.click('#next');await idle();assert.equal(await b.evaluate("document.querySelector('#page-status').textContent"),`${String(pageIndexForId('inside-front')+1).padStart(2,'0')} / ${pages.length}`);
-  await visit('unequal');await imagesReady();assert.ok(await b.evaluate("parseFloat(getComputedStyle(document.querySelector('#html-book .columns p')).fontSize)>=18"));await capture('edition-mobile-reading');
+  await b.click('#next');await idle();assert.equal(await b.evaluate("document.querySelector('#page-status').textContent"),formatPage(pages[pageIndexForId('inside-front')]));
+  await visit('unequal');await imagesReady();assert.ok(await b.evaluate("parseFloat(getComputedStyle(document.querySelector('#html-book .columns p')).fontSize)>=16"));await capture('edition-mobile-reading');
   await b.click('#read-linear');assert.equal(await b.evaluate("document.querySelectorAll('.linear-page').length"),pages.length);await close();
   await visit('payback','3d');await b.waitFor("document.querySelector('#book-canvas').dataset.textureCount==='2'");assert.equal(await b.evaluate("document.querySelector('#page-status').textContent"),formatPages(spreadForPage(pageIndexForId('payback'))));
   assert.deepEqual(b.errors,[]);assert.deepEqual(b.requests.filter(r=>!r.url.endsWith('/favicon.ico')),[]);

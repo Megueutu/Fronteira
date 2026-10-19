@@ -1,5 +1,5 @@
 {
-  "pages": 36,
+  "pages": 28,
   "width": 1140,
   "height": 1596,
   "sources": [
@@ -20,5 +20,5 @@
     "assets/qr/site.svg",
     "assets/qr/barcode.svg"
   ],
-  "sha256": "2833f0c51499e9173fed902572c8ab98e9842b3d5148770f168de35bdfc34143"
+  "sha256": "e673ff0309c62d3dded07f0e7d9ecd025a033554dd239007a09ea64871bcba33"
 }

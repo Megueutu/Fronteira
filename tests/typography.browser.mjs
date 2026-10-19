@@ -40,7 +40,7 @@ try{
         if(mode==='landing'){
           const editorial=`#landing-${pages[pageIndexForId('editorial')].id}`;
           const body=await browser.evaluate(`parseFloat(getComputedStyle(document.querySelector('${editorial} .reading-passage > p')).fontSize)`);
-          assert.equal(body,width<=760?18:20);
+          assert.equal(body,16);
         }else{
           const count=await browser.evaluate("document.querySelectorAll('#html-book>article').length");assert.equal(count,1);
         }

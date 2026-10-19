@@ -12,7 +12,7 @@ test('edição mantém páginas e limites válidos ao avançar e voltar', () => 
   assert.equal(pages.length % 4, 0);
   assert.equal(clampSpread(99), spreadCount - 1);
   assert.deepEqual(getSpread(0).map(p => p.id), ['cover']);
-  assert.equal(formatPages(0), `01 / ${pages.length}`);
+  assert.equal(formatPages(0), 'Capa');
   assert.equal(getOpening(0).left, null);
   assert.equal(getOpening(spreadCount - 1).right, null);
   const sequence = Array.from({length:spreadCount},(_,i)=>getSpread(i)).flat();

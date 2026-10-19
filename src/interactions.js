@@ -43,7 +43,7 @@ export function createInteractions(onJump) {
     let title = '', markup = '';
     if (type === 'index') {
       title = 'Sumário da edição';
-      markup = `<nav class="dialog-index" aria-label="Sumário">${chapters.map(ch => `<button type="button" data-jump="${ch.page}"><b>${String(ch.page + 1).padStart(2,'0')}</b><span>${ch.title}<small>${ch.detail}</small></span><i aria-hidden="true">${uiIcon("arrow_forward")}</i></button>`).join('')}</nav><details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>`;
+      markup = `<nav class="dialog-index" aria-label="Sumário">${chapters.map(ch => `<button type="button" data-jump="${ch.page}"><b>${pages[ch.page].readingLabel}</b><span>${ch.title}<small>${ch.detail}</small></span><i aria-hidden="true">${uiIcon("arrow_forward")}</i></button>`).join('')}</nav><details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>`;
       markup += interviewEntryHTML();
     } else if (type === 'interview') {
       title = 'Conversa com Adolfo Braid';
@@ -89,7 +89,7 @@ export function createInteractions(onJump) {
       markup = `<div class="linear-content">${selection.map(p => pageHTML(p,pages.indexOf(p),{linear:true})).join('')}</div>`;
     } else {
       title = page.note?.title || 'Energia, sociedade e escolhas.';
-      const note=(page.note?.text || 'Geração, rede, distribuição, capacidade de pagamento e participação são dimensões relacionadas. Nenhuma fonte, sozinha, resolve todos esses problemas. A revista reúne esses critérios ao longo dos cinco temas.').replace('na página 19',`na página ${pages.find(item=>item.id==='credits')?.folio || 19}`);
+      const note=(page.note?.text || 'Geração, rede, distribuição, capacidade de pagamento e participação são dimensões relacionadas. Nenhuma fonte, sozinha, resolve todos esses problemas. A revista reúne esses critérios ao longo dos cinco temas.').replace('na página 19','no expediente');
       markup = `<p class="note-body">${escapeHTML(note)}</p>${(page.sourceId || page.id) === 'editorial' ? `<h3>Fluxograma do editorial</h3>${flowHTML(['Defender acesso à energia e autonomia tecnológica','Relacionar geração, distribuição e tarifas com Milton Santos e Maria Laura Silveira','Discutir capacidade produtiva e dependência com Wallerstein','Propor planejamento público, capacitação e ampliação industrial','Vincular financiamento a metas e prestação de contas'])}` : ''}${page.refs?.length ? `<h3>Fontes desta leitura</h3><ol class="references-list">${referenceHTML(page.refs)}</ol>` : ''}`;
     }
     if (type === 'chart') markup += citationHTML(visualEvidence.matrix);

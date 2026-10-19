@@ -1,5 +1,7 @@
 # Design system da edição
 
+Atualização de 2026-10-19: **20 páginas de conteúdo**, em **28 faces físicas / 15 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas no desktop e alinhadas à esquerda no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
+
 ## Ajuste final dos controles
 
 O topo não exibe título, favicon ou identificação da edição. Todos os ícones da barra têm 24 px. Controles de leitura usam pílulas tonais iguais à referência do seletor de modo: superfície neutra, ação principal verde clara, raios constantes. O contador apresenta somente posições físicas uniformes, como `02–03 / 36`. O fundo é estático; a animação orgânica e seu módulo foram removidos. As referências históricas ao fundo abaixo descrevem etapas anteriores.

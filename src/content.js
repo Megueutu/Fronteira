@@ -137,42 +137,46 @@ const originalPages = [
   { id: 'references', kind: 'references', section: 'REFERÊNCIAS / CONTINUE A LEITURA', title: 'Volte às fontes.', subtitle: 'Fontes institucionais, obras teóricas e documentação da pesquisa.', body: ['O botão de fontes de cada matéria reúne os documentos e o local de consulta utilizado na pesquisa. Abra a lista completa para acessar os links, os recortes históricos e os créditos. Consulta e revisão desta edição: 16 de outubro de 2026.'], action: action('sources', 'Abra todas as referências') },
 ];
 
-// Stable source identities survive physical repagination.
-const continuation = (page, id, body, offset) => ({...page,id,kind:'continuation',sourceId:page.id,sourceParagraphOffset:offset,body,note:undefined,image:undefined,visual:undefined,balance:undefined,quote:undefined});
-const composed = [];
-for (const original of originalPages) {
-  const page = {...original,sourceId:original.id,sourceParagraphOffset:0};
-  const fixedPhoto = {safety:'steam',sovereignty:'panel','who-pays':'coast'}[page.id];
-  if (fixedPhoto) page.image = photos[fixedPhoto];
-  if (page.id === 'cover') {
-    composed.push({...page,body:[],folio:null,readingLabel:'Capa'});
-    composed.push({id:'inside-front',kind:'inside-cover',section:page.section,title:'Uma investigação em cinco temas.',subtitle:'',sourceId:'cover',sourceParagraphOffset:0,body:page.body,refs:[],action:null,folio:null,readingLabel:'Segunda capa'});
-  } else if (page.id === 'contents') {
-    composed.push({...page,showTeam:false});
-    composed.push({id:'team',kind:'team',section:'PESQUISA E EDIÇÃO',title:'Quem fez esta pesquisa',subtitle:'Pesquisa e edição do grupo · São Paulo',sourceId:'team',body:[],refs:[],action:{type:'index',label:'Explore a edição',x:.5,y:.925}});
-  } else if (page.id === 'editorial' || page.id === 'credits') {
-    composed.push({...page,body:page.body.slice(0,2)});
-    composed.push(continuation(page,page.id+'-continued',page.body.slice(2),2));
-  } else if (['safety','sovereignty','who-pays'].includes(page.id)) {
-    composed.push({...page,body:page.body.slice(0,2),balance:undefined});
-    composed.push({...continuation(page,page.id+'-continued',page.body.slice(2),2),balance:page.balance});
-  } else composed.push(page);
-  if (page.id === 'public') composed.push(...createInterviewPages(interviewPhotos));
+// Twenty numbered content pages; production matter and the supplement are separate.
+const originalById = Object.fromEntries(originalPages.map(page=>[page.id,page]));
+const fromOriginal = id => ({...originalById[id],sourceId:id,sourceParagraphOffset:0});
+export const interviewSections = createInterviewPages(interviewPhotos);
+const editorial = fromOriginal('editorial');
+const guideEvidence = {kind:'Roteiro editorial da edição',sources:[{id:'group'}]};
+const contentPages = [
+  {...fromOriginal('cover'),id:'opening',kind:'opener',section:'ABERTURA / O PROBLEMA',title:'Eletricidade confiável.\nPara quem?',subtitle:'Como garantir eletricidade confiável às comunidades remotas, diante das dificuldades de infraestrutura e distribuição?',image:photos.angra,visual:'opening',refs:['group'],evidence:[guideEvidence],action:action('index','Percorra a investigação')},
+  {...editorial,body:editorial.body.slice(0,3),visual:'editorial-map'},
+  {id:'method',kind:'data',section:'ABERTURA / O CAMINHO DA PESQUISA',title:'Uma pergunta.\nCinco perspectivas.',subtitle:'Tecnologia, território, custos e decisões políticas precisam ser lidos em conjunto.',body:['A investigação parte do acesso à eletricidade e percorre cinco temas: panorama e território; funcionamento e segurança; urânio e soberania; custos e payback; política e opinião pública. A entrevista com Adolfo Braid amplia essa leitura no suplemento.','Os gráficos, esquemas e a calculadora ajudam a explorar a pesquisa. As fontes permitem distinguir dados, hipóteses e interpretações; o balanço final retoma os critérios para avaliar as escolhas.'],refs:['group'],evidence:[guideEvidence,guideEvidence],visual:'guide',action:action('index','Explore a estrutura da revista')},
+  ...['unequal','matrix','territory','reactor','safety','uranium','wallerstein','sovereignty','cost','payback','who-pays','messmer','world','public','balance','references'].map(fromOriginal),
+  {...editorial,id:'editorial-conclusion',kind:'editorial',title:'Posicionamento\ndo editorial.',subtitle:'Acesso à energia, autonomia tecnológica e prestação de contas.',body:editorial.body.slice(3),sourceParagraphOffset:3,note:undefined,image:photos.grid,visual:'closing',action:action('checklist','Retome os critérios do balanço')},
+].map((page,index)=>({...page,folio:index+1,readingLabel:String(index+1).padStart(2,'0'),contentPage:true}));
+for (const page of contentPages) {
+  const photoKey={safety:'steam',sovereignty:'panel','who-pays':'coast'}[page.id];
+  if(photoKey) page.image=photos[photoKey];
 }
-composed.push({id:'inside-back',kind:'inside-cover',section:'',title:'Terceira capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Terceira capa'});
-composed.push({id:'back-cover',kind:'back-cover',section:'',title:'Quarta capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Quarta capa'});
-let folio = 0;
-export const pages = composed.map(page => page.folio === null ? page : {...page,folio:++folio,readingLabel:String(folio).padStart(2,'0')});
+const front = [
+  {...fromOriginal('cover'),body:[],folio:null,readingLabel:'Capa'},
+  {id:'inside-front',kind:'inside-cover',section:'',title:'Segunda capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Segunda capa'},
+  {...fromOriginal('contents'),showTeam:false,folio:null,readingLabel:'Sumário'},
+  {id:'team',kind:'team',section:'PESQUISA E EDIÇÃO',title:'Quem fez esta pesquisa',subtitle:'Pesquisa e edição do grupo · São Paulo',sourceId:'team',body:[],refs:[],action:action('index','Explore a edição'),folio:null,readingLabel:'Equipe'},
+];
+const supplement = {...interviewSections[0],folio:null,readingLabel:'Suplemento',supplement:true};
+export const pages = [...front,...contentPages,supplement,
+  {...fromOriginal('credits'),folio:null,readingLabel:'Expediente'},
+  {id:'inside-back',kind:'inside-cover',section:'',title:'Terceira capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Terceira capa'},
+  {id:'back-cover',kind:'back-cover',section:'',title:'Quarta capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Quarta capa'},
+];
+export { contentPages };
 export const pageIndexForId = id => pages.findIndex(page=>page.id===id);
 
 // Keep the page's source button consistent with its paragraph-level evidence.
 for (const page of pages) {
-  const ids = page.body.flatMap((_,i)=>evidenceFor(page.sourceId || page.id,i + (page.sourceParagraphOffset || 0))?.sources.map(source=>source.id) || []);
+  const ids = page.body.flatMap((_,i)=>(page.evidence?.[i] || evidenceFor(page.sourceId || page.id,i + (page.sourceParagraphOffset || 0)))?.sources.map(source=>source.id) || []);
   if (ids.length) page.refs = [...new Set([...(page.refs || []),...ids])];
 }
 
 export const chapters = [
-  {id:'editorial',title:'Editorial',detail:'Acesso à energia e autonomia tecnológica'},
+  {id:'opening',title:'Abertura',detail:'Páginas 1–3 · problema, editorial e investigação'},
   {id:'unequal',title:'Um Brasil Desigual',detail:'Panorama, território e Milton Santos'},
   {id:'reactor',title:'Como funciona',detail:'Reator, segurança e resíduos'},
   {id:'uranium',title:'Urânio e soberania',detail:'Ciclo do combustível e Wallerstein'},
@@ -180,9 +184,10 @@ export const chapters = [
   {id:'messmer',title:'Política e opinião pública',detail:'Messmer, Weber e o mundo'},
   {id:'interview-profile',title:'Adolfo Braid',detail:'Trajetória, microrreatores e perguntas da pesquisa'},
   {id:'balance',title:'Balanço final',detail:'Os critérios para decidir'},
-  {id:'credits',title:'Uso de IA e referências',detail:'Expediente, fontes e créditos'},
+  {id:'references',title:'Fontes e posicionamento',detail:'Páginas 19–20 · pesquisa e conclusão do editorial'},
+  {id:'credits',title:'Expediente',detail:'Uso de IA e créditos · fora da numeração do conteúdo'},
 ].map(chapter=>({...chapter,page:pageIndexForId(chapter.id)}));
-export const {spreadCount,clampSpread,spreadForPage,getOpening,getSpread,formatPages} = createPagination(pages);
+export const {spreadCount,clampSpread,spreadForPage,getOpening,getSpread,formatPages,formatPage} = createPagination(pages);
 export const escapeHTML = text => String(text).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function referenceHTML(ids = [], all = false) {
   return references.filter(ref => all || ids.includes(ref.id)).map(ref => `<li><span>${references.indexOf(ref) + 1}.</span> ${ref.url ? `<a href="${ref.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(ref.name)} ${uiIcon("arrow_forward")}</a>` : escapeHTML(ref.name)}${all ? `<div class="reference-location">Local da informação: ${escapeHTML(ref.location)}</div>` : ''}</li>`).join('');
@@ -229,13 +234,14 @@ export function pageHTML(page, index, { linear = false, digital = true, flow = f
   const image = page.image && !(flow && flowPhotoKeys[page.id] && photos[flowPhotoKeys[page.id]]===page.image) ? `<figure class="editorial-photo"><button type="button" data-action="image" data-page="${index}" aria-label="Ampliar: ${escapeHTML(page.image.title)}"><img src="${page.image.src}" alt="${escapeHTML(page.image.caption)}" decoding="async" draggable="false"><span class="photo-expand" aria-hidden="true">${uiIcon("arrow_forward")}</span></button><figcaption>${escapeHTML(page.image.credit)}${['safety','sovereignty','who-pays'].includes(page.id) ? ' · '+escapeHTML(page.image.caption) : page.image === photos.angra ? ' · Angra, registro histórico (fonte: 2009)' : page.image === photos.construction ? ' · Angra 3, maio de 2015' : ' · imagem ilustrativa'}</figcaption></figure>` : '';
   const flowKey=flow ? flowPhotoKeys[page.id] : null;
   const body = `<div class="columns">${page.body.map((text,i) => {
-    const passage=`<p>${escapeHTML(text)}</p>${citationHTML(evidenceFor(page.sourceId || page.id,i + (page.sourceParagraphOffset || 0)),{className:'inline-citation'})}`;
+    const passage=`<p>${escapeHTML(text)}</p>${citationHTML((page.evidence?.[i] || evidenceFor(page.sourceId || page.id,i + (page.sourceParagraphOffset || 0))),{className:'inline-citation'})}`;
     return flow ? `<div class="reading-passage">${passage}</div>${flowKey && i===0 ? flowPhotoHTML(flowKey,index) : ''}` : passage;
   }).join('')}</div>`;
-  const visuals = { matrix: chartHTML(), cycle: cycleHTML(), reactor: '<div class="reactor-strip"><span>Fissão</span><b>→</b><span>Calor</span><b>→</b><span>Vapor</span><b>→</b><span>Eletricidade</span></div>', payback: scenarioTable(), timeline: timelineHTML(true) };
+  const visuals = { 'editorial-map': '<div class="reading-route"><span>Geração → distribuição → acesso</span><span>Conhecimento → capacidade produtiva → autonomia</span><span>Financiamento → metas públicas → prestação de contas</span></div>', opening: '<div class="reading-route"><span>O problema: acesso confiável</span><span>A investigação: cinco temas</span><span>A avaliação: benefícios e responsabilidades</span></div>', guide: '<div class="topic-guide">'+[['01','Panorama e território','Acesso, matriz elétrica e Milton Santos.'],['02','Funcionamento e segurança','Fissão, geração, resíduos e responsabilidades.'],['03','Urânio e soberania','Combustível, sistema-mundo e autonomia.'],['04','Custos e payback','Angra 3, hipóteses e distribuição dos custos.'],['05','Política e opinião pública','Messmer, experiências internacionais e Weber.']].map(([n,t,d])=>`<section><b>${n}</b><h3>${t}</h3><p>${d}</p></section>`).join('')+'</div>', closing: '<div class="reading-route"><span>Acesso e qualidade do fornecimento</span><span>Capacidade científica e industrial</span><span>Metas públicas e prestação de contas</span></div>', matrix: chartHTML(), cycle: cycleHTML(), reactor: '<div class="reactor-strip"><span>Fissão</span><b>→</b><span>Calor</span><b>→</b><span>Vapor</span><b>→</b><span>Eletricidade</span></div>', payback: scenarioTable(), timeline: timelineHTML(true) };
   const contents = page.kind === 'contents' ? `<nav class="page-index" aria-label="Sumário da edição">${chapters.map(ch => `<button type="button" data-jump="${ch.page}"><span>${pages[ch.page].readingLabel}</span><div><strong>${ch.title}</strong><small>${ch.detail}</small></div><b>${uiIcon("arrow_forward")}</b></button>`).join('')}</nav><section class="edition-authors" aria-label="Integrantes da pesquisa">${page.showTeam===false?'':`<h3>Quem fez esta pesquisa</h3>${teamHTML()}<span>Pesquisa e edição do grupo · São Paulo</span>`}</section>${interviewEntryHTML()}` : '';
   const bibliography = page.kind === 'references' ? `<ol class="bibliography">${referenceHTML(['epe','ben','sin','santos','iaea','waste','inb','enrichment','wallerstein','critique','cost','weber'])}</ol>` : '';
   const balanceBox = page.balance ? `<aside class="balance-box" aria-label="Argumentos a favor e em debate"><div><h3>A FAVOR</h3><p>${page.balance.favor}</p></div><div><h3>EM DEBATE</h3><p>${page.balance.debate}</p></div>${citationHTML({kind:'Síntese do grupo, com base em',sources:(page.refs || []).map(id=>({id}))},{className:'inline-citation'})}</aside>` : '';
+  const inlineNote = page.note && ['unequal','territory','wallerstein','public'].includes(page.id) ? `<aside class="reader-note"><h3>${escapeHTML(page.note.title)}</h3><p>${escapeHTML(page.note.text)}</p></aside>` : '';
   const explorer = digital ? explorerHTML(page.id,photos) : '';
-  return `<article class="magazine-page page-${page.kind}${linear ? ' linear-page' : ''}${explorer && page.visual ? ' has-digital-visual' : ''}" data-page-index="${index}" data-page-id="${page.id}" aria-label="${page.readingLabel}: ${escapeHTML(page.title.replaceAll('\n',' '))}"><header class="page-top"><span>FRONTEIRA</span><span>${page.section}</span></header><div class="page-main">${page.kicker ? `<p class="kicker">${page.kicker}</p>` : ''}<h2>${page.title.replaceAll('\n','<br>')}</h2><p class="page-subtitle">${page.subtitle}</p>${image}${body}${page.visual ? visuals[page.visual] + citationHTML(visualEvidence[page.visual],{className:'inline-citation visual-source'}) : ''}${contents}${page.kind==='team' ? teamHTML() : ''}${bibliography}${page.quote ? `<blockquote>${page.quote}</blockquote>${citationHTML({kind:'Formulação da edição; interpretação do grupo',sources:page.refs.map(id=>({id}))},{className:'inline-citation'})}` : ''}${balanceBox}${explorer}</div><div class="page-tail"><button type="button" class="page-action" data-action="${page.action.type}" data-page="${index}"><span>${page.action.label}</span><b aria-hidden="true">${uiIcon("arrow_forward")}</b></button><footer class="page-bottom">${sourceButtonHTML(page,index)}<span>${String(page.folio).padStart(2,'0')}</span></footer></div></article>`;
+  return `<article class="magazine-page page-${page.kind}${linear ? ' linear-page' : ''}${explorer && page.visual ? ' has-digital-visual' : ''}" data-page-index="${index}" data-page-id="${page.id}" aria-label="${page.readingLabel}: ${escapeHTML(page.title.replaceAll('\n',' '))}"><header class="page-top"><span>FRONTEIRA</span><span>${page.section}</span></header><div class="page-main">${page.kicker ? `<p class="kicker">${page.kicker}</p>` : ''}<h2>${page.title.replaceAll('\n','<br>')}</h2><p class="page-subtitle">${page.subtitle}</p>${image}${body}${page.visual ? visuals[page.visual] + citationHTML(visualEvidence[page.visual] || {kind:'Roteiro editorial da edição',sources:[{id:'group'}]},{className:'inline-citation visual-source'}) : ''}${contents}${page.kind==='team' ? teamHTML() : ''}${bibliography}${page.quote ? `<blockquote>${page.quote}</blockquote>${citationHTML({kind:'Formulação da edição; interpretação do grupo',sources:page.refs.map(id=>({id}))},{className:'inline-citation'})}` : ''}${balanceBox}${inlineNote}${explorer}</div><div class="page-tail"><button type="button" class="page-action" data-action="${page.action.type}" data-page="${index}"><span>${page.action.label}</span><b aria-hidden="true">${uiIcon("arrow_forward")}</b></button><footer class="page-bottom">${sourceButtonHTML(page,index)}<span>${page.folio ? String(page.folio).padStart(2,'0') : page.readingLabel}</span></footer></div></article>`;
 }

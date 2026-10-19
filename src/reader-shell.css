@@ -136,3 +136,8 @@
  .top-app-bar .app-title { min-width: 0; overflow: hidden; }
  .app-title #go-cover { font-size: 16px; }
 }
+
+/* Rótulos de produção não usam os fólios do conteúdo. */
+.contents-drawer .dialog-index button { min-width: 0; }
+.contents-drawer .dialog-index button > span { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+.contents-drawer .dialog-index button > b { max-width: 76px; font-size: 12px; overflow-wrap: anywhere; }

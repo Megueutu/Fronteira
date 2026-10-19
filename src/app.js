@@ -1,4 +1,4 @@
-import { pages, pageHTML, getSpread, spreadForPage, clampSpread, formatPages } from './content.js';
+import { pages, pageHTML, getSpread, spreadForPage, clampSpread, formatPages, formatPage } from './content.js';
 import { createInteractions } from './interactions.js';
 import { sourcePanelHTML } from './citations.js';
 import { createExplorers, refreshExplorers } from './explorers.js';
@@ -39,7 +39,7 @@ if (renderIndex !== null) {
   function update() {
     previous.disabled = turning || (single() ? pageIndex === 0 : spread() === 0);
     next.disabled = turning || (single() ? pageIndex === pages.length - 1 : spread() === clampSpread(999));
-    document.querySelector('#page-status').textContent = single() ? `${String(pageIndex+1).padStart(2,'0')} / ${pages.length}` : formatPages(spread());
+    document.querySelector('#page-status').textContent = single() ? formatPage(pages[pageIndex]) : formatPages(spread());
     document.querySelector('#page-status').setAttribute('aria-label',`Posição ${selectedPages().map(page=>pages.indexOf(page)+1).join(' e ')} de ${pages.length}`);
     document.querySelector('#section-label').textContent = pages[pageIndex].section;
     document.querySelector('.context-label').textContent = mode === 'landing' ? 'Nesta seção' : 'Nesta abertura';

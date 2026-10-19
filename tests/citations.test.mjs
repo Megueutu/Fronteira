@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { pages, pageHTML, interviewHTML } from '../src/content.js';
+import { pages, pageHTML, interviewHTML, interviewSections } from '../src/content.js';
 import { references, pageEvidence, citationHTML, sourcePanelHTML, pageSourceRecords } from '../src/citations.js';
 import { adolfoInterview } from '../src/interview.js';
 
 test('every research paragraph has a source locator or an explicit editorial attribution',()=>{
   for (const page of pages.filter(page=>page.body.length && !['cover','inside-cover','back-cover','contents','references','interview','team'].includes(page.kind))) {
     const offset=page.sourceParagraphOffset || 0;
-    const records=pageEvidence[page.sourceId || page.id]?.slice(offset,offset+page.body.length);
+    const records=page.evidence || pageEvidence[page.sourceId || page.id]?.slice(offset,offset+page.body.length);
     assert.equal(records?.length,page.body.length,page.id);
     for (const record of records) {
       assert.ok(record.kind);
@@ -43,8 +43,8 @@ test('source locators are escaped when inserted into markup',()=>{
   assert.ok(citationHTML({kind:'Fonte',sources:[{id:'inb',location:'<texto> & "aspas"'}]}).includes('&lt;texto&gt; &amp; &quot;aspas&quot;'));
 });
 
-test('seven interview faces preserve all fifteen source records independently of fixed-page visibility',()=>{
-  const interviewPages=pages.filter(page=>page.kind==='interview');
+test('seven supplement sections preserve all fifteen source records independently of fixed-page visibility',()=>{
+  const interviewPages=interviewSections;
   assert.equal(interviewPages.length,7);
   assert.equal(interviewPages.flatMap(page=>page.evidence).length,15);
   for(const item of adolfoInterview.conversations) {

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { pages, pageHTML, photos, interviewPhotos } from '../src/content.js';
+import { pages, pageHTML, photos, interviewPhotos, interviewSections, interviewHTML } from '../src/content.js';
 import { adolfoInterview } from '../src/interview.js';
 import { evidenceFor } from '../src/citations.js';
 
@@ -27,11 +27,11 @@ test('a redistribuição preserva integralmente e em ordem os parágrafos das vi
   }
 });
 
-test('as faces da entrevista conservam respostas, análises, localizadores e quatro imagens',()=>{
+test('o suplemento conserva respostas, análises, localizadores e quatro imagens',()=>{
   assert.deepEqual(adolfoInterview,original.interview);
-  const faces=pages.filter(page=>page.kind==='interview');
+  const faces=interviewSections;
   assert.equal(faces.length,7);
-  const markup=faces.map(page=>pageHTML(page,pages.indexOf(page))).join('');
+  const markup=interviewHTML();
   for (const text of [adolfoInterview.fullName,adolfoInterview.role,adolfoInterview.title,adolfoInterview.introduction,...adolfoInterview.career.flatMap(item=>[item.title,item.text]),...adolfoInterview.conversations.flatMap(item=>[item.topic,item.question,item.answer,item.reading,item.record]),...adolfoInterview.questions.flatMap(item=>[item.question,item.answer,...(item.record?[item.record]:[])])]) assert.ok(markup.includes(escape(text)),text);
   for (const source of Object.values(adolfoInterview.sources)) assert.ok(markup.includes(source.url),source.label);
   for (const art of Object.values(interviewPhotos)) {
@@ -52,6 +52,6 @@ test('fotografias de contexto aparecem uma vez na matéria e não nas continuaç
       assert.equal(markup.split(`src="${photos[key].src}"`).length-1,1,`${id}, flow=${flow}`);
       assert.ok(markup.includes(escape(photos[key].caption)),id);
     }
-    assert.equal(pages.find(page=>page.id===id+'-continued').image,undefined);
+    assert.equal(pages.find(page=>page.id===id+'-continued')?.image,undefined);
   }
 });

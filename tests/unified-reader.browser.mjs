@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { mkdir,writeFile } from 'node:fs/promises';
 import { launchBrowser } from '../scripts/chromium.mjs';
-import { pages, pageIndexForId, formatPages, spreadForPage } from '../src/content.js';
+import { pages, pageIndexForId, formatPages, spreadForPage, formatPage } from '../src/content.js';
 
 const base = (process.env.TEST_URL || 'http://localhost:3000').replace(/\/$/,'');
 const browser = await launchBrowser({timeout:240000});
@@ -55,7 +55,7 @@ try {
   const target=pageIndexForId('payback'),folioCount=pages.filter(page=>page.folio).length;
   await browser.navigate(base+`/edicoes/energia-atomica.html?template=html&page=${target+1}`);
   await browser.waitFor(`location.pathname.endsWith('/') && document.querySelector('#html-book>[data-page-index="${target}"]')`);
-  assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),`${String(target+1).padStart(2,'0')} / ${pages.length}`);
+  assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPage(pages[target]));
   assert.equal(await browser.evaluate("document.querySelectorAll('#html-book>article').length"),1);
   assert.equal(await browser.evaluate('location.search+location.hash'),'');
   assert.deepEqual(browser.errors,[]);

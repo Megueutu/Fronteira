@@ -1060,3 +1060,39 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 .edition-cover .cover-deck, .edition-cover .cover-callout { color: #103d26; }
 .edition-cover .cover-imprint .publisher-brand { filter: brightness(0); opacity: .8; }
 .edition-cover .cover-qr { top: 35cqw; width: 17cqw; max-width: none; padding: 1cqw; gap: .65cqw; }
+
+/* Miolo: 20 páginas de conteúdo, corpo editorial de 12 pt equivalentes. */
+:is(.render-document,.html-book:not(.single-page)) .magazine-page:not(.page-cover):not(.page-decorative) { padding: 30px 38px 24px; }
+:is(.render-document,.html-book:not(.single-page)) .magazine-page:not(.page-cover):not(.page-decorative) .page-main h2 { font-size: 40px; line-height: 1.08; letter-spacing: -1.3px; margin-bottom: 10px; }
+:is(.render-document,.html-book:not(.single-page)) .page-opener .page-main h2 { font-size: 56px; }
+:is(.render-document,.html-book:not(.single-page)) .magazine-page:not(.page-cover):not(.page-decorative) .page-subtitle { font-size: 16px; line-height: 1.4; margin-bottom: 16px; }
+:is(.render-document,.html-book:not(.single-page)) .magazine-page:not(.page-cover):not(.page-decorative) .columns p { font-size: 16px; line-height: 1.45; margin-bottom: 10px; }
+:is(.render-document,.html-book:not(.single-page)) .columns { column-gap: 26px; }
+:is(.render-document,.html-book:not(.single-page)) .balance-box { padding: 12px 14px; }
+:is(.render-document,.html-book:not(.single-page)) .balance-box p { font-size: 14px; line-height: 1.4; }
+:is(.render-document,.html-book:not(.single-page)) :is([data-page-id="safety"],[data-page-id="sovereignty"],[data-page-id="who-pays"]) .editorial-photo img { height: 210px; }
+:is(.render-document,.html-book:not(.single-page)) [data-page-id="opening"] .editorial-photo img { height: 390px; }
+:is(.render-document,.html-book:not(.single-page)) [data-page-id="editorial"] .columns { column-count: 2; }
+.reading-route { margin-top: 28px; display: grid; gap: 12px; }
+.reading-route span { display: block; padding: 18px 20px; border-left: 3px solid var(--green); background: var(--soft); font-size: 18px; line-height: 1.4; }
+.topic-guide { display: grid; gap: 12px; margin-top: 28px; }
+.topic-guide section { display: grid; grid-template-columns: 42px 1fr; gap: 2px 16px; padding: 18px; background: var(--soft); }
+.topic-guide b { grid-row: span 2; font-size: 28px; font-weight: 500; color: var(--green); }
+.topic-guide h3 { font-size: 18px; margin: 0; }
+.topic-guide p { font-size: 16px; line-height: 1.45; margin: 0; }
+.supplement-open { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; margin-top: 16px; padding: 12px 20px; border: 0; border-radius: 999px; background: #c6e8ce; color: #005a35; font-size: 16px; }
+.page-interview .interview-page-photo img { max-height: 370px; }
+.page-bottom > span { white-space: nowrap; }
+@media (max-width:760px) {
+ .single-page .magazine-page:not(.page-cover):not(.page-decorative) .columns p, .landing-view .reading-passage > p, .linear-content .columns p { font-size: 16px; line-height: 1.55; text-align: left; }
+ .reading-route span { font-size: 16px; }
+}
+:is(.render-document,.html-book:not(.single-page)) [data-page-id="who-pays"] .editorial-photo img { height: 180px; }
+.landing-view .reading-passage > p { font-size: 16px; line-height: 1.5; }
+.reader-note { margin-top: 20px; padding: 16px 18px; background: var(--soft); border-left: 3px solid var(--green); }
+.reader-note h3 { margin: 0 0 8px; font-size: 16px; line-height: 1.4; }
+.reader-note p { margin: 0; font-size: 16px; line-height: 1.45; text-align: left; }
+.page-index, .page-index button, .page-index button > div { min-width: 0; }
+.page-index button > div { flex: 1; overflow-wrap: anywhere; }
+.page-index button > span { flex-shrink: 0; }
+@media (max-width:760px) { .page-index button { gap: 12px; } .page-index button > span { font-size: 14px; max-width: 80px; overflow-wrap: anywhere; } }

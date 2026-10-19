@@ -14,6 +14,8 @@ export function createPagination(pages) {
     return { left: leftIndex === null ? null : pages[leftIndex], right: rightIndex === null ? null : pages[rightIndex], leftIndex, rightIndex };
   }
   const getSpread = value => { const opening = getOpening(value); return [opening.left, opening.right].filter(Boolean); };
-  const formatPages = value => `${getSpread(value).map(page=>String(pages.indexOf(page)+1).padStart(2,'0')).join('–')} / ${pages.length}`;
-  return { spreadCount, clampSpread, spreadForPage, getOpening, getSpread, formatPages };
+  const contentCount = pages.filter(page=>Number.isInteger(page.folio)).length;
+  const formatPage = page => Number.isInteger(page.folio) ? `${String(page.folio).padStart(2,'0')} / ${contentCount}` : page.readingLabel;
+  const formatPages = value => { const selection=getSpread(value); return selection.every(page=>Number.isInteger(page.folio)) ? `${selection.map(page=>String(page.folio).padStart(2,'0')).join('–')} / ${contentCount}` : selection.map(formatPage).join(' · '); };
+  return { spreadCount, clampSpread, spreadForPage, getOpening, getSpread, formatPages, formatPage };
 }

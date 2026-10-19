@@ -1,5 +1,7 @@
 # Arquitetura da revista interativa
 
+Atualização de 2026-10-19: **20 páginas de conteúdo**, em **28 faces físicas / 15 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas no desktop e alinhadas à esquerda no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
+
 ## Revisão física vigente — 36 faces e 19 aberturas
 
 A revisão final retirou `src/reader-shell.js` e o canvas de fundo. A barra não exibe branding ou identificação da edição; ícones de 24 px, contador físico uniforme e ações de leitura em pílulas seguem a referência fornecida. As descrições anteriores de fundo orgânico abaixo são históricas.

@@ -80,7 +80,7 @@ export async function create3DReader(onLost) {
   function makeHotspots() {
     hotspots.setAttribute('role','group'); hotspots.setAttribute('aria-label','Fontes das páginas desta abertura');
     const opening=getOpening(spread);
-    hotspots.innerHTML = [['left',opening.leftIndex],['right',opening.rightIndex]].map(([side,index]) => index===null || !pages[index].folio ? '' : `<button type="button" class="hotspot spread-source-action" data-side="${side}" data-action="sources" data-page="${index}" aria-haspopup="dialog"><span>Fontes da página ${String(pages[index].folio).padStart(2,'0')}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button>`).join(''); updateHotspots();
+    hotspots.innerHTML = [['left',opening.leftIndex],['right',opening.rightIndex]].map(([side,index]) => index===null || (!pages[index].folio && !pages[index].supplement) ? '' : `<button type="button" class="hotspot spread-source-action" data-side="${side}" data-action="${pages[index].supplement ? 'interview' : 'sources'}" data-page="${index}" aria-haspopup="dialog"><span>${pages[index].supplement ? 'Entrevista completa' : 'Fontes da página '+String(pages[index].folio).padStart(2,'0')}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button>`).join(''); updateHotspots();
   }
   const centerOf = value => { const opening=getOpening(value); return opening.leftIndex===null ? WIDTH/2 : opening.rightIndex===null ? -WIDTH/2 : 0; };
   function render(now = performance.now()) {
