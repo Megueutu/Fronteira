@@ -1,7 +1,6 @@
 import { createLavaLamp } from './lava-lamp.js';
-import { drawBrasilDots } from './brasil-dots.js';
 
-/** Capas e quarta capa: lava lamp (WebGL) e mapa pontilhado (canvas 2D). Sem movimento, ambos ficam em um quadro fixo. */
+/** Capa e quarta capa: lava lamp (WebGL). Sem movimento, fica em um quadro fixo. */
 const STILL_TIME = 7;
 const PALETTE = ['#a6d63a', '#2fa856', '#0a8a9a', '#8fd06a', '#d8f08a', '#1f8a4c'];
 const mounted = new Set();
@@ -15,14 +14,11 @@ function mount(canvas) {
     if (!lamp) { canvas.hidden = true; return; }
     lamp.draw(STILL_TIME);
     mounted.add(Object.assign(canvas, { cover, paint: seconds => lamp.draw(seconds * .55 + STILL_TIME) }));
-  } else {
-    drawBrasilDots(canvas, STILL_TIME);
-    mounted.add(Object.assign(canvas, { cover, paint: seconds => drawBrasilDots(canvas, seconds + STILL_TIME) }));
   }
 }
 
 export function mountCoverCanvases(root = document) {
-  root.querySelectorAll?.('canvas.cover-lava-gl, canvas.cover-dots').forEach(mount);
+  root.querySelectorAll?.('canvas.cover-lava-gl').forEach(mount);
 }
 
 export function installCoverMotion() {
@@ -40,7 +36,7 @@ export function installCoverMotion() {
     for (const record of records) {
       for (const node of record.addedNodes) if (node.nodeType === 1) register(node);
       for (const node of record.removedNodes) if (node.nodeType === 1) {
-        node.querySelectorAll?.('canvas.cover-lava-gl, canvas.cover-dots').forEach(canvas => mounted.delete(canvas));
+        node.querySelectorAll?.('canvas.cover-lava-gl').forEach(canvas => mounted.delete(canvas));
         if (node.matches('.edition-cover, .page-back-cover')) observer.unobserve(node);
         node.querySelectorAll?.('.edition-cover, .page-back-cover').forEach(cover => observer.unobserve(cover));
       }

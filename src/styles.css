@@ -927,7 +927,6 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 .edition-cover .cover-artwork, .page-back-cover .cover-artwork { --u: calc(100cqw / 760); position: relative; display: block; width: 100%; height: 100%; min-height: 0; isolation: isolate; container-type: inline-size; overflow: hidden; background: #0d5233; font-family: 'MontserratVariable', 'InterVariable', sans-serif; }
 .cover-lava-gl { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; }
 .edition-cover .cover-artwork::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, #0a5a33d9 0%, #0a5a33a6 28%, #0a5a3300 50%); }
-.cover-dots { position: absolute; z-index: 2; right: calc(24 * var(--u)); top: calc(46 * var(--u)); width: calc(430 * var(--u)); height: auto; pointer-events: none; }
 .cover-defs { position: absolute; }
 .cover-windows { position: absolute; inset: 0; z-index: 2; }
 .cover-photograph { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 27% center; filter: saturate(.88); }
@@ -935,11 +934,12 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 .edition-cover .cover-copy { position: absolute; z-index: 3; left: calc(56 * var(--u)); right: calc(40 * var(--u)); top: calc(96 * var(--u)); }
 .edition-cover .page-main .cover-title { margin: 0; color: #fff; font: 800 calc(128 * var(--u))/.88 'MontserratVariable', sans-serif; letter-spacing: -.035em; text-transform: uppercase; text-align: left; text-wrap: nowrap; }
 .edition-cover .cover-title > span { display: block; margin-top: calc(26 * var(--u)); color: #d8f08a; font-size: calc(30 * var(--u)); font-weight: 600; line-height: 1; letter-spacing: .34em; text-transform: uppercase; }
-.edition-cover .cover-panel { position: absolute; z-index: 3; left: calc(316 * var(--u)); right: calc(56 * var(--u)); top: calc(452 * var(--u)); padding: calc(26 * var(--u)) calc(28 * var(--u)); background: #0a3d26; border-left: calc(5 * var(--u)) solid #a6d63a; }
-.edition-cover .cover-deck { margin: 0; color: #fff; font: 500 calc(17 * var(--u))/1.5 'MontserratVariable', sans-serif; text-align: left; text-wrap: pretty; }
-.edition-cover .cover-callout { margin: calc(18 * var(--u)) 0 0; padding-top: calc(16 * var(--u)); border-top: 1px solid #ffffff3d; text-align: left; }
-.edition-cover .cover-callout strong { display: block; color: #d8f08a; font: 800 calc(18 * var(--u))/1.2 'MontserratVariable', sans-serif; letter-spacing: .04em; text-transform: uppercase; }
-.edition-cover .cover-callout > span { display: block; margin-top: calc(8 * var(--u)); color: #ffffffd9; font: 400 calc(13 * var(--u))/1.5 'MontserratVariable', sans-serif; }
+/* Texto de apoio em coluna editorial, sem caixa: filete verde-limão, chamada, apoio e temas. */
+.edition-cover .cover-panel { position: absolute; z-index: 3; left: calc(344 * var(--u)); right: calc(56 * var(--u)); top: calc(456 * var(--u)); padding-top: calc(22 * var(--u)); border-top: calc(4 * var(--u)) solid #d8f08a; text-shadow: 0 1px calc(14 * var(--u)) #0a3d2680; }
+.edition-cover .cover-callout { margin: 0; text-align: left; }
+.edition-cover .cover-callout strong { display: block; color: #d8f08a; font: 800 calc(24 * var(--u))/1.15 'MontserratVariable', sans-serif; letter-spacing: .02em; text-transform: uppercase; }
+.edition-cover .cover-deck { margin: calc(14 * var(--u)) 0 0; color: #fff; font: 600 calc(19 * var(--u))/1.45 'MontserratVariable', sans-serif; text-align: left; text-wrap: pretty; }
+.edition-cover .cover-topics { margin: calc(14 * var(--u)) 0 0; color: #ffffffe6; font: 500 calc(13 * var(--u))/1.6 'MontserratVariable', sans-serif; letter-spacing: .04em; }
 .edition-cover .cover-qr { position: absolute; z-index: 3; left: calc(548 * var(--u)); top: calc(716 * var(--u)); width: calc(104 * var(--u)); box-sizing: border-box; display: grid; justify-items: center; gap: calc(4 * var(--u)); padding: calc(7 * var(--u)); background: #fff; color: #0a3d26; text-decoration: none; }
 .edition-cover .cover-qr img { display: block; width: 100%; height: auto; }
 .edition-cover .cover-qr span { font: 700 calc(7 * var(--u))/1.2 'MontserratVariable', sans-serif; letter-spacing: .08em; }
@@ -948,7 +948,6 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 .edition-cover .cover-issue { color: #cfe6c4; font: 600 calc(11 * var(--u))/1.6 'MontserratVariable', sans-serif; letter-spacing: .2em; }
 .edition-cover .cover-imprint .publisher-brand { width: calc(206 * var(--u)); height: auto; filter: none; opacity: 1; }
 .edition-cover .cover-barcode { justify-self: end; width: calc(96 * var(--u)); height: auto; padding: calc(4 * var(--u)); background: #fff; }
-.page-back-cover .cover-dots-back { left: 50%; right: auto; top: 50%; width: calc(640 * var(--u)); transform: translate(-50%, -64%); opacity: .55; }
 .page-back-cover .decorative-brand { z-index: 3; width: calc(330 * var(--u)); top: 50%; }
 .page-back-cover .back-caption { position: absolute; z-index: 3; left: 0; right: 0; bottom: calc(64 * var(--u)); margin: 0; text-align: center; color: #e1f2da; font: 600 calc(12 * var(--u))/2 'MontserratVariable', sans-serif; letter-spacing: .26em; text-transform: uppercase; }
 

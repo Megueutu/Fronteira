@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 export const textureSources = [
   'src/app.js','src/editorial-panels.js','src/content.js','src/data.js','src/styles.css','src/citations.js','src/explorers.js',
-  'src/editorial-cover.js','src/interview-pages.js','src/interview.js','src/pagination.js','src/icons.js','src/cover-motion.js','src/lava-lamp.js','src/brasil-dots.js',
+  'src/editorial-cover.js','src/interview-pages.js','src/interview.js','src/pagination.js','src/icons.js','src/cover-motion.js','src/lava-lamp.js',
   'assets/fonts/InterVariable.woff2','assets/fonts/InterVariable-Italic.woff2','assets/fonts/MontserratVariable.woff2',
   'assets/branding/fronteira.svg','assets/photos/angra-cover.jpg','assets/qr/site.svg','assets/qr/barcode.svg',
 ];

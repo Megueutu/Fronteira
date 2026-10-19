@@ -15,7 +15,7 @@ try {
   const bounds=await b.evaluate(`(()=>{const qr=document.querySelector('#html-book .cover-qr').getBoundingClientRect(),code=document.querySelector('#html-book .cover-barcode').getBoundingClientRect();return{qrBottom:qr.bottom,codeTop:code.top}})()`);
   assert.ok(bounds.qrBottom<bounds.codeTop,'QR and barcode have separate space');
   assert.ok(await b.evaluate("document.fonts.check('800 40px MontserratVariable')"),'Montserrat is loaded for the cover');
-  assert.equal(await b.evaluate("document.querySelectorAll('#html-book .edition-cover canvas.cover-lava-gl, #html-book .edition-cover canvas.cover-dots').length"),2);
+  assert.equal(await b.evaluate("document.querySelectorAll('#html-book .edition-cover canvas.cover-lava-gl').length"),1);
   console.log('motion check'); const frame="document.querySelector('#html-book .cover-lava-gl').toDataURL()";
   const before=await b.evaluate(frame);
   await b.evaluate('new Promise(resolve=>setTimeout(resolve,900))');
@@ -28,5 +28,5 @@ try {
  assert.equal(await b.evaluate("document.querySelector('#html-book .cover-motion-toggle')"),null);
  await b.navigate(base+'/?render=0');await b.waitFor("document.body?.dataset.ready==='true'");
  assert.deepEqual(b.errors,[]);
- console.log('PASS: one photograph in organic windows, Montserrat, lava lamp and dotted map canvases, no pause button, reduced motion, stable texture rendering and three widths.');
+ console.log('PASS: one photograph in organic windows, Montserrat, lava lamp canvas, no pause button, reduced motion, stable texture rendering and three widths.');
 } finally {await b.close();}
