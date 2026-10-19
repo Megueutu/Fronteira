@@ -304,3 +304,9 @@ No HTML há movimento lento, resposta ao ponteiro e pausa manual. As janelas tê
 Validação: todas as 36 faces foram renderizadas, medidas e conferidas em contact sheet. O teste específico da capa passou em 1440, 390 e 320 px: uma única foto, máscara animada, resposta ao ponteiro, pausa, movimento reduzido, ausência de transbordamento e separação entre QR e código de barras. O QR foi decodificado corretamente no PNG e na textura JPEG. Os 20 testes unitários/build passaram, incluindo preservação editorial e sincronização das texturas. Não se mediu desempenho em hardware real.
 
 A suíte de tipografia também passou nos três modos e em cinco larguras, incluindo capa, colunas e diálogos.
+
+## Ajuste do enquadramento do título — 2026-10-19
+
+Revisão visual solicitada pelo responsável: título alinhado à direita, peso mais leve e hierarquia mais clara para “no Brasil”; linha fina mais larga e botão de pausa deslocado para o lado oposto. As 36 faces foram renderizadas e inspecionadas em conjunto. Os 20 testes unitários/build e o teste da capa em três larguras passaram, incluindo movimento, pausa e ausência de sobreposição entre QR e código de barras. Conteúdo, fotografia, formas e demais páginas foram preservados.
+
+A suíte de tipografia passou nos três modos e em cinco larguras após corrigir a largura herdada do botão de pausa na rolagem. Capturas de desktop e celular foram conferidas.

@@ -196,3 +196,7 @@ Referência escolhida pelo responsável: capa Brasil Nuclear enviada em `image 2
 As máscaras e formas têm animação CSS lenta, reação suave ao ponteiro e botão de pausa. A animação para fora da viewport, em aba oculta e com movimento reduzido. O ponteiro não interfere no gesto de leitura em telas touch. A textura do 3D e a impressão usam uma composição estática determinística; movimento e reação ao ponteiro ficam na capa HTML, na rolagem e na leitura ampliada. O fundo externo da interface continua estático.
 
 A implementação usa SVG e CSS nativos: [máscaras SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/mask) e [movimento reduzido](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40media/prefers-reduced-motion). Nenhum código de terceiros foi incorporado nesta etapa.
+
+## Enquadramento do título — 2026-10-19
+
+Após revisão do responsável, o título da capa passa para o bloco superior direito, compartilhando o alinhamento das chamadas. O peso cai de 800 para 650, o corpo passa de 72 para 80 px na folha de referência e o complemento “no Brasil” mantém 32 px e peso 450. A linha de contexto usa 10 px e menor espaçamento. A linha fina ocupa uma largura maior para evitar quebras curtas. O botão de pausa fica no alto à esquerda, separado do título também no celular. Fotografia, formas, movimento e textos editoriais foram preservados.
