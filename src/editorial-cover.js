@@ -12,7 +12,6 @@ export function coverHTML(page, index, { linear = false } = {}) {
       <div class="cover-windows" style="clip-path:url(#${windows})"><img class="cover-photograph" src="/assets/photos/angra-cover.jpg" alt="Vista da Central Nuclear Almirante Álvaro Alberto, em Angra dos Reis. Fotografia: Eletronuclear." decoding="async" fetchpriority="high" draggable="false"></div>
       <p class="cover-eyebrow"><span>ENERGIA, SOCIEDADE E BRASIL</span></p>
       <div class="cover-copy"><h2 class="cover-title">Energia<br>Nuclear<br><span>no Brasil</span></h2></div>
-      <div class="cover-panel"><p class="cover-callout"><strong>Da mina à tomada.</strong></p><p class="cover-deck">${escape(page.subtitle)}</p><p class="cover-topics">Matriz, tecnologia, urânio, custos e decisões políticas.</p></div>
       <div class="cover-imprint"><span aria-hidden="true"></span><img class="publisher-brand" src="/assets/branding/fronteira.svg" alt="Editora Fronteira" width="272" height="35"><img class="cover-barcode" src="/assets/qr/barcode.svg" alt="" aria-hidden="true" width="128" height="46"></div>
     </div>
   </article>`;

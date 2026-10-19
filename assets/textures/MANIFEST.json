@@ -18,7 +18,6 @@
     "src/pagination.js",
     "src/icons.js",
     "src/cover-motion.js",
-    "src/page-fit.js",
     "src/page-refine.css",
     "src/lava-lamp.js",
     "assets/fonts/InterVariable.woff2",
@@ -29,5 +28,5 @@
     "assets/qr/site.svg",
     "assets/qr/barcode.svg"
   ],
-  "sha256": "8fa09e5af500d6e146ab580d0f0168effab5c081a30e54ac9181e086c97c5fd5"
+  "sha256": "9aa3fdafbc1812e0166c45762f3d0b6808dd529322592943a49ccb9a1a5966ab"
 }

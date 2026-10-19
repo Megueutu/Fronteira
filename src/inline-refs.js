@@ -66,7 +66,7 @@ export const inlineRefs = [
   source('balance', 1, 'Milton Santos', 'santos'),
   source('balance', 1, 'Weber', 'weber'),
   source('balance', 1, 'Wallerstein', 'wallerstein'),
-  popup('balance', 3, 'Oferece critérios', 'checklist', 'balance'),
+  popup('balance', 5, 'Oferece critérios', 'checklist', 'balance'),
 ];
 
 const attr = text => String(text).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
