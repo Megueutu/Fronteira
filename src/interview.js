@@ -23,12 +23,12 @@ export const adolfoInterview = {
     { question: 'O Brasil deveria apostar mais em nuclear? Por quê?', answer: 'Sim. Sua defesa se apoia nas reservas brasileiras de urânio, na experiência tecnológica do país e na oferta contínua de eletricidade, que poderia complementar outras fontes da matriz.', record: '§2, reservas e ciclo do combustível; §4, matriz e papel da energia nuclear; §10, pergunta sobre ampliar a aposta nuclear.' },
   ],
   sources: {
-    cnen: { label: 'CNEN · projeto e participação de Adolfo Braid', url: 'https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/cerimonia-oficial-marca-o-inicio-formal-do-projeto-do-primeiro-microrreator-nuclear-brasileiro' },
-    abdan: { label: 'ABDAN · perfil do Nuclear Summit 2026', url: 'https://abdan.glueup.com/event/nuclear-summit-2026-162855/speakers.html' },
-    aeita: { label: 'AEITA · apresentação profissional', url: 'https://pt.linkedin.com/posts/aeita_nesta-sexta-feira-2111-%C3%A0s-18h-hor%C3%A1rio-activity-7396519091383042048-_j4Q' },
-    licensing: { label: 'ANSN/IEN · licenciamento em janeiro de 2026', url: 'https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/reuniao-entre-ien-cnen-e-a-ansn-para-discutir-termo-de-referencia-acontece-na-sede-da-cnen' },
-    kilopower: { label: 'NASA · protótipo Kilopower', url: 'https://www.nasa.gov/image-article/kilopower-13/' },
-    marvel: { label: 'DOE / INL · representação do MARVEL', url: 'https://www.flickr.com/photos/departmentofenergy/55461564410' },
+    cnen: { label: 'CNEN, projeto e participação de Adolfo Braid', url: 'https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/cerimonia-oficial-marca-o-inicio-formal-do-projeto-do-primeiro-microrreator-nuclear-brasileiro' },
+    abdan: { label: 'ABDAN, perfil do Nuclear Summit 2026', url: 'https://abdan.glueup.com/event/nuclear-summit-2026-162855/speakers.html' },
+    aeita: { label: 'AEITA, apresentação profissional', url: 'https://pt.linkedin.com/posts/aeita_nesta-sexta-feira-2111-%C3%A0s-18h-hor%C3%A1rio-activity-7396519091383042048-_j4Q' },
+    licensing: { label: 'ANSN/IEN, licenciamento em janeiro de 2026', url: 'https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/reuniao-entre-ien-cnen-e-a-ansn-para-discutir-termo-de-referencia-acontece-na-sede-da-cnen' },
+    kilopower: { label: 'NASA, protótipo Kilopower', url: 'https://www.nasa.gov/image-article/kilopower-13/' },
+    marvel: { label: 'DOE / INL, representação do MARVEL', url: 'https://www.flickr.com/photos/departmentofenergy/55461564410' },
     linkedin: { label: 'LinkedIn indicado pelo grupo', url: 'https://www.linkedin.com/in/adolfobraid/' },
   },
 };

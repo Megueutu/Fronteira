@@ -35,7 +35,7 @@ try{
   if(scope!=='reactor'){
    const root='.linear-content [data-page-id="who-pays"] [data-explorer=tariffs]';await b.click(`${root} [data-tariff-mode=cost]`);
    await b.evaluate(`const x=document.querySelector('${root} [data-tariff-consumption]');x.value='350';x.dispatchEvent(new Event('input',{bubbles:true}))`);
-   assert.deepEqual(await b.evaluate(`[...document.querySelectorAll('${root} .explorer-tariff-values')].map(el=>el.textContent)`),regionalTariffs.map(row=>`R$ ${decimal(row.min*350,2)} – ${decimal(row.max*350,2)}`));
+   assert.deepEqual(await b.evaluate(`[...document.querySelectorAll('${root} .explorer-tariff-values')].map(el=>el.textContent)`),regionalTariffs.map(row=>`R$ ${decimal(row.min*350,2)} a ${decimal(row.max*350,2)}`));
   }
   if(scope==='reactor'||scope==='all')for(let i=0;i<reactorSteps.length;i++){await b.click(`.linear-content [data-explorer=reactor] [data-reactor-step="${i}"]`);assert.equal(await b.evaluate("document.querySelector('.linear-content [data-reactor-description]').textContent"),reactorSteps[i][1]);}
   await close();

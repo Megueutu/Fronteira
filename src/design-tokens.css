@@ -32,5 +32,5 @@
   --ds-press: scale(.95);
   --ds-blur: saturate(180%) blur(20px);
   --ds-tight: -.022em;
-  --ds-display: 'MontserratVariable', 'InterVariable', system-ui, sans-serif;
+  --ds-display: 'InterVariable', system-ui, sans-serif;
 }

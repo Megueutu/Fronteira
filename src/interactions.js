@@ -25,7 +25,7 @@ export function createInteractions(onJump) {
   const flowHTML = items => `<ol class="reading-flow">${items.map(item=>`<li>${item}</li>`).join('')}</ol>`;
   let currentSteps = [], scenario = { ...scenarios[1], investment: 23.9 };
   function scenarioHTML() {
-    return `<p class="dialog-intro">Um exercício didático com as hipóteses da pesquisa do grupo. Não é orçamento vigente, proposta de tarifa ou previsão financeira.</p><div class="scenario-presets" role="group" aria-label="Cenário">${scenarios.map((s, i) => `<button type="button" data-scenario="${i}" aria-pressed="${i === 1}">${s.name}</button>`).join('')}</div><div class="calculator-grid"><div class="calculator-fields"><label>Fator de capacidade <output id="capacity-value">85%</output><input id="capacity" type="range" min="50" max="95" value="85" step="1"></label><label>Tarifa assumida <output id="tariff-value">R$ 791,81/MWh</output><input id="tariff" type="range" min="500" max="1100" value="791.81" step="0.01"></label><label>Custos operacionais <output id="operating-value">30% da receita</output><input id="operating" type="range" min="15" max="60" value="30" step="1"></label><label>Base de investimento<select id="investment"><option value="23.9">Restante · R$ 23,9 bilhões</option><option value="35.9">Total do exercício · R$ 35,9 bilhões</option></select></label></div><div class="calculator-result" role="status" aria-live="polite"><span>PAYBACK SIMPLES</span><strong id="result-years"></strong><span>anos de operação</span><p id="result-cash"></p></div></div><p class="calculation-method">Energia = 1.405 MW × 8.760 h × fator de capacidade.<br>Fluxo anual = energia × tarifa × (1 − parcela de custos).<br>Payback = investimento ÷ fluxo anual.</p><p class="source-note">Sem considerar integralmente juros, impostos, construção, financiamento, descomissionamento e cronograma. As hipóteses monetárias são nominais e pertencem ao exercício escolar de 2025.</p>`;
+    return `<p class="dialog-intro">Um exercício didático com as hipóteses da pesquisa do grupo. Não é orçamento vigente, proposta de tarifa ou previsão financeira.</p><div class="scenario-presets" role="group" aria-label="Cenário">${scenarios.map((s, i) => `<button type="button" data-scenario="${i}" aria-pressed="${i === 1}">${s.name}</button>`).join('')}</div><div class="calculator-grid"><div class="calculator-fields"><label>Fator de capacidade <output id="capacity-value">85%</output><input id="capacity" type="range" min="50" max="95" value="85" step="1"></label><label>Tarifa assumida <output id="tariff-value">R$ 791,81/MWh</output><input id="tariff" type="range" min="500" max="1100" value="791.81" step="0.01"></label><label>Custos operacionais <output id="operating-value">30% da receita</output><input id="operating" type="range" min="15" max="60" value="30" step="1"></label><label>Base de investimento<select id="investment"><option value="23.9">Restante, R$ 23,9 bilhões</option><option value="35.9">Total do exercício, R$ 35,9 bilhões</option></select></label></div><div class="calculator-result" role="status" aria-live="polite"><span>PAYBACK SIMPLES</span><strong id="result-years"></strong><span>anos de operação</span><p id="result-cash"></p></div></div><p class="calculation-method">Energia = 1.405 MW × 8.760 h × fator de capacidade.<br>Fluxo anual = energia × tarifa × (1 − parcela de custos).<br>Payback = investimento ÷ fluxo anual.</p><p class="source-note">Sem considerar integralmente juros, impostos, construção, financiamento, descomissionamento e cronograma. As hipóteses monetárias são nominais e pertencem ao exercício escolar de 2025.</p>`;
   }
   function updateScenario() {
     const result = calculateScenario(scenario);
@@ -65,7 +65,7 @@ export function createInteractions(onJump) {
       const member = teamMembers.find(item => item.id === trigger?.dataset.member);
       if (!member) return;
       title = member.name;
-      markup = `<figure class="expanded-photo member-photo"><img src="${member.portrait}" alt="Retrato de ${escapeHTML(member.name)}"><figcaption>${escapeHTML(member.name)} · Integrante da pesquisa.<br>Fotografia fornecida pelo grupo para esta revista. Fotógrafo não informado.</figcaption></figure>`;
+      markup = `<figure class="expanded-photo member-photo"><img src="${member.portrait}" alt="Retrato de ${escapeHTML(member.name)}"><figcaption>${escapeHTML(member.name)}, Integrante da pesquisa.<br>Fotografia fornecida pelo grupo para esta revista. Fotógrafo não informado.</figcaption></figure>`;
     } else if (type === 'image') {
       const art = photos[trigger?.dataset.photoKey] || interviewPhotos[trigger?.dataset.photoKey] || page.image || photos.angra;
       title = art.title;
@@ -73,22 +73,22 @@ export function createInteractions(onJump) {
       if (group?.length > 1) { gallery = group; slideIndex = group.indexOf(art); retitle = true; markup = `<div id="gallery-photo">${photoHTML(art)}</div>${galleryControlsHTML()}`; }
       else markup = photoHTML(art);
     } else if (type === 'carousel') {
-      title = 'Paisagens da energia.'; gallery = artworks; slideIndex = 0;
+      title = 'Paisagens da energia'; gallery = artworks; slideIndex = 0;
       markup = `<div id="gallery-photo">${photoHTML(gallery[0])}</div>${galleryControlsHTML()}`;
     } else if (type === 'chart') {
-      title = 'Matriz elétrica em camadas.';
+      title = 'Matriz elétrica em camadas';
       markup = `<p class="dialog-intro">Geração nacional em 2025. Selecione um grupo; a escala das barras permanece a mesma.</p><div class="chart-filters" role="group" aria-label="Filtrar fontes"><button type="button" data-filter="all" aria-pressed="true">Todas</button><button type="button" data-filter="renewable" aria-pressed="false">Renováveis</button><button type="button" data-filter="nuclear" aria-pressed="false">Nuclear</button></div><div id="interactive-chart" role="region" aria-live="polite" aria-label="Gráfico por fonte">${chartHTML()}</div><p class="source-note">A nuclear aparece com 2,0%; “outras”, com 1,5%. Fonte: <a href="${references[0].url}" target="_blank" rel="noopener">EPE, Anuário 2026 ${uiIcon("arrow_forward")}</a>. Valores também disponíveis como texto em cada linha.</p>`;
     } else if (type === 'cycle') {
-      title = 'O caminho do combustível.';
+      title = 'O caminho do combustível';
       markup = cycleExplorerHTML();
     } else if (type === 'diagram') {
-      title = 'Do reator à rede.';
+      title = 'Do reator à rede';
       currentSteps = reactorSteps;
       markup = stepsHTML(currentSteps) + citationHTML(visualEvidence.reactor);
     } else if (type === 'calculator') {
-      title = 'Laboratório de cenários.'; scenario = { ...scenarios[1], investment: 23.9 }; markup = scenarioHTML() + paybackBarsHTML(scenario) + citationHTML(visualEvidence.payback);
+      title = 'Laboratório de cenários'; scenario = { ...scenarios[1], investment: 23.9 }; markup = scenarioHTML() + paybackBarsHTML(scenario) + citationHTML(visualEvidence.payback);
     } else if (type === 'timeline') {
-      title = 'Seis trajetórias, diferentes contextos.';
+      title = 'Seis trajetórias, diferentes contextos';
       markup = `<p class="dialog-intro">Recortes históricos com data. Selecione um país para conhecer o contexto e a fonte.</p>${timelineHTML()}<div class="timeline-detail" role="status" id="timeline-detail"></div>`;
     } else if (type === 'checklist') {
       title = 'O que precisa entrar na decisão?';
@@ -98,7 +98,7 @@ export function createInteractions(onJump) {
       title = used.length ? 'As fontes desta matéria.' : 'As fontes da edição.';
       markup = `<div class="sources-overview"><span>${used.length?`${used.length} ${used.length===1?'referência':'referências'} nesta matéria`:'BIBLIOGRAFIA DA REVISTA'}</span><p>${escapeHTML(page.title.replaceAll('\n',' '))}</p><small>Consulte o documento original e o local utilizado na pesquisa.</small></div>${used.length?sourceCardsHTML(page):''}${sourcePanelHTML(page,pageIndex)?`<details class="source-passages"><summary>Onde cada fonte aparece no texto</summary>${sourcePanelHTML(page,pageIndex)}</details>`:''}<details class="source-all" ${used.length?'':'open'}><summary>Todas as referências da edição</summary><ol class="references-list">${referenceHTML([],true)}</ol></details><button type="button" class="sources-photo-link" data-action="credits">Fotografias, autores e licenças ${uiIcon("arrow_forward")}</button><p class="source-note">Os exemplos internacionais são datados; as hipóteses financeiras pertencem ao estudo do grupo. Cada referência identifica o período e o local de consulta disponíveis.</p>`;
     } else if (type === 'credits') {
-      title = 'Quem fez estas imagens.';
+      title = 'Quem fez estas imagens';
       markup = `<p class="dialog-intro">Os arquivos foram redimensionados e têm recortes de exibição. Fotografias conservam as licenças de seus autores; nenhuma implica apoio dos fotógrafos às conclusões da revista.</p><div class="photo-credits">${artworks.map(art => `<div><img src="${art.src}" alt="${escapeHTML(art.title)}" loading="lazy"><p>${escapeHTML(art.caption)}<br><a href="${art.url}" target="_blank" rel="noopener">${escapeHTML(art.credit)} ${uiIcon("arrow_forward")}</a><br><a href="${art.licenseUrl}" target="_blank" rel="noopener">${escapeHTML(art.license)}</a></p></div>`).join('')}</div><h3>Retratos dos integrantes</h3><p class="source-note">Fotografias fornecidas pelo grupo para uso nesta revista. Fotógrafo não informado.</p>${teamHTML()}`;
       markup += `<h3>Entrevista com Adolfo Braid</h3><div class="photo-credits">${Object.values(interviewPhotos).map(art => `<div><img src="${art.src}" alt="${escapeHTML(art.title)}" loading="lazy"><p>${escapeHTML(art.caption)}<br><a href="${art.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.credit)} ${uiIcon("arrow_forward")}</a><br><a href="${art.licenseUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.license)}</a></p></div>`).join('')}</div>`;
       markup += `<h3>Fotografia da capa</h3><div class="photo-credits"><div><img src="/assets/photos/angra-cover.jpg" alt="Central Nuclear Almirante Álvaro Alberto, em Angra dos Reis" loading="lazy"><p>Central Nuclear Almirante Álvaro Alberto, Angra dos Reis. Crédito institucional: Eletronuclear. Autoria individual e data do registro não identificadas na página de origem.<br><a href="https://www.eletronuclear.gov.br/Imprensa-e-Midias/Paginas/revisao-tarifaria-das-usinas-nucleares-do-brasil-reforca-sustentabilidade.aspx" target="_blank" rel="noopener noreferrer">Fotografia na publicação oficial ${uiIcon('arrow_forward')}</a><br>A página de origem não explicita licença de reutilização.</p></div></div>`;
@@ -137,7 +137,7 @@ export function createInteractions(onJump) {
   }
   function setEvent(index) {
     const event = timeline[index], ref = references.find(ref => ref.id === event.ref);
-    content.querySelector('#timeline-detail').innerHTML = `<span class="eyebrow">${event.country} · ${event.year}</span><h3>${event.title}</h3><p>${event.text}</p>${citationHTML({kind:'Fonte do recorte histórico',sources:[{id:event.ref}]})}`;
+    content.querySelector('#timeline-detail').innerHTML = `<span class="eyebrow">${event.country}, ${event.year}</span><h3>${event.title}</h3><p>${event.text}</p>${citationHTML({kind:'Fonte do recorte histórico',sources:[{id:event.ref}]})}`;
     content.querySelectorAll('[data-event]').forEach(button => button.setAttribute('aria-pressed',String(Number(button.dataset.event) === index)));
   }
   function close() {

@@ -4,7 +4,7 @@
       "id": "cover",
       "kind": "cover",
       "section": "EDIÇÃO 01 / OUTUBRO 2026",
-      "title": "Energia nuclear\nno Brasil.",
+      "title": "Energia nuclear\nno Brasil",
       "subtitle": "Uma escolha que atravessa a técnica, o território e a sociedade.",
       "image": {
         "src": "/assets/photos/angra.jpg",
@@ -12,7 +12,7 @@
         "caption": "Vista histórica das usinas de Angra dos Reis. Registro identificado na página de origem como janeiro de 2009; não representa o estágio atual das obras.",
         "credit": "Sturm / Wikimedia Commons",
         "url": "https://commons.wikimedia.org/wiki/File:Angra_dos_Reis_-_usinas_nucleares.jpg",
-        "license": "CC BY 3.0 · redimensionamento e recorte de exibição",
+        "license": "CC BY 3.0, redimensionamento e recorte de exibição",
         "licenseUrl": "https://creativecommons.org/licenses/by/3.0/"
       },
       "body": [
@@ -29,7 +29,7 @@
       "id": "contents",
       "kind": "contents",
       "section": "GUIA DE LEITURA",
-      "title": "Cinco temas.\nMuitas perguntas.",
+      "title": "Cinco temas\ne muitas perguntas",
       "subtitle": "Uma revista para ler, comparar e explorar.",
       "body": [
         "As setas viram as páginas. Os botões abrem gráficos, notas e fotografias. O sumário leva diretamente a uma seção, e a leitura contínua reúne toda a edição em texto selecionável."
@@ -76,7 +76,7 @@
       "id": "unequal",
       "kind": "opener",
       "section": "01 / PANORAMA",
-      "title": "Um Brasil\ndesigual.",
+      "title": "Um Brasil\ndesigual",
       "subtitle": "Uma matriz majoritariamente renovável não garante que a energia chegue do mesmo jeito a todos.",
       "image": {
         "src": "/assets/photos/transmission.jpg",
@@ -112,8 +112,8 @@
       "id": "matrix",
       "kind": "data",
       "section": "01 / PANORAMA",
-      "title": "O tamanho\nde cada fonte.",
-      "subtitle": "Geração elétrica nacional por fonte · 2025",
+      "title": "O tamanho\nde cada fonte",
+      "subtitle": "Geração elétrica nacional por fonte, 2025",
       "body": [
         "A hidrelétrica ainda responde por mais da metade da geração. Eólica e solar ganharam espaço e, juntas, chegaram a 26,4% em 2025. A nuclear participa com 2,0%: uma fatia pequena, mas que integra uma discussão maior sobre diversificação.",
         "Geração nacional e oferta interna de eletricidade não são o mesmo indicador. A oferta também considera importações; por isso, percentuais de tabelas diferentes não devem ser misturados. Aqui, a comparação usa as participações da geração nacional apresentadas na pesquisa e no Anuário da EPE.",
@@ -165,7 +165,7 @@
       "id": "reactor",
       "kind": "opener",
       "section": "02 / COMO FUNCIONA",
-      "title": "Do átomo\nao interruptor.",
+      "title": "Do átomo\nao interruptor",
       "subtitle": "O princípio físico é diferente; a etapa final ainda envolve calor, turbina e gerador.",
       "image": {
         "src": "/assets/photos/control-room.jpg",
@@ -196,7 +196,7 @@
       "id": "safety",
       "kind": "essay",
       "section": "02 / SEGURANÇA E RESÍDUOS",
-      "title": "O risco exige\nresponsabilidade.",
+      "title": "O risco exige\nresponsabilidade",
       "subtitle": "Distinguir operação, acidentes e gestão do combustível é parte de um debate informado.",
       "body": [
         "Usina, arma nuclear, radiação e resíduo não são sinônimos. Uma central comercial utiliza uma reação controlada para gerar eletricidade. Isso não elimina riscos: exige descrever falhas possíveis, resfriamento e proteção de trabalhadores e moradores.",
@@ -228,7 +228,7 @@
       "id": "uranium",
       "kind": "data",
       "section": "03 / URÂNIO",
-      "title": "Ter a reserva\nnão é ter o ciclo.",
+      "title": "Ter a reserva\nnão é ter o ciclo",
       "subtitle": "Entre o minério e o reator existe uma cadeia industrial.",
       "body": [
         "Entre a mina e o reator há mineração e beneficiamento, conversão, enriquecimento e fabricação. Cada etapa exige instalações, conhecimento, controle de qualidade e logística.",
@@ -318,7 +318,7 @@
       "id": "cost",
       "kind": "opener",
       "section": "04 / CUSTO E PAYBACK",
-      "title": "A conta\nda escolha.",
+      "title": "A conta\nda escolha",
       "subtitle": "Angra 3 reúne uma obra de longa duração, recursos já aplicados e decisões ainda relevantes.",
       "image": {
         "src": "/assets/photos/angra3.jpg",
@@ -326,7 +326,7 @@
         "caption": "Canteiro de Angra 3 em 20 de maio de 2015. Fotografia histórica; não indica o progresso atual da obra.",
         "credit": "Wusel007 / Wikimedia Commons",
         "url": "https://commons.wikimedia.org/wiki/File:Construction_site_Angra_III.JPG",
-        "license": "CC BY 3.0 · redimensionamento e recorte de exibição",
+        "license": "CC BY 3.0, redimensionamento e recorte de exibição",
         "licenseUrl": "https://creativecommons.org/licenses/by/3.0/"
       },
       "body": [
@@ -348,7 +348,7 @@
       "id": "payback",
       "kind": "data",
       "section": "04 / LABORATÓRIO DE CENÁRIOS",
-      "title": "Retorno depende\ndas premissas.",
+      "title": "Retorno depende\ndas premissas",
       "subtitle": "Um cálculo que você pode explorar — sem confundir simulação com previsão.",
       "body": [
         "O payback simples divide o investimento pelo fluxo anual disponível. O exercício usa 1.405 MW, 8.760 horas anuais e um fator de capacidade. Da receita estimada pela tarifa, subtrai-se a parcela de custos operacionais.",
@@ -371,7 +371,7 @@
       "id": "who-pays",
       "kind": "essay",
       "section": "04 / QUEM GANHA, QUEM ARCA",
-      "title": "Uma tarifa.\nMuitos efeitos.",
+      "title": "Uma tarifa\ne muitos efeitos",
       "subtitle": "Eficiência financeira e justiça social precisam ser examinadas juntas.",
       "body": [
         "Se uma tarifa é calculada para viabilizar um empreendimento, usá-la para provar que o empreendimento se paga pode criar um raciocínio circular. O resultado mostra o que aconteceria sob aquela hipótese; não demonstra que consumidores e sistema elétrico deveriam aceitá-la.",
@@ -398,8 +398,8 @@
       "id": "messmer",
       "kind": "opener",
       "section": "05 / POLÍTICA",
-      "title": "Uma decisão\nde Estado.",
-      "subtitle": "O Plano Messmer mostra a força — e os limites — de uma estratégia de longo prazo.",
+      "title": "Uma decisão\nde Estado",
+      "subtitle": "O Plano Messmer mostra a força e os limites de uma estratégia de longo prazo.",
       "image": {
         "src": "/assets/photos/nuclear-night.jpg",
         "title": "Energia em perspectiva",
@@ -456,7 +456,7 @@
       "id": "public",
       "kind": "essay",
       "section": "05 / OPINIÃO PÚBLICA",
-      "title": "Confiança também\né infraestrutura.",
+      "title": "Confiança também\né infraestrutura",
       "subtitle": "Informação, participação e regulação fazem parte da política energética.",
       "body": [
         "Uma decisão de longa duração precisa atravessar governos e continuar compreensível para a sociedade. Opinião pública não é um obstáculo a ser contornado: moradores, trabalhadores e consumidores têm interesses legítimos sobre riscos, empregos, tarifas e uso do território.",
@@ -485,7 +485,7 @@
       "id": "balance",
       "kind": "essay",
       "section": "BALANÇO FINAL",
-      "title": "A resposta pede\nmais de um critério.",
+      "title": "A resposta pede\nmais de um critério",
       "subtitle": "O debate não termina na escolha de uma tecnologia.",
       "body": [
         "A energia nuclear pode integrar uma estratégia de diversificação, formação científica e autonomia. Também cria obrigações de financiamento, segurança e gestão de materiais que atravessam décadas. Esses pontos não se anulam: precisam ser avaliados no mesmo quadro de decisão.",
@@ -514,7 +514,7 @@
       "id": "credits",
       "kind": "credits",
       "section": "EXPEDIENTE / TRANSPARÊNCIA",
-      "title": "Como esta edição\nfoi construída.",
+      "title": "Como esta edição\nfoi construída",
       "subtitle": "Pesquisa, edição e responsabilidade precisam aparecer no mesmo lugar.",
       "body": [
         "O ponto de partida foi o material de pesquisa fornecido pelo grupo, reunido no documento Revista Energia Nuclear Brasil. Esta edição digital o reorganiza em cinco temas e condensa a redação para a leitura em páginas. Os documentos acadêmicos originais foram preservados.",
@@ -621,27 +621,27 @@
     ],
     "sources": {
       "cnen": {
-        "label": "CNEN · projeto e participação de Adolfo Braid",
+        "label": "CNEN, projeto e participação de Adolfo Braid",
         "url": "https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/cerimonia-oficial-marca-o-inicio-formal-do-projeto-do-primeiro-microrreator-nuclear-brasileiro"
       },
       "abdan": {
-        "label": "ABDAN · perfil do Nuclear Summit 2026",
+        "label": "ABDAN, perfil do Nuclear Summit 2026",
         "url": "https://abdan.glueup.com/event/nuclear-summit-2026-162855/speakers.html"
       },
       "aeita": {
-        "label": "AEITA · apresentação profissional",
+        "label": "AEITA, apresentação profissional",
         "url": "https://pt.linkedin.com/posts/aeita_nesta-sexta-feira-2111-%C3%A0s-18h-hor%C3%A1rio-activity-7396519091383042048-_j4Q"
       },
       "licensing": {
-        "label": "ANSN/IEN · licenciamento em janeiro de 2026",
+        "label": "ANSN/IEN, licenciamento em janeiro de 2026",
         "url": "https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/reuniao-entre-ien-cnen-e-a-ansn-para-discutir-termo-de-referencia-acontece-na-sede-da-cnen"
       },
       "kilopower": {
-        "label": "NASA · protótipo Kilopower",
+        "label": "NASA, protótipo Kilopower",
         "url": "https://www.nasa.gov/image-article/kilopower-13/"
       },
       "marvel": {
-        "label": "DOE / INL · representação do MARVEL",
+        "label": "DOE / INL, representação do MARVEL",
         "url": "https://www.flickr.com/photos/departmentofenergy/55461564410"
       },
       "linkedin": {

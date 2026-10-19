@@ -23,7 +23,7 @@ export const zoomButton = title => `<button type="button" class="chart-zoom" dat
 const decimal = (number, digits = 1) => new Intl.NumberFormat('pt-BR', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(number);
 export function chartHTML(filter = 'all') {
   const rows = matrixData.filter(row => filter === 'all' || (filter === 'renewable' ? row.renewable : row.name === 'Nuclear'));
-  return `<figure class="matrix-chart" data-zoom-target data-zoom-title="Matriz elétrica brasileira, 2025"><figcaption><span>PARTICIPAÇÃO NA GERAÇÃO NACIONAL · %</span>${zoomButton('matriz elétrica brasileira, 2025')}</figcaption><div class="chart-rows">${rows.map(row => `<div class="chart-row${row.name === 'Nuclear' ? ' nuclear-row' : ''}" tabindex="0"><span>${row.name}</span><div class="bar-track"><i style="width:${row.value / 51.7 * 100}%"></i></div><b>${decimal(row.value)}%</b></div>`).join('')}</div><p class="visual-caption">EPE · Anuário 2026 · ano-base 2025. A escala é mantida ao filtrar; “outras” reúne fontes de classificação mista. Arredondamentos conforme a pesquisa.</p></figure>`;
+  return `<figure class="matrix-chart" data-zoom-target data-zoom-title="Matriz elétrica brasileira, 2025"><figcaption><span>PARTICIPAÇÃO NA GERAÇÃO NACIONAL, %</span>${zoomButton('matriz elétrica brasileira, 2025')}</figcaption><div class="chart-rows">${rows.map(row => `<div class="chart-row${row.name === 'Nuclear' ? ' nuclear-row' : ''}" tabindex="0"><span>${row.name}</span><div class="bar-track"><i style="width:${row.value / 51.7 * 100}%"></i></div><b>${decimal(row.value)}%</b></div>`).join('')}</div><p class="visual-caption">EPE, Anuário 2026, ano-base 2025. A escala é mantida ao filtrar; “outras” reúne fontes de classificação mista. Arredondamentos conforme a pesquisa.</p></figure>`;
 }
 export const fuelSteps = [
   ['Mineração e beneficiamento', 'A rocha é extraída e processada para obter o concentrado de urânio. Caetité, na Bahia, integra essa etapa da cadeia brasileira.'],
@@ -45,9 +45,9 @@ export const fuelStages = [
   { icon: 'science', place: 'Exterior', operator: 'Serviço contratado', status: 'abroad', state: 'No exterior', map: 'exterior', extra: 'A conversão e parte do processamento podem envolver serviços no exterior. A edição não indica em quais países.', source: [['inb', 'Etapa “Conversão”: serviço contratado no exterior.']] },
   { icon: 'cyclone', place: 'Resende (RJ)', operator: 'INB', status: 'br', state: 'No Brasil, em etapas', map: 'resende', extra: 'Dominar a tecnologia não significa possuir, no mesmo momento, capacidade industrial para atender a toda a demanda.', source: ['inb', 'enrichment'] },
   { icon: 'factory', place: 'Resende (RJ)', operator: 'INB', status: 'br', state: 'No Brasil', map: 'resende', source: ['inb'] },
-  { icon: 'bolt', place: 'Angra dos Reis (RJ)', operator: 'Eletronuclear · Angra 1 e 2', status: 'br', state: 'No Brasil', map: 'angra', source: ['inb', 'waste'] },
+  { icon: 'bolt', place: 'Angra dos Reis (RJ)', operator: 'Eletronuclear, Angra 1 e 2', status: 'br', state: 'No Brasil', map: 'angra', source: ['inb', 'waste'] },
 ];
-export const fuelProject = { name: 'Santa Quitéria (Itataia, CE)', place: 'Santa Quitéria (CE)', operator: 'Projeto Santa Quitéria · INB', state: 'Projeto, não combustível disponível', text: 'O projeto, associado ao depósito de Itataia, no Ceará, aparece como possibilidade de ampliar a oferta. Reserva geológica, licenciamento e produção efetiva são situações distintas: um projeto não é combustível já disponível.' };
+export const fuelProject = { name: 'Santa Quitéria (Itataia, CE)', place: 'Santa Quitéria (CE)', operator: 'Projeto Santa Quitéria, INB', state: 'Projeto, não combustível disponível', text: 'O projeto, associado ao depósito de Itataia, no Ceará, aparece como possibilidade de ampliar a oferta. Reserva geológica, licenciamento e produção efetiva são situações distintas: um projeto não é combustível já disponível.' };
 const stageIcon = uiIcon;
 /** Conteúdo de um cartão de etapa, compartilhado pela versão estática e pelo explorador. */
 export function fuelStageInner(i) {
@@ -56,7 +56,7 @@ export function fuelStageInner(i) {
 }
 /** Infográfico estático (textura, impressão, leitura em página). A versão interativa vive em explorers.js. */
 export function cycleHTML() {
-  return `<figure class="fuel-infographic" aria-label="Ciclo do combustível nuclear no Brasil, em cinco etapas"><ol class="fuel-flow">${fuelSteps.map((_, i) => `<li class="fuel-stage fuel-card" data-status="${fuelStages[i].status}">${fuelStageInner(i)}</li>`).join('')}</ol><div class="fuel-notes"><p class="fuel-cake"><i class="cake-dot" aria-hidden="true"></i><span><strong>Yellow cake</strong> · etapa 1 → 2. Pó amarelado, rico em U3O8; ainda não é combustível.</span></p><p class="fuel-project"><strong>Santa Quitéria (Itataia, CE)</strong> · projeto que pode ampliar a oferta; reserva não é produção nem combustível.</p></div></figure>`;
+  return `<figure class="fuel-infographic" aria-label="Ciclo do combustível nuclear no Brasil, em cinco etapas"><ol class="fuel-flow">${fuelSteps.map((_, i) => `<li class="fuel-stage fuel-card" data-status="${fuelStages[i].status}">${fuelStageInner(i)}</li>`).join('')}</ol><div class="fuel-notes"><p class="fuel-cake"><i class="cake-dot" aria-hidden="true"></i><span><strong>Yellow cake</strong>, etapas 1 e 2. Pó amarelado, rico em U3O8; ainda não é combustível.</span></p><p class="fuel-project"><strong>Santa Quitéria (Itataia, CE)</strong> Projeto que pode ampliar a oferta; reserva não é produção nem combustível.</p></div></figure>`;
 }
 export const scenarios = [
   { name: 'Conservador', capacity: 75, tariff: 778.86, operating: 35 },
@@ -71,7 +71,7 @@ export function calculateScenario({ capacity = 85, tariff = 791.81, operating = 
   return { generation, revenue, cash, years: investment / cash };
 }
 export function scenarioTable() {
-  return `<div class="scenario-table"><table><caption>PAYBACK SIMPLES · ANOS DE OPERAÇÃO</caption><thead><tr><th>Cenário</th><th>Restante<br>R$ 23,9 bi</th><th>Total<br>R$ 35,9 bi</th></tr></thead><tbody>${scenarios.map(s => `<tr><th>${s.name}</th><td>${decimal(calculateScenario(s).years)}</td><td>${decimal(calculateScenario({ ...s, investment: 35.9 }).years)}</td></tr>`).join('')}</tbody></table><p class="visual-caption">Exercício do grupo, hipóteses de 2025. Valores em reais nominais; sem juros, impostos e cronograma completo. Não é orçamento vigente nem previsão de retorno.</p></div>`;
+  return `<div class="scenario-table"><table><caption>PAYBACK SIMPLES, ANOS DE OPERAÇÃO</caption><thead><tr><th>Cenário</th><th>Restante<br>R$ 23,9 bi</th><th>Total<br>R$ 35,9 bi</th></tr></thead><tbody>${scenarios.map(s => `<tr><th>${s.name}</th><td>${decimal(calculateScenario(s).years)}</td><td>${decimal(calculateScenario({ ...s, investment: 35.9 }).years)}</td></tr>`).join('')}</tbody></table><p class="visual-caption">Exercício do grupo, hipóteses de 2025. Valores em reais nominais; sem juros, impostos e cronograma completo. Não é orçamento vigente nem previsão de retorno.</p></div>`;
 }
 export const timeline = [
   { country: 'Alemanha', year: '2023', title: 'Encerramento dos últimos reatores', text: 'As três últimas centrais em operação encerraram a produção em 15 de abril de 2023, após um processo gradual de saída.', ref: 'germany' },

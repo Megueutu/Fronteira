@@ -30,31 +30,31 @@ export const references = [
 // Locators describe the material actually available; missing book pagination is explicit.
 const researchURL = 'https://github.com/Megueutu/Fronteira/blob/main/pesquisa/';
 const locations = {
-  epe: ['EPE · Anuário 2026', 'Destaques → Geração de Eletricidade; ano-base 2025.'],
-  ben: ['EPE · BEN 2026', 'Ano-base 2025; oferta interna de eletricidade.'],
-  sin: ['ONS · O que é o SIN', 'Descrição do sistema, subsistemas e integração da geração e transmissão.'],
-  santos: ['Santos e Silveira · O Brasil (2001)', 'Conceitos de espaços luminosos/opacos e meio técnico-científico-informacional; retomados na pesquisa do grupo, §3.3. Página da obra não informada no material fornecido.'],
-  iaea: ['AIEA · What is Nuclear Energy?', 'Seções “What is nuclear fission?” e “How does a nuclear power plant work?”.'],
-  waste: ['AIEA · Spent fuel management', 'Texto de abertura: armazenamento após a retirada do núcleo, reprocessamento/destinação e responsabilidades de longo prazo.'],
-  inb: ['INB · Ciclo do combustível nuclear', 'Descrição das etapas: mineração, conversão, enriquecimento, reconversão, pastilhas e montagem.'],
-  enrichment: ['INB · Enriquecimento', 'Descrição das ultracentrífugas e da ampliação industrial por etapas.'],
-  wallerstein: ['Wallerstein · World-Systems Analysis (2004)', 'Obra indicada na pesquisa, §8.3 e §9; conceitos de centro, semiperiferia e periferia. Página da obra não informada; link para a editora.'],
-  critique: ['Skocpol · crítica ao sistema-mundo (1977)', 'Artigo “Wallerstein’s World Capitalist System: A Theoretical and Historical Critique”; DOI 10.1086/226431.'],
-  cost: ['EPE · Nota de esclarecimento (11/04/2024)', 'Esclarecimento sobre Angra 3 e os limites das informações e estimativas então disponíveis.'],
-  group: ['Pesquisa do grupo · estudo ABNT revisto', 'Documento fornecido pelo grupo; seções identificadas em cada trecho.'],
-  weber: ['Weber · apoio: Stanford Encyclopedia', 'Verbete “Max Weber”, §3 (History), §4 (Modernity) e §6 (Politics and Ethics). Aplicação à energia elaborada pelo grupo.'],
-  messmer: ['INA · nuclear civil francês em 1974', 'Arquivo “Le lancement du nucléaire civil en France en 1974”. Recorte histórico, não avaliação da política atual.'],
-  germany: ['Governo alemão · encerramento nuclear', 'Comunicado de 13/04/2023 sobre o desligamento das últimas centrais em 15/04/2023.'],
-  belgium: ['Governo belga · acordo com a Engie', 'Acordo de 2023 sobre a extensão de Doel 4 e Tihange 3 por dez anos.'],
-  japan: ['Missão do Japão em Viena · AIEA (2015)', 'Declaração de 14/09/2015; trecho sobre Sendai e a retomada sob os novos requisitos.'],
-  italy: ['AIEA · Nuclear Technology Review 2012', 'Documento GC(56)/INF/3; passagem sobre o referendo italiano de junho de 2011. Sem página confirmada neste registro.'],
-  lithuania: ['Parlamento Europeu · Ignalina (2011)', 'Pergunta parlamentar E-008709/2011: encerramento e compromissos associados à adesão à União Europeia.'],
-  korea: ['MRE · experiências internacionais (2024)', 'Apresentação de maio de 2024; recorte sobre a Coreia do Sul. Página não registrada na pesquisa.'],
-  npt: ['ONU · Tratado de Não Proliferação', 'Artigos II, III e IV: armas, salvaguardas e usos pacíficos.'],
-  polis: ['Instituto Pólis · Justiça energética (2024)', 'Relatório de pesquisa; acesso, desigualdade e pobreza energética. Página não registrada na edição de origem.'],
-  interview: ['Entrevista · Adolfo Braid', 'Trajetória profissional, ciclo do combustível, matriz elétrica e propostas de microrreatores. Seções 1, 2, 4, 6 e 7; apresentação na seção 9.'],
-  'adolfo-abdan': ['ABDAN · Adolfo Braid', 'Nuclear Summit 2026 → Speakers → Adolfo Braid; função profissional e projetos citados no perfil.'],
-  'adolfo-cnen': ['CNEN · projeto de microrreator', 'Notícia sobre o início formal do projeto; passagem que identifica a participação de Adolfo Braid.'],
+  epe: ['EPE, Anuário 2026', 'Destaques / Geração de Eletricidade; ano-base 2025.'],
+  ben: ['EPE, BEN 2026', 'Ano-base 2025; oferta interna de eletricidade.'],
+  sin: ['ONS, O que é o SIN', 'Descrição do sistema, subsistemas e integração da geração e transmissão.'],
+  santos: ['Santos e Silveira, O Brasil (2001)', 'Conceitos de espaços luminosos/opacos e meio técnico-científico-informacional; retomados na pesquisa do grupo, §3.3. Página da obra não informada no material fornecido.'],
+  iaea: ['AIEA, What is Nuclear Energy?', 'Seções “What is nuclear fission?” e “How does a nuclear power plant work?”.'],
+  waste: ['AIEA, Spent fuel management', 'Texto de abertura: armazenamento após a retirada do núcleo, reprocessamento/destinação e responsabilidades de longo prazo.'],
+  inb: ['INB, Ciclo do combustível nuclear', 'Descrição das etapas: mineração, conversão, enriquecimento, reconversão, pastilhas e montagem.'],
+  enrichment: ['INB, Enriquecimento', 'Descrição das ultracentrífugas e da ampliação industrial por etapas.'],
+  wallerstein: ['Wallerstein, World-Systems Analysis (2004)', 'Obra indicada na pesquisa, §8.3 e §9; conceitos de centro, semiperiferia e periferia. Página da obra não informada; link para a editora.'],
+  critique: ['Skocpol, crítica ao sistema-mundo (1977)', 'Artigo “Wallerstein’s World Capitalist System: A Theoretical and Historical Critique”; DOI 10.1086/226431.'],
+  cost: ['EPE, Nota de esclarecimento (11/04/2024)', 'Esclarecimento sobre Angra 3 e os limites das informações e estimativas então disponíveis.'],
+  group: ['Pesquisa do grupo, estudo ABNT revisto', 'Documento fornecido pelo grupo; seções identificadas em cada trecho.'],
+  weber: ['Weber, apoio: Stanford Encyclopedia', 'Verbete “Max Weber”, §3 (History), §4 (Modernity) e §6 (Politics and Ethics). Aplicação à energia elaborada pelo grupo.'],
+  messmer: ['INA, nuclear civil francês em 1974', 'Arquivo “Le lancement du nucléaire civil en France en 1974”. Recorte histórico, não avaliação da política atual.'],
+  germany: ['Governo alemão, encerramento nuclear', 'Comunicado de 13/04/2023 sobre o desligamento das últimas centrais em 15/04/2023.'],
+  belgium: ['Governo belga, acordo com a Engie', 'Acordo de 2023 sobre a extensão de Doel 4 e Tihange 3 por dez anos.'],
+  japan: ['Missão do Japão em Viena, AIEA (2015)', 'Declaração de 14/09/2015; trecho sobre Sendai e a retomada sob os novos requisitos.'],
+  italy: ['AIEA, Nuclear Technology Review 2012', 'Documento GC(56)/INF/3; passagem sobre o referendo italiano de junho de 2011. Sem página confirmada neste registro.'],
+  lithuania: ['Parlamento Europeu, Ignalina (2011)', 'Pergunta parlamentar E-008709/2011: encerramento e compromissos associados à adesão à União Europeia.'],
+  korea: ['MRE, experiências internacionais (2024)', 'Apresentação de maio de 2024; recorte sobre a Coreia do Sul. Página não registrada na pesquisa.'],
+  npt: ['ONU, Tratado de Não Proliferação', 'Artigos II, III e IV: armas, salvaguardas e usos pacíficos.'],
+  polis: ['Instituto Pólis, Justiça energética (2024)', 'Relatório de pesquisa; acesso, desigualdade e pobreza energética. Página não registrada na edição de origem.'],
+  interview: ['Entrevista, Adolfo Braid', 'Trajetória profissional, ciclo do combustível, matriz elétrica e propostas de microrreatores. Seções 1, 2, 4, 6 e 7; apresentação na seção 9.'],
+  'adolfo-abdan': ['ABDAN, Adolfo Braid', 'Nuclear Summit 2026 / Speakers / Adolfo Braid; função profissional e projetos citados no perfil.'],
+  'adolfo-cnen': ['CNEN, projeto de microrreator', 'Notícia sobre o início formal do projeto; passagem que identifica a participação de Adolfo Braid.'],
 };
 for (const ref of references) {
   [ref.short,ref.location] = locations[ref.id];
@@ -64,15 +64,15 @@ for (const ref of references) {
   if (ref.id === 'santos') { ref.url = researchURL + 'ApostaEnergiaNuclearBrasilABNT%20revisto.docx'; ref.name = 'SANTOS, Milton. A natureza do espaço (1996). SANTOS; SILVEIRA. O Brasil: território e sociedade no início do século XXI (2001). Obras indicadas na pesquisa, §3.3; link para o documento do grupo, sem paginação confirmada dos livros.'; }
 }
 references.push(
-  {id:'wallerstein-bio',short:'THE · Immanuel Wallerstein, 1930-2019',name:'REISZ, Matthew. Immanuel Wallerstein, 1930-2019. Times Higher Education, 12 set. 2019.',url:'https://www.timeshighereducation.com/people/immanuel-wallerstein-1930-2019-obituary',location:'Obituário: formação em Columbia, atuação em Columbia, McGill, Binghamton e Yale, direção do Centro Fernand Braudel e The Modern World-System (1974).'},
-  {id:'tariff-study',short:'Pesquisa do grupo · PDF ABNT',name:'Pesquisa do grupo. Aposta Energia Nuclear Brasil, PDF ABNT. Tarifas por região.',url:researchURL+'Aposta_Energia_Nuclear_Brasil_ABNT.pdf',location:'Página 24, §5.1, Tabela 2; gráfico na p. 25, Figura 7. Valores da compilação Meutudo de 2026, reproduzidos conforme a pesquisa.'},
-  {id:'tariff-compilation',short:'Meutudo · tabela por região (2026)',name:'Meutudo. Tabela de consumo de energia elétrica (Luz) 2026, 14 jan. 2026.',url:'https://meutudo.com.br/blog/tabelas/tabela-de-consumo-de-energia-eletrica-luz/',location:'Seção “Tabelas de Tarifas de Energia Elétrica (Luz) por Região”. Limites ordenados conforme a Tabela 2 do PDF; a página consultada apresenta os títulos mínima/máxima invertidos.'},
-  {id:'aneel-tariffs',short:'ANEEL · Ranking das tarifas',name:'ANEEL. Ranking das Tarifas.',url:'https://www.gov.br/aneel/pt-br/assuntos/tarifas/ranking-das-tarifas',location:'Texto introdutório: unidades em R$/kWh e itens não contemplados nas tarifas homologadas, como tributos, iluminação pública e bandeiras.'},
-  {id:'fukushima',short:'AIEA · Fukushima Daiichi',name:'AIEA. Fukushima Daiichi Nuclear Accident.',url:'https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident',location:'Dossiê sobre o acidente de março de 2011, resposta e lições de segurança.'},
-  {id:'aeita',short:'AEITA · formação de Adolfo Braid',name:'AEITA. Apresentação profissional de Adolfo Braid.',url:'https://pt.linkedin.com/posts/aeita_nesta-sexta-feira-2111-%C3%A0s-18h-hor%C3%A1rio-activity-7396519091383042048-_j4Q',location:'Publicação de divulgação da palestra; apresentação da formação no IME, Berkeley e COPPE/UFRJ.'},
-  {id:'chernobyl',short:'AIEA · Chernobyl',name:'AIEA. Twenty Years After the Chernobyl Accident.',url:'https://www.iaea.org/newscenter/news/twenty-years-after-the-chernobyl-accident',location:'Texto sobre o acidente de abril de 1986, suas consequências e as lições para segurança.'},
-  {id:'abacc',short:'ABACC · acordos de salvaguardas',name:'ABACC. Agreements and Statements.',url:'https://www.abacc.org.br/en/agreements-and-statements/',location:'Acordo Quadripartite entre Brasil, Argentina, ABACC e AIEA para aplicação de salvaguardas.'},
-  {id:'itataia',short:'INB · Projeto Santa Quitéria',name:'INB. O que é o Projeto Santa Quitéria?',url:'https://www.inb.gov.br/Contato/Perguntas-Frequentes/Pergunta/Conteudo/o-que-e-o-projeto-santa-quiteria?Origem=1083',location:'Resposta sobre a jazida de Itataia, o projeto conjunto de mineração e o Consórcio Santa Quitéria.'},
+  {id:'wallerstein-bio',short:'THE, Immanuel Wallerstein, 1930-2019',name:'REISZ, Matthew. Immanuel Wallerstein, 1930-2019. Times Higher Education, 12 set. 2019.',url:'https://www.timeshighereducation.com/people/immanuel-wallerstein-1930-2019-obituary',location:'Obituário: formação em Columbia, atuação em Columbia, McGill, Binghamton e Yale, direção do Centro Fernand Braudel e The Modern World-System (1974).'},
+  {id:'tariff-study',short:'Pesquisa do grupo, PDF ABNT',name:'Pesquisa do grupo. Aposta Energia Nuclear Brasil, PDF ABNT. Tarifas por região.',url:researchURL+'Aposta_Energia_Nuclear_Brasil_ABNT.pdf',location:'Página 24, §5.1, Tabela 2; gráfico na p. 25, Figura 7. Valores da compilação Meutudo de 2026, reproduzidos conforme a pesquisa.'},
+  {id:'tariff-compilation',short:'Meutudo, tabela por região (2026)',name:'Meutudo. Tabela de consumo de energia elétrica (Luz) 2026, 14 jan. 2026.',url:'https://meutudo.com.br/blog/tabelas/tabela-de-consumo-de-energia-eletrica-luz/',location:'Seção “Tabelas de Tarifas de Energia Elétrica (Luz) por Região”. Limites ordenados conforme a Tabela 2 do PDF; a página consultada apresenta os títulos mínima/máxima invertidos.'},
+  {id:'aneel-tariffs',short:'ANEEL, Ranking das tarifas',name:'ANEEL. Ranking das Tarifas.',url:'https://www.gov.br/aneel/pt-br/assuntos/tarifas/ranking-das-tarifas',location:'Texto introdutório: unidades em R$/kWh e itens não contemplados nas tarifas homologadas, como tributos, iluminação pública e bandeiras.'},
+  {id:'fukushima',short:'AIEA, Fukushima Daiichi',name:'AIEA. Fukushima Daiichi Nuclear Accident.',url:'https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident',location:'Dossiê sobre o acidente de março de 2011, resposta e lições de segurança.'},
+  {id:'aeita',short:'AEITA, formação de Adolfo Braid',name:'AEITA. Apresentação profissional de Adolfo Braid.',url:'https://pt.linkedin.com/posts/aeita_nesta-sexta-feira-2111-%C3%A0s-18h-hor%C3%A1rio-activity-7396519091383042048-_j4Q',location:'Publicação de divulgação da palestra; apresentação da formação no IME, Berkeley e COPPE/UFRJ.'},
+  {id:'chernobyl',short:'AIEA, Chernobyl',name:'AIEA. Twenty Years After the Chernobyl Accident.',url:'https://www.iaea.org/newscenter/news/twenty-years-after-the-chernobyl-accident',location:'Texto sobre o acidente de abril de 1986, suas consequências e as lições para segurança.'},
+  {id:'abacc',short:'ABACC, acordos de salvaguardas',name:'ABACC. Agreements and Statements.',url:'https://www.abacc.org.br/en/agreements-and-statements/',location:'Acordo Quadripartite entre Brasil, Argentina, ABACC e AIEA para aplicação de salvaguardas.'},
+  {id:'itataia',short:'INB, Projeto Santa Quitéria',name:'INB. O que é o Projeto Santa Quitéria?',url:'https://www.inb.gov.br/Contato/Perguntas-Frequentes/Pergunta/Conteudo/o-que-e-o-projeto-santa-quiteria?Origem=1083',location:'Resposta sobre a jazida de Itataia, o projeto conjunto de mineração e o Consórcio Santa Quitéria.'},
 );
 
 const c = (id,location) => ({id,...(location ? {location} : {})});
@@ -86,7 +86,7 @@ const finance = study('§7, “Previsão de payback”: valores adotados, Tabela
 export const pageEvidence = {
   editorial: [analysis('iaea'),analysis('santos','sin'),analysis('wallerstein','enrichment'),{kind:'Proposta editorial do grupo',sources:[]}],
   unequal: [evidence('polis',study('§5.4, “Pobreza energética”.')),analysis('sin','polis')],
-  matrix: [evidence(c('epe','Destaques → Geração de Eletricidade: participação hidráulica e soma eólica + solar em 2025.'),study('§3.1, Tabela 1: composição por fonte; nuclear = 2,0%.')),evidence('epe','ben'),analysis('epe')],
+  matrix: [evidence(c('epe','Destaques / Geração de Eletricidade: participação hidráulica e soma eólica + solar em 2025.'),study('§3.1, Tabela 1: composição por fonte; nuclear = 2,0%.')),evidence('epe','ben'),analysis('epe')],
   territory: [evidence('sin'),analysis('sin','polis'),analysis('santos'),analysis(study('§3.3 e §5.5, “O caso Belo Monte: custo aqui, benefício ali”.'),'polis')],
   reactor: [evidence('iaea'),evidence(study('§2, descrição do ciclo nuclear e reatores de Angra.'),'iaea')],
   safety: [evidence('iaea','npt'),evidence('waste'),evidence('fukushima','chernobyl',study('§6, impactos dos acidentes nas decisões nacionais.')),analysis('waste','weber')],
@@ -104,7 +104,7 @@ export const pageEvidence = {
 };
 export const visualEvidence = {
   tariffs: {...evidence('tariff-study','tariff-compilation'),kind:'Dados reproduzidos da pesquisa'},
-  matrix: evidence(c('epe','Destaques → Geração de Eletricidade; dados por fonte reproduzidos na pesquisa, §3.1, Tabela 1.'),study('§3.1, Tabela 1: participação por fonte em 2025.')),
+  matrix: evidence(c('epe','Destaques / Geração de Eletricidade; dados por fonte reproduzidos na pesquisa, §3.1, Tabela 1.'),study('§3.1, Tabela 1: participação por fonte em 2025.')),
   reactor: evidence(c('iaea','Seções “What is nuclear fission?” e “How does a nuclear power plant work?”; esquema simplificado pela edição.')),
   cycle: evidence('inb','waste'),
   payback: {...evidence(finance),kind:'Cálculo da edição a partir de'},
@@ -136,10 +136,10 @@ export function pageSourceRecords(page) {
 }
 export function sourceButtonHTML(page,index) {
   const used=pageSourceRecords(page),count=used.length || references.length;
-  const names=[...new Set(used.map(ref=>ref.short.split(' · ')[0]))];
-  const preview=used.length ? names.slice(0,3).join(' · ')+(names.length>3?` · +${names.length-3}`:'') : 'Bibliografia e documentos da pesquisa';
+  const names=[...new Set(used.map(ref=>ref.short.split('; ')[0]))];
+  const preview=used.length ? names.slice(0,3).join(', ')+(names.length>3?`, +${names.length-3}`:'') : 'Bibliografia e documentos da pesquisa';
   const title=used.length?'Ver fontes desta matéria':'Fontes da edição';
-  return `<button type="button" class="source-link" data-action="sources" data-page="${index}" aria-label="${title}, ${page.folio ? 'página '+page.folio : page.readingLabel}, ${count} ${count===1?'referência':'referências'}" aria-haspopup="dialog"><span class="source-compact"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg><span>${used.length?'Ver fontes':'Fontes da edição'}</span><span class="source-count">${count}</span><span aria-hidden="true">${uiIcon("arrow_forward")}</span></span><span class="source-card-icon" aria-hidden="true"><svg class="reader-icon"><use href="#ui-menu_book"/></svg></span><span class="source-card-copy"><strong>${title}</strong><small>${count} ${count===1?'referência':'referências'} · ${escape(preview)}</small></span><svg class="reader-icon source-card-arrow" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button>`;
+  return `<button type="button" class="source-link" data-action="sources" data-page="${index}" aria-label="${title}, ${page.folio ? 'página '+page.folio : page.readingLabel}, ${count} ${count===1?'referência':'referências'}" aria-haspopup="dialog"><span class="source-compact"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg><span>${used.length?'Ver fontes':'Fontes da edição'}</span><span class="source-count">${count}</span><span aria-hidden="true">${uiIcon("arrow_forward")}</span></span><span class="source-card-icon" aria-hidden="true"><svg class="reader-icon"><use href="#ui-menu_book"/></svg></span><span class="source-card-copy"><strong>${title}</strong><small>${count} ${count===1?'referência':'referências'}, ${escape(preview)}</small></span><svg class="reader-icon source-card-arrow" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button>`;
 }
 export function sourceCardsHTML(page) {
   return `<div class="source-catalog">${pageSourceRecords(page).map(ref=>`<article class="source-document" data-document-source="${ref.id}"><header><span class="source-reference-number" aria-label="Referência ${references.findIndex(item=>item.id===ref.id)+1}">${references.findIndex(item=>item.id===ref.id)+1}</span><div><h3>${escape(ref.short)}</h3><small>${escape(new URL(ref.url).hostname.replace(/^www\./,''))}</small></div></header><p>${escape(ref.name)}</p><div class="source-document-locations"><strong>Onde encontrar a informação</strong><ul>${ref.locations.map(location=>`<li>${escape(location)}</li>`).join('')}</ul></div><a class="source-document-open" href="${escape(ref.url)}" target="_blank" rel="noopener noreferrer">Abrir fonte original <svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></a></article>`).join('')}</div>`;
@@ -147,7 +147,7 @@ export function sourceCardsHTML(page) {
 export function sourcePanelHTML(page,index) {
   const records=paragraphRecords(page);
   if (!records.length) return '';
-  return `<section class="page-evidence"><h3>${page.folio ? String(page.folio).padStart(2,'0')+' · ' : ''}${escape(page.title.replaceAll('\n',' '))}</h3>${records.map((record,i)=>record ? `<div class="evidence-entry"><h4>Trecho ${(page.sourceParagraphOffset || 0)+i+1} · ${escape((page.evidencePassages?.[i] || page.body[i] || page.title).split(/[.!?]/)[0])}</h4>${citationHTML(record)}</div>` : '').join('')}${pageVisualRecords(page).map(record=>citationHTML(record,{label:'Gráfico ou esquema'})).join('')}${page.balance ? citationHTML(analysis(...(page.refs || [])),{label:'Balanço: síntese do grupo com base em'}) : ''}</section>`;
+  return `<section class="page-evidence"><h3>${page.folio ? String(page.folio).padStart(2,'0')+', ' : ''}${escape(page.title.replaceAll('\n',' '))}</h3>${records.map((record,i)=>record ? `<div class="evidence-entry"><h4>Trecho ${(page.sourceParagraphOffset || 0)+i+1}, ${escape((page.evidencePassages?.[i] || page.body[i] || page.title).split(/[.!?]/)[0])}</h4>${citationHTML(record)}</div>` : '').join('')}${pageVisualRecords(page).map(record=>citationHTML(record,{label:'Gráfico ou esquema'})).join('')}${page.balance ? citationHTML(analysis(...(page.refs || [])),{label:'Balanço: síntese do grupo com base em'}) : ''}</section>`;
 }
 function paragraphRecords(page) {
   if(page.evidence) return page.evidence;
