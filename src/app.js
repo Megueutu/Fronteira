@@ -35,7 +35,7 @@ if (renderIndex !== null) {
   const sourcePanel = document.createElement('section');
   sourcePanel.id = 'reader-sources'; sourcePanel.className = 'reader-sources';
   sourcePanel.setAttribute('aria-label','Fontes dos trechos desta abertura');
-  document.querySelector('.navigation').after(sourcePanel);
+  document.querySelector('.reading-progress').after(sourcePanel);
   let sourceSelection = '';
   function update() {
     previous.disabled = turning || (single() ? pageIndex === 0 : spread() === 0);
