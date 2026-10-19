@@ -400,3 +400,8 @@
 #interaction-dialog.video-dialog #dialog-external:hover { background: #ffffff47; }
 #interaction-dialog.qr-dialog #dialog-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .qr-dialog .qr-card .qr-link { display: block; line-height: 0; }
+
+/* Popups sem barra de rolagem visível; o conteúdo continua rolando. */
+#interaction-dialog, #interaction-dialog * { scrollbar-width: none; -ms-overflow-style: none; }
+#interaction-dialog::-webkit-scrollbar, #interaction-dialog *::-webkit-scrollbar { display: none; width: 0; height: 0; }
+#download-pdf { text-decoration: none; }

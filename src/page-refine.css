@@ -6,3 +6,4 @@
 
 .page-surface .magazine-page.magazine-page.magazine-page:not(.linear-page):not(.page-cover) .page-main .columns p { font-size: var(--font-size-16); line-height: 1.45; margin-bottom: 13px; }
 .page-surface .magazine-page.magazine-page.magazine-page:not(.linear-page):not(.page-cover) .page-main .columns p:last-of-type { margin-bottom: 0; }
+.page-action-spacer { flex: 1; }

@@ -22,7 +22,8 @@
     "test:sources": "node tests/sources.browser.mjs",
     "test:3d": "node tests/reader-3d.browser.mjs",
     "render:textures": "node scripts/render-textures.mjs",
-    "build:pages": "node scripts/build-pages.mjs"
+    "build:pages": "node scripts/build-pages.mjs",
+    "build:pdf": "python scripts/build-pdf.py"
   },
   "engines": { "node": ">=22" }
 }

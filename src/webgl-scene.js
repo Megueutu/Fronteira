@@ -85,7 +85,7 @@ export async function create3DReader(onLost) {
       const page=pages[index];
       const primary=page.supplement ? {type:'interview',label:'Entrevista completa'} : page.action;
       const button=(type,label,kind)=>`<button type="button" class="hotspot ${kind}" data-side="${side}" data-action="${type}" data-page="${index}" aria-haspopup="dialog"><span>${label}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-${type==='sources'?'menu_book':'arrow_forward'}"/></svg></button>`;
-      return `<div class="page-hotspot-group" data-page="${index}" data-side="${side}">${button(primary.type,primary.label,'spread-page-action')}${page.folio ? button('sources','Fontes da página '+String(page.folio).padStart(2,'0'),'spread-source-action') : ''}</div>`;
+      return `<div class="page-hotspot-group" data-page="${index}" data-side="${side}">${primary ? button(primary.type,primary.label,'spread-page-action') : ''}${page.folio ? button('sources','Fontes da página '+String(page.folio).padStart(2,'0'),'spread-source-action') : ''}</div>`;
     }).join(''); updateHotspots();
   }
   const centerOf = value => { const opening=getOpening(value); return opening.leftIndex===null ? WIDTH/2 : opening.rightIndex===null ? -WIDTH/2 : 0; };

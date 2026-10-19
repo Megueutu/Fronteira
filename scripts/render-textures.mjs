@@ -2,6 +2,8 @@ import { mkdir,writeFile,readFile } from 'node:fs/promises';
 import { textureFingerprint, textureSources } from './texture-fingerprint.mjs';
 import { pages } from '../src/content.js';
 import { launchBrowser } from './chromium.mjs';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const base = process.env.TEST_URL || 'http://localhost:3000';
 const selected = process.argv.slice(2).map(value=>Number(value)-1);
@@ -42,3 +44,5 @@ try {
   await writeFile(new URL('../artifacts/page-layout.json',import.meta.url),JSON.stringify([...prior,...results].sort((a,b)=>a.index-b.index),null,2));
   if (results.some(row=>!fits(row)) || browser.errors.length) process.exitCode=1;
 } finally { await browser.close(); }
+// O PDF para download acompanha as texturas; sem Python disponível, o passo é ignorado com um aviso.
+try { console.log(execFileSync('python',[fileURLToPath(new URL('./build-pdf.py',import.meta.url))],{encoding:'utf8'}).trim()); } catch (error) { console.warn('PDF não regenerado:',String(error.message).split('\n')[0]); }
