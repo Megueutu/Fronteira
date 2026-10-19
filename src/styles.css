@@ -1,3 +1,4 @@
+@font-face { font-family: 'MontserratVariable'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/assets/fonts/MontserratVariable.woff2') format('woff2'); }
 @font-face { font-family: 'InterVariable'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/assets/fonts/InterVariable.woff2') format('woff2'); }
 @font-face { font-family: 'InterVariable'; font-style: italic; font-weight: 100 900; font-display: swap; src: url('/assets/fonts/InterVariable-Italic.woff2') format('woff2'); }
 :root {
@@ -716,26 +717,7 @@ summary { cursor: pointer; padding: 15px 0; color: var(--green); font-size: var(
 .interview-feature h2, .interview-feature h3, .interview-feature h4 { font-weight: 650; }
 
 /* A fotografia cobre a folha inteira; a capa não tem fólio ou rodapé editorial. */
-.magazine-page.edition-cover { padding: 0; display: block; background: #102d25; color: white; overflow: visible; }
-.edition-cover .cover-artwork { position: relative; display: block; width: 100%; height: 100%; min-height: 0; isolation: isolate; container-type: inline-size; }
-.edition-cover .cover-artwork::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg,#071c18a6 0%,#071c1840 40%,#071c180d 54%,#071c18d9 83%,#071c18f0 100%); }
-.cover-photograph { position: absolute; inset: 0; z-index: -2; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 27% center; }
-.cover-copy { position: absolute; left: 6.3%; right: 6.3%; top: 5.2%; }
-.cover-eyebrow { display: block; font: 550 calc(var(--type-step-12) * 100cqw / 760)/1.4 var(--sans); letter-spacing: .16em; color: #fff; margin-bottom: 3cqw; }
-.edition-cover .page-main .cover-title { color: white; margin: 0; font: 750 calc(var(--type-step-80) * 100cqw / 760)/.98 var(--sans); letter-spacing: -.055em; text-align: left; text-transform: none; overflow-wrap: normal; hyphens: none; }
-.edition-cover .cover-title > span { font-weight: 450; }
-.edition-cover .cover-deck { margin: 3cqw 0 0; max-width: 66%; color: #fff; font: 450 calc(var(--type-step-20) * 100cqw / 760)/1.45 var(--sans); text-wrap: pretty; }
-.cover-lower { position: absolute; left: 6.3%; right: 6.3%; bottom: 14%; display: flex; align-items: end; justify-content: space-between; gap: 3cqw; }
-.edition-cover .cover-callout { margin: 0; color: white; text-align: left; }
-.edition-cover .cover-callout strong { display: block; font: 650 calc(var(--type-step-28) * 100cqw / 760)/1.2 var(--sans); letter-spacing: -.02em; }
-.edition-cover .cover-callout > span { display: block; margin-top: 1.2cqw; font: 400 calc(var(--type-step-16) * 100cqw / 760)/1.5 var(--sans); }
-.cover-qr { display: grid; justify-items: center; gap: 5px; color: #112e24; background: #fff; padding: 8px; text-decoration: none; flex: none; width: 19%; }
-.cover-qr img { display: block; width: 100%; height: auto; }
-.cover-qr span { font: 600 calc(var(--type-step-10) * 100cqw / 760)/1.2 var(--sans); letter-spacing: .035em; }
-.cover-qr:focus-visible { outline-color: white; outline-offset: 5px; }
-.cover-imprint { position: absolute; left: 6.3%; right: 6.3%; bottom: 5%; display: flex; justify-content: space-between; align-items: end; gap: 20px; }
 .publisher-brand { display: block; width: 30%; height: auto; }
-.cover-barcode { display: block; width: 21%; height: auto; background: white; }
 
 /* Faces internas e quarta capa usam a marca como padrão discreto. */
 .magazine-page.page-decorative { padding: 0; display: block; background: #edf2ed; }
@@ -824,40 +806,6 @@ summary { cursor: pointer; padding: 15px 0; color: var(--green); font-size: var(
 .page-surface [data-page-id="interview-matrix"] .interview-page-photo img { max-height: 320px; }
 
 /* Capa orgânica: uma fotografia contínua, revelada por janelas em movimento. */
-.edition-cover .cover-artwork::after { background: none; }
-.cover-lava { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
-.edition-cover .cover-photograph { filter: saturate(.82); }
-.edition-cover .cover-copy { top: 8%; left: 32%; right: 6.3%; text-align: right; }
-.edition-cover .cover-eyebrow { font-size: calc(var(--type-step-10) * 100cqw / 760); letter-spacing: .12em; margin-bottom: 2.6cqw; }
-.edition-cover .page-main .cover-title { font-size: calc(var(--type-step-80) * 100cqw / 760); font-weight: 650; line-height: .98; letter-spacing: -.045em; text-transform: uppercase; text-align: right; }
-.edition-cover .cover-title > span { display: block; margin-top: 1.8cqw; font-size: .4em; font-weight: 450; letter-spacing: .02em; text-transform: none; }
-.edition-cover .cover-deck { margin: 4cqw 0 0 auto; max-width: 88%; font-weight: 450; text-align: right; }
-.edition-cover .cover-lower { top: 48%; bottom: auto; left: 52%; display: block; }
-.edition-cover .cover-callout { text-align: right; }
-.edition-cover .cover-callout strong { font-size: calc(var(--type-step-28) * 100cqw / 760); }
-.edition-cover .cover-qr { position: absolute; top: 44cqw; right: 0; width: 24cqw; max-width: 128px; box-sizing: border-box; }
-.edition-cover .cover-imprint { bottom: 5.8%; align-items: center; }
-.edition-cover .publisher-brand { width: 33%; }
-.lava-response { transform: translate(var(--lava-x,0px),var(--lava-y,0px)); transition: transform 1.4s ease-out; }
-.lava-window, .lava-accent { transform-box: fill-box; transform-origin: center; animation: cover-lava-float 18s ease-in-out infinite alternate; animation-play-state: paused; }
-.lava-window-b { animation-duration: 23s; animation-direction: alternate-reverse; }
-.lava-window-c { animation-duration: 27s; }
-.lava-accent-a { animation-duration: 21s; }
-.lava-accent-b { animation-duration: 26s; animation-direction: alternate-reverse; }
-.lava-accent-c { animation-duration: 16s; animation-direction: alternate-reverse; }
-.edition-cover[data-cover-active="true"] :is(.lava-window,.lava-accent) { animation-play-state: running; }
-.cover-motion-hidden :is(.lava-window,.lava-accent) { animation-play-state: paused; }
-@keyframes cover-lava-float { from { transform: translate(0,0) rotate(-3deg) scale(1,.97); } to { transform: translate(8px,-22px) rotate(4deg) scale(.96,1.07); } }
-.render-document :is(.lava-window,.lava-accent) { animation: none; }
-@media (prefers-reduced-motion: reduce) {
-  .edition-cover :is(.lava-window,.lava-accent) { animation: none; }
-  .edition-cover .lava-response { transform: none; transition: none; }
-}
-@media print { .edition-cover :is(.lava-window,.lava-accent) { animation: none; } }
-.edition-cover .cover-qr { top: 38cqw; }
-.edition-cover .cover-deck, .edition-cover .cover-callout { color: #08281a; }
-.edition-cover .cover-imprint .publisher-brand { filter: brightness(0); opacity: .8; }
-.edition-cover .cover-qr { top: 35cqw; width: 17cqw; max-width: none; padding: 1cqw; gap: .65cqw; }
 
 /* Miolo: 20 páginas de conteúdo, corpo editorial de 12 pt equivalentes. */
 .page-surface .magazine-page:not(.page-cover):not(.page-decorative) { padding: 30px 38px 24px; }
@@ -929,18 +877,6 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 .html-book.page-surface > .magazine-page { background-image: none; }
 
 /* Capa: grade editorial única, título aberto e assinatura fora da fotografia. */
-.edition-cover .cover-copy { top: 5.8%; left: 10.5%; right: 6.3%; text-align: left; }
-.edition-cover .cover-eyebrow { margin-bottom: 2.4cqw; font-size: calc(var(--type-step-12) * 100cqw / 760); letter-spacing: .14em; }
-.edition-cover .page-main .cover-title { font-size: calc(var(--type-step-96) * 100cqw / 760); font-weight: 600; line-height: .97; letter-spacing: -.055em; text-transform: none; text-align: left; }
-.edition-cover .cover-title > span { margin-top: 1.8cqw; font-size: calc(var(--type-step-40) * 100cqw / 760); font-weight: 450; letter-spacing: -.025em; }
-.edition-cover .cover-deck { margin: 4cqw 0 0 auto; max-width: 46.5%; font-size: calc(var(--type-step-20) * 100cqw / 760); line-height: 1.45; text-align: left; }
-.edition-cover .cover-lower { top: 47%; left: 55%; right: 6.3%; }
-.edition-cover .cover-callout { text-align: left; }
-.edition-cover .cover-callout strong { font-size: calc(var(--type-step-24) * 100cqw / 760); }
-.edition-cover .cover-qr { top: 30cqw; right: 8cqw; width: 15cqw; }
-.edition-cover .cover-imprint { left: 0; right: 0; bottom: 0; height: 9%; padding: 0 6.3%; box-sizing: border-box; background: #e5efca; align-items: center; }
-.edition-cover .cover-imprint .publisher-brand { width: 34%; filter: brightness(0); opacity: .85; }
-.edition-cover .cover-barcode { width: 20%; }
 
 /* Sumário: a mesma hierarquia e marcação na folha e no painel. */
 :is(.page-surface,.contents-drawer,.linear-content) .edition-index button { display: grid; grid-template-columns: 58px minmax(0,1fr) 24px; align-items: start; gap: 12px; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 16px 0; background: transparent; text-align: left; width: 100%; }
@@ -952,3 +888,33 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 :is(.page-surface,.contents-drawer,.linear-content) .edition-index button:hover { background: var(--soft); }
 .page-surface .page-contents .edition-index { column-gap: 28px; }
 .page-surface .page-contents .edition-index button { min-height: 108px; padding-top: 20px; padding-bottom: 20px; }
+
+/* Capas: Montserrat, lava lamp (WebGL), mapa pontilhado (canvas) e janelas fotográficas. Unidade --u = 1/760 da largura. */
+.magazine-page.edition-cover, .magazine-page.page-back-cover { padding: 0; display: block; overflow: hidden; background: #0d5233; color: #fff; }
+.edition-cover .cover-artwork, .page-back-cover .cover-artwork { --u: calc(100cqw / 760); position: relative; display: block; width: 100%; height: 100%; min-height: 0; isolation: isolate; container-type: inline-size; overflow: hidden; background: #0d5233; font-family: 'MontserratVariable', 'InterVariable', sans-serif; }
+.cover-lava-gl { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; }
+.edition-cover .cover-artwork::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, #0a5a33d9 0%, #0a5a33a6 28%, #0a5a3300 50%); }
+.cover-dots { position: absolute; z-index: 2; right: calc(24 * var(--u)); top: calc(46 * var(--u)); width: calc(430 * var(--u)); height: auto; pointer-events: none; }
+.cover-defs { position: absolute; }
+.cover-windows { position: absolute; inset: 0; z-index: 2; }
+.cover-photograph { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 27% center; filter: saturate(.88); }
+.edition-cover .cover-eyebrow { position: absolute; z-index: 3; top: calc(50 * var(--u)); left: calc(56 * var(--u)); right: calc(56 * var(--u)); display: flex; justify-content: space-between; margin: 0; font: 600 calc(12 * var(--u))/1 'MontserratVariable', sans-serif; letter-spacing: .22em; color: #fff; }
+.edition-cover .cover-copy { position: absolute; z-index: 3; left: calc(56 * var(--u)); right: calc(40 * var(--u)); top: calc(96 * var(--u)); }
+.edition-cover .page-main .cover-title { margin: 0; color: #fff; font: 800 calc(128 * var(--u))/.88 'MontserratVariable', sans-serif; letter-spacing: -.035em; text-transform: uppercase; text-align: left; text-wrap: nowrap; }
+.edition-cover .cover-title > span { display: block; margin-top: calc(26 * var(--u)); color: #d8f08a; font-size: calc(30 * var(--u)); font-weight: 600; line-height: 1; letter-spacing: .34em; text-transform: uppercase; }
+.edition-cover .cover-panel { position: absolute; z-index: 3; left: calc(316 * var(--u)); right: calc(56 * var(--u)); top: calc(452 * var(--u)); padding: calc(26 * var(--u)) calc(28 * var(--u)); background: #0a3d26; border-left: calc(5 * var(--u)) solid #a6d63a; }
+.edition-cover .cover-deck { margin: 0; color: #fff; font: 500 calc(17 * var(--u))/1.5 'MontserratVariable', sans-serif; text-align: left; text-wrap: pretty; }
+.edition-cover .cover-callout { margin: calc(18 * var(--u)) 0 0; padding-top: calc(16 * var(--u)); border-top: 1px solid #ffffff3d; text-align: left; }
+.edition-cover .cover-callout strong { display: block; color: #d8f08a; font: 800 calc(18 * var(--u))/1.2 'MontserratVariable', sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+.edition-cover .cover-callout > span { display: block; margin-top: calc(8 * var(--u)); color: #ffffffd9; font: 400 calc(13 * var(--u))/1.5 'MontserratVariable', sans-serif; }
+.edition-cover .cover-qr { position: absolute; z-index: 3; left: calc(548 * var(--u)); top: calc(716 * var(--u)); width: calc(104 * var(--u)); box-sizing: border-box; display: grid; justify-items: center; gap: calc(4 * var(--u)); padding: calc(7 * var(--u)); background: #fff; color: #0a3d26; text-decoration: none; }
+.edition-cover .cover-qr img { display: block; width: 100%; height: auto; }
+.edition-cover .cover-qr span { font: 700 calc(7 * var(--u))/1.2 'MontserratVariable', sans-serif; letter-spacing: .08em; }
+.edition-cover .cover-qr:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.edition-cover .cover-imprint { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: calc(96 * var(--u)); box-sizing: border-box; padding: 0 calc(56 * var(--u)); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; background: #0a3d26; border-top: calc(5 * var(--u)) solid #a6d63a; }
+.edition-cover .cover-issue { color: #cfe6c4; font: 600 calc(11 * var(--u))/1.6 'MontserratVariable', sans-serif; letter-spacing: .2em; }
+.edition-cover .cover-imprint .publisher-brand { width: calc(206 * var(--u)); height: auto; filter: none; opacity: 1; }
+.edition-cover .cover-barcode { justify-self: end; width: calc(96 * var(--u)); height: auto; padding: calc(4 * var(--u)); background: #fff; }
+.page-back-cover .cover-dots-back { left: 50%; right: auto; top: 50%; width: calc(640 * var(--u)); transform: translate(-50%, -64%); opacity: .55; }
+.page-back-cover .decorative-brand { z-index: 3; width: calc(330 * var(--u)); top: 50%; }
+.page-back-cover .back-caption { position: absolute; z-index: 3; left: 0; right: 0; bottom: calc(64 * var(--u)); margin: 0; text-align: center; color: #e1f2da; font: 600 calc(12 * var(--u))/2 'MontserratVariable', sans-serif; letter-spacing: .26em; text-transform: uppercase; }

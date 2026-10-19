@@ -219,3 +219,7 @@ A implementação usa SVG e CSS nativos: [máscaras SVG](https://developer.mozil
 ## Enquadramento do título — 2026-10-19
 
 Após revisão do responsável, o título da capa passa para o bloco superior direito, compartilhando o alinhamento das chamadas. O peso cai de 800 para 650, o corpo passa de 72 para 80 px na folha de referência e o complemento “no Brasil” mantém 32 px e peso 450. A linha de contexto usa 10 px e menor espaçamento. A linha fina ocupa uma largura maior para evitar quebras curtas. O botão de pausa fica no alto à esquerda, separado do título também no celular. Fotografia, formas, movimento e textos editoriais foram preservados.
+
+## Capa e quarta capa (2026-10-19)
+
+Decisão aceita e implementada: capa e quarta capa passam a usar Montserrat local (`assets/fonts/MontserratVariable.woff2`, OFL), título em caixa alta com 128 px na composição de 760 × 1064, painel verde escuro com o texto de apoio e faixa inferior com marca da editora centralizada, edição e código de barras. O fundo é uma lava lamp em WebGL2 (`src/lava-lamp.js`), adaptada do shader `metaballs` do Paper Shaders (Apache-2.0; licença e NOTICE em `assets/third-party/paper-shaders/`). O mapa do Brasil (`src/brasil-dots.js`, 491 pontos extraídos de `brasilpontilhado.svg`) é desenhado em canvas 2D. A fotografia única aparece em duas janelas orgânicas recortadas por `clip-path`. Sem movimento (`prefers-reduced-motion`) ou nas texturas 3D, ambos os canvases usam um quadro fixo. A quarta capa reutiliza lava lamp e mapa, com a marca centralizada. O restante da revista segue em Inter.

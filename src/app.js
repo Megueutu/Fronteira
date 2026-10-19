@@ -2,7 +2,7 @@ import { pages, pageHTML, getSpread, spreadForPage, clampSpread, formatPages, fo
 import { createInteractions } from './interactions.js';
 import { sourcePanelHTML } from './citations.js';
 import { createExplorers, refreshExplorers } from './explorers.js';
-import { installCoverMotion } from './cover-motion.js';
+import { installCoverMotion, mountCoverCanvases } from './cover-motion.js';
 
 const renderIndex = new URLSearchParams(location.search).get('render');
 if (renderIndex !== null) {
@@ -10,8 +10,10 @@ if (renderIndex !== null) {
   const sprite=document.querySelector('.reader-icon-sprite')?.outerHTML || '';
   document.body.className = 'render-document page-surface';
   document.body.innerHTML = sprite + pageHTML(pages[index],index,{digital:false});
+  mountCoverCanvases(document);
   await Promise.all([...document.images].map(img => img.decode().catch(() => {})));
   await document.fonts.ready;
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve,250))));
   document.body.dataset.ready = 'true';
 } else {
   installCoverMotion();
