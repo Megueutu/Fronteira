@@ -1,4 +1,14 @@
-# Revisão da edição de 20 páginas
+# Revisão da revista
+
+## Redesign visual e físico — 2026-10-18
+
+Implementado conforme a rodada aprovada em [EDITORIAL_REVIEW.md](EDITORIAL_REVIEW.md): título Energia Nuclear no Brasil, marca Fronteira fornecida, foto institucional única de Angra em alta resolução, Inter Variable local e capas sem fólio. A redistribuição preserva a redação e integra a entrevista em uma sequência de 36 faces e 19 aberturas. As quatro faces de capa fazem parte desse total; capa e quarta capa aparecem isoladas. O registro anterior de vinte páginas abaixo descreve a versão histórica.
+
+Ajuste de interface solicitado posteriormente: removidos edição/data, título e favicon visíveis no topo e o fundo interativo. Ícones Material de 24 px, setas da mesma família, contador físico uniforme (`02–03 / 36`) e ações de leitura em pílula tonal. O favicon permanece apenas na aba do navegador. A raiz continua limpa durante a navegação.
+
+Validação visual: as 36 faces foram renderizadas e inspecionadas em PNG e contact sheet. As medições verificam imagens, limites e respiro do rodapé; as texturas foram sincronizadas. O QR foi decodificado no PNG e no JPEG e retorna o endereço publicado. Há teste independente de preservação de parágrafos, notas, balanços, referências e entrevista.
+
+As suítes de navegador de interface unificada, rolagem, entrevista, citações, exploradores, tarifas, layout, tipografia, reator, fontes e 3D passaram no Chromium headless. Cobrem cinco larguras, três modos, foco/Escape, fontes e créditos, capas isoladas, cache e perda de contexto WebGL. A verificação de fontes foi adaptada ao rodapé horizontal: exige controles contidos e sem sobreposição. O teste geral de navegador também passou nas 36 faces e 19 aberturas. Os 20 testes unitários/build passaram, incluindo preservação editorial e integridade das texturas. Não houve validação em aparelhos físicos, Safari ou Firefox.
 
 ## Unificação da interface — 2026-10-18
 

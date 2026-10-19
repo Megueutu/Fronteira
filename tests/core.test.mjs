@@ -1,28 +1,33 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { pages, getSpread, clampSpread, formatPages } from '../src/content.js';
+import { pages, getSpread, getOpening, spreadForPage, spreadCount, clampSpread, formatPages } from '../src/content.js';
 import { pageGeometry, projection, projectPoint } from '../src/webgl-reader.js';
 import { matrixData, calculateScenario, scenarios, timeline } from '../src/data.js';
 import { chapters, references, pageHTML, teamMembers } from '../src/content.js';
 import { access, readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
+import { textureFingerprint } from '../scripts/texture-fingerprint.mjs';
 
 test('edição mantém páginas e limites válidos ao avançar e voltar', () => {
   assert.equal(clampSpread(-1), 0);
-  assert.equal(pages.length, 20);
-  assert.equal(clampSpread(99), 9);
-  assert.deepEqual(getSpread(2).map(p => p.id), ['matrix', 'territory']);
-  assert.equal(formatPages(2), '05 — 06 / 20');
+  assert.equal(pages.length % 4, 0);
+  assert.equal(clampSpread(99), spreadCount - 1);
+  assert.deepEqual(getSpread(0).map(p => p.id), ['cover']);
+  assert.equal(formatPages(0), `01 / ${pages.length}`);
+  assert.equal(getOpening(0).left, null);
+  assert.equal(getOpening(spreadCount - 1).right, null);
+  const sequence = Array.from({length:spreadCount},(_,i)=>getSpread(i)).flat();
+  assert.deepEqual(sequence.map(page=>page.id),pages.map(page=>page.id));
+  for (let i=0;i<pages.length;i++) assert.ok(getSpread(spreadForPage(i)).includes(pages[i]));
   assert.equal(new Set(pages.map(p => p.id)).size, pages.length);
 });
 
 test('edição tem fontes, ações e destinos válidos, sem omitir os cinco temas', async () => {
   const ids = new Set(references.map(ref => ref.id));
   for (const [index,page] of pages.entries()) {
-    assert.ok(page.action.type && page.action.label);
-    assert.ok(page.body.length);
+    assert.ok(page.action === null || (page.action.type && page.action.label));
+    assert.ok(Array.isArray(page.body));
     assert.ok((page.refs || []).every(ref => ids.has(ref)), page.id);
-    assert.match(pageHTML(page,index), /class="columns"/);
+    assert.match(pageHTML(page,index), /class="magazine-page/);
     if (page.image) await access(new URL(`..${page.image.src}`,import.meta.url));
   }
   assert.ok(chapters.every(ch => ch.page >= 0 && ch.page < pages.length));
@@ -52,11 +57,10 @@ test('payback respeita unidades, sensibilidade e hipóteses inválidas', () => {
   assert.throws(()=>calculateScenario({tariff:NaN}),RangeError);
 });
 
-test('as vinte texturas correspondem ao conteúdo e à composição versionados', async () => {
-  const source = await Promise.all(['src/content.js','src/data.js','src/styles.css','src/citations.js','src/explorers.js'].map(async name=>(await readFile(new URL(`../${name}`,import.meta.url),'utf8')).replaceAll('\r\n','\n')));
+test('as texturas correspondem ao conteúdo e à composição versionados', async () => {
   const manifest = JSON.parse(await readFile(new URL('../assets/textures/MANIFEST.json',import.meta.url),'utf8'));
   assert.equal(manifest.pages,pages.length);
-  assert.equal(manifest.sha256,createHash('sha256').update(source.join('')).digest('hex'),'regenere as texturas após alterar conteúdo ou diagramação');
+  assert.equal(manifest.sha256,await textureFingerprint(),'regenere as texturas após alterar conteúdo ou diagramação');
   for (let i=1;i<=pages.length;i++) await access(new URL(`../assets/textures/page-${String(i).padStart(2,'0')}.jpg`,import.meta.url));
 });
 

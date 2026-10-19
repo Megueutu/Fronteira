@@ -1,5 +1,11 @@
 # Estrutura editorial da edição
 
+## Edição vigente — 36 faces
+
+Em 18/10/2026, o responsável aprovou a revisão visual sem alterações na redação. A edição tem capa fotográfica isolada, segunda capa com introdução, sumário, equipe, editorial em duas faces, cinco temas com continuações para preservar o corpo maior, entrevista integrada em sete faces, balanço, transparência, referências, terceira capa e quarta capa isolada. São 36 faces e 19 aberturas. A numeração editorial é independente da posição física; as quatro faces de capa não têm fólio.
+
+Os dados anteriores foram preservados e são conferidos por fixture e testes. Consulte [EDITORIAL_REVIEW.md](EDITORIAL_REVIEW.md) e o mapa `src/pagination.js`. A estrutura de vinte páginas abaixo registra a edição anterior e a origem da reorganização.
+
 Status: edição digital de 20 páginas, autorizada em 2026-10-16. A proposta foi consolidada após o responsável confirmar branco e verde, fotografia, interatividade, colunas justificadas e cinco temas que acomodam os demais assuntos do DOCX.
 
 ## Identidade e método

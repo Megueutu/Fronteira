@@ -1,5 +1,20 @@
 # Design system da edição
 
+## Ajuste final dos controles
+
+O topo não exibe título, favicon ou identificação da edição. Todos os ícones da barra têm 24 px. Controles de leitura usam pílulas tonais iguais à referência do seletor de modo: superfície neutra, ação principal verde clara, raios constantes. O contador apresenta somente posições físicas uniformes, como `02–03 / 36`. O fundo é estático; a animação orgânica e seu módulo foram removidos. As referências históricas ao fundo abaixo descrevem etapas anteriores.
+
+## Direção fotográfica sem serifa (2026-10-18)
+
+Decisão aceita pelo responsável: uma única família sem serifa, capa fotográfica integral com título da revista em primeiro plano e marca fornecida da editora na base. Inter Variable 4.1 é incorporada localmente em WOFF2 normal e itálico, sob SIL Open Font License 1.1. A licença acompanha `assets/fonts/LICENSE.txt`; origem: [projeto oficial](https://github.com/rsms/inter/releases/tag/v4.1). Não depende de CDN. `--sans` e o alias legado `--serif` apontam ambos para InterVariable; Georgia, Arial e Segoe UI deixam de ser famílias ativas.
+
+Corpo inicial de 20 px lógicos e entrelinha 1,55 nas folhas, títulos de 40 px em matérias de texto/dados e 64 px nas aberturas, com peso 650, linha fina de 18/20 px. A abertura antes da refatoração media 78,4% em 1440 × 1024: 20 px lógicos equivalem a cerca de 15,7 px aparentes nessa escala. O enquadramento final precisa ser medido; esse cálculo não é promessa de tamanho idêntico em todas as telas. A redistribuição de parágrafos é autorizada, sem cortes ou redução da entrelinha para preservar quantidade de páginas. Na leitura móvel, corpo de 18 px, uma coluna e alinhamento à esquerda. A reportagem desktop conserva duas colunas balanceadas, justificação por palavras, última linha natural e hifenização em português.
+
+A capa de `src/editorial-cover.js` ocupa 760 × 1064 px sem fólio, faixa de fontes ou margens. Fotografia única de Angra, título Energia Nuclear no Brasil, linha fina e chamadas existentes, QR para a publicação no GitHub Pages, código de barras decorativo e marca da editora. A introdução original é transferida integralmente à face interna. Faces internas e quarta capa usam padrões discretos e a marca fornecida; controles continuam usando Material Symbols do sprite. Fotografia não recebe preenchimento generativo ou reconstrução de estruturas.
+
+Implementação e revisão visual estão em curso nesta etapa. A sondagem isolada da nova capa confirmou folha e arte de 760 × 1064, fontes carregadas e quatro recursos presentes (fotografia, QR, marca e código de barras). Após a integração, uma sondagem percorreu as 36 faces na composição fixa: nenhum transbordamento vertical e conteúdo pelo menos 10 px antes do rodapé. O corpo permaneceu em 20 px/1,55. Ações, consulta às fontes e fólio dividem uma faixa horizontal com alvos de 44 px; a bibliografia usa duas colunas. A entrevista fixa apresenta suas fontes completas na camada própria, mantendo as referências próximas na leitura fluida. A geração das texturas e a validação final ainda precisam ser concluídas. As seções históricas abaixo registram a composição anterior e ficam superadas por esta decisão nos pontos de tipografia e capa.
+
+
 ## Interface unificada em 2026-10-18
 
 Por pedido do responsável, a revista na raiz mantém as páginas, a tipografia editorial e os leitores da Fronteira, mas adota a interface da Energia Atômica: barra compacta em superfície neutra, seleção tonal verde, ícones Material Symbols Rounded locais, zoom, sumário lateral e fundo orgânico. A referência é [ENERGIA_ATOMICA_DESIGN_SYSTEM.md](ENERGIA_ATOMICA_DESIGN_SYSTEM.md); as regras da interface ficam em `src/reader-shell.css`, sem alterar o layout das páginas. O modo inicial passa a ser HTML. Os raios dos controles permanecem fixos em todos os estados. Abaixo de 860 px a barra ocupa duas linhas e o zoom é ocultado; os três modos continuam acessíveis. O conteúdo anterior deste documento descreve a composição editorial que foi preservada.

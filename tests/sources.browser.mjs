@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {launchBrowser} from '../scripts/chromium.mjs';
-import {pages} from '../src/content.js';
+import {pages,pageIndexForId} from '../src/content.js';
 import {pageSourceRecords} from '../src/citations.js';
 const b=await launchBrowser({timeout:180000});
-const base=process.env.TEST_URL || 'http://127.0.0.1:4317';
+const base=process.env.TEST_URL || 'http://localhost:3000';
 const root='#landing-reactor .source-link';
 await mkdir('artifacts/sources',{recursive:true});
 const frame=async name=>{
@@ -14,9 +14,9 @@ const frame=async name=>{
 };
 const close=async()=>{await b.key('Escape','Escape',27);await b.waitFor("!document.querySelector('#interaction-dialog').open");};
 try {
- await b.viewport(1440,900);await b.navigate(base+'/?template=landing&page=7');
+ await b.viewport(1440,900);await b.navigate(base+`/?template=landing&page=${pageIndexForId('reactor')+1}`);
  await b.waitFor(`document.querySelector('${root} .source-card-copy')`);
- const expected=pageSourceRecords(pages[6]);
+ const expected=pageSourceRecords(pages[pageIndexForId('reactor')]);
  assert.ok((await b.evaluate(`document.querySelector('${root}').innerText`)).includes(`${expected.length} referências`));
  assert.ok((await b.evaluate(`document.querySelector('${root}').innerText`)).includes('AIEA'));
  assert.equal(await b.evaluate(`getComputedStyle(document.querySelector('${root} .source-compact')).display`),'none');
@@ -51,13 +51,13 @@ try {
   await close();
  }
  await b.viewport(1440,900);await b.click('[data-mode="html"]');
- await b.click('#open-index');await b.click('dialog [data-jump="6"]');
- const compact='.html-book [data-page-index="6"] .source-link';
+ await b.click('#open-index');await b.click(`dialog [data-jump="${pageIndexForId('reactor')}"]`);
+ const compact=`.html-book [data-page-index="${pageIndexForId('reactor')}"] .source-link`;
  await b.waitFor(`document.querySelector('${compact}')`);
  assert.notEqual(await b.evaluate(`getComputedStyle(document.querySelector('${compact} .source-compact')).display`),'none');
  assert.equal(await b.evaluate(`document.querySelector('${compact} .source-count').textContent`),String(expected.length));
  assert.equal(await b.evaluate(`getComputedStyle(document.querySelector('${compact}')).minHeight`),'44px');
- assert.ok(await b.evaluate(`(()=>{const button=document.querySelector('${compact}'),footer=button.closest('.page-tail'),action=footer.querySelector('.page-action');return button.getBoundingClientRect().top>=action.getBoundingClientRect().bottom})()`));
+ assert.ok(await b.evaluate(`(()=>{const button=document.querySelector('${compact}'),footer=button.closest('.page-tail'),action=footer.querySelector('.page-action'),a=button.getBoundingClientRect(),c=action.getBoundingClientRect(),f=footer.getBoundingClientRect();return (a.left>=c.right||c.left>=a.right||a.top>=c.bottom||c.top>=a.bottom)&&a.left>=f.left&&a.right<=f.right+.25&&a.top>=f.top&&a.bottom<=f.bottom+.25})()`),'source and action controls fit the footer without overlap');
  await frame('footer-paginated');
  await b.waitFor("!document.querySelector('#interaction-dialog').open");
  await b.evaluate(`document.querySelector('${compact}').focus({preventScroll:true})`);
@@ -66,9 +66,9 @@ try {
  assert.equal(await b.evaluate("document.querySelectorAll('.source-document').length"),expected.length);
  await close();assert.ok(await b.evaluate(`document.activeElement===document.querySelector('${compact}')`));
  await b.click('[data-mode="3d"]');
- await b.click('#open-index');await b.click('dialog [data-jump="6"]');
+ await b.click('#open-index');await b.click(`dialog [data-jump="${pageIndexForId('reactor')}"]`);
  await b.waitFor("document.querySelector('#loading').hidden && document.querySelector('#book-canvas').dataset.textureCount==='2'");
- await b.click('#read-spread');await b.click('dialog [data-page-index="6"] .source-link');
+ await b.click('#read-spread');await b.click(`dialog [data-page-index="${pageIndexForId('reactor')}"] .source-link`);
  await b.waitFor("document.querySelector('.source-catalog')");
  assert.equal(await b.evaluate("document.querySelectorAll('.source-document').length"),expected.length);
  await b.key('Escape','Escape',27);await b.waitFor("document.querySelector('.linear-content') && document.activeElement.matches('.source-link')");

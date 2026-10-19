@@ -1,19 +1,18 @@
-import { pages, pageHTML, clampSpread, formatPages, interviewHTML } from './content.js';
+import { pages, pageHTML, getSpread, spreadForPage, clampSpread, formatPages } from './content.js';
 import { createInteractions } from './interactions.js';
 import { sourcePanelHTML } from './citations.js';
 import { createExplorers, refreshExplorers } from './explorers.js';
-import { initializeBackground } from './reader-shell.js';
 
 const renderIndex = new URLSearchParams(location.search).get('render');
 if (renderIndex !== null) {
   const index = Math.max(0,Math.min(pages.length - 1,Number(renderIndex) || 0));
+  const sprite=document.querySelector('.reader-icon-sprite')?.outerHTML || '';
   document.body.className = 'render-document';
-  document.body.innerHTML = pageHTML(pages[index],index,{digital:false});
+  document.body.innerHTML = sprite + pageHTML(pages[index],index,{digital:false});
   await Promise.all([...document.images].map(img => img.decode().catch(() => {})));
   await document.fonts.ready;
   document.body.dataset.ready = 'true';
 } else {
-  initializeBackground();
   const stage = document.querySelector('#stage');
   const book = document.querySelector('#html-book');
   const landing = document.querySelector('#landing-view');
@@ -26,7 +25,9 @@ if (renderIndex !== null) {
   const interactions = createInteractions(jump);
   let landingObserver;
   const single = () => mode === 'landing' || (mobile.matches && mode === 'html');
-  const spread = () => Math.floor(pageIndex / 2);
+  const spread = () => spreadForPage(pageIndex);
+  const firstInOpening = index => pages.indexOf(getSpread(index)[0]);
+  const selectedPages = () => single() ? [pages[pageIndex]] : getSpread(spread());
   const previous = document.querySelector('#previous'), next = document.querySelector('#next');
   const sourcePanel = document.createElement('section');
   sourcePanel.id = 'reader-sources'; sourcePanel.className = 'reader-sources';
@@ -36,23 +37,22 @@ if (renderIndex !== null) {
   function update() {
     previous.disabled = turning || (single() ? pageIndex === 0 : spread() === 0);
     next.disabled = turning || (single() ? pageIndex === pages.length - 1 : spread() === clampSpread(999));
-    document.querySelector('#page-status').textContent = single() ? `${String(pageIndex + 1).padStart(2,'0')} / ${pages.length}` : formatPages(spread());
+    document.querySelector('#page-status').textContent = single() ? `${String(pageIndex+1).padStart(2,'0')} / ${pages.length}` : formatPages(spread());
+    document.querySelector('#page-status').setAttribute('aria-label',`Posição ${selectedPages().map(page=>pages.indexOf(page)+1).join(' e ')} de ${pages.length}`);
     document.querySelector('#section-label').textContent = pages[pageIndex].section;
-    initializeBackground.setSection?.(pageIndex);
     document.querySelector('.context-label').textContent = mode === 'landing' ? 'Nesta seção' : 'Nesta abertura';
     document.querySelector('.nav-caption').textContent = mode === 'landing' ? 'Seções' : 'Páginas';
     stage.setAttribute('aria-busy',String(turning));
     stage.classList.toggle('turning',turning);
-    const sourceKey = `${mode}:${single() ? pageIndex : spread()*2}:${single()}`;
+    const sourceKey = `${mode}:${single() ? pageIndex : spread()}:${single()}`;
     sourcePanel.hidden = mode === 'landing';
     if (sourceKey !== sourceSelection) {
       sourceSelection = sourceKey;
-      const first = single() ? pageIndex : spread()*2;
-      const blocks = pages.slice(first,first+(single()?1:2)).map((page,i)=>sourcePanelHTML(page,first+i)).join('');
+      const blocks = selectedPages().map(page=>sourcePanelHTML(page,pages.indexOf(page))).join('');
       sourcePanel.innerHTML = blocks ? `<h2>De onde vêm as informações desta abertura</h2><p>Fontes por trecho, com o local da informação no site ou documento. As interpretações e propostas são identificadas como trabalho do grupo.</p><div class="spread-evidence">${blocks}</div>` : '';
       sourcePanel.hidden ||= !blocks;
     } else if (!sourcePanel.children.length) sourcePanel.hidden = true;
-    document.querySelector('#reading-progress').style.width = `${(single() ? pageIndex + 1 : Math.min(spread() * 2 + 2,pages.length)) / pages.length * 100}%`;
+    document.querySelector('#reading-progress').style.width = `${(single() ? pageIndex + 1 : Math.max(...selectedPages().map(page=>pages.indexOf(page)))+1) / pages.length * 100}%`;
     // Links antigos são lidos na abertura; a navegação mantém apenas a raiz visível.
     history.replaceState({ ...history.state, reader: { mode, page: pageIndex + 1 } },'',location.pathname);
   }
@@ -71,17 +71,16 @@ if (renderIndex !== null) {
       landing.innerHTML = pages.map((page,index) => pageHTML(page,index,{flow:true})).join('');
       landing.querySelectorAll('.magazine-page').forEach((article,index) => {
         article.id = `landing-${pages[index].id}`;
-        const title = article.querySelector('h2');
+        const title = article.querySelector('h2') || article.insertBefore(Object.assign(document.createElement('h2'),{textContent:pages[index].readingLabel || pages[index].title,className:'sr-only'}),article.firstChild);
         title.id = `landing-title-${index}`; title.tabIndex = -1;
         article.setAttribute('aria-labelledby',title.id); article.removeAttribute('aria-label');
         article.querySelectorAll('img').forEach(img => { img.loading = index === 0 ? 'eager' : 'lazy'; });
       });
-      landing.querySelector('#landing-public').insertAdjacentHTML('afterend',interviewHTML({inline:true}));
       const cover = landing.firstElementChild;
       const oldTitle = cover.querySelector('h2'), title = document.createElement('h1');
         title.id = oldTitle.id; title.className = oldTitle.className; title.tabIndex = -1; title.innerHTML = oldTitle.innerHTML; oldTitle.replaceWith(title);
       const actions = document.createElement('div'); actions.className = 'landing-cover-actions';
-      actions.innerHTML = '<button type="button" data-jump="1">Explore a edição <svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button><span>20 páginas · 5 temas</span>';
+      actions.innerHTML = `<button type="button" data-jump="${pages.findIndex(page=>page.id==='contents')}">Explore a edição <svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button><span>5 temas · entrevista</span>`;
       cover.querySelector('.page-main').append(actions);
     }
     observeLanding(); refreshExplorers(landing);
@@ -97,22 +96,22 @@ if (renderIndex !== null) {
     if (mode === 'landing') { observeLanding(); return; }
     const availableWidth = Math.max(300,stage.clientWidth - (mobile.matches ? 20 : 70));
     const availableHeight = Math.max(430,Math.min(950,innerHeight - (mobile.matches ? 200 : 190)));
-    const count = single() ? 1 : 2;
+    const count = selectedPages().length;
     const scale = Math.min(availableWidth / (760 * count), availableHeight / 1064) * zoom;
     const frame = document.querySelector('#html-view');
     frame.style.width = `${760 * count * scale}px`; frame.style.height = `${1064 * scale}px`;
     book.style.transform = `scale(${scale})`; book.style.width = `${760 * count}px`;
     book.classList.toggle('single-page',single());
+    book.classList.toggle('closed-book',count===1 && !single());
     const stageHeight = mode === '3d' ? Math.min(availableHeight + 96,Math.max(340,stage.clientWidth / 1.43 + 144)) : Math.max(availableHeight + 30,1064 * scale + 30);
     stage.style.setProperty('--stage-height',`${stageHeight}px`);
   }
   function showHTML(animate = false, direction = 1) {
     if (mode === 'landing') { showLanding(); return; }
-    const old = book.querySelectorAll('article')[direction > 0 ? 1 : 0]?.cloneNode(true);
+    const old = [...book.querySelectorAll(':scope > article')].at(direction > 0 ? -1 : 0)?.cloneNode(true);
     clearTimeout(timer);
-    const start = single() ? pageIndex : spread() * 2;
-    const selection = pages.slice(start,start + (single() ? 1 : 2));
-    book.innerHTML = selection.map((page,i) => pageHTML(page,start + i,{digital:single()})).join('');
+    const selection = selectedPages();
+    book.innerHTML = selection.map(page => pageHTML(page,pages.indexOf(page),{digital:single()})).join('');
     layout(); refreshExplorers(book);
     if (animate && !single() && !matchMedia('(prefers-reduced-motion: reduce)').matches && old) {
       const sheet = document.createElement('div'); sheet.className = `turn-sheet ${direction > 0 ? 'forward' : 'backward'}`; sheet.inert = true; sheet.setAttribute('aria-hidden','true'); sheet.append(old); book.append(sheet); timer = setTimeout(() => sheet.remove(),600);
@@ -120,8 +119,8 @@ if (renderIndex !== null) {
   }
   async function navigate(delta) {
     if (turning || interactions.isOpen()) return;
-    const target = single() ? Math.max(0,Math.min(pages.length - 1,pageIndex + delta)) : clampSpread(spread() + delta) * 2;
-    if (target === pageIndex || (!single() && Math.floor(target / 2) === spread())) return;
+    const target = single() ? Math.max(0,Math.min(pages.length - 1,pageIndex + delta)) : firstInOpening(clampSpread(spread() + delta));
+    if (target === pageIndex || (!single() && spreadForPage(target) === spread())) return;
     if (mode === 'landing') { jump(target); return; }
     const from = spread(), request = ++turnId;
     pageIndex = target; turning = true; update();
@@ -133,7 +132,7 @@ if (renderIndex !== null) {
   }
   async function jump(index) {
     pageIndex = Math.max(0,Math.min(pages.length - 1,index)); turning = false; ++turnId; renderer?.cancel();
-    if (!single()) pageIndex = Math.floor(pageIndex / 2) * 2;
+    if (!single()) pageIndex = firstInOpening(spread());
     showHTML(); update();
     if (mode === 'landing') { const target = pageIndex; requestAnimationFrame(() => { pageIndex = target; scrollLanding({focus:true}); update(); }); return; }
     if (mode === '3d' && renderer && !failed) { try { await renderer.show(spread()); } catch { showGraphicsError(); } }
@@ -153,10 +152,9 @@ if (renderIndex !== null) {
     const previousMode = mode;
     landingObserver?.disconnect();
     mode = value; turning = false; ++turnId; renderer?.cancel();
-    initializeBackground.setMode?.(mode);
     document.body.dataset.readerMode = mode;
     stage.hidden = mode === 'landing'; landing.hidden = mode !== 'landing';
-    if (!single()) pageIndex = Math.floor(pageIndex / 2) * 2;
+    if (!single()) pageIndex = firstInOpening(spread());
     document.querySelectorAll('[data-mode]').forEach(button => button.setAttribute('aria-pressed',String(button.dataset.mode === mode)));
     document.querySelector('#html-view').hidden = mode !== 'html';
     document.querySelector('#webgl-view').hidden = mode !== '3d';
@@ -183,7 +181,7 @@ if (renderIndex !== null) {
   document.querySelector('#zoom-in').addEventListener('click',() => { zoom = Math.min(1.5,zoom + .15); layout(); document.querySelector('#zoom-status').textContent = `${Math.round(zoom * 100)}%`; });
   document.querySelector('#zoom-out').addEventListener('click',() => { zoom = Math.max(.85,zoom - .15); layout(); document.querySelector('#zoom-status').textContent = `${Math.round(zoom * 100)}%`; });
   for (const id of ['zoom-reset','zoom-fit']) document.querySelector(`#${id}`).addEventListener('click',() => { zoom = 1; layout(); document.querySelector('#zoom-status').textContent = '100%'; });
-  document.querySelector('#fullscreen').addEventListener('click',async () => { try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); } catch { document.querySelector('#fullscreen').textContent = 'Indisponível'; } });
+  document.querySelector('#fullscreen').addEventListener('click',async () => { try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); } catch { const button=document.querySelector('#fullscreen'); button.title='Tela cheia indisponível neste navegador'; button.disabled=true; } });
   document.addEventListener('keydown',event => {
     if (event.defaultPrevented || interactions.isOpen() || event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input,textarea,select,[contenteditable],[data-explorer]')) return;
     if (['ArrowRight','ArrowLeft'].includes(event.key)) { event.preventDefault(); navigate(event.key === 'ArrowRight' ? 1 : -1); }

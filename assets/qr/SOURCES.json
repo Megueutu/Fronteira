@@ -1,0 +1,15 @@
+{
+  "target": "https://megueutu.github.io/Fronteira/",
+  "file": "site.svg",
+  "encoder": "Nayuki QR Code generator, Python",
+  "encoderCommit": "3c6d0b3cefb4e049dc337e82237c9644399716a8",
+  "encoderSource": "https://github.com/nayuki/QR-Code-generator",
+  "license": "MIT; full notice retained in scripts/vendor/qrcodegen.py",
+  "generator": "python scripts/generate-qr.py",
+  "version": 4,
+  "modules": 33,
+  "quietZoneModules": 4,
+  "errorCorrection": "quartile or stronger, as selected by encoder",
+  "sha256": "cb9353ab572f06a98ca6d0c259912d894ede71d010a3a4e634249ba665c3c2ae",
+  "barcode": "barcode.svg: original decorative pattern; no encoded product identifier or fictitious digits"
+}

@@ -1,5 +1,6 @@
 import { matrixData, regionalTariffs, reactorSteps, scenarios, calculateScenario, timeline, decimal } from './data.js';
 import { citationHTML, visualEvidence } from './citations.js';
+import { uiIcon } from './icons.js';
 
 const escape = value => String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const arrow = back => `<svg class="reader-icon${back ? ' arrow-back' : ''}" aria-hidden="true"><use href="#ui-arrow_forward"/></svg>`;
@@ -154,7 +155,8 @@ export function refreshExplorers(container=document) {
     const page=root.closest('.magazine-page');
     if (page && !page.querySelector('.digital-entry')) {
       const button=document.createElement('button'); button.type='button'; button.className='digital-entry';
-      button.textContent=root.dataset.explorer==='reactor' ? 'Explore o caminho da energia ↓' : root.dataset.explorer==='matrix' ? 'Explore o gráfico ↓' : root.dataset.explorer==='tariffs' ? 'Compare as tarifas ↓' : root.dataset.explorer==='payback' ? 'Experimente o simulador ↓' : root.querySelector('.explorer-photo') ? 'Percorra as fotografias ↓' : 'Compare os países ↓';
+      const label=root.dataset.explorer==='reactor' ? 'Explore o caminho da energia' : root.dataset.explorer==='matrix' ? 'Explore o gráfico' : root.dataset.explorer==='tariffs' ? 'Compare as tarifas' : root.dataset.explorer==='payback' ? 'Experimente o simulador' : root.querySelector('.explorer-photo') ? 'Percorra as fotografias' : 'Compare os países';
+      button.innerHTML=`<span>${label}</span>${uiIcon('arrow_downward')}`;
       page.querySelector('.page-subtitle').after(button);
     }
   });

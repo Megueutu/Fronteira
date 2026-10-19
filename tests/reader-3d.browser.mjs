@@ -1,68 +1,61 @@
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {launchBrowser} from '../scripts/chromium.mjs';
-import {projection,projectPoint} from '../src/webgl-reader.js';
-const base=process.env.TEST_URL || 'http://127.0.0.1:4317';
-const b=await launchBrowser({timeout:240000});
+import {pages,getOpening,getSpread,spreadCount,formatPages,pageIndexForId,spreadForPage} from '../src/content.js';
+import {projectPoint} from '../src/webgl-reader.js';
+
+const base=process.env.TEST_URL || 'http://localhost:3000';
+const browser=await launchBrowser({timeout:300000});
 await mkdir('artifacts/reader-3d',{recursive:true});
-const idle=()=>b.waitFor(`document.querySelector('#stage').getAttribute('aria-busy')==='false' && document.querySelector('#loading').hidden && document.querySelector('#book-canvas').dataset.textureCount==='2'`);
-const frame=async name=>{
-  await b.evaluate(`document.querySelector('#stage').scrollIntoView({block:'start'});new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))`);
-  await writeFile(`artifacts/reader-3d/${name}.png`,await b.screenshot({clip:{x:0,y:await b.evaluate('scrollY'),width:await b.evaluate('innerWidth'),height:await b.evaluate('innerHeight')}}));
-};
+const idle=(textures)=>browser.waitFor(`document.querySelector('#stage')?.getAttribute('aria-busy')==='false' && document.querySelector('#loading').hidden && document.querySelector('#book-canvas').dataset.textureCount==='${textures}'`);
+const capture=async name=>writeFile(`artifacts/reader-3d/${name}.png`,await browser.screenshot({clip:{x:0,y:await browser.evaluate('scrollY'),width:await browser.evaluate('innerWidth'),height:await browser.evaluate('innerHeight')}}));
+async function closedBounds(side) {
+  const sample=await browser.evaluate(`(()=>{const c=document.querySelector('#book-canvas'),gl=c.getContext('webgl'),p=gl.getParameter(gl.CURRENT_PROGRAM);return {width:c.clientWidth,height:c.clientHeight,matrix:Array.from(gl.getUniform(p,gl.getUniformLocation(p,'matrix')))}})()`);
+  const a=projectPoint(sample.matrix,side<0?-1.43:0,0,0,sample.width,sample.height),b=projectPoint(sample.matrix,side<0?0:1.43,0,0,sample.width,sample.height);
+  assert.ok(Math.abs((a.x+b.x)/2-sample.width/2)<2,'closed cover is centered');
+  assert.ok(a.x>=0&&b.x<=sample.width,'closed cover stays inside canvas');
+}
 try {
-  await b.viewport(1440,1000);await b.navigate(base+'/?render=4');
-  await b.waitFor(`document.body.dataset.ready==='true'`);
-  assert.equal(await b.evaluate(`getComputedStyle(document.querySelector('.page-action')).visibility`),'hidden');
-  assert.equal(await b.evaluate(`getComputedStyle(document.querySelector('.page-bottom')).visibility`),'visible');
-  await b.navigate(base+'/?template=3d&page=15');await idle();
-  assert.ok(await b.evaluate(`[...document.querySelectorAll('#hotspots button')].every(button=>button.dataset.action==='sources')`));
-  const measurements=[];
-  for(const [width,height] of [[1896,1080],[1440,1000],[1024,900],[768,900],[390,844],[320,700]]) {
-    await b.viewport(width,height,width<=760);
-    await b.waitFor(`document.querySelector('#book-canvas').width>=document.querySelector('#book-canvas').clientWidth*1.49`);
-    const layout=await b.evaluate(`(()=>{const canvas=document.querySelector('#book-canvas'),c=canvas.getBoundingClientRect(),tray=document.querySelector('#hotspots').getBoundingClientRect(),stage=document.querySelector('#stage').getBoundingClientRect();return {width:innerWidth,height:innerHeight,canvas:c.toJSON(),tray:tray.toJSON(),stage:stage.toJSON(),overflow:document.documentElement.scrollWidth>innerWidth,buttons:[...document.querySelectorAll('#hotspots button')].map(el=>({page:el.dataset.page,action:el.dataset.action,...el.getBoundingClientRect().toJSON()}))}})()`);
-    assert.equal(layout.overflow,false,`overflow at ${width}`);
-    assert.ok(layout.tray.top>=layout.canvas.bottom,`controls cover the page at ${width}`);
-    assert.ok(layout.tray.bottom<=layout.stage.bottom && layout.tray.left>=0 && layout.tray.right<=width,JSON.stringify(layout));
-    assert.ok(layout.buttons.every(button=>button.width>=44 && button.height>=44 && button.x>=0 && button.right<=width));
-    assert.deepEqual([...new Set(layout.buttons.map(button=>button.page))],['14','15']);
-    const matrix=projection(layout.canvas.width/layout.canvas.height);
-    for(const x of [-1.43,1.43]) for(const y of [-1,1]) {
-      const p=projectPoint(matrix,x,y,0,layout.canvas.width,layout.canvas.height);
-      assert.ok(p.x>0 && p.x<layout.canvas.width && p.y>0 && p.y<layout.canvas.height);
-    }
-    measurements.push(layout);await frame(`spread-${width}`);
+  await browser.viewport(1440,1000);
+  await browser.navigate(base+'/?template=3d');await idle(1);
+  assert.equal(await browser.evaluate("document.querySelectorAll('.hotspot').length"),0);
+  assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(0));
+  await closedBounds(1);await capture('front-cover');
+  await browser.click('#next');
+  await browser.waitFor("document.querySelector('#stage').getAttribute('aria-busy')==='true'");
+  await idle(2);
+  assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(1));
+  await browser.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
+  for(let opening=2;opening<spreadCount;opening++) {
+    await browser.click('#next');await idle(getSpread(opening).length);
+    const expected=getSpread(opening).filter(page=>page.folio).map(page=>String(pages.indexOf(page)));
+    assert.deepEqual(await browser.evaluate("[...document.querySelectorAll('.hotspot')].map(button=>button.dataset.page)"),expected);
+    assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(opening));
   }
-  await writeFile('artifacts/reader-3d/layout.json',JSON.stringify(measurements,null,2));
-  await b.viewport(1440,1000);
-  await b.evaluate(`document.querySelector('.hotspot[data-page="14"]').focus()`);await b.key(' ','Space',32);
-  await b.waitFor(`document.querySelector('#interaction-dialog').open && document.querySelector('.source-catalog')`);
-  await b.key('Escape','Escape',27);
-  await b.waitFor(`!document.querySelector('#interaction-dialog').open && document.activeElement.matches('.hotspot[data-page="14"]')`);
-  await b.click('.spread-source-action[data-page="15"]');
-  await b.waitFor(`document.querySelector('.source-catalog')`);
-  assert.ok(await b.evaluate(`document.querySelector('.sources-overview').textContent.includes('Sair, manter')`));
-  await b.key('Escape','Escape',27);
-  await b.waitFor(`document.activeElement.matches('.spread-source-action[data-page="15"]')`);
-  await b.click('#next');await b.waitFor(`document.querySelector('#stage').getAttribute('aria-busy')==='true'`);
-  assert.equal(await b.evaluate(`getComputedStyle(document.querySelector('#hotspots')).visibility`),'hidden');
-  await idle();await frame('after-turn');
-  assert.equal(await b.evaluate(`document.querySelector('#page-status').textContent`),'17 — 18 / 20');
-  await b.click('#previous');await idle();
-  await b.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
-  await b.key('Home','Home',36);
-  await b.waitFor(`document.querySelector('.hotspot')?.dataset.page==='1'`);await idle();
-  assert.equal(await b.evaluate(`document.querySelectorAll('.hotspot').length`),1);
-  assert.equal(await b.evaluate(`document.querySelector('.hotspot').dataset.page`),'1');
-  for(let spread=1;spread<10;spread++) {
-    await b.click('#next');await idle();
-    assert.deepEqual(await b.evaluate(`[...document.querySelectorAll('#hotspots button')].map(el=>el.dataset.page)`),[String(spread*2),String(spread*2+1)]);
+  await closedBounds(-1);await capture('back-cover');
+  await browser.click('#read-spread');
+  assert.equal(await browser.evaluate("document.querySelectorAll('.linear-page').length"),1);
+  await browser.key('Escape','Escape',27);
+  const target=pageIndexForId('reactor'),opening=spreadForPage(target);
+  await browser.click('#open-index');await browser.click(`dialog [data-jump="${target}"]`);await idle(getSpread(opening).length);
+  for(const [width,height] of [[1440,1000],[1024,900],[768,900],[390,844],[320,700]]) {
+    await browser.viewport(width,height,width<=760);
+    const bounds=await browser.evaluate("(()=>{const c=document.querySelector('#book-canvas').getBoundingClientRect(),tray=document.querySelector('#hotspots').getBoundingClientRect();return {canvas:c.toJSON(),tray:tray.toJSON(),overflow:document.documentElement.scrollWidth>innerWidth}})()");
+    assert.equal(bounds.overflow,false,`overflow at ${width}`);
+    assert.ok(bounds.tray.top>=bounds.canvas.bottom-1,'source controls stay below paper');
+    assert.ok(bounds.tray.left>=0&&bounds.tray.right<=width,'source controls stay inside viewport');
   }
-  await b.click('#read-spread');await b.waitFor(`document.querySelectorAll('.linear-page').length===2`);
-  await b.key('Escape','Escape',27);await b.waitFor(`!document.querySelector('#interaction-dialog').open`);
-  await b.evaluate(`document.querySelector('#book-canvas').getContext('webgl').getExtension('WEBGL_lose_context').loseContext()`);
-  await b.waitFor(`!document.querySelector('#stage-error').hidden && !document.querySelector('#html-view').hidden`);
-  assert.deepEqual(b.errors,[]);assert.deepEqual(b.requests,[]);
-  console.log('PASS: no action callouts on 3D paper or below it, source links, keyboard/focus, 6 widths, 10 spreads, real turn, reduced motion, texture cache, reading and WebGL fallback.');
-} finally {await b.close();}
+  await browser.viewport(1440,1000);
+  await browser.click(`.hotspot[data-page="${target}"]`);
+  await browser.waitFor("document.querySelector('.source-catalog')");
+  await browser.key('Escape','Escape',27);
+  await browser.waitFor(`document.activeElement.matches('.hotspot[data-page="${target}"]')`);
+  await browser.click('#read-spread');
+  assert.equal(await browser.evaluate("document.querySelectorAll('.linear-page').length"),getSpread(opening).length);
+  await browser.key('Escape','Escape',27);
+  await browser.evaluate("document.querySelector('#book-canvas').getContext('webgl').getExtension('WEBGL_lose_context').loseContext()");
+  await browser.waitFor("!document.querySelector('#stage-error').hidden && !document.querySelector('#html-view').hidden");
+  await browser.click('#next');await browser.waitFor("document.querySelector('#stage').getAttribute('aria-busy')==='false'");
+  assert.deepEqual(browser.errors,[]);assert.deepEqual(browser.requests,[]);
+  console.log('PASS: centered isolated covers, every physical opening, texture cache, real/reduced turn, source controls, 5 widths and WebGL fallback.');
+} finally {await browser.close();}

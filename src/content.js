@@ -1,7 +1,11 @@
+import { uiIcon } from './icons.js';
 import { references, citationHTML, visualEvidence, evidenceFor, sourceButtonHTML } from './citations.js';
 import { chartHTML, cycleHTML, scenarioTable, timelineHTML } from './data.js';
 import { adolfoInterview } from './interview.js';
 import { explorerHTML } from './explorers.js';
+import { createPagination } from './pagination.js';
+import { createInterviewPages, interviewPageHTML } from './interview-pages.js';
+import { coverHTML, decorativeHTML } from './editorial-cover.js';
 
 export const teamMembers = [
   { id: 'davi', name: 'Davi de Oliveira', portrait: '/assets/team/davi-silva.jpg' },
@@ -36,7 +40,7 @@ export const interviewPhotos = {
 const action = (type, label) => ({ type, label, x: .5, y: .925 });
 const balance = (favor, debate) => ({ favor, debate });
 
-export const pages = [
+const originalPages = [
   { id: 'cover', kind: 'cover', section: 'EDIÇÃO 01 / OUTUBRO 2026', title: 'Energia nuclear\nno Brasil.', subtitle: 'Uma escolha que atravessa a técnica, o território e a sociedade.', image: photos.angra, body: ['Quem ganha, quem arca e o que está em jogo quando um país decide investir em energia nuclear? Uma investigação em cinco temas, com argumentos para pensar além do sim ou não.'], action: action('carousel', 'Explore as fotografias') },
   { id: 'contents', kind: 'contents', section: 'GUIA DE LEITURA', title: 'Cinco temas.\nMuitas perguntas.', subtitle: 'Uma revista para ler, comparar e explorar.', body: ['As setas viram as páginas. Os botões abrem gráficos, notas e fotografias. O sumário leva diretamente a uma seção, e a leitura contínua reúne toda a edição em texto selecionável.'], action: action('index', 'Escolha por onde começar') },
   { id: 'editorial', kind: 'editorial', section: 'EDITORIAL', title: 'A energia nuclear no futuro brasileiro', subtitle: 'Acesso à energia e autonomia tecnológica.', body: [
@@ -133,39 +137,65 @@ export const pages = [
   { id: 'references', kind: 'references', section: 'REFERÊNCIAS / CONTINUE A LEITURA', title: 'Volte às fontes.', subtitle: 'Fontes institucionais, obras teóricas e documentação da pesquisa.', body: ['O botão de fontes de cada matéria reúne os documentos e o local de consulta utilizado na pesquisa. Abra a lista completa para acessar os links, os recortes históricos e os créditos. Consulta e revisão desta edição: 16 de outubro de 2026.'], action: action('sources', 'Abra todas as referências') },
 ];
 
+// Stable source identities survive physical repagination.
+const continuation = (page, id, body, offset) => ({...page,id,kind:'continuation',sourceId:page.id,sourceParagraphOffset:offset,body,note:undefined,image:undefined,visual:undefined,balance:undefined,quote:undefined});
+const composed = [];
+for (const original of originalPages) {
+  const page = {...original,sourceId:original.id,sourceParagraphOffset:0};
+  const fixedPhoto = {safety:'steam',sovereignty:'panel','who-pays':'coast'}[page.id];
+  if (fixedPhoto) page.image = photos[fixedPhoto];
+  if (page.id === 'cover') {
+    composed.push({...page,body:[],folio:null,readingLabel:'Capa'});
+    composed.push({id:'inside-front',kind:'inside-cover',section:page.section,title:'Uma investigação em cinco temas.',subtitle:'',sourceId:'cover',sourceParagraphOffset:0,body:page.body,refs:[],action:null,folio:null,readingLabel:'Segunda capa'});
+  } else if (page.id === 'contents') {
+    composed.push({...page,showTeam:false});
+    composed.push({id:'team',kind:'team',section:'PESQUISA E EDIÇÃO',title:'Quem fez esta pesquisa',subtitle:'Pesquisa e edição do grupo · São Paulo',sourceId:'team',body:[],refs:[],action:{type:'index',label:'Explore a edição',x:.5,y:.925}});
+  } else if (page.id === 'editorial' || page.id === 'credits') {
+    composed.push({...page,body:page.body.slice(0,2)});
+    composed.push(continuation(page,page.id+'-continued',page.body.slice(2),2));
+  } else if (['safety','sovereignty','who-pays'].includes(page.id)) {
+    composed.push({...page,body:page.body.slice(0,2),balance:undefined});
+    composed.push({...continuation(page,page.id+'-continued',page.body.slice(2),2),balance:page.balance});
+  } else composed.push(page);
+  if (page.id === 'public') composed.push(...createInterviewPages(interviewPhotos));
+}
+composed.push({id:'inside-back',kind:'inside-cover',section:'',title:'Terceira capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Terceira capa'});
+composed.push({id:'back-cover',kind:'back-cover',section:'',title:'Quarta capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Quarta capa'});
+let folio = 0;
+export const pages = composed.map(page => page.folio === null ? page : {...page,folio:++folio,readingLabel:String(folio).padStart(2,'0')});
+export const pageIndexForId = id => pages.findIndex(page=>page.id===id);
+
 // Keep the page's source button consistent with its paragraph-level evidence.
 for (const page of pages) {
-  const ids = page.body.flatMap((_,i)=>evidenceFor(page.id,i)?.sources.map(source=>source.id) || []);
+  const ids = page.body.flatMap((_,i)=>evidenceFor(page.sourceId || page.id,i + (page.sourceParagraphOffset || 0))?.sources.map(source=>source.id) || []);
   if (ids.length) page.refs = [...new Set([...(page.refs || []),...ids])];
 }
 
 export const chapters = [
-  { title: 'Editorial', page: 2, detail: 'Acesso à energia e autonomia tecnológica' },
-  { title: 'Um Brasil Desigual', page: 3, detail: 'Panorama, território e Milton Santos' },
-  { title: 'Como funciona', page: 6, detail: 'Reator, segurança e resíduos' },
-  { title: 'Urânio e soberania', page: 8, detail: 'Ciclo do combustível e Wallerstein' },
-  { title: 'Custo e payback', page: 11, detail: 'Angra 3, cenários e distribuição' },
-  { title: 'Política e opinião pública', page: 14, detail: 'Messmer, Weber e o mundo' },
-  { title: 'Balanço final', page: 17, detail: 'Os critérios para decidir' },
-  { title: 'Uso de IA e referências', page: 18, detail: 'Expediente, fontes e créditos' },
-];
-export const spreadCount = Math.ceil(pages.length / 2);
-export const clampSpread = value => Math.max(0, Math.min(spreadCount - 1, Math.trunc(Number(value) || 0)));
-export function getSpread(index) { return pages.slice(clampSpread(index) * 2, clampSpread(index) * 2 + 2); }
-export function formatPages(index) { const start = clampSpread(index) * 2; return `${String(start + 1).padStart(2, '0')} — ${String(Math.min(start + 2, pages.length)).padStart(2, '0')} / ${pages.length}`; }
+  {id:'editorial',title:'Editorial',detail:'Acesso à energia e autonomia tecnológica'},
+  {id:'unequal',title:'Um Brasil Desigual',detail:'Panorama, território e Milton Santos'},
+  {id:'reactor',title:'Como funciona',detail:'Reator, segurança e resíduos'},
+  {id:'uranium',title:'Urânio e soberania',detail:'Ciclo do combustível e Wallerstein'},
+  {id:'cost',title:'Custo e payback',detail:'Angra 3, cenários e distribuição'},
+  {id:'messmer',title:'Política e opinião pública',detail:'Messmer, Weber e o mundo'},
+  {id:'interview-profile',title:'Adolfo Braid',detail:'Trajetória, microrreatores e perguntas da pesquisa'},
+  {id:'balance',title:'Balanço final',detail:'Os critérios para decidir'},
+  {id:'credits',title:'Uso de IA e referências',detail:'Expediente, fontes e créditos'},
+].map(chapter=>({...chapter,page:pageIndexForId(chapter.id)}));
+export const {spreadCount,clampSpread,spreadForPage,getOpening,getSpread,formatPages} = createPagination(pages);
 export const escapeHTML = text => String(text).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function referenceHTML(ids = [], all = false) {
-  return references.filter(ref => all || ids.includes(ref.id)).map(ref => `<li><span>${references.indexOf(ref) + 1}.</span> ${ref.url ? `<a href="${ref.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(ref.name)} ↗</a>` : escapeHTML(ref.name)}${all ? `<div class="reference-location">Local da informação: ${escapeHTML(ref.location)}</div>` : ''}</li>`).join('');
+  return references.filter(ref => all || ids.includes(ref.id)).map(ref => `<li><span>${references.indexOf(ref) + 1}.</span> ${ref.url ? `<a href="${ref.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(ref.name)} ${uiIcon("arrow_forward")}</a>` : escapeHTML(ref.name)}${all ? `<div class="reference-location">Local da informação: ${escapeHTML(ref.location)}</div>` : ''}</li>`).join('');
 }
 export function teamHTML() {
   return `<div class="team-grid">${teamMembers.map(member => `<figure class="team-member"><button type="button" class="team-portrait" data-action="member" data-member="${member.id}" aria-label="Ampliar foto de ${escapeHTML(member.name)}"><img src="${member.portrait}" alt="Retrato de ${escapeHTML(member.name)}" width="500" height="500" decoding="async" draggable="false"></button><figcaption>${escapeHTML(member.name)}</figcaption></figure>`).join('')}</div>`;
 }
 export function interviewEntryHTML() {
-  return `<button type="button" class="interview-entry" data-action="interview"><span><small>ENTREVISTA DO GRUPO</small><strong>Adolfo Braid</strong><span>Trajetória, microrreatores e as perguntas da pesquisa.</span></span><b aria-hidden="true">↗</b></button>`;
+  return `<button type="button" class="interview-entry" data-action="interview"><span><small>ENTREVISTA DO GRUPO</small><strong>Adolfo Braid</strong><span>Trajetória, microrreatores e as perguntas da pesquisa.</span></span><b aria-hidden="true">${uiIcon("arrow_forward")}</b></button>`;
 }
 export function interviewHTML({ inline = false } = {}) {
   const interview = adolfoInterview;
-  const sourceLink = key => `<a href="${interview.sources[key].url}" target="_blank" rel="noopener noreferrer">${escapeHTML(interview.sources[key].label)} ↗</a>`;
+  const sourceLink = key => `<a href="${interview.sources[key].url}" target="_blank" rel="noopener noreferrer">${escapeHTML(interview.sources[key].label)} ${uiIcon("arrow_forward")}</a>`;
   const interviewSource = location => citationHTML({kind:'Fonte da entrevista',sources:[{id:'interview',location}]});
   const careerSources = [
     [{id:'aeita'}],
@@ -175,68 +205,37 @@ export function interviewHTML({ inline = false } = {}) {
   const analysisSources = [['wallerstein','inb'],['iaea','waste'],['santos','polis']];
   const image = (key, primary = false) => {
     const art = interviewPhotos[key];
-    return `<figure class="interview-photo"><button type="button" data-action="image" data-photo-key="${key}" aria-label="Ampliar: ${escapeHTML(art.title)}"><img src="${art.src}" alt="${escapeHTML(art.caption)}" width="${art.width || (primary ? 1599 : 1600)}" height="${art.height || (primary ? 1066 : 970)}" ${inline ? 'loading="lazy"' : ''} decoding="async"><span class="interview-photo-expand" aria-hidden="true">Ampliar ↗</span></button><figcaption>${escapeHTML(art.caption)}<br><a href="${art.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.credit)}</a> · <a href="${art.licenseUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.license.split(' · ')[0])}</a></figcaption></figure>`;
+    return `<figure class="interview-photo"><button type="button" data-action="image" data-photo-key="${key}" aria-label="Ampliar: ${escapeHTML(art.title)}"><img src="${art.src}" alt="${escapeHTML(art.caption)}" width="${art.width || (primary ? 1599 : 1600)}" height="${art.height || (primary ? 1066 : 970)}" ${inline ? 'loading="lazy"' : ''} decoding="async"><span class="interview-photo-expand" aria-hidden="true">Ampliar ${uiIcon("arrow_forward")}</span></button><figcaption>${escapeHTML(art.caption)}<br><a href="${art.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.credit)}</a> · <a href="${art.licenseUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(art.license.split(' · ')[0])}</a></figcaption></figure>`;
   };
   return `<section class="interview-feature" ${inline ? 'id="interview-adolfo" aria-labelledby="interview-adolfo-title"' : 'aria-label="Entrevista com Adolfo Braid"'}>
     <header class="interview-heading"><p class="interview-eyebrow">PESQUISA DE CAMPO · ENTREVISTA DO GRUPO</p><${inline ? 'h2 id="interview-adolfo-title" tabindex="-1"' : 'h3'}>Adolfo Braid</${inline ? 'h2' : 'h3'}><p>${escapeHTML(interview.title)}</p></header>
-    <div class="interview-hero"><div class="interview-profile"><p class="interview-eyebrow">QUEM CONVERSOU COM A GENTE</p><h3>${escapeHTML(interview.fullName)}</h3><p class="interview-role">${escapeHTML(interview.role)}</p><p>${escapeHTML(interview.introduction)}</p><a href="${interview.sources.abdan.url}" target="_blank" rel="noopener noreferrer">Perfil profissional e retrato na ABDAN ↗</a></div>${image('adolfoLicensing',true)}</div>
+    <div class="interview-hero"><div class="interview-profile"><p class="interview-eyebrow">QUEM CONVERSOU COM A GENTE</p><h3>${escapeHTML(interview.fullName)}</h3><p class="interview-role">${escapeHTML(interview.role)}</p><p>${escapeHTML(interview.introduction)}</p><a href="${interview.sources.abdan.url}" target="_blank" rel="noopener noreferrer">Perfil profissional e retrato na ABDAN ${uiIcon("arrow_forward")}</a></div>${image('adolfoLicensing',true)}</div>
     ${interviewSource('§1: trajetória; §4: posição sobre a matriz; §6: microrreatores.')}
     <div class="interview-body"><aside class="interview-career"><p class="interview-eyebrow">UMA TRAJETÓRIA NO SETOR</p>${interview.career.map((item,i) => `<section><h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.text)}</p>${citationHTML({kind:'Fontes do perfil',sources:careerSources[i]})}</section>`).join('')}${image('adolfoAmazul')}<section class="interview-research-image"><p class="interview-eyebrow">TECNOLOGIA EM TESTE</p><h3>Um protótipo por dentro.</h3>${image('kilopower')}</section></aside>
-    <div class="interview-conversation"><h3 class="interview-section-title">Perguntas e respostas.</h3>${interview.conversations.map((item,i) => `<article class="interview-answer"><p class="interview-eyebrow">${escapeHTML(item.topic)}</p><h4>${escapeHTML(item.question)}</h4><p>${escapeHTML(item.answer)}</p>${interviewSource(item.record)}${i === 2 ? `<section class="interview-research-image interview-microreactor"><p class="interview-eyebrow">MICRORREATORES</p><h3>Uma escala menor, novos projetos.</h3>${image('marvel')}</section>` : ''}<div class="interview-connection"><h5>Como isso entra na nossa pesquisa</h5><p>${escapeHTML(item.reading)}</p>${citationHTML({kind:'Análise do grupo, com base em',sources:analysisSources[i].map(id=>({id}))})}<button type="button" data-jump="${item.chapter}">Ler: ${escapeHTML(item.chapterLabel)} ↗</button></div></article>`).join('')}</div></div>
+    <div class="interview-conversation"><h3 class="interview-section-title">Perguntas e respostas.</h3>${interview.conversations.map((item,i) => `<article class="interview-answer"><p class="interview-eyebrow">${escapeHTML(item.topic)}</p><h4>${escapeHTML(item.question)}</h4><p>${escapeHTML(item.answer)}</p>${interviewSource(item.record)}${i === 2 ? `<section class="interview-research-image interview-microreactor"><p class="interview-eyebrow">MICRORREATORES</p><h3>Uma escala menor, novos projetos.</h3>${image('marvel')}</section>` : ''}<div class="interview-connection"><h5>Como isso entra na nossa pesquisa</h5><p>${escapeHTML(item.reading)}</p>${citationHTML({kind:'Análise do grupo, com base em',sources:analysisSources[i].map(id=>({id}))})}<button type="button" data-jump="${pageIndexForId(['uranium','reactor','unequal'][i])}">Ler: ${escapeHTML(item.chapterLabel)} ${uiIcon("arrow_forward")}</button></div></article>`).join('')}</div></div>
     <details class="interview-questions"><summary>Mais perguntas e respostas</summary><dl>${interview.questions.map(item => `<div><dt>${escapeHTML(item.question)}</dt><dd>${escapeHTML(item.answer)}${citationHTML({kind:'Fonte',sources:item.sources || [{id:'interview',location:item.record}]})}</dd></div>`).join('')}</dl></details>
-    <footer class="interview-sources"><div><h3>Da tecnologia ao acesso à energia</h3><p>A conversa reúne experiência industrial e propostas para ampliar a geração nuclear. A distância entre desenvolver uma tecnologia, produzi-la em escala e levar seus benefícios à população atravessa os temas desta edição.</p><button type="button" data-action="popup" data-page="16">Quatro perguntas antes de compartilhar ↗</button></div><details><summary>Fontes e créditos das imagens</summary><p>Entrevista realizada pelo grupo com Adolfo Braid. As fontes abaixo complementam o perfil profissional e apresentam os projetos ilustrados nesta matéria.</p><ul>${Object.keys(interview.sources).map(key => `<li>${sourceLink(key)}</li>`).join('')}</ul><p>As imagens identificam os eventos e projetos retratados, com autoria e condições de uso em cada legenda. Os registros do IRD/ANSN, o protótipo da NASA e a representação digital do DOE/INL são exibidos integralmente, sem recorte ou filtro. Fontes consultadas em 17 e 18/10/2026.</p></details></footer>
+    <footer class="interview-sources"><div><h3>Da tecnologia ao acesso à energia</h3><p>A conversa reúne experiência industrial e propostas para ampliar a geração nuclear. A distância entre desenvolver uma tecnologia, produzi-la em escala e levar seus benefícios à população atravessa os temas desta edição.</p><button type="button" data-action="popup" data-page="${pageIndexForId('public')}">Quatro perguntas antes de compartilhar ${uiIcon("arrow_forward")}</button></div><details><summary>Fontes e créditos das imagens</summary><p>Entrevista realizada pelo grupo com Adolfo Braid. As fontes abaixo complementam o perfil profissional e apresentam os projetos ilustrados nesta matéria.</p><ul>${Object.keys(interview.sources).map(key => `<li>${sourceLink(key)}</li>`).join('')}</ul><p>As imagens identificam os eventos e projetos retratados, com autoria e condições de uso em cada legenda. Os registros do IRD/ANSN, o protótipo da NASA e a representação digital do DOE/INL são exibidos integralmente, sem recorte ou filtro. Fontes consultadas em 17 e 18/10/2026.</p></details></footer>
   </section>`;
 }
 const flowPhotoKeys = {editorial:'angra',territory:'coast',safety:'steam',wallerstein:'construction',sovereignty:'panel',public:'grid',balance:'wind'};
 function flowPhotoHTML(key,index) {
   const image=photos[key];
-  return `<figure class="editorial-photo flow-photo"><button type="button" data-action="image" data-page="${index}" data-photo-key="${key}" aria-label="Ampliar: ${escapeHTML(image.title)}"><img src="${image.src}" alt="${escapeHTML(image.caption)}" loading="lazy" decoding="async" draggable="false"><span class="photo-expand" aria-hidden="true">↗</span></button><figcaption><strong>${escapeHTML(image.title)}</strong><span>${escapeHTML(image.caption)}</span><span>Foto: <a href="${image.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(image.credit)} ↗</a> · <a href="${image.licenseUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(image.license)}</a></span></figcaption></figure>`;
+  return `<figure class="editorial-photo flow-photo"><button type="button" data-action="image" data-page="${index}" data-photo-key="${key}" aria-label="Ampliar: ${escapeHTML(image.title)}"><img src="${image.src}" alt="${escapeHTML(image.caption)}" loading="lazy" decoding="async" draggable="false"><span class="photo-expand" aria-hidden="true">${uiIcon("arrow_forward")}</span></button><figcaption><strong>${escapeHTML(image.title)}</strong><span>${escapeHTML(image.caption)}</span><span>Foto: <a href="${image.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(image.credit)} ${uiIcon("arrow_forward")}</a> · <a href="${image.licenseUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(image.license)}</a></span></figcaption></figure>`;
 }
 export function pageHTML(page, index, { linear = false, digital = true, flow = false } = {}) {
-  if (page.kind === 'cover') return coverHTML(page, index, linear);
-  const image = page.image ? `<figure class="editorial-photo"><button type="button" data-action="image" data-page="${index}" aria-label="Ampliar: ${escapeHTML(page.image.title)}"><img src="${page.image.src}" alt="${escapeHTML(page.image.caption)}" decoding="async" draggable="false"><span class="photo-expand" aria-hidden="true">↗</span></button><figcaption>${escapeHTML(page.image.credit)}${page.image === photos.angra ? ' · Angra, registro histórico (fonte: 2009)' : page.image === photos.construction ? ' · Angra 3, maio de 2015' : ' · imagem ilustrativa'}</figcaption></figure>` : '';
+  if (page.kind === 'cover') return coverHTML(page,index,{linear,flow});
+  if (['inside-cover','back-cover','interlude'].includes(page.kind)) return decorativeHTML(page,index,{linear,flow});
+  if (page.kind === 'interview') return interviewPageHTML(page,index,{linear,flow});
+  const image = page.image && !(flow && flowPhotoKeys[page.id] && photos[flowPhotoKeys[page.id]]===page.image) ? `<figure class="editorial-photo"><button type="button" data-action="image" data-page="${index}" aria-label="Ampliar: ${escapeHTML(page.image.title)}"><img src="${page.image.src}" alt="${escapeHTML(page.image.caption)}" decoding="async" draggable="false"><span class="photo-expand" aria-hidden="true">${uiIcon("arrow_forward")}</span></button><figcaption>${escapeHTML(page.image.credit)}${['safety','sovereignty','who-pays'].includes(page.id) ? ' · '+escapeHTML(page.image.caption) : page.image === photos.angra ? ' · Angra, registro histórico (fonte: 2009)' : page.image === photos.construction ? ' · Angra 3, maio de 2015' : ' · imagem ilustrativa'}</figcaption></figure>` : '';
   const flowKey=flow ? flowPhotoKeys[page.id] : null;
   const body = `<div class="columns">${page.body.map((text,i) => {
-    const passage=`<p>${escapeHTML(text)}</p>${citationHTML(evidenceFor(page.id,i),{className:'inline-citation'})}`;
+    const passage=`<p>${escapeHTML(text)}</p>${citationHTML(evidenceFor(page.sourceId || page.id,i + (page.sourceParagraphOffset || 0)),{className:'inline-citation'})}`;
     return flow ? `<div class="reading-passage">${passage}</div>${flowKey && i===0 ? flowPhotoHTML(flowKey,index) : ''}` : passage;
   }).join('')}</div>`;
   const visuals = { matrix: chartHTML(), cycle: cycleHTML(), reactor: '<div class="reactor-strip"><span>Fissão</span><b>→</b><span>Calor</span><b>→</b><span>Vapor</span><b>→</b><span>Eletricidade</span></div>', payback: scenarioTable(), timeline: timelineHTML(true) };
-  const contents = page.kind === 'contents' ? `<nav class="page-index" aria-label="Sumário da edição">${chapters.map(ch => `<button type="button" data-jump="${ch.page}"><span>${String(ch.page + 1).padStart(2,'0')}</span><div><strong>${ch.title}</strong><small>${ch.detail}</small></div><b>↗</b></button>`).join('')}</nav><section class="edition-authors" aria-label="Integrantes da pesquisa"><h3>Quem fez esta pesquisa</h3>${teamHTML()}<span>Pesquisa e edição do grupo · São Paulo</span></section>${interviewEntryHTML()}` : '';
+  const contents = page.kind === 'contents' ? `<nav class="page-index" aria-label="Sumário da edição">${chapters.map(ch => `<button type="button" data-jump="${ch.page}"><span>${pages[ch.page].readingLabel}</span><div><strong>${ch.title}</strong><small>${ch.detail}</small></div><b>${uiIcon("arrow_forward")}</b></button>`).join('')}</nav><section class="edition-authors" aria-label="Integrantes da pesquisa">${page.showTeam===false?'':`<h3>Quem fez esta pesquisa</h3>${teamHTML()}<span>Pesquisa e edição do grupo · São Paulo</span>`}</section>${interviewEntryHTML()}` : '';
   const bibliography = page.kind === 'references' ? `<ol class="bibliography">${referenceHTML(['epe','ben','sin','santos','iaea','waste','inb','enrichment','wallerstein','critique','cost','weber'])}</ol>` : '';
   const balanceBox = page.balance ? `<aside class="balance-box" aria-label="Argumentos a favor e em debate"><div><h3>A FAVOR</h3><p>${page.balance.favor}</p></div><div><h3>EM DEBATE</h3><p>${page.balance.debate}</p></div>${citationHTML({kind:'Síntese do grupo, com base em',sources:(page.refs || []).map(id=>({id}))},{className:'inline-citation'})}</aside>` : '';
   const explorer = digital ? explorerHTML(page.id,photos) : '';
-  return `<article class="magazine-page page-${page.kind}${linear ? ' linear-page' : ''}${explorer && page.visual ? ' has-digital-visual' : ''}" data-page-index="${index}" aria-label="Página ${index + 1}: ${escapeHTML(page.title.replaceAll('\n',' '))}"><header class="page-top"><span>FRONTEIRA</span><span>${page.section}</span></header><div class="page-main">${page.kicker ? `<p class="kicker">${page.kicker}</p>` : ''}<h2>${page.title.replaceAll('\n','<br>')}</h2><p class="page-subtitle">${page.subtitle}</p>${page.kind === 'cover' ? image + body : page.kind === 'opener' ? image + body : body}${page.visual ? visuals[page.visual] + citationHTML(visualEvidence[page.visual],{className:'inline-citation visual-source'}) : ''}${contents}${bibliography}${page.quote ? `<blockquote>${page.quote}</blockquote>${citationHTML({kind:'Formulação da edição; interpretação do grupo',sources:page.refs.map(id=>({id}))},{className:'inline-citation'})}` : ''}${balanceBox}${explorer}</div><div class="page-tail"><button type="button" class="page-action" data-action="${page.action.type}" data-page="${index}"><span>${page.action.label}</span><b aria-hidden="true">↗</b></button><footer class="page-bottom">${sourceButtonHTML(page,index)}<span>${String(index + 1).padStart(2,'0')}</span></footer></div></article>`;
-}
-
-function coverHTML(page, index, linear) {
-  const cutout = (key, position) => {
-    const image = photos[key];
-    return `<figure class="editorial-photo cover-cutout cover-cutout-${position}"><button type="button" data-action="image" data-page="${index}" data-photo-key="${key}" aria-label="Ampliar: ${escapeHTML(image.title)}"><img src="${image.src}" alt="${escapeHTML(image.caption)}" decoding="async" draggable="false"><span class="photo-expand" aria-hidden="true">↗</span></button><figcaption class="cover-sr-only">${escapeHTML(image.credit)} · ${escapeHTML(image.caption)}</figcaption></figure>`;
-  };
-  return `<article class="magazine-page page-cover organic-cover${linear ? ' linear-page' : ''}" data-page-index="${index}" aria-label="Página ${index + 1}: ${escapeHTML(page.title.replaceAll('\n',' '))}">
-    <header class="page-top"><span>REVISTA DIGITAL</span><span>${page.section}</span></header>
-    <div class="page-main">
-      <div class="cover-artwork">
-        <svg class="cover-emblem" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <g stroke="currentColor" stroke-width="2"><ellipse cx="50" cy="50" rx="44" ry="17" transform="rotate(-35 50 50)"/><ellipse cx="50" cy="50" rx="44" ry="17" transform="rotate(35 50 50)"/><ellipse cx="50" cy="50" rx="44" ry="17" transform="rotate(90 50 50)"/></g>
-          <circle cx="50" cy="50" r="7" fill="currentColor"/>
-          <g transform="rotate(35 50 50)" fill="currentColor">
-            <circle class="cover-electron-static" cx="7.76" cy="45.24" r="4"/>
-            <circle class="cover-electron-moving" r="4">
-              <animateMotion dur="8s" repeatCount="indefinite" calcMode="paced" path="M7.76 45.24 A44 17 0 1 1 92.24 54.76 A44 17 0 1 1 7.76 45.24 Z"/>
-            </circle>
-          </g>
-        </svg>
-        <p class="cover-masthead" aria-label="Fronteira">fronteira</p>
-        <h2 class="cover-title">${escapeHTML(page.title).replaceAll('\n','<br>')}</h2>
-        <p class="cover-deck">${escapeHTML(page.subtitle)}</p>
-        <p class="cover-callout"><strong>Da mina<br>à tomada.</strong><span>Matriz, tecnologia, urânio,<br>custos e decisões políticas.</span></p>
-        <div class="cover-photo-flow">${cutout('panel','top')}${cutout('angra','bottom')}${cutout('construction','side')}</div>
-        <svg class="cover-ribbon" viewBox="0 0 760 780" preserveAspectRatio="none" aria-hidden="true"><path class="cover-wave-lime" d="M-40 90C110 180-10 240 83 315S160 455 86 500-70 420-40 340Z"/><path class="cover-wave-blue" d="M170 810C140 745 246 747 270 680S275 589 318 603 380 668 335 702 302 773 346 810Z"/><path class="cover-wave-lime" d="M385 780C415 730 518 755 560 709S650 710 670 780Z"/><path class="cover-wave-blue" d="M760-20C700 62 800 84 738 164L800 230V-20Z"/></svg>
-      </div>
-      <div class="columns">${page.body.map(text => `<p>${escapeHTML(text)}</p>`).join('')}</div>
-      <p class="cover-photo-credit">Fotos: Dan Meyers / Unsplash (painel ilustrativo); Sturm e Wusel007 / Wikimedia Commons, CC BY 3.0 (Angra, 2009; Angra 3, 2015). Recortes e tratamento azulado na capa. Amplie para ver originais e créditos.</p>
-    </div>
-    <div class="page-tail"><footer class="page-bottom">${sourceButtonHTML(page,index)}<span>${String(index + 1).padStart(2,'0')}</span></footer></div>
-  </article>`;
+  return `<article class="magazine-page page-${page.kind}${linear ? ' linear-page' : ''}${explorer && page.visual ? ' has-digital-visual' : ''}" data-page-index="${index}" data-page-id="${page.id}" aria-label="${page.readingLabel}: ${escapeHTML(page.title.replaceAll('\n',' '))}"><header class="page-top"><span>FRONTEIRA</span><span>${page.section}</span></header><div class="page-main">${page.kicker ? `<p class="kicker">${page.kicker}</p>` : ''}<h2>${page.title.replaceAll('\n','<br>')}</h2><p class="page-subtitle">${page.subtitle}</p>${image}${body}${page.visual ? visuals[page.visual] + citationHTML(visualEvidence[page.visual],{className:'inline-citation visual-source'}) : ''}${contents}${page.kind==='team' ? teamHTML() : ''}${bibliography}${page.quote ? `<blockquote>${page.quote}</blockquote>${citationHTML({kind:'Formulação da edição; interpretação do grupo',sources:page.refs.map(id=>({id}))},{className:'inline-citation'})}` : ''}${balanceBox}${explorer}</div><div class="page-tail"><button type="button" class="page-action" data-action="${page.action.type}" data-page="${index}"><span>${page.action.label}</span><b aria-hidden="true">${uiIcon("arrow_forward")}</b></button><footer class="page-bottom">${sourceButtonHTML(page,index)}<span>${String(page.folio).padStart(2,'0')}</span></footer></div></article>`;
 }

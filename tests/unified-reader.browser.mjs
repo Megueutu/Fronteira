@@ -1,15 +1,20 @@
 import assert from 'node:assert/strict';
 import { mkdir,writeFile } from 'node:fs/promises';
 import { launchBrowser } from '../scripts/chromium.mjs';
+import { pages, pageIndexForId, formatPages, spreadForPage } from '../src/content.js';
 
-const base = process.env.TEST_URL || 'http://localhost:3000';
+const base = (process.env.TEST_URL || 'http://localhost:3000').replace(/\/$/,'');
 const browser = await launchBrowser({timeout:240000});
 await mkdir('artifacts/unified',{recursive:true});
 try {
   await browser.viewport(1440,1000);
   await browser.navigate(base+'/');
-  await browser.waitFor("document.body?.dataset.readerMode==='html' && document.querySelectorAll('#html-book>article').length===2");
-  assert.equal(await browser.evaluate('location.pathname+location.search+location.hash'),new URL(base).pathname);
+  await browser.waitFor("document.body?.dataset.readerMode==='html' && document.querySelectorAll('#html-book>article').length===1");
+  assert.equal(await browser.evaluate('location.pathname+location.search+location.hash'),new URL(base+'/').pathname);
+  assert.equal(await browser.evaluate("document.querySelector('#reader-toolbar img,#organic-bg')"),null);
+  assert.ok(await browser.evaluate("[...document.querySelectorAll('#reader-toolbar .reader-icon')].every(icon=>getComputedStyle(icon).width==='24px'&&getComputedStyle(icon).height==='24px')"));
+  assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(0));
+  assert.ok(await browser.evaluate("parseFloat(getComputedStyle(document.querySelector('.reading-actions')).borderRadius)>100"));
   await browser.evaluate("Promise.all([...document.querySelectorAll('#html-book img')].map(image=>image.decode()))");
   await writeFile('artifacts/unified/desktop.png',await browser.screenshot());
   await browser.click('#open-index');
@@ -29,11 +34,12 @@ try {
   await browser.click('#next');
   await browser.waitFor("document.querySelector('#stage').getAttribute('aria-busy')==='false'");
   await browser.click('[data-mode="landing"]');
-  await browser.waitFor("document.querySelectorAll('#landing-view>.magazine-page').length===20");
+  await browser.waitFor(`document.querySelectorAll('#landing-view>.magazine-page').length===${pages.length}`);
   await browser.click('[data-mode="3d"]');
   await browser.waitFor("document.querySelector('#loading').hidden && document.querySelector('#book-canvas').dataset.textureCount==='2'");
   assert.equal(await browser.evaluate("document.querySelector('#stage-error').hidden"),true);
   assert.equal(await browser.evaluate('location.search+location.hash'),'');
+  assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(spreadForPage(pageIndexForId('inside-front'))));
   await writeFile('artifacts/unified/3d.png',await browser.screenshot());
   for (const width of [1024,768,390,320]) {
     await browser.viewport(width,844,width<760);
@@ -46,11 +52,13 @@ try {
     }
     if(width===390) await writeFile('artifacts/unified/mobile.png',await browser.screenshot());
   }
-  await browser.navigate(base+'/edicoes/energia-atomica.html?template=html&page=13');
-  await browser.waitFor("location.pathname.endsWith('/') && document.querySelector('#page-status')?.textContent==='13 / 20'");
+  const target=pageIndexForId('payback'),folioCount=pages.filter(page=>page.folio).length;
+  await browser.navigate(base+`/edicoes/energia-atomica.html?template=html&page=${target+1}`);
+  await browser.waitFor(`location.pathname.endsWith('/') && document.querySelector('#html-book>[data-page-index="${target}"]')`);
+  assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),`${String(target+1).padStart(2,'0')} / ${pages.length}`);
   assert.equal(await browser.evaluate("document.querySelectorAll('#html-book>article').length"),1);
   assert.equal(await browser.evaluate('location.search+location.hash'),'');
   assert.deepEqual(browser.errors,[]);
   assert.deepEqual(browser.requests.filter(request=>!request.url.endsWith('/favicon.ico')),[]);
-  console.log('PASS: unified root, Material toolbar, drawer/focus, zoom, three reading modes, responsive controls and legacy redirect.');
+  console.log(`PASS: clean unified root, isolated cover, Material toolbar, drawer/focus, zoom, ${pages.length} faces, three modes, responsive controls and legacy redirect.`);
 } finally { await browser.close(); }

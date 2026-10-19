@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#1d7449">
   <meta name="description" content="Fronteira: revista interativa sobre energia nuclear no Brasil. Vinte páginas, cinco temas e uma entrevista, para ler e explorar.">
-  <title>Fronteira — energia nuclear no Brasil</title>
+  <title>Energia Nuclear no Brasil — Editora Fronteira</title>
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/src/styles.css">
   <link rel="stylesheet" href="/src/reader-shell.css">
@@ -33,10 +33,9 @@
   <symbol id="ui-bar_chart" viewBox="0 -960 960 960"><path d="M690-160q-12.75 0-21.37-8.63Q660-177.25 660-190v-220q0-12.75 8.63-21.38Q677.25-440 690-440h80q12.75 0 21.38 8.62Q800-422.75 800-410v220q0 12.75-8.62 21.37Q782.75-160 770-160h-80Zm-250 0q-12.75 0-21.37-8.63Q410-177.25 410-190v-580q0-12.75 8.63-21.38Q427.25-800 440-800h80q12.75 0 21.38 8.62Q550-782.75 550-770v580q0 12.75-8.62 21.37Q532.75-160 520-160h-80Zm-250 0q-12.75 0-21.37-8.63Q160-177.25 160-190v-380q0-12.75 8.63-21.38Q177.25-600 190-600h80q12.75 0 21.38 8.62Q300-582.75 300-570v380q0 12.75-8.62 21.37Q282.75-160 270-160h-80Z"/></symbol>
   <symbol id="ui-fullscreen_exit" viewBox="0 -960 960 960"><path d="M253-253H150q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h133q12.75 0 21.38 8.62Q313-295.75 313-283v133q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-103Zm454 0v103q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63-8.5-8.62-8.5-21.37v-133q0-12.75 8.63-21.38Q664.25-313 677-313h133q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H707ZM253-707v-103q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v133q0 12.75-8.62 21.37Q295.75-647 283-647H150q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h103Zm454 0h103q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H677q-12.75 0-21.37-8.63Q647-664.25 647-677v-133q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v103Z"/></symbol>
 </svg>
-  <canvas id="organic-bg" class="organic-bg" aria-hidden="true"></canvas>
   <header class="top-app-bar reader-toolbar" id="reader-toolbar" tabindex="-1" aria-label="Controles da revista">
     <button type="button" class="icon-button" id="open-index" aria-label="Abrir sumário" title="Abrir sumário" aria-haspopup="dialog" aria-expanded="false" aria-controls="interaction-dialog"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu"/></svg></button>
-    <div class="app-title"><button id="go-cover" title="Voltar à capa">Fronteira</button><span id="section-label">Energia nuclear no Brasil</span><span class="context-label sr-only">Nesta abertura</span></div>
+    <button class="icon-button" id="go-cover" title="Voltar à capa" aria-label="Voltar à capa"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button><span id="section-label" class="sr-only"></span><span class="context-label sr-only">Nesta abertura</span>
     <div class="layout-switch template-tabs" role="group" aria-label="Modo de leitura">
       <button type="button" data-mode="landing" aria-pressed="false" aria-label="Rolagem: leitura em página inteira" title="Rolagem"><svg class="reader-icon" aria-hidden="true"><use href="#ui-view_agenda"/></svg><span>Rolagem</span></button>
       <button type="button" data-mode="html" aria-pressed="true" aria-label="Revista: páginas HTML interativas" title="Revista"><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg><span>Revista</span></button>
@@ -50,21 +49,21 @@
     </div>
     <div class="app-actions" role="group" aria-label="Navegação da revista">
       <button type="button" class="icon-button" id="previous" aria-label="Páginas anteriores" title="Páginas anteriores" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_back"/></svg></button>
-      <span class="page-counter" id="page-status" role="status" aria-live="polite" aria-atomic="true">01 — 02 / 20</span><span class="nav-caption sr-only">Páginas</span>
+      <span class="position-chip"><svg class="reader-icon" aria-hidden="true"><use href="#ui-view_agenda"/></svg><span class="page-counter" id="page-status" role="status" aria-live="polite" aria-atomic="true">01 / 36</span></span><span class="nav-caption sr-only">Páginas</span>
       <button type="button" class="icon-button" id="next" aria-label="Próximas páginas" title="Próximas páginas" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-arrow_forward"/></svg></button>
     </div>
     <button type="button" class="icon-button" id="fullscreen" aria-label="Alternar tela cheia" title="Alternar tela cheia" ><svg class="reader-icon" aria-hidden="true"><use href="#ui-open_in_full"/></svg></button>
   </header>
   <main>
-    <section class="reader" aria-label="Revista interativa em vinte páginas">
+    <section class="reader" aria-label="Energia Nuclear no Brasil, revista interativa">
       <p id="stage-error" class="stage-error" hidden>A revista 3D ficou indisponível. Você pode continuar pelas páginas abaixo ou pela leitura contínua.</p>
       <div id="stage" class="stage" aria-busy="false"><p id="loading" class="loading" role="status">Preparando sua revista…</p><div class="book-frame" id="html-view"><div class="html-book" id="html-book"></div></div><div class="webgl-view" id="webgl-view" hidden><canvas id="book-canvas" role="img" aria-label="Revista tridimensional. Use as setas para folhear e amplie a leitura para explorar."></canvas><div id="hotspots" class="hotspots"></div></div></div>
       <div id="landing-view" class="landing-view" hidden></div>
       <div class="reading-progress" aria-hidden="true"><i id="reading-progress"></i></div>
       <div class="navigation">
-        <span class="reading-hint">20 páginas · 5 temas</span>
-        <div class="reading-actions"><button id="read-spread"><svg class="reader-icon" aria-hidden="true"><use href="#ui-center_focus_strong"/></svg><span>Ampliar leitura</span></button><button id="read-linear"><svg class="reader-icon" aria-hidden="true"><use href="#ui-view_agenda"/></svg><span>Leitura contínua</span></button></div>
-        <span class="reading-hint keyboard-hint">Use ← → para folhear</span>
+        <span class="reading-hint">5 temas · Entrevista · Editora Fronteira</span>
+        <div class="reading-actions" role="group" aria-label="Opções de leitura"><button id="read-spread"><svg class="reader-icon" aria-hidden="true"><use href="#ui-center_focus_strong"/></svg><span>Ampliar leitura</span></button><button id="read-linear"><svg class="reader-icon" aria-hidden="true"><use href="#ui-view_agenda"/></svg><span>Leitura contínua</span></button></div>
+        <span class="reading-hint keyboard-hint">Use as setas para folhear</span>
       </div>
     </section>
   </main>

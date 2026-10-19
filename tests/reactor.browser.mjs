@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {launchBrowser} from '../scripts/chromium.mjs';
 import {reactorSteps} from '../src/data.js';
+import {pageIndexForId} from '../src/content.js';
 const b=await launchBrowser({timeout:180000});
-const base=process.env.TEST_URL || 'http://127.0.0.1:4317';
+const base=process.env.TEST_URL || 'http://localhost:3000';
 const root='#landing-reactor [data-explorer=reactor]';
 await mkdir('artifacts/reactor',{recursive:true});
 const capture=async name=>{
@@ -13,7 +14,7 @@ const capture=async name=>{
  await writeFile(`artifacts/reactor/${name}.png`,await b.screenshot({clip}));
 };
 try {
- await b.viewport(1440,1100);await b.navigate(base+'/?template=landing&page=7');
+ await b.viewport(1440,1100);await b.navigate(base+`/?template=landing&page=${pageIndexForId('reactor')+1}`);
  await b.waitFor(`document.querySelectorAll('${root} [data-reactor-step]').length===5`);
  assert.equal(await b.evaluate("getComputedStyle(document.querySelector('#landing-reactor .reactor-strip')).display"),'none');
  assert.equal(await b.evaluate(`document.querySelectorAll('${root} .reactor-stages>li').length`),4);
@@ -43,7 +44,7 @@ try {
  }
  await b.viewport(1440,1100);
  await b.click('[data-mode="3d"]');
- await b.click('#open-index');await b.click('dialog [data-jump="6"]');
+ await b.click('#open-index');await b.click(`dialog [data-jump="${pageIndexForId('reactor')}"]`);
  await b.waitFor("document.querySelector('#loading').hidden && document.querySelector('#book-canvas').dataset.textureCount==='2'");
  await b.click('#read-spread');
  assert.equal(await b.evaluate("document.querySelectorAll('dialog [data-explorer=reactor]').length"),1);

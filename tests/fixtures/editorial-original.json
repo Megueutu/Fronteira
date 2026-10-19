@@ -1,0 +1,692 @@
+{
+  "pages": [
+    {
+      "id": "cover",
+      "kind": "cover",
+      "section": "EDIÇÃO 01 / OUTUBRO 2026",
+      "title": "Energia nuclear\nno Brasil.",
+      "subtitle": "Uma escolha que atravessa a técnica, o território e a sociedade.",
+      "image": {
+        "src": "/assets/photos/angra.jpg",
+        "title": "Entre o mar e a infraestrutura",
+        "caption": "Vista histórica das usinas de Angra dos Reis. Registro identificado na página de origem como janeiro de 2009; não representa o estágio atual das obras.",
+        "credit": "Sturm / Wikimedia Commons",
+        "url": "https://commons.wikimedia.org/wiki/File:Angra_dos_Reis_-_usinas_nucleares.jpg",
+        "license": "CC BY 3.0 · redimensionamento e recorte de exibição",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/"
+      },
+      "body": [
+        "Quem ganha, quem arca e o que está em jogo quando um país decide investir em energia nuclear? Uma investigação em cinco temas, com argumentos para pensar além do sim ou não."
+      ],
+      "action": {
+        "type": "carousel",
+        "label": "Explore as fotografias",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "contents",
+      "kind": "contents",
+      "section": "GUIA DE LEITURA",
+      "title": "Cinco temas.\nMuitas perguntas.",
+      "subtitle": "Uma revista para ler, comparar e explorar.",
+      "body": [
+        "As setas viram as páginas. Os botões abrem gráficos, notas e fotografias. O sumário leva diretamente a uma seção, e a leitura contínua reúne toda a edição em texto selecionável."
+      ],
+      "action": {
+        "type": "index",
+        "label": "Escolha por onde começar",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "editorial",
+      "kind": "editorial",
+      "section": "EDITORIAL",
+      "title": "A energia nuclear no futuro brasileiro",
+      "subtitle": "Acesso à energia e autonomia tecnológica.",
+      "body": [
+        "Escolher como produzir eletricidade é também decidir o futuro de um país. No Brasil, ampliar a participação nuclear pode contribuir para um abastecimento estável e para o desenvolvimento científico. Entretanto, essa expansão exige avaliar quem receberá seus benefícios e assumirá seus custos. O investimento no setor deve, portanto, melhorar o acesso à energia e ampliar a autonomia tecnológica brasileira.",
+        "O primeiro compromisso exige olhar além da quantidade de eletricidade produzida. A geração nuclear pode complementar fontes como a solar e a eólica, mas seus benefícios precisam alcançar a população. Milton Santos e Maria Laura Silveira, ao distinguirem espaços luminosos e opacos, explicam como territórios dotados de infraestrutura atraem investimentos, reforçando vantagens existentes. Essa concentração pode persistir quando se amplia a geração sem melhorar as redes de distribuição das localidades precárias. Assim, mesmo integrada ao sistema nacional, a produção de Angra não elimina falhas nessas redes. Por isso, a expansão deve incluir melhorias na distribuição e avaliação dos impactos tarifários, pois produzir mais não garante tarifas acessíveis.",
+        "O segundo compromisso envolve transformar conhecimento científico em capacidade produtiva. Na teoria do sistema-mundo de Immanuel Wallerstein, a concentração de atividades de maior valor tecnológico ajuda a explicar a dependência entre países. O Brasil possui tecnologia própria de enriquecimento de urânio, mas sua escala industrial ainda exige a contratação de parte desse serviço no exterior. Assim, avanços científicos coexistem com dependências produtivas: sem capacidade suficiente para processar o combustível, fornecedores estrangeiros atendem parte da demanda. Investimentos em pesquisa, formação profissional e ampliação industrial podem reduzir essas limitações.",
+        "Portanto, o Ministério de Minas e Energia, em parceria com o Ministério da Ciência, Tecnologia e Inovação, deve planejar a expansão com critérios públicos de financiamento. Os projetos devem prever avaliações de segurança, gestão de rejeitos e impactos tarifários, além de melhorias nas redes, priorizando localidades com interrupções frequentes. Paralelamente, editais devem financiar capacitação e ampliação industrial, com metas anuais e prestação de contas. A liberação dos recursos deve depender do cumprimento dessas metas, para fortalecer a autonomia tecnológica e distribuir os benefícios energéticos."
+      ],
+      "note": {
+        "title": "Sobre este editorial",
+        "text": "Esta é a versão final enviada pelo responsável em 17 de outubro de 2026, reproduzida integralmente em quatro parágrafos. O texto apresenta uma posição editorial sobre acesso à energia e autonomia tecnológica. Sua inclusão não atribui falas ou aprovação individual aos integrantes do grupo. O processo de edição da revista está descrito na página 19."
+      },
+      "refs": [
+        "group",
+        "santos",
+        "wallerstein",
+        "enrichment",
+        "sin",
+        "iaea"
+      ],
+      "action": {
+        "type": "popup",
+        "label": "Sobre o editorial",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "unequal",
+      "kind": "opener",
+      "section": "01 / PANORAMA",
+      "title": "Um Brasil\ndesigual.",
+      "subtitle": "Uma matriz majoritariamente renovável não garante que a energia chegue do mesmo jeito a todos.",
+      "image": {
+        "src": "/assets/photos/transmission.jpg",
+        "title": "A energia atravessa o território",
+        "caption": "Linhas de transmissão ao entardecer. Fotografia ilustrativa; instalação não identificada como brasileira.",
+        "credit": "Matthew Henry / Unsplash",
+        "url": "https://unsplash.com/photos/yETqkLnhsUI",
+        "license": "Unsplash",
+        "licenseUrl": "https://unsplash.com/license"
+      },
+      "body": [
+        "A eletricidade faz parte de quase tudo: conservar alimentos, estudar, trabalhar e acessar informação. Mas olhar apenas para o total produzido esconde diferenças de acesso, qualidade do serviço e capacidade de pagar a conta. Um país pode gerar muita energia e ainda conviver com pobreza energética.",
+        "É nesse contraste que começa a discussão nuclear. Antes de perguntar qual usina construir, é preciso perguntar qual problema se pretende resolver. Ampliar a geração, reduzir emissões, melhorar a distribuição e levar serviço confiável a localidades isoladas são objetivos relacionados, mas exigem instrumentos diferentes."
+      ],
+      "refs": [
+        "epe",
+        "polis",
+        "sin",
+        "group"
+      ],
+      "action": {
+        "type": "popup",
+        "label": "Energia não é só geração",
+        "x": 0.5,
+        "y": 0.925
+      },
+      "note": {
+        "title": "Pobreza energética",
+        "text": "O conceito inclui dificuldades para obter serviços energéticos suficientes e confiáveis a um custo suportável. A leitura deve considerar renda, condições da moradia, acesso e qualidade do fornecimento. Uma média nacional de geração não mede, por si só, essas dimensões."
+      }
+    },
+    {
+      "id": "matrix",
+      "kind": "data",
+      "section": "01 / PANORAMA",
+      "title": "O tamanho\nde cada fonte.",
+      "subtitle": "Geração elétrica nacional por fonte · 2025",
+      "body": [
+        "A hidrelétrica ainda responde por mais da metade da geração. Eólica e solar ganharam espaço e, juntas, chegaram a 26,4% em 2025. A nuclear participa com 2,0%: uma fatia pequena, mas que integra uma discussão maior sobre diversificação.",
+        "Geração nacional e oferta interna de eletricidade não são o mesmo indicador. A oferta também considera importações; por isso, percentuais de tabelas diferentes não devem ser misturados. Aqui, a comparação usa as participações da geração nacional apresentadas na pesquisa e no Anuário da EPE.",
+        "Uma participação pequena não demonstra, sozinha, que a fonte seja dispensável ou que deva crescer. Essa avaliação depende do que o sistema necessita, das alternativas disponíveis, dos custos e do prazo para entregar a energia."
+      ],
+      "visual": "matrix",
+      "refs": [
+        "epe",
+        "ben",
+        "group"
+      ],
+      "action": {
+        "type": "chart",
+        "label": "Compare as fontes no gráfico",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "territory",
+      "kind": "essay",
+      "section": "01 / TERRITÓRIO",
+      "title": "Quem recebe\na energia?",
+      "subtitle": "Milton Santos e a diferença entre estar conectado e ter acesso de qualidade.",
+      "body": [
+        "No Sistema Interligado Nacional, a eletricidade circula em uma rede compartilhada. Cada usina não abastece exclusivamente um estado, e contratos não reservam caminhos físicos para os elétrons. Transmissão, distribuição e operação conjunta também determinam o fornecimento.",
+        "O território, porém, importa. Linhas, empregos e impactos se distribuem de forma desigual. Uma grande usina conectada ao sistema não cria automaticamente acesso em localidades isoladas, que exigem planejamento próprio.",
+        "Milton Santos trata o espaço como resultado e condição das relações sociais. Seu meio técnico-científico-informacional permite observar como técnica, ciência, informação e capital se combinam em redes que valorizam alguns lugares mais que outros. Aplicada à energia, essa lente desloca a pergunta: produzir mais para quem, em quais condições e sob qual controle?",
+        "Tarifas, renda e continuidade do fornecimento completam a análise. Belo Monte aparece na pesquisa como um convite a comparar onde se concentram os efeitos territoriais de um empreendimento e onde seus benefícios são percebidos. O paralelo não torna hidrelétricas e nucleares equivalentes; ajuda a formular perguntas de justiça territorial para ambas."
+      ],
+      "balance": {
+        "favor": "Diversificação e infraestrutura podem apoiar o desenvolvimento regional e a segurança do sistema.",
+        "debate": "Mais geração não assegura distribuição justa, tarifa suportável ou atendimento aos sistemas isolados."
+      },
+      "refs": [
+        "sin",
+        "santos",
+        "polis",
+        "group"
+      ],
+      "action": {
+        "type": "popup",
+        "label": "Conheça a lente de Milton Santos",
+        "x": 0.5,
+        "y": 0.925
+      },
+      "note": {
+        "title": "Espaços luminosos e espaços opacos",
+        "text": "Na leitura de Milton Santos e Maria Laura Silveira, alguns lugares concentram redes, informação e capacidade de decisão; outros têm menos recursos para participar dessas dinâmicas. Trata-se de uma interpretação das relações territoriais, não de uma classificação moral das pessoas que vivem nesses espaços."
+      }
+    },
+    {
+      "id": "reactor",
+      "kind": "opener",
+      "section": "02 / COMO FUNCIONA",
+      "title": "Do átomo\nao interruptor.",
+      "subtitle": "O princípio físico é diferente; a etapa final ainda envolve calor, turbina e gerador.",
+      "image": {
+        "src": "/assets/photos/control-room.jpg",
+        "title": "A técnica por dentro",
+        "caption": "Painel histórico de controle, imagem ilustrativa. Não representa os sistemas atuais de Angra.",
+        "credit": "Dan Meyers / Unsplash",
+        "url": "https://unsplash.com/photos/cHR1Q2g1_F4",
+        "license": "Unsplash",
+        "licenseUrl": "https://unsplash.com/license"
+      },
+      "body": [
+        "Na fissão, um núcleo pesado se divide e libera energia e nêutrons. Em um reator, a reação em cadeia é controlada. O calor é transferido por sistemas de refrigeração e usado para produzir vapor, movimentar uma turbina e gerar eletricidade.",
+        "As usinas de Angra utilizam reatores de água pressurizada. Seus circuitos separam a água que passa pelo reator do vapor que aciona a turbina. Sistemas de controle, barreiras e procedimentos operacionais fazem parte do funcionamento, e não são acessórios da instalação."
+      ],
+      "visual": "reactor",
+      "refs": [
+        "iaea",
+        "group"
+      ],
+      "action": {
+        "type": "diagram",
+        "label": "Explore o caminho da energia",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "safety",
+      "kind": "essay",
+      "section": "02 / SEGURANÇA E RESÍDUOS",
+      "title": "O risco exige\nresponsabilidade.",
+      "subtitle": "Distinguir operação, acidentes e gestão do combustível é parte de um debate informado.",
+      "body": [
+        "Usina, arma nuclear, radiação e resíduo não são sinônimos. Uma central comercial utiliza uma reação controlada para gerar eletricidade. Isso não elimina riscos: exige descrever falhas possíveis, resfriamento e proteção de trabalhadores e moradores.",
+        "O combustível retirado do reator continua produzindo calor e requer blindagem, resfriamento inicial e controle. As estratégias de armazenamento e destinação dependem da política de cada país. São compromissos de longo prazo, com custos e responsabilidades institucionais que precisam integrar qualquer avaliação econômica.",
+        "Acidentes como Chernobyl e Fukushima marcaram a memória pública e alteraram decisões políticas. Tinham tecnologias, condições e sequências de eventos diferentes. Usá-los como se fossem exemplos idênticos impede compreender as causas; ignorá-los impede aprender com elas.",
+        "A fiscalização precisa ter capacidade técnica, transparência e condições para exigir correções. Planos de emergência e comunicação de risco devem ser compreensíveis para a população. Confiança não nasce apenas de dizer que a tecnologia é segura, mas de instituições capazes de demonstrar como os riscos são geridos."
+      ],
+      "balance": {
+        "favor": "A operação nuclear oferece geração controlável, com baixa emissão direta de gases de efeito estufa.",
+        "debate": "Resíduos, possíveis acidentes, descomissionamento e fiscalização exigem recursos e compromissos duradouros."
+      },
+      "refs": [
+        "iaea",
+        "waste",
+        "npt",
+        "fukushima",
+        "chernobyl",
+        "group",
+        "weber"
+      ],
+      "action": {
+        "type": "popup",
+        "label": "Uma imagem pode enganar",
+        "x": 0.5,
+        "y": 0.925
+      },
+      "note": {
+        "title": "Torres não são sinônimo de reator",
+        "text": "Torres de resfriamento podem existir em diferentes instalações industriais. Uma fotografia delas não identifica, por si só, uma usina nuclear nem demonstra o nível de emissão ou de risco. As fotografias estrangeiras desta revista estão marcadas como ilustrativas; as vistas de Angra têm autoria e contexto próprios."
+      }
+    },
+    {
+      "id": "uranium",
+      "kind": "data",
+      "section": "03 / URÂNIO",
+      "title": "Ter a reserva\nnão é ter o ciclo.",
+      "subtitle": "Entre o minério e o reator existe uma cadeia industrial.",
+      "body": [
+        "Entre a mina e o reator há mineração e beneficiamento, conversão, enriquecimento e fabricação. Cada etapa exige instalações, conhecimento, controle de qualidade e logística.",
+        "No Brasil, a INB atua em Caetité, na Bahia, e na fabricação do combustível em Resende, no Rio de Janeiro. O enriquecimento utiliza ultracentrífugas e é implantado em etapas. Dominar a tecnologia não significa possuir, no mesmo momento, capacidade industrial para atender a toda a demanda.",
+        "A conversão e parte do processamento podem envolver serviços no exterior. Assim, exportar material para processamento e importar combustível não são necessariamente sinais contraditórios: são movimentos de uma cadeia com etapas e capacidades diferentes.",
+        "Santa Quitéria, associado ao depósito de Itataia, no Ceará, aparece como possibilidade de ampliar a oferta. Reserva geológica, licenciamento e produção efetiva são situações distintas: um projeto não é combustível já disponível."
+      ],
+      "visual": "cycle",
+      "refs": [
+        "inb",
+        "enrichment",
+        "group",
+        "itataia"
+      ],
+      "action": {
+        "type": "cycle",
+        "label": "Percorra o ciclo do combustível",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "wallerstein",
+      "kind": "essay",
+      "section": "03 / SISTEMA-MUNDO",
+      "title": "Em que lugar\no Brasil está?",
+      "subtitle": "Quem foi Wallerstein e por que sua teoria entra nesta discussão.",
+      "body": [
+        "Immanuel Wallerstein (1930–2019) foi um sociólogo que propôs analisar o capitalismo como uma economia-mundo. Em vez de tratar cada país como uma trajetória isolada, examinou as relações históricas de trabalho, comércio, poder e acumulação que conectam regiões desiguais.",
+        "Na teoria, o centro concentra atividades com maior poder econômico e tecnológico; a periferia tende a ocupar posições subordinadas; a semiperiferia combina características de ambas. Essas posições dizem respeito a relações e processos históricos, não a uma hierarquia natural ou permanente entre povos.",
+        "O caso nuclear permite formular uma pergunta concreta: o país participa como fornecedor de matéria-prima, comprador de serviços ou produtor de tecnologia e combustível de maior valor agregado? Reservas de urânio e capacidade científica podem aumentar a margem de decisão, mas dependência financeira e gargalos industriais podem limitá-la.",
+        "Nessa leitura, o Brasil pode reunir competências avançadas e, ao mesmo tempo, depender de outros países em etapas decisivas. A soberania não se mede apenas pela existência de uma mina ou de um reator. Inclui a capacidade de sustentar pesquisa, produção, formação profissional, regulação e acordos internacionais ao longo do tempo."
+      ],
+      "quote": "A posição de um país depende também das relações que ele consegue transformar.",
+      "refs": [
+        "wallerstein",
+        "inb",
+        "group",
+        "enrichment"
+      ],
+      "action": {
+        "type": "popup",
+        "label": "Centro, semiperiferia e periferia",
+        "x": 0.5,
+        "y": 0.925
+      },
+      "note": {
+        "title": "Três posições, uma relação",
+        "text": "Centro: atividades com maior poder de apropriar valor e influenciar regras. Periferia: posições mais subordinadas na divisão do trabalho. Semiperiferia: combinação de capacidades industriais e dependências. A aplicação ao Brasil é uma interpretação sociológica, não uma classificação estatística produzida pela AIEA ou pela INB."
+      }
+    },
+    {
+      "id": "sovereignty",
+      "kind": "essay",
+      "section": "03 / SOBERANIA EM DEBATE",
+      "title": "Autonomia\ncom quais limites?",
+      "subtitle": "Uma teoria ajuda a enxergar. Também precisa ser questionada.",
+      "body": [
+        "A análise de sistema-mundo tem limites. Theda Skocpol critica o peso excessivo da posição internacional em explicações que reduzem o espaço de conflitos internos, instituições e trajetórias políticas. A relação com o exterior não substitui a investigação de quem decide dentro de cada sociedade.",
+        "Também seria simplificador concluir que toda tecnologia nacional gera autonomia ou que toda cooperação internacional produz dependência. Parcerias podem transferir conhecimento, diversificar fornecedores ou ampliar capacidades. Seu efeito depende das condições negociadas e de quem controla os resultados.",
+        "No setor nuclear, soberania convive com compromissos de uso pacífico, contabilidade de materiais e verificação internacional. O Tratado de Não Proliferação e as salvaguardas distinguem o direito ao uso pacífico das obrigações de não desenvolver armas. O caso brasileiro inclui a ABACC e a AIEA na estrutura de verificação.",
+        "O programa de propulsão naval acrescenta questões próprias ao debate. Propulsão nuclear não equivale a armamento nuclear; o controle dos materiais e as regras aplicáveis precisam ser tratados de forma específica. Transformar qualquer aplicação nuclear em prova automática de intenção bélica prejudica a análise."
+      ],
+      "balance": {
+        "favor": "Conhecimento, indústria e fornecedores diversificados podem ampliar a capacidade de decisão do país.",
+        "debate": "Autonomia exige escala, recursos, fiscalização e acordos; não decorre apenas de possuir reservas."
+      },
+      "refs": [
+        "wallerstein",
+        "critique",
+        "enrichment",
+        "npt",
+        "abacc",
+        "group"
+      ],
+      "action": {
+        "type": "popup",
+        "label": "Soberania não é isolamento",
+        "x": 0.5,
+        "y": 0.925
+      },
+      "note": {
+        "title": "Uma pergunta para comparar acordos",
+        "text": "Uma parceria forma profissionais, transfere capacidades, diversifica fornecedores e preserva fiscalização? Ou concentra decisões e mantém gargalos? O mesmo conceito de soberania pode servir para defender investimentos ou questionar contratos. A resposta precisa examinar os termos concretos."
+      }
+    },
+    {
+      "id": "cost",
+      "kind": "opener",
+      "section": "04 / CUSTO E PAYBACK",
+      "title": "A conta\nda escolha.",
+      "subtitle": "Angra 3 reúne uma obra de longa duração, recursos já aplicados e decisões ainda relevantes.",
+      "image": {
+        "src": "/assets/photos/angra3.jpg",
+        "title": "Uma obra, muitas decisões",
+        "caption": "Canteiro de Angra 3 em 20 de maio de 2015. Fotografia histórica; não indica o progresso atual da obra.",
+        "credit": "Wusel007 / Wikimedia Commons",
+        "url": "https://commons.wikimedia.org/wiki/File:Construction_site_Angra_III.JPG",
+        "license": "CC BY 3.0 · redimensionamento e recorte de exibição",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/"
+      },
+      "body": [
+        "Concluir, interromper ou substituir um projeto envolve custos diferentes. O dinheiro já gasto ajuda a contar sua história, mas a decisão daqui para a frente precisa comparar despesas e benefícios futuros de cada alternativa. Um investimento passado não garante que continuar seja a melhor escolha.",
+        "Na pesquisa do grupo, Angra 3 foi usada como estudo de caso. Os cenários trabalham com R$ 23,9 bilhões de investimento restante e R$ 35,9 bilhões de custo total conhecido, valores adotados no exercício de 2025. Eles não são apresentados aqui como orçamento atualizado ou decisão oficial de financiamento."
+      ],
+      "refs": [
+        "group",
+        "cost"
+      ],
+      "action": {
+        "type": "calculator",
+        "label": "Abra o laboratório de cenários",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "payback",
+      "kind": "data",
+      "section": "04 / LABORATÓRIO DE CENÁRIOS",
+      "title": "Retorno depende\ndas premissas.",
+      "subtitle": "Um cálculo que você pode explorar — sem confundir simulação com previsão.",
+      "body": [
+        "O payback simples divide o investimento pelo fluxo anual disponível. O exercício usa 1.405 MW, 8.760 horas anuais e um fator de capacidade. Da receita estimada pela tarifa, subtrai-se a parcela de custos operacionais.",
+        "Os três cenários do grupo mudam simultaneamente capacidade, tarifa e proporção de custos. A tabela mostra o resultado aproximado em anos de operação, não uma data do calendário. O intervalo de construção e eventuais atrasos ainda precisam ser considerados.",
+        "Juros, impostos, cronograma de desembolsos, variações de produção, descomissionamento e custo de capital não estão integralmente representados nesse modelo simples. Recuperar um valor sob uma tarifa assumida não demonstra que essa tarifa seja competitiva ou socialmente aceitável."
+      ],
+      "visual": "payback",
+      "refs": [
+        "group",
+        "cost"
+      ],
+      "action": {
+        "type": "calculator",
+        "label": "Altere as hipóteses e compare",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "who-pays",
+      "kind": "essay",
+      "section": "04 / QUEM GANHA, QUEM ARCA",
+      "title": "Uma tarifa.\nMuitos efeitos.",
+      "subtitle": "Eficiência financeira e justiça social precisam ser examinadas juntas.",
+      "body": [
+        "Se uma tarifa é calculada para viabilizar um empreendimento, usá-la para provar que o empreendimento se paga pode criar um raciocínio circular. O resultado mostra o que aconteceria sob aquela hipótese; não demonstra que consumidores e sistema elétrico deveriam aceitá-la.",
+        "A EPE esclareceu, em 2024, que sua avaliação então disponível sobre Angra 3 utilizava informações preliminares. O documento é importante por lembrar que projeções têm data, escopo e limitações. Não deve ser convertido em uma conclusão definitiva sobre o orçamento atual.",
+        "Há efeitos que o fluxo de caixa de uma usina não mede sozinho: empregos, cadeia de fornecedores, desenvolvimento tecnológico, custos territoriais e distribuição das despesas. Ao comparar com eólica, solar, armazenamento e eficiência energética, é preciso explicitar quais serviços são equivalentes e quais custos de integração estão incluídos.",
+        "Max Weber ajuda a distinguir o cálculo dos meios e a discussão dos fins. Um procedimento pode ser tecnicamente calculável e ainda deixar em aberto quais valores devem orientar a decisão. Transparência, controle de contratos e avaliação de alternativas permitem discutir tanto a eficiência quanto a legitimidade do investimento."
+      ],
+      "balance": {
+        "favor": "A conclusão de uma obra pode aproveitar equipamentos, competências e infraestrutura existentes.",
+        "debate": "Recursos são limitados; atrasos, tarifas e custos de oportunidade precisam entrar na comparação."
+      },
+      "refs": [
+        "cost",
+        "weber",
+        "group",
+        "polis"
+      ],
+      "action": {
+        "type": "popup",
+        "label": "Meios, fins e custo de oportunidade",
+        "x": 0.5,
+        "y": 0.925
+      },
+      "note": {
+        "title": "O que outra escolha permitiria fazer?",
+        "text": "Custo de oportunidade é o benefício da melhor alternativa abandonada quando se escolhe um caminho. Comparar projetos exige considerar prazo, confiabilidade, rede, armazenamento e demanda. Não basta colocar lado a lado preços que representam serviços diferentes."
+      }
+    },
+    {
+      "id": "messmer",
+      "kind": "opener",
+      "section": "05 / POLÍTICA",
+      "title": "Uma decisão\nde Estado.",
+      "subtitle": "O Plano Messmer mostra a força — e os limites — de uma estratégia de longo prazo.",
+      "image": {
+        "src": "/assets/photos/nuclear-night.jpg",
+        "title": "Energia em perspectiva",
+        "caption": "Torres de resfriamento à noite. Imagem ilustrativa de instalação estrangeira; não representa Angra.",
+        "credit": "Nicolas Hippert / Unsplash",
+        "url": "https://unsplash.com/photos/C82jAEQkfE0",
+        "license": "Unsplash",
+        "licenseUrl": "https://unsplash.com/license"
+      },
+      "body": [
+        "Em 1974, após o choque do petróleo, o governo francês anunciou uma forte expansão nuclear associada ao Plano Messmer. A decisão articulou planejamento estatal, indústria e a busca por menor dependência de combustíveis importados. Não foi apenas uma escolha de equipamento.",
+        "A experiência ajuda a discutir continuidade administrativa, padronização e formação técnica. Ao mesmo tempo, coloca em debate centralização das decisões, participação pública e compromissos duradouros com combustível e resíduos. O contexto francês não pode ser transferido automaticamente para o Brasil, cuja matriz e estrutura social são diferentes."
+      ],
+      "refs": [
+        "messmer",
+        "weber"
+      ],
+      "action": {
+        "type": "timeline",
+        "label": "Compare seis trajetórias nacionais",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "world",
+      "kind": "data",
+      "section": "05 / LIÇÕES DO MUNDO",
+      "title": "Sair, manter\nou reconsiderar?",
+      "subtitle": "Seis recortes históricos. Nenhum funciona como receita universal.",
+      "body": [
+        "Alemanha e Itália representam trajetórias de abandono; Japão e Bélgica mostram que suspensão, extensão e retomada são situações distintas. A Lituânia encerrou Ignalina em um contexto próprio de integração europeia. A Coreia do Sul ilustra mudanças de orientação entre governos.",
+        "Os recortes abaixo têm datas e fontes específicas. Eles não afirmam que todas as políticas estejam congeladas desde então. Para comparar resultados, seria necessário observar também demanda, importações, combustíveis, emissões, preços e alternativas disponíveis em cada país.",
+        "A lição é política e metodológica: uma transição depende de instituições, recursos e decisões distribuídas no tempo. A escolha de outro país não dispensa uma análise brasileira dos mesmos critérios."
+      ],
+      "visual": "timeline",
+      "refs": [
+        "germany",
+        "italy",
+        "japan",
+        "lithuania",
+        "belgium",
+        "korea",
+        "weber"
+      ],
+      "action": {
+        "type": "timeline",
+        "label": "Leia as trajetórias e suas fontes",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "public",
+      "kind": "essay",
+      "section": "05 / OPINIÃO PÚBLICA",
+      "title": "Confiança também\né infraestrutura.",
+      "subtitle": "Informação, participação e regulação fazem parte da política energética.",
+      "body": [
+        "Uma decisão de longa duração precisa atravessar governos e continuar compreensível para a sociedade. Opinião pública não é um obstáculo a ser contornado: moradores, trabalhadores e consumidores têm interesses legítimos sobre riscos, empregos, tarifas e uso do território.",
+        "Na leitura de Weber, regras, especialização e burocracia tornam possível coordenar organizações complexas. Mas a competência técnica não substitui a prestação de contas. É necessário explicar quem fiscaliza, quais dados são públicos e como uma decisão pode ser questionada.",
+        "A desinformação cresce quando conceitos diferentes são tratados como equivalentes: radiação, combustível, propulsão e arma nuclear, por exemplo. Também aparece quando benefícios são anunciados sem condições ou quando um acidente é usado para descrever toda instalação, independentemente da tecnologia e do contexto.",
+        "O método desta revista é conferir a fonte, distinguir fato e interpretação e dar contexto a números e imagens. Uma pesquisa de opinião precisa informar pergunta, amostra, período e instituição responsável. Na ausência desses elementos, um percentual não deve ser usado como retrato definitivo do que a população pensa."
+      ],
+      "balance": {
+        "favor": "Planejamento público, formação técnica e instituições estáveis podem sustentar decisões de longo prazo.",
+        "debate": "Fiscalização independente, participação, transparência e gestão de riscos são condições, não detalhes."
+      },
+      "refs": [
+        "weber",
+        "npt",
+        "group",
+        "polis"
+      ],
+      "action": {
+        "type": "interview",
+        "label": "Leia a entrevista com Adolfo Braid",
+        "x": 0.5,
+        "y": 0.925
+      },
+      "note": {
+        "title": "Quatro perguntas antes de compartilhar",
+        "text": "Quem publicou? Qual é a fonte original? O número tem período, unidade e contexto? A imagem retrata realmente o lugar e a situação descritos? Quando se tratar de pesquisa de opinião, procure também pergunta, amostra e método. A ausência dessas informações deve acompanhar a interpretação."
+      }
+    },
+    {
+      "id": "balance",
+      "kind": "essay",
+      "section": "BALANÇO FINAL",
+      "title": "A resposta pede\nmais de um critério.",
+      "subtitle": "O debate não termina na escolha de uma tecnologia.",
+      "body": [
+        "A energia nuclear pode integrar uma estratégia de diversificação, formação científica e autonomia. Também cria obrigações de financiamento, segurança e gestão de materiais que atravessam décadas. Esses pontos não se anulam: precisam ser avaliados no mesmo quadro de decisão.",
+        "Pelo território de Milton Santos, a pergunta é como infraestrutura, benefícios e responsabilidades se distribuem. Pelos meios e fins de Weber, pergunta-se se o cálculo é verificável e a decisão é legítima. Pelo sistema-mundo de Wallerstein, investigam-se capacidades próprias e relações de dependência, sem ignorar as críticas à teoria.",
+        "Uma posição informada exige explicar qual problema o investimento resolve, compará-lo a alternativas e mostrar quem paga em diferentes cenários. Também exige reconhecer o que ainda é estimativa, o que depende de autorização e o que uma tecnologia não consegue resolver sozinha.",
+        "Esta edição não entrega um voto pronto. Oferece critérios para que a escolha possa ser debatida: confiabilidade, clima, custo, prazo, soberania, transparência e justiça social. Uma política energética se torna mais consistente quando suas promessas podem ser confrontadas com evidências e suas responsabilidades permanecem visíveis."
+      ],
+      "balance": {
+        "favor": "Geração controlável; diversificação; conhecimento especializado; possibilidades de autonomia industrial.",
+        "debate": "Execução e financiamento; resíduos e risco; capacidade regulatória; distribuição dos custos e alternativas."
+      },
+      "refs": [
+        "santos",
+        "weber",
+        "wallerstein",
+        "group",
+        "iaea",
+        "waste",
+        "critique",
+        "polis"
+      ],
+      "action": {
+        "type": "checklist",
+        "label": "Monte seu quadro de avaliação",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "credits",
+      "kind": "credits",
+      "section": "EXPEDIENTE / TRANSPARÊNCIA",
+      "title": "Como esta edição\nfoi construída.",
+      "subtitle": "Pesquisa, edição e responsabilidade precisam aparecer no mesmo lugar.",
+      "body": [
+        "O ponto de partida foi o material de pesquisa fornecido pelo grupo, reunido no documento Revista Energia Nuclear Brasil. Esta edição digital o reorganiza em cinco temas e condensa a redação para a leitura em páginas. Os documentos acadêmicos originais foram preservados.",
+        "Na edição digital, a inteligência artificial participou da análise do acervo, da pesquisa complementar, da redação e condensação de textos, da revisão, do design, da implementação e dos testes. O atestado registra essas contribuições, distinguindo-as da pesquisa original fornecida pelo grupo.",
+        "Foram corrigidas inconsistências identificáveis, como a comparação entre 2,0% e 1,5%, e distinguidos números oficiais, hipóteses do exercício de payback e interpretações sociológicas. Gráficos sem valores verificáveis e links suficientes não foram reproduzidos como evidências nesta edição.",
+        "O editorial reproduz integralmente a versão final enviada pelo responsável em 17 de outubro de 2026; não atribui falas ou aprovação individual aos autores. A publicação identifica as contribuições e mantém fontes e créditos acessíveis. As fotografias conservam suas licenças próprias, e imagens de contexto não são apresentadas como registros das usinas de Angra."
+      ],
+      "refs": [
+        "group"
+      ],
+      "action": {
+        "type": "credits",
+        "label": "Veja créditos e licenças das imagens",
+        "x": 0.5,
+        "y": 0.925
+      }
+    },
+    {
+      "id": "references",
+      "kind": "references",
+      "section": "REFERÊNCIAS / CONTINUE A LEITURA",
+      "title": "Volte às fontes.",
+      "subtitle": "Fontes institucionais, obras teóricas e documentação da pesquisa.",
+      "body": [
+        "O botão de fontes de cada matéria reúne os documentos e o local de consulta utilizado na pesquisa. Abra a lista completa para acessar os links, os recortes históricos e os créditos. Consulta e revisão desta edição: 16 de outubro de 2026."
+      ],
+      "action": {
+        "type": "sources",
+        "label": "Abra todas as referências",
+        "x": 0.5,
+        "y": 0.925
+      }
+    }
+  ],
+  "interview": {
+    "name": "Adolfo Braid",
+    "fullName": "Adolfo de Aguiar Braid",
+    "role": "Diretor de pesquisa e desenvolvimento da Terminus",
+    "title": "Da experiência nuclear às perguntas sobre o futuro.",
+    "introduction": "O grupo conversou com Adolfo Braid para aproximar a pesquisa de quem trabalha no setor. Sua trajetória passa pelo ciclo do combustível e por projetos industriais; na entrevista, ele defende a expansão nuclear e apresenta os microrreatores como uma possibilidade para o Brasil.",
+    "career": [
+      {
+        "title": "Formação em engenharia",
+        "text": "Braid é graduado em Engenharia Química pelo IME, mestre em Engenharia Nuclear por Berkeley e doutor em Engenharia Metalúrgica e de Materiais pela COPPE/UFRJ.",
+        "source": "aeita"
+      },
+      {
+        "title": "Do combustível aos equipamentos",
+        "text": "Sua trajetória inclui atuação na Marinha, no ciclo do combustível nuclear e no desenvolvimento de centrífugas. Também participou de projetos industriais, como a fabricação dos geradores de vapor de Angra 1.",
+        "source": "abdan"
+      },
+      {
+        "title": "Pesquisa em microrreatores",
+        "text": "Na Terminus, Braid dirige a pesquisa e o desenvolvimento e participa do projeto brasileiro de microrreator. O projeto reúne empresas e institutos de pesquisa e passa por etapas de licenciamento nuclear e ambiental.",
+        "source": "cnen"
+      }
+    ],
+    "conversations": [
+      {
+        "topic": "Urânio e soberania",
+        "question": "Em que parte do ciclo do combustível seu trabalho se encaixa?",
+        "answer": "Braid trabalhou no ciclo do combustível nuclear e no desenvolvimento de centrífugas para enriquecimento de urânio. Para ele, dominar uma tecnologia e produzi-la em escala industrial são desafios diferentes. Defende ampliar os investimentos para transformar o conhecimento acumulado em produção.",
+        "reading": "A resposta ajuda a discutir a diferença entre ter reservas, dominar técnicas e sustentar uma cadeia produtiva. Essa relação aproxima a entrevista do debate sobre dependência e autonomia tecnológica.",
+        "chapter": 8,
+        "chapterLabel": "Urânio e soberania",
+        "record": "§1: trajetória e ciclo do combustível; §2: reservas e produção industrial."
+      },
+      {
+        "topic": "Geração e matriz",
+        "question": "O Brasil deveria apostar mais em energia nuclear? Por quê?",
+        "answer": "Braid defende ampliar a participação da energia nuclear no Brasil. Apoia essa posição nas reservas de urânio, na experiência tecnológica brasileira e na oferta contínua de eletricidade, que poderia complementar a geração solar, eólica e hidrelétrica.",
+        "reading": "Essa é uma perspectiva do setor. Para avaliá-la, a pesquisa também precisa considerar segurança, resíduos, custos, rede e alternativas de geração, sem transformar a defesa de uma fonte em conclusão automática.",
+        "chapter": 6,
+        "chapterLabel": "Funcionamento e segurança",
+        "record": "§2: reservas e ciclo do combustível; §4: matriz e papel da energia nuclear."
+      },
+      {
+        "topic": "Território e desigualdade",
+        "question": "Seria viável levar energia nuclear a regiões com menos condições?",
+        "answer": "Braid apresenta os microrreatores como uma proposta de geração próxima dos consumidores. Ao discutir o Nordeste, distingue a produção regional de eletricidade do acesso da população ao consumo. O projeto brasileiro de microrreator ainda está em desenvolvimento.",
+        "reading": "A aproximação com Milton Santos está na distribuição dos benefícios. Uma instalação local, sozinha, não demonstra que haverá renda maior ou conta de luz acessível; preço, infraestrutura e participação das comunidades precisam entrar na análise.",
+        "chapter": 3,
+        "chapterLabel": "Panorama e território",
+        "record": "§6: microrreatores; §7: produção e consumo no Nordeste; apresentação, §9.4 e §9.5: propostas de aplicação."
+      }
+    ],
+    "questions": [
+      {
+        "question": "Qual é seu papel hoje?",
+        "answer": "Adolfo Braid é diretor de pesquisa e desenvolvimento da Terminus e participa do projeto brasileiro de microrreatores.",
+        "sources": [
+          {
+            "id": "adolfo-abdan"
+          },
+          {
+            "id": "adolfo-cnen"
+          }
+        ]
+      },
+      {
+        "question": "Em que etapa do ciclo do combustível trabalha?",
+        "answer": "Sua atuação passa pelo ciclo do combustível nuclear e pelo desenvolvimento de centrífugas para enriquecimento de urânio.",
+        "record": "§1, “Trajetória profissional e atuação no ciclo nuclear”; §10, pergunta sobre a etapa do ciclo."
+      },
+      {
+        "question": "Levar nuclear a regiões com menos condições seria viável?",
+        "answer": "Braid apresenta os microrreatores como proposta de geração local, próxima dos consumidores. As aplicações discutidas incluem municípios e regiões que exigem soluções adequadas à sua infraestrutura; o projeto ainda está em desenvolvimento.",
+        "record": "§6, microrreatores; §7, Nordeste e consumo; slides em §9.4 e §9.5; §10, pergunta sobre regiões com menos condições."
+      },
+      {
+        "question": "Como avalia as reservas de urânio pouco aproveitadas?",
+        "answer": "Defende aproveitar as reservas e o conhecimento técnico brasileiro com responsabilidade, ampliando os investimentos para transformar esse potencial em produção industrial.",
+        "record": "§2, “Reservas brasileiras, ciclo do combustível e retorno do investimento”; §10, pergunta sobre reservas."
+      },
+      {
+        "question": "O Brasil deveria apostar mais em nuclear? Por quê?",
+        "answer": "Sim. Sua defesa se apoia nas reservas brasileiras de urânio, na experiência tecnológica do país e na oferta contínua de eletricidade, que poderia complementar outras fontes da matriz.",
+        "record": "§2, reservas e ciclo do combustível; §4, matriz e papel da energia nuclear; §10, pergunta sobre ampliar a aposta nuclear."
+      }
+    ],
+    "sources": {
+      "cnen": {
+        "label": "CNEN · projeto e participação de Adolfo Braid",
+        "url": "https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/cerimonia-oficial-marca-o-inicio-formal-do-projeto-do-primeiro-microrreator-nuclear-brasileiro"
+      },
+      "abdan": {
+        "label": "ABDAN · perfil do Nuclear Summit 2026",
+        "url": "https://abdan.glueup.com/event/nuclear-summit-2026-162855/speakers.html"
+      },
+      "aeita": {
+        "label": "AEITA · apresentação profissional",
+        "url": "https://pt.linkedin.com/posts/aeita_nesta-sexta-feira-2111-%C3%A0s-18h-hor%C3%A1rio-activity-7396519091383042048-_j4Q"
+      },
+      "licensing": {
+        "label": "ANSN/IEN · licenciamento em janeiro de 2026",
+        "url": "https://www.gov.br/cnen/pt-br/assunto/ultimas-noticias/reuniao-entre-ien-cnen-e-a-ansn-para-discutir-termo-de-referencia-acontece-na-sede-da-cnen"
+      },
+      "kilopower": {
+        "label": "NASA · protótipo Kilopower",
+        "url": "https://www.nasa.gov/image-article/kilopower-13/"
+      },
+      "marvel": {
+        "label": "DOE / INL · representação do MARVEL",
+        "url": "https://www.flickr.com/photos/departmentofenergy/55461564410"
+      },
+      "linkedin": {
+        "label": "LinkedIn indicado pelo grupo",
+        "url": "https://www.linkedin.com/in/adolfobraid/"
+      }
+    }
+  }
+}

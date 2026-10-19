@@ -91,8 +91,24 @@ Arquivos publicados baixados sem edição local, recorte ou filtro. As legendas 
 
 Cada fotografia do acervo de energia tem legenda completa, autoria e link para a licença na ampliação e na lista de créditos. Os retratos seguem o registro de fornecimento pelo grupo descrito acima. Não há imagens geradas por IA apresentadas como documentação de fatos. Uma foto de torres de resfriamento não é prova automática de que o local seja uma central nuclear, nem permite concluir o nível de emissão ou risco.
 
-O portal de imprensa da Eletronuclear foi localizado como referência possível. Não foram baixadas fotografias institucionais presumindo uma autorização geral de uso. Os dois registros de Angra vieram de arquivos com licença individual explícita no Commons.
+Até a revisão anterior da capa, os dois registros de Angra vieram de arquivos com licença individual explícita no Commons. A nova fotografia institucional incorporada em 18/10/2026 está documentada abaixo; sua procedência não foi confundida com uma licença de reutilização.
 
 ## Fotografias na leitura da Página inteira (18/10/2026)
 
 Sete fotografias do acervo existente foram acrescentadas ao fluxo das matérias: Angra no editorial; costa no território; torres de resfriamento na segurança; canteiro de Angra 3 no sistema-mundo; painel de controle na soberania; transmissão na opinião pública; eólica no balanço. As legendas repetem os limites documentados do registro histórico ou ilustrativo, sem apresentá-las como novas evidências de localização, segurança ou impacto. Autoria, página de origem e licença aparecem sob cada figura e na ampliação. Não houve download, licença nova ou uso das imagens BY-ND da entrevista nesses recortes.
+
+## Fotografia da capa Energia Nuclear no Brasil (18/10/2026)
+
+Por solicitação expressa do responsável, a nova capa utiliza uma única fotografia de Angra publicada no portal oficial da Eletronuclear: [CN_011.JPG](https://www.eletronuclear.gov.br/Imprensa-e-Midias/PublishingImages/Paginas/revisao-tarifaria-das-usinas-nucleares-do-brasil-reforca-sustentabilidade/CN_011.JPG), na [notícia institucional de 03/02/2026](https://www.eletronuclear.gov.br/Imprensa-e-Midias/Paginas/revisao-tarifaria-das-usinas-nucleares-do-brasil-reforca-sustentabilidade.aspx). Arquivo local: `assets/photos/angra-cover.jpg`, 3888 × 2592 px, 1.411.256 bytes. A data da notícia não confirma a data do registro fotográfico.
+
+Crédito de procedência: **Acervo Eletronuclear; fotógrafo individual não identificado na página consultada**. A página não informa licença de reutilização para esta fotografia; o portal reserva direitos. Não foi obtida autorização institucional e não se declara que a imagem esteja liberada. A escolha e a incorporação foram solicitadas pelo responsável pelo projeto; esse pedido não substitui uma licença do titular. Não houve contato com terceiros. Os registros do Commons permanecem com suas próprias licenças.
+
+Os bytes do original foram preservados, sem recompressão, ampliação artificial, reconstrução ou geração de detalhes. O enquadramento vertical é feito na apresentação. Origem, dimensões, estado dos direitos e SHA-256 constam de [angra-cover.source.json](../assets/photos/angra-cover.source.json). Os metadados foram conferidos e a fotografia foi inspecionada visualmente para preservar as instalações principais no recorte.
+
+## Marca da editora e códigos da capa (18/10/2026)
+
+O responsável forneceu `Downloads/fronteira.svg` e `Downloads/favicon.svg`, preservados em `assets/branding/`. O primeiro é a marca horizontal branca, 272 × 35; o segundo é o monograma FR branco em fundo verde `#1E7349`, 250 × 250. O favicon da aplicação recebeu os mesmos bytes do arquivo fornecido. A marca identifica a **editora Fronteira**; o título desta edição é **Energia Nuclear no Brasil**. Não foi presumida uma licença pública de redistribuição da identidade visual.
+
+`assets/qr/site.svg` codifica exatamente `https://megueutu.github.io/Fronteira/`, com quatro módulos de margem branca. É um arquivo vetorial estático gerado pelo encoder MIT de Nayuki; não há requisição a um serviço de QR nem biblioteca de geração carregada pelo visitante. Regeneração: `python scripts/generate-qr.py`. Procedência e hash estão em [SOURCES.json](../assets/qr/SOURCES.json).
+
+Validação: Chromium renderizou o próprio SVG em 164 × 164 px; zxing-cpp 3.1.1 decodificou a captura e retornou o endereço exato acima. Evidências em `artifacts/identity/qr-rendered-164.png` e `qr-verification.json`, ignoradas pelo Git. O decoder foi instalado somente em `artifacts/identity/decoder`, para conferência local. Isso comprova a decodificação digital nessa escala; não equivale a teste de câmera física ou impressão. O arquivo `assets/qr/barcode.svg` é um padrão vetorial decorativo original, sem números ou identificação de produto; não pretende representar ISBN, ISSN ou EAN registrado.

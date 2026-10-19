@@ -1,6 +1,24 @@
 {
-  "pages": 20,
+  "pages": 36,
   "width": 1140,
   "height": 1596,
-  "sha256": "d9cc6e5fd39238f607150b6b7263f0db0f383d679480ff7adf1a5fcce8465d58"
+  "sources": [
+    "src/content.js",
+    "src/data.js",
+    "src/styles.css",
+    "src/citations.js",
+    "src/explorers.js",
+    "src/editorial-cover.js",
+    "src/interview-pages.js",
+    "src/interview.js",
+    "src/pagination.js",
+    "src/icons.js",
+    "assets/fonts/InterVariable.woff2",
+    "assets/fonts/InterVariable-Italic.woff2",
+    "assets/branding/fronteira.svg",
+    "assets/photos/angra-cover.jpg",
+    "assets/qr/site.svg",
+    "assets/qr/barcode.svg"
+  ],
+  "sha256": "5cc0db4cad42d0321216c8605eb70139a09c8b146315652af6afe0cd535771c1"
 }

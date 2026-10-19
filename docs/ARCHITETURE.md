@@ -1,5 +1,15 @@
 # Arquitetura da revista interativa
 
+## Revisão física vigente — 36 faces e 19 aberturas
+
+A revisão final retirou `src/reader-shell.js` e o canvas de fundo. A barra não exibe branding ou identificação da edição; ícones de 24 px, contador físico uniforme e ações de leitura em pílulas seguem a referência fornecida. As descrições anteriores de fundo orgânico abaixo são históricas.
+
+Desde 18/10/2026, `src/pagination.js` produz um mapa explícito com capa isolada à direita, duplas internas e quarta capa isolada à esquerda. `getOpening` retorna faces e índices opcionais por lado; `spreadForPage` faz o percurso inverso. Nunca se deduz uma abertura com `index*2`. Os leitores HTML e WebGL e a leitura ampliada usam o mesmo mapa; o WebGL ignora lados vazios e recentraliza as capas fechadas.
+
+`src/editorial-cover.js` compõe capa e interiores; `src/interview-pages.js` integra sete faces da entrevista; `src/icons.js` usa o sprite Material comum. A tipografia Inter é local. Metadados `sourceId`, `sourceParagraphOffset` e `evidence` mantêm citações após redistribuição. A leitura por rolagem não acrescenta outro suplemento de entrevista.
+
+`scripts/texture-fingerprint.mjs` centraliza os arquivos que determinam a composição, incluindo módulos, fontes, foto, marca e QR. A geração suporta faces decorativas sem colunas ou rodapé; compara limites sem esconder conteúdo excedente. Os documentos de pesquisa e os testes de preservação conservam a redação anterior. A raiz e o prefixo do Pages continuam funcionando, com o endereço limpo após a abertura.
+
 Status: edição de 20 páginas implementada em 2026-10-16; interface e rotas unificadas em 2026-10-18. Mantém-se a grafia solicitada deste arquivo. Consulte [REVIEW.md](REVIEW.md) para decisões de revisão e limites de validação.
 
 ## Estrutura

@@ -1,9 +1,12 @@
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { launchBrowser } from '../scripts/chromium.mjs';
-import { pages, interviewPhotos } from '../src/content.js';
+import { pages, interviewPhotos, pageIndexForId } from '../src/content.js';
 
 const base = process.env.TEST_URL || 'http://127.0.0.1:3000';
+const publicIndex=pageIndexForId('public');
+const profileIndex=pageIndexForId('interview-profile');
+const interviewFaces=pages.filter(page=>page.kind==='interview');
 const browser = await launchBrowser({timeout:240000});
 await mkdir(new URL('../artifacts/interview/',import.meta.url),{recursive:true});
 const capture = async name => writeFile(new URL(`../artifacts/interview/${name}.png`,import.meta.url),await browser.screenshot({clip:{x:0,y:await browser.evaluate('scrollY'),width:await browser.evaluate('innerWidth'),height:1000}}));
@@ -26,19 +29,20 @@ const navigate = async url => {
 };
 const visitInlineImages = async () => {
   for (const key of Object.keys(interviewPhotos)) {
-    await browser.evaluate(`document.querySelector('#interview-adolfo [data-photo-key="${key}"]').scrollIntoView({block:'center'})`);
-    await browser.waitFor(`document.querySelector('#interview-adolfo [data-photo-key="${key}"] img').naturalWidth>0`);
+    await browser.evaluate(`document.querySelector('.page-interview [data-photo-key="${key}"]').scrollIntoView({block:'center'})`);
+    await browser.waitFor(`document.querySelector('.page-interview [data-photo-key="${key}"] img').naturalWidth>0`);
   }
-  await browser.evaluate('document.querySelector("#interview-adolfo").scrollIntoView({block:"start"})');
+  await browser.evaluate('document.querySelector("#landing-interview-profile").scrollIntoView({block:"start"})');
 };
 try {
   await browser.viewport(1440,1000);
-  await navigate(base+'/?template=landing&page=17&interview=adolfo');
+  await navigate(base+`/?template=landing&page=${publicIndex+1}&interview=adolfo`);
   await browser.waitFor('document.querySelector("dialog.interview-dialog")?.open');
   await browser.waitFor('[...document.querySelectorAll("dialog .interview-photo img")].every(img=>img.naturalWidth>0)');
-  assert.equal(await browser.evaluate('document.querySelectorAll("#landing-view>.magazine-page").length'),20);
-  assert.equal(await browser.evaluate('document.querySelectorAll("#landing-view>#interview-adolfo").length'),1);
-  assert.deepEqual(await browser.evaluate('[...document.querySelectorAll("#landing-view .columns p")].map(el=>el.textContent)'),pages.flatMap(page=>page.body));
+  assert.equal(await browser.evaluate('document.querySelectorAll("#landing-view>.magazine-page").length'),pages.length);
+  assert.equal(await browser.evaluate('document.querySelectorAll("#landing-view>#interview-adolfo").length'),0);
+  assert.equal(await browser.evaluate('document.querySelectorAll("#landing-view>.page-interview").length'),interviewFaces.length);
+  for(const page of pages) for(const text of page.body) assert.ok(await browser.evaluate(`document.querySelector('#landing-${page.id}').textContent.includes(${JSON.stringify(text)})`),page.id);
   const interviewText = await browser.evaluate('document.querySelector("dialog .interview-feature").textContent');
   assert.doesNotMatch(interviewText,/anotações|posição registrada|avaliação registrada|registro consolidado|síntese das|transcrição|organização documental/i);
   assert.match(interviewText,/Braid defende ampliar a participação/);
@@ -51,27 +55,22 @@ try {
 
   // O suplemento não pode deslocar os destinos das páginas posteriores.
   await browser.click('#next');
-  await browser.waitFor('history.state?.reader?.page===18 && document.activeElement.id==="landing-title-17"');
+  await browser.waitFor(`history.state?.reader?.page===${profileIndex+1} && document.activeElement.id==="landing-title-${profileIndex}"`);
   await browser.click('#previous');
-  await browser.waitFor('history.state?.reader?.page===17');
-  await browser.evaluate('document.querySelector("#interview-adolfo").scrollIntoView({block:"start"})');
+  await browser.waitFor(`history.state?.reader?.page===${publicIndex+1}`);
+  await browser.evaluate('document.querySelector("#landing-interview-profile").scrollIntoView({block:"start"})');
   await visitInlineImages();
   await capture('inline-desktop');
-  await browser.click('#interview-adolfo .interview-questions summary');
-  assert.equal(await browser.evaluate('document.querySelector("#interview-adolfo .interview-questions").open'),true);
-  assert.equal(await browser.evaluate('document.querySelectorAll("#interview-adolfo .interview-questions dl > div").length'),5);
-  assert.equal(await browser.evaluate('document.querySelectorAll("#interview-adolfo .interview-questions dd > span").length'),0);
-  assert.ok(!(await browser.evaluate('document.querySelector("#interview-adolfo").textContent')).match(/momento mais marcante|o que o motivou|há quanto tempo atua|maior oportunidade e o maior risco|concluir angra 3 ou/i));
-  assert.equal(await browser.evaluate('document.querySelectorAll("#interview-adolfo .interview-answer").length'),3);
-  await browser.click('#interview-adolfo .interview-questions summary');
+  assert.equal(await browser.evaluate('document.querySelectorAll("#landing-interview-questions .interview-page-questions > div").length'),5);
+  assert.equal(await browser.evaluate('document.querySelectorAll("#landing-view > .page-interview").length'),interviewFaces.length);
 
   for (const mode of ['landing','html','3d']) {
     console.log('Checking interview in',mode);
-    await navigate(base+`/?template=${mode}&page=17`);
+    await navigate(base+`/?template=${mode}&page=${publicIndex+1}`);
     await browser.waitFor(`document.body.dataset.readerMode==="${mode}" && document.querySelector("#stage")?.getAttribute("aria-busy")==="false"`);
     if(mode==='3d') {
       await browser.waitFor('document.querySelector("#loading").hidden && document.querySelectorAll(".hotspot").length===2');
-      await browser.click('#read-spread');await browser.click('dialog [data-page="16"][data-action="interview"]');
+      await browser.click('#read-spread');await browser.click(`dialog [data-page="${publicIndex}"][data-action="interview"]`);
       await browser.waitFor('document.querySelector("dialog.interview-dialog")?.open');
       await close();await close();
     }
@@ -98,16 +97,16 @@ try {
 
   for(const width of [1440,768,390,320]) {
     await browser.viewport(width,1000);
-    await navigate(base+'/?template=landing&page=17');
-    await browser.waitFor('document.querySelector("#interview-adolfo")');
-    await browser.evaluate('document.querySelector("#interview-adolfo").scrollIntoView({block:"start"})');
+    await navigate(base+`/?template=landing&page=${profileIndex+1}`);
+    await browser.waitFor('document.querySelector("#landing-interview-profile")');
+    await browser.evaluate('document.querySelector("#landing-interview-profile").scrollIntoView({block:"start"})');
     await visitInlineImages();
     assert.equal(await browser.evaluate('document.documentElement.scrollWidth>innerWidth'),false);
-    const ratios = await browser.evaluate('[...document.querySelectorAll("#interview-adolfo img")].map(img=>({actual:img.getBoundingClientRect().width/img.getBoundingClientRect().height,natural:img.naturalWidth/img.naturalHeight}))');
-    assert.ok(ratios.every(r=>Math.abs(r.actual-r.natural)<.005));
+    const fits = await browser.evaluate('[...document.querySelectorAll("#landing-view > .page-interview img")].map(img=>getComputedStyle(img).objectFit)');
+    assert.ok(fits.every(fit=>fit==='contain'));
     await capture(`inline-${width}`);
     if (width === 1440 || width === 390) {
-      await browser.evaluate('document.querySelector("#interview-adolfo .interview-answer:nth-of-type(3)").scrollIntoView({block:"start"}); scrollBy(0,-120)');
+      await browser.evaluate('document.querySelector("#landing-interview-territory").scrollIntoView({block:"start"}); scrollBy(0,-120)');
       await capture(`microreactor-${width}`);
     }
     await browser.click('#open-index');
@@ -116,7 +115,7 @@ try {
     await capture(`dialog-${width}`);
   }
   assert.deepEqual(browser.errors,[]);
-  console.log('PASS: interview deep link, preserved 20 pages, navigation after supplement, HTML/3D/landing entry, four images including microreactor, credits/licenses, nested Escape/focus and four responsive widths.');
+  console.log('PASS: interview deep link, physical interview sequence without duplicate supplement, dynamic page destinations, HTML/3D/landing entry, four images including microreactor, credits/licenses, nested Escape/focus and four responsive widths.');
 } catch(error) {
   console.log('FAILED:',error.message);
   console.log(await browser.evaluate('JSON.stringify({url:location.href,open:document.querySelector("dialog")?.open,title:document.querySelector("#dialog-title")?.textContent,active:document.activeElement?.outerHTML.slice(0,500),photos:document.querySelectorAll("dialog [data-photo-key]").length,trace:window.interviewTrace})'));

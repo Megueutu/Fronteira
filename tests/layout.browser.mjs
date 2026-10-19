@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {launchBrowser} from '../scripts/chromium.mjs';
-import {pages,photos} from '../src/content.js';
+import {pages,photos,pageIndexForId} from '../src/content.js';
 
 const base=process.env.TEST_URL || 'http://127.0.0.1:4317';
 const b=await launchBrowser({timeout:240000});
@@ -9,16 +9,20 @@ await mkdir('artifacts/layout',{recursive:true});
 const report=[];
 try {
  await b.viewport(1440,1000);
- await b.navigate(base+'/?template=landing&page=3');
+ await b.navigate(base+`/?template=landing&page=${pageIndexForId('editorial')+1}`);
  await b.waitFor("document.querySelectorAll('#landing-view .flow-photo').length===7");
- assert.deepEqual(await b.evaluate("[...document.querySelectorAll('#landing-view .columns p')].map(p=>p.textContent)"),pages.flatMap(page=>page.body));
+ assert.equal(await b.evaluate("document.querySelectorAll('#landing-view>.magazine-page').length"),pages.length);
+ for(const page of pages) for(const text of page.body) assert.ok(await b.evaluate(`document.querySelector('#landing-${page.id}').textContent.includes(${JSON.stringify(text)})`),page.id);
+ assert.match(await b.evaluate("getComputedStyle(document.querySelector('#landing-editorial .columns p')).fontFamily"),/Inter/);
  const layout=await b.evaluate(`Array.from(document.querySelectorAll('#landing-view>.magazine-page:not(.page-cover)')).map(page=>{
-  const main=page.querySelector('.page-main'),columns=main.querySelector('.columns'),box=columns.getBoundingClientRect();
+  const main=page.querySelector('.page-main'),columns=main.querySelector(':scope > .columns');
+  if(!columns || !columns.querySelector('p')) return null;
+  const box=columns.getBoundingClientRect();
   const paragraphs=[...columns.querySelectorAll('p')].flatMap(p=>[...p.getClientRects()].map(r=>r.x-box.x));
   return {id:page.id,mainWidth:main.clientWidth,bodyWidth:Math.round(box.width),columns:getComputedStyle(columns).columnCount,height:Math.round(page.getBoundingClientRect().height),left:paragraphs.some(x=>x<box.width*.1),right:paragraphs.some(x=>x>box.width*.45)};
- })`);
+ }).filter(Boolean)`);
  for(const row of layout) {
-  if(['landing-contents','landing-references'].includes(row.id)) continue;
+  if(['landing-contents','landing-references','landing-inside-front'].includes(row.id)) continue;
   assert.equal(row.columns,'2',row.id);
   assert.ok(row.bodyWidth>=row.mainWidth*.98,row.id+' uses full width');
   assert.ok(row.left && row.right,row.id+' has text on both sides');
@@ -57,5 +61,5 @@ try {
  }
  assert.deepEqual(b.errors,[]);assert.deepEqual(b.requests,[]);
  await writeFile('artifacts/layout/REPORT.json',JSON.stringify(report,null,2));
- console.log('PASS: full-width magazine columns, text on both sides, preserved paragraphs/sources, seven contextual photos, expansion/credits/focus and five viewport widths.');
+ console.log('PASS: full-width magazine columns, text on both sides, preserved paragraphs/sources and Inter typography, seven contextual photos, expansion/credits/focus and five viewport widths.');
 } finally {await b.close();}

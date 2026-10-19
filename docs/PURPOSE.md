@@ -1,5 +1,7 @@
 # Finalidade do Fronteira
 
+A edição vigente, aprovada em 18/10/2026, tem o título **Energia Nuclear no Brasil** e Fronteira como editora. Reúne 36 faces com capa, interiores, miolo, entrevista integrada e quarta capa, preservando integralmente a redação anterior. A revisão visual prioriza fotografia, Inter local e leitura em colunas, com detalhes em [EDITORIAL_REVIEW.md](EDITORIAL_REVIEW.md).
+
 Atualização de 2026-10-18: o responsável pediu uma única revista na raiz. A interface da Energia Atômica (barra, ícones Material, sumário lateral e fundo orgânico) passa a envolver o conteúdo e os leitores da Fronteira. O antigo endereço da Energia Atômica redireciona para a raiz. A exigência anterior de manter aquela edição em um HTML autocontido foi substituída por esse pedido.
 
 O Fronteira é uma revista interativa sobre energia nuclear no Brasil, concebida como um objeto de leitura no centro da interface. A edição inicial tem 20 páginas e combina o folheamento de folhas curvas em WebGL com camadas HTML para explorar imagens, dados, diagramas, notas e referências.

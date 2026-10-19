@@ -1,4 +1,4 @@
-import { getSpread } from './content.js';
+import { pages, getOpening } from './content.js';
 import { pageGeometry, projection, projectPoint } from './webgl-reader.js';
 
 const WIDTH = 1.43, HEIGHT = 2;
@@ -34,6 +34,7 @@ export async function create3DReader(onLost) {
   const filtering = anisotropy ? Math.min(4,gl.getParameter(anisotropy.MAX_TEXTURE_MAX_ANISOTROPY_EXT)) : 1;
   gl.uniform1i(gl.getUniformLocation(program,'page'),0); gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
   async function ensure(index) {
+    if (index === null || index === undefined) return;
     if (textures.has(index)) return;
     if (pending.has(index)) return pending.get(index);
     const operation = (async () => {
@@ -49,9 +50,10 @@ export async function create3DReader(onLost) {
     pending.set(index,operation);
     try { await operation; } finally { pending.delete(index); }
   }
-  async function prepare(value) { await Promise.all([ensure(value * 2),ensure(value * 2 + 1)]); }
+  async function prepare(value) { const opening=getOpening(value); await Promise.all([ensure(opening.leftIndex),ensure(opening.rightIndex)]); }
   function prune() {
-    const keep = new Set([spread * 2,spread * 2 + 1]);
+    const opening=getOpening(spread);
+    const keep = new Set([opening.leftIndex,opening.rightIndex]);
     for (const [index,texture] of textures) if (!keep.has(index)) { gl.deleteTexture(texture); textures.delete(index); }
     canvas.dataset.textureCount = String(textures.size);
   }
@@ -77,21 +79,26 @@ export async function create3DReader(onLost) {
   }
   function makeHotspots() {
     hotspots.setAttribute('role','group'); hotspots.setAttribute('aria-label','Fontes das páginas desta abertura');
-    hotspots.innerHTML = getSpread(spread).map((page,i) => page.id==='cover' ? '' : `<button type="button" class="hotspot spread-source-action" data-side="${i===0?'left':'right'}" data-action="sources" data-page="${spread*2+i}" aria-haspopup="dialog"><span>Fontes da página ${String(spread*2+i+1).padStart(2,'0')}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button>`).join(''); updateHotspots();
+    const opening=getOpening(spread);
+    hotspots.innerHTML = [['left',opening.leftIndex],['right',opening.rightIndex]].map(([side,index]) => index===null || !pages[index].folio ? '' : `<button type="button" class="hotspot spread-source-action" data-side="${side}" data-action="sources" data-page="${index}" aria-haspopup="dialog"><span>Fontes da página ${String(pages[index].folio).padStart(2,'0')}</span><svg class="reader-icon" aria-hidden="true"><use href="#ui-menu_book"/></svg></button>`).join(''); updateHotspots();
   }
+  const centerOf = value => { const opening=getOpening(value); return opening.leftIndex===null ? WIDTH/2 : opening.rightIndex===null ? -WIDTH/2 : 0; };
   function render(now = performance.now()) {
     if (lost || !matrix) return;
     const raw = animation ? Math.min(1,(now - animation.start) / 850) : 0;
     const progress = raw * raw * (3 - 2 * raw);
     matrix = projection(width / height,animation ? WIDTH*1.25*Math.sin(progress*Math.PI) : 0);
+    const center=animation ? centerOf(animation.from)*(1-progress)+centerOf(animation.to)*progress : centerOf(spread);
+    for(let row=0;row<4;row++) matrix[12+row]-=matrix[row]*center;
     gl.uniformMatrix4fv(matrixLocation,false,matrix);
     gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    const base = animation ? animation.from : spread;
-    for (let i = 4; i >= 1; i--) { draw(-1,base * 2,0,-i * .004,.94 + .012 * (4-i),true); draw(1,base * 2 + 1,0,-i * .004,.94 + .012 * (4-i),true); }
-    if (!animation) { draw(-1,spread * 2); draw(1,spread * 2 + 1); return; }
+    const base = getOpening(animation ? animation.from : spread);
+    for (let i = 4; i >= 1; i--) { draw(-1,base.leftIndex,0,-i * .004,.94 + .012 * (4-i),true); draw(1,base.rightIndex,0,-i * .004,.94 + .012 * (4-i),true); }
+    if (!animation) { draw(-1,base.leftIndex); draw(1,base.rightIndex); return; }
     const forward = animation.to > animation.from;
-    draw(-1,(forward ? animation.from : animation.to) * 2); draw(1,(forward ? animation.to : animation.from) * 2 + 1);
-    const index = forward ? (progress <= .5 ? animation.from * 2 + 1 : animation.to * 2) : (progress <= .5 ? animation.from * 2 : animation.to * 2 + 1);
+    const from=getOpening(animation.from),to=getOpening(animation.to);
+    draw(-1,(forward ? from : to).leftIndex); draw(1,(forward ? to : from).rightIndex);
+    const index = forward ? (progress <= .5 ? from.rightIndex : to.leftIndex) : (progress <= .5 ? from.leftIndex : to.rightIndex);
     draw(forward ? 1 : -1,index,progress,.018);
     if (raw < 1) frame = requestAnimationFrame(render);
     else { spread = animation.to; animation = null; makeHotspots(); render(); prune(); const done = resolveTurn; resolveTurn = null; done?.(); }

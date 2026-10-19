@@ -5,8 +5,9 @@ import { references, pageEvidence, citationHTML, sourcePanelHTML, pageSourceReco
 import { adolfoInterview } from '../src/interview.js';
 
 test('every research paragraph has a source locator or an explicit editorial attribution',()=>{
-  for (const page of pages.filter(page=>!['cover','contents','references'].includes(page.kind))) {
-    const records=pageEvidence[page.id];
+  for (const page of pages.filter(page=>page.body.length && !['cover','inside-cover','back-cover','contents','references','interview','team'].includes(page.kind))) {
+    const offset=page.sourceParagraphOffset || 0;
+    const records=pageEvidence[page.sourceId || page.id]?.slice(offset,offset+page.body.length);
     assert.equal(records?.length,page.body.length,page.id);
     for (const record of records) {
       assert.ok(record.kind);
@@ -19,7 +20,7 @@ test('every research paragraph has a source locator or an explicit editorial att
       }
     }
     assert.ok((pageHTML(page,pages.indexOf(page)).match(/class="claim-source inline-citation"/g)||[]).length>=page.body.length);
-    assert.ok(sourcePanelHTML(page,pages.indexOf(page)).includes('Trecho 1'));
+    assert.ok(sourcePanelHTML(page,pages.indexOf(page)).includes(`Trecho ${offset+1}`));
   }
 });
 test('financial assumptions cite the group tables and interview answers cite the actual record',()=>{
@@ -40,6 +41,19 @@ test('financial assumptions cite the group tables and interview answers cite the
 });
 test('source locators are escaped when inserted into markup',()=>{
   assert.ok(citationHTML({kind:'Fonte',sources:[{id:'inb',location:'<texto> & "aspas"'}]}).includes('&lt;texto&gt; &amp; &quot;aspas&quot;'));
+});
+
+test('seven interview faces preserve all fifteen source records independently of fixed-page visibility',()=>{
+  const interviewPages=pages.filter(page=>page.kind==='interview');
+  assert.equal(interviewPages.length,7);
+  assert.equal(interviewPages.flatMap(page=>page.evidence).length,15);
+  for(const item of adolfoInterview.conversations) {
+    const face=interviewPages.find(page=>page.subtitle===item.question);
+    assert.ok(face.evidence.some(record=>record.sources.some(source=>source.location===item.record)));
+    assert.ok(pageSourceRecords(face).find(ref=>ref.id==='interview').locations.includes(item.record));
+  }
+  const questions=interviewPages.find(page=>page.id==='interview-questions');
+  for(const item of adolfoInterview.questions.filter(item=>item.record)) assert.ok(questions.evidence.some(record=>record.sources.some(source=>source.location===item.record)));
 });
 test('page source catalog includes interactive graphs and keeps specific locators without repetition',()=>{
   const tariffs=pageSourceRecords(pages.find(page=>page.id==='who-pays'));

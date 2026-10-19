@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Fronteira — revista unificada</title></head><body>
 <p>A revista agora está em um único endereço. <a href="../">Abrir a revista</a>.</p>
-<script>
+<script type="module">
+  import { pageIndexForId } from '../src/content.js';
   const destination = new URL('../', location.href);
   destination.search = location.search;
   // Links antigos por página continuam levando ao assunto correspondente.
   const oldPage = Number(location.hash.match(/^#p(\d+)$/)?.[1]);
-  const pageMap = [1,2,2,3,5,6,7,8,8,8,9,11,12,14,17,18];
-  if (oldPage >= 1 && oldPage <= pageMap.length && !destination.searchParams.has('page')) destination.searchParams.set('page',pageMap[oldPage-1]);
+  const pageMap = ['cover','team','contents','editorial','matrix','territory','reactor','safety','safety','safety','uranium','sovereignty','cost','who-pays','public','balance'];
+  if (oldPage >= 1 && oldPage <= pageMap.length && !destination.searchParams.has('page')) destination.searchParams.set('page',pageIndexForId(pageMap[oldPage-1])+1);
   location.replace(destination.href);
 </script></body></html>

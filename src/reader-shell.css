@@ -14,7 +14,6 @@
   background: var(--md-sys-color-surface-container);
 }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.organic-bg { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 .unified-reader main, .unified-reader .site-footer { position: relative; z-index: 1; }
 .unified-reader .reader { max-width: 1800px; }
 .top-app-bar.reader-toolbar {
@@ -22,7 +21,7 @@
   align-items: center; gap: 8px; min-height: 72px; padding: 8px 16px;
   background: var(--md-sys-color-surface-container-low);
   border-bottom: 1px solid #c4c9c5; box-shadow: 0 2px 10px #10261908;
-  color: var(--md-sys-color-on-surface); font-family: 'Segoe UI', Arial, sans-serif;
+  color: var(--md-sys-color-on-surface); font-family: var(--sans);
 }
 .top-app-bar .reader-icon { width: 24px; height: 24px; }
 .top-app-bar .icon-button, .dialog-top .icon-button {
@@ -34,31 +33,34 @@
 .top-app-bar .icon-button:hover:not(:disabled), .dialog-top .icon-button:hover { background: #20262314; }
 .top-app-bar .icon-button:active:not(:disabled) { background: #20262326; }
 .top-app-bar .app-title { display: grid; gap: 3px; min-width: 100px; max-width: 250px; }
-.app-title #go-cover { border: 0; background: none; padding: 0; text-align: left; font: 700 18px/1.3 'Segoe UI', Arial, sans-serif; }
-.app-title #section-label { font: 400 12px/1.4 'Segoe UI', Arial, sans-serif; letter-spacing: 0; color: #525955; }
+.app-title #go-cover { border: 0; background: none; padding: 0; text-align: left; font: 700 18px/1.3 var(--sans); }
+.app-title #section-label { font: 400 12px/1.4 var(--sans); letter-spacing: 0; color: #525955; }
 .top-app-bar .layout-switch {
   display: flex; align-items: center; gap: 2px; margin-left: auto;
   padding: 4px; border: 0; border-radius: 999px; background: #e0e4dd;
 }
 .top-app-bar .layout-switch button {
   min-height: 40px; min-width: 48px; padding: 8px 14px; border-radius: 999px;
-  gap: 8px; color: #525955; font: 500 14px/1.4 'Segoe UI', Arial, sans-serif;
+  gap: 8px; color: #525955; font: 500 14px/1.4 var(--sans);
 }
 .top-app-bar .layout-switch button[aria-pressed=true] { background: #c6e8ce; color: #005a35; }
 .top-app-bar .layout-switch button:hover { background: #c6e8ce80; }
 .top-app-bar .zoom-control { display: flex; gap: 0; align-items: center; padding: 0 4px; border-radius: 999px; background: #e0e4dd; }
 .top-app-bar .zoom-control .icon-button { width: 40px; min-width: 40px; height: 40px; }
-.top-app-bar .zoom-control .reader-icon { width: 20px; height: 20px; }
+.top-app-bar .zoom-control .reader-icon { width: 24px; height: 24px; }
 .zoom-value { min-width: 52px; height: 36px; padding: 0 4px; border: 0; border-radius: 8px; background: transparent; font-size: 14px; color: #525955; font-variant-numeric: tabular-nums; }
 .zoom-value:hover { background: #20262314; }
 .top-app-bar .app-actions { display: flex; align-items: center; gap: 0; }
-.top-app-bar .page-counter { min-width: 112px; text-align: center; font-size: 14px; font-variant-numeric: tabular-nums; color: #525955; white-space: nowrap; }
+.top-app-bar .page-counter { min-width: 0; text-align: center; font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; color: #525955; white-space: nowrap; }
+.position-chip { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #e0e4dd; }
 .unified-reader .stage { background: transparent; border: 0; border-radius: 0; }
 .unified-reader .book-frame { box-shadow: 0 2px 6px #10261912, 0 16px 48px -12px #10261938; }
 .unified-reader .navigation { min-height: 72px; padding: 12px 32px; display: flex; justify-content: space-between; gap: 16px; }
-.reading-hint { color: #525955; font: 400 12px/1.5 'Segoe UI', Arial, sans-serif; }
-.reading-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-.reading-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 16px; border: 1px solid #bec9bf; border-radius: 12px; background: #f4f5f4; color: #005a35; font-size: 14px; }
+.reading-hint { color: #525955; font: 400 12px/1.5 var(--sans); }
+.reading-actions { display: inline-flex; align-items: center; justify-content: center; gap: 2px; padding: 4px; border-radius: 999px; background: #e0e4dd; }
+.reading-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 16px; border: 0; border-radius: 999px; background: transparent; color: #525955; font-size: 14px; font-weight: 500; }
+.reading-actions .reader-icon { width: 24px; height: 24px; }
+#read-spread { background: #c6e8ce; color: #005a35; }
 .reading-actions button:hover { background: #c6e8ce; }
 .unified-reader .reading-progress { height: 2px; background: #c4c9c580; }
 .unified-reader .reading-progress i { background: #1d7449; }
@@ -77,13 +79,13 @@
   background: #f4f5f4;
 }
 .contents-drawer #dialog-content { padding: 24px 16px; }
-.contents-drawer #dialog-title { margin: 0 8px 24px; font: 600 24px/1.3 'Segoe UI', Arial, sans-serif; }
+.contents-drawer #dialog-title { margin: 0 8px 24px; font: 600 24px/1.3 var(--sans); }
 .contents-drawer .dialog-index { gap: 4px; }
 .contents-drawer .dialog-index button { min-height: 56px; padding: 14px 16px; border: 0; border-radius: 12px; background: transparent; gap: 12px; }
 .contents-drawer .dialog-index button:hover, .contents-drawer .dialog-index button[aria-current] { background: #c6e8ce; }
 .contents-drawer .dialog-index button b { font-size: 14px; color: #005a35; }
 .contents-drawer .dialog-index button span { font-size: 16px; }
-.contents-drawer .dialog-index button > span { font-family: 'Segoe UI', Arial, sans-serif; }
+.contents-drawer .dialog-index button > span { font-family: var(--sans); }
 .contents-drawer .dialog-index button small { font-size: 12px; line-height: 1.5; }
 .contents-drawer .dialog-index .reader-icon { width: 18px; height: 18px; }
 .contents-drawer details { margin: 24px 8px; font-size: 14px; }
@@ -97,11 +99,11 @@
   .top-app-bar.reader-toolbar { flex-wrap: wrap; gap: 4px; padding: 6px 8px; }
   .top-app-bar .app-title { flex: 1; max-width: none; }
   .top-app-bar .zoom-control { display: none; }
-  .top-app-bar .layout-switch { margin-left: 0; order: 4; }
-  .top-app-bar .app-actions { order: 5; margin-left: auto; }
+  .top-app-bar .layout-switch { margin-left: auto; order: 0; }
+  .top-app-bar .app-actions { order: 2; width: 100%; justify-content: center; margin: 0; }
   .top-app-bar .layout-switch button > span { display: inline; }
   .top-app-bar .app-actions .icon-button { width: 44px; min-width: 44px; }
-  .top-app-bar .page-counter { min-width: 106px; font-size: 12px; }
+  .top-app-bar .page-counter { min-width: 0; font-size: 12px; }
   .unified-reader .navigation { flex-direction: column; padding: 16px 12px; gap: 10px; }
   .unified-reader .reader-sources { margin: 0 12px 16px; padding: 24px 16px; }
   .unified-reader .footer-inner { padding: 20px 16px; }
@@ -111,14 +113,26 @@
   .top-app-bar .layout-switch button { min-width: 44px; padding: 8px 10px; }
   .top-app-bar .layout-switch { gap: 0; }
   .top-app-bar .app-actions .icon-button { width: 40px; min-width: 40px; }
-  .top-app-bar .page-counter { min-width: 90px; }
+  .top-app-bar .page-counter { min-width: 0; }
+  .position-chip { gap: 6px; padding: 0 10px; }
+  .reading-actions { width: 100%; max-width: 400px; }
+  .reading-actions button { flex: 1; min-width: 0; padding: 10px 8px; gap: 6px; font-size: 12px; }
 }
 @media (max-width: 360px) {
   .top-app-bar .layout-switch button { min-width: 40px; width: 40px; padding: 8px; }
 }
 @media print {
-  .top-app-bar.reader-toolbar, .organic-bg { display: none; }
+  .top-app-bar.reader-toolbar { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .top-app-bar *, .contents-drawer * { transition: none; }
+}
+
+/* A editora acompanha o título da revista sem disputar sua hierarquia. */
+.app-title #go-cover { display: flex; align-items: center; gap: 8px; min-width: 0; width: 100%; }
+.app-title #go-cover img { width: 24px; height: 24px; object-fit: contain; flex: none; }
+.app-title #go-cover > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 860px) {
+ .top-app-bar .app-title { min-width: 0; overflow: hidden; }
+ .app-title #go-cover { font-size: 16px; }
 }
