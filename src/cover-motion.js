@@ -20,7 +20,7 @@ export function installCoverMotion() {
   }).observe(document.body, {childList:true, subtree:true});
   document.addEventListener('pointermove', event => {
     const cover = event.target.closest('.edition-cover');
-    if (!cover || reduced.matches || cover.dataset.coverPaused === 'true' || event.pointerType === 'touch') return;
+    if (!cover || reduced.matches || event.pointerType === 'touch') return;
     const box = cover.getBoundingClientRect();
     cover.style.setProperty('--lava-x', `${((event.clientX-box.left)/box.width-.5)*22}px`);
     cover.style.setProperty('--lava-y', `${((event.clientY-box.top)/box.height-.5)*18}px`);
@@ -30,15 +30,6 @@ export function installCoverMotion() {
     if (cover && !cover.contains(event.relatedTarget)) {
       cover.style.removeProperty('--lava-x'); cover.style.removeProperty('--lava-y');
     }
-  });
-  document.addEventListener('click', event => {
-    const button = event.target.closest('.cover-motion-toggle');
-    if (!button) return;
-    const cover = button.closest('.edition-cover');
-    const paused = cover.dataset.coverPaused !== 'true';
-    cover.dataset.coverPaused = String(paused);
-    button.setAttribute('aria-pressed',String(paused));
-    button.textContent = paused ? 'Animar formas' : 'Pausar formas';
   });
   const visibility = () => document.body.classList.toggle('cover-motion-hidden',document.hidden);
   document.addEventListener('visibilitychange',visibility); visibility();

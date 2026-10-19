@@ -838,9 +838,6 @@ summary { cursor: pointer; padding: 15px 0; color: var(--green); font-size: var(
 .edition-cover .cover-qr { position: absolute; top: 44cqw; right: 0; width: 24cqw; max-width: 128px; box-sizing: border-box; }
 .edition-cover .cover-imprint { bottom: 5.8%; align-items: center; }
 .edition-cover .publisher-brand { width: 33%; }
-.cover-motion-toggle { position: absolute; left: 6.3%; top: 3%; border: 1px solid #ffffff70; border-radius: 999px; background: #06643d; color: white; font: 500 12px/1.2 var(--sans); min-height: 44px; padding: 8px 12px; cursor: pointer; }
-.cover-motion-toggle:hover { background: #094b32; }
-.cover-motion-toggle:focus-visible { outline: 3px solid white; outline-offset: 3px; }
 .lava-response { transform: translate(var(--lava-x,0px),var(--lava-y,0px)); transition: transform 1.4s ease-out; }
 .lava-window, .lava-accent { transform-box: fill-box; transform-origin: center; animation: cover-lava-float 18s ease-in-out infinite alternate; animation-play-state: paused; }
 .lava-window-b { animation-duration: 23s; animation-direction: alternate-reverse; }
@@ -849,18 +846,16 @@ summary { cursor: pointer; padding: 15px 0; color: var(--green); font-size: var(
 .lava-accent-b { animation-duration: 26s; animation-direction: alternate-reverse; }
 .lava-accent-c { animation-duration: 16s; animation-direction: alternate-reverse; }
 .edition-cover[data-cover-active="true"] :is(.lava-window,.lava-accent) { animation-play-state: running; }
-.edition-cover[data-cover-paused="true"] :is(.lava-window,.lava-accent), .cover-motion-hidden :is(.lava-window,.lava-accent) { animation-play-state: paused; }
+.cover-motion-hidden :is(.lava-window,.lava-accent) { animation-play-state: paused; }
 @keyframes cover-lava-float { from { transform: translate(0,0) rotate(-3deg) scale(1,.97); } to { transform: translate(8px,-22px) rotate(4deg) scale(.96,1.07); } }
 .render-document :is(.lava-window,.lava-accent) { animation: none; }
-.render-document .cover-motion-toggle, .turning .cover-motion-toggle { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .edition-cover :is(.lava-window,.lava-accent) { animation: none; }
   .edition-cover .lava-response { transform: none; transition: none; }
-  .cover-motion-toggle { display: none; }
 }
-@media print { .cover-motion-toggle { display: none; } .edition-cover :is(.lava-window,.lava-accent) { animation: none; } }
+@media print { .edition-cover :is(.lava-window,.lava-accent) { animation: none; } }
 .edition-cover .cover-qr { top: 38cqw; }
-.edition-cover .cover-deck, .edition-cover .cover-callout { color: #103d26; }
+.edition-cover .cover-deck, .edition-cover .cover-callout { color: #08281a; }
 .edition-cover .cover-imprint .publisher-brand { filter: brightness(0); opacity: .8; }
 .edition-cover .cover-qr { top: 35cqw; width: 17cqw; max-width: none; padding: 1cqw; gap: .65cqw; }
 
@@ -932,3 +927,28 @@ body[data-reader-mode="landing"] #read-spread { display: none; }
 .linear-content .has-digital-visual .page-main > :is(.matrix-chart,.scenario-table,.compact-timeline,.reactor-strip,.visual-source) { display: none; }
 .page-surface { --font-heading-page: var(--font-size-56); --font-heading-feature: var(--font-size-72); --font-number: var(--font-size-80); --font-number-unit: var(--font-size-40); --font-cover-display: var(--font-size-96); }
 .html-book.page-surface > .magazine-page { background-image: none; }
+
+/* Capa: grade editorial única, título aberto e assinatura fora da fotografia. */
+.edition-cover .cover-copy { top: 5.8%; left: 10.5%; right: 6.3%; text-align: left; }
+.edition-cover .cover-eyebrow { margin-bottom: 2.4cqw; font-size: calc(var(--type-step-12) * 100cqw / 760); letter-spacing: .14em; }
+.edition-cover .page-main .cover-title { font-size: calc(var(--type-step-96) * 100cqw / 760); font-weight: 600; line-height: .97; letter-spacing: -.055em; text-transform: none; text-align: left; }
+.edition-cover .cover-title > span { margin-top: 1.8cqw; font-size: calc(var(--type-step-40) * 100cqw / 760); font-weight: 450; letter-spacing: -.025em; }
+.edition-cover .cover-deck { margin: 4cqw 0 0 auto; max-width: 46.5%; font-size: calc(var(--type-step-20) * 100cqw / 760); line-height: 1.45; text-align: left; }
+.edition-cover .cover-lower { top: 47%; left: 55%; right: 6.3%; }
+.edition-cover .cover-callout { text-align: left; }
+.edition-cover .cover-callout strong { font-size: calc(var(--type-step-24) * 100cqw / 760); }
+.edition-cover .cover-qr { top: 30cqw; right: 8cqw; width: 15cqw; }
+.edition-cover .cover-imprint { left: 0; right: 0; bottom: 0; height: 9%; padding: 0 6.3%; box-sizing: border-box; background: #e5efca; align-items: center; }
+.edition-cover .cover-imprint .publisher-brand { width: 34%; filter: brightness(0); opacity: .85; }
+.edition-cover .cover-barcode { width: 20%; }
+
+/* Sumário: a mesma hierarquia e marcação na folha e no painel. */
+:is(.page-surface,.contents-drawer,.linear-content) .edition-index button { display: grid; grid-template-columns: 58px minmax(0,1fr) 24px; align-items: start; gap: 12px; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 16px 0; background: transparent; text-align: left; width: 100%; }
+:is(.page-surface,.contents-drawer,.linear-content) .edition-index .index-folio { font: 550 12px/1.5 var(--sans); color: var(--green); padding-top: 3px; white-space: nowrap; }
+:is(.page-surface,.contents-drawer,.linear-content) .edition-index .index-copy { display: block; min-width: 0; font-family: var(--sans); }
+:is(.page-surface,.contents-drawer,.linear-content) .edition-index strong { display: block; font: 600 20px/1.2 var(--sans); letter-spacing: -.4px; }
+:is(.page-surface,.contents-drawer,.linear-content) .edition-index small { display: block; margin-top: 6px; font: 400 12px/1.45 var(--sans); color: var(--muted); }
+:is(.page-surface,.contents-drawer,.linear-content) .edition-index .reader-icon { width: 24px; height: 24px; color: var(--green); }
+:is(.page-surface,.contents-drawer,.linear-content) .edition-index button:hover { background: var(--soft); }
+.page-surface .page-contents .edition-index { column-gap: 28px; }
+.page-surface .page-contents .edition-index button { min-height: 108px; padding-top: 20px; padding-bottom: 20px; }

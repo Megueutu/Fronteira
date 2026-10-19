@@ -1,5 +1,5 @@
 import { uiIcon } from './icons.js';
-import { pages, pageHTML, getSpread, spreadForPage, photos, artworks, chapters, references, referenceHTML, escapeHTML, teamMembers, teamHTML, interviewPhotos, interviewHTML, interviewEntryHTML } from './content.js';
+import { pages, pageHTML, getSpread, spreadForPage, photos, artworks, contentsHTML, references, referenceHTML, escapeHTML, teamMembers, teamHTML, interviewPhotos, interviewHTML } from './content.js';
 import { chartHTML, fuelSteps, reactorSteps, calculateScenario, scenarios, timeline, timelineHTML, decimal } from './data.js';
 import { citationHTML, visualEvidence, sourcePanelHTML, pageSourceRecords, sourceCardsHTML } from './citations.js';
 import { paybackBarsHTML, updatePaybackBars, refreshExplorers } from './explorers.js';
@@ -43,8 +43,8 @@ export function createInteractions(onJump) {
     let title = '', markup = '';
     if (type === 'index') {
       title = 'Sumário da edição';
-      markup = `<nav class="dialog-index" aria-label="Sumário">${chapters.map(ch => `<button type="button" data-jump="${ch.page}"><b>${pages[ch.page].readingLabel}</b><span>${ch.title}<small>${ch.detail}</small></span><i aria-hidden="true">${uiIcon("arrow_forward")}</i></button>`).join('')}</nav><details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>`;
-      markup += interviewEntryHTML();
+      markup = `${contentsHTML({drawer:true})}<details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>`;
+
     } else if (type === 'interview') {
       title = 'Conversa com Adolfo Braid';
       markup = interviewHTML();

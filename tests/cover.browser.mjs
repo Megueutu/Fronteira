@@ -20,16 +20,14 @@ try {
   assert.notEqual(await b.evaluate("getComputedStyle(document.querySelector('#html-book .lava-window')).transform"),before,'organic windows move');
   await b.evaluate(`document.querySelector('#html-book .cover-title').dispatchEvent(new PointerEvent('pointermove',{bubbles:true,clientX:250,clientY:200,pointerType:'mouse'}))`);
   assert.ok(await b.evaluate("document.querySelector('#html-book .edition-cover').style.getPropertyValue('--lava-x')"));
-  console.log('pause check'); await b.click('#html-book .cover-motion-toggle');
-  assert.equal(await b.evaluate("getComputedStyle(document.querySelector('#html-book .lava-window')).animationPlayState"),'paused');
-  assert.equal(await b.evaluate("document.querySelector('#html-book .cover-motion-toggle').getAttribute('aria-pressed')"),'true');
+  assert.equal(await b.evaluate("document.querySelector('#html-book .cover-motion-toggle')"),null);
   await writeFile(`artifacts/cover/cover-${width}.png`,await b.screenshot());
  }
  await b.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
  assert.equal(await b.evaluate("getComputedStyle(document.querySelector('#html-book .lava-window')).animationName"),'none');
- assert.equal(await b.evaluate("getComputedStyle(document.querySelector('#html-book .cover-motion-toggle')).display"),'none');
+ assert.equal(await b.evaluate("document.querySelector('#html-book .cover-motion-toggle')"),null);
  await b.navigate(base+'/?render=0');await b.waitFor("document.body?.dataset.ready==='true'");
  assert.equal(await b.evaluate("getComputedStyle(document.querySelector('.lava-window')).animationName"),'none');
  assert.deepEqual(b.errors,[]);
- console.log('PASS: one continuous photo, organic mask motion, pointer response, pause, reduced motion, stable texture rendering and three widths.');
+ console.log('PASS: one continuous photo, organic mask motion, pointer response, no pause button, reduced motion, stable texture rendering and three widths.');
 } finally {await b.close();}

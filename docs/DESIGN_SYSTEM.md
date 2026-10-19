@@ -1,5 +1,11 @@
 # Design system da edição
 
+## Capa e sumário — 2026-10-19
+
+Pedido implementado após revisão por subagente: retirada da ação “Pausar formas”, título alinhado à esquerda com escala maior e caixa natural, chamadas na coluna direita, recortes orgânicos afastados do título e faixa inferior clara para a marca e o código de barras. A fotografia institucional única, o QR e o movimento reduzido foram preservados. Não foram incorporados novos assets ou bibliotecas.
+
+O sumário impresso e o painel lateral usam `contentsHTML`: mesma estrutura, hierarquia, faixas de páginas, ícones e nove destinos. Expediente foi retirado dos sumários; sua página de transparência e créditos permanece na edição. A entrada duplicada da entrevista foi removida. Mantidas as 20 páginas de conteúdo e 28 faces físicas.
+
 ## Composição canônica — 2026-10-19
 
 Decisão vigente: HTML, rolagem e texturas 3D compartilham `pageHTML` e a superfície de 760 × 1064 px, inclusive no celular. A folha é reduzida ou ampliada proporcionalmente; as regras antigas de recomposição exclusiva por modo abaixo ficam como histórico. A rolagem usa molduras dimensionadas e transformação CSS, com zoom de 50% a 300%, preservando a página em leitura. A leitura ampliada em diálogo continua fluida para acessibilidade.

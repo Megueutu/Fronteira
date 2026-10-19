@@ -7,7 +7,7 @@ const base=process.env.TEST_URL||'http://localhost:3000';
 const samples=pages.map(page=>page.id);
 await mkdir('artifacts/canonical',{recursive:true});
 async function visit(id,mode,width){await b.viewport(width,1100,width<760);const index=pageIndexForId(id);await b.navigate(mode==='render'?`${base}/?render=${index}`:`${base}/?template=${mode}&page=${index+1}`);await b.waitFor(mode==='render'?"document.body?.dataset.ready==='true'":`document.body?.dataset.readerMode==='${mode}'&&document.querySelector('[data-page-id="${id}"]')`);await b.evaluate('document.fonts.ready');}
-async function measure(id){return b.evaluate(`(()=>{const p=document.querySelector('[data-page-id="${id}"]'),r=p.getBoundingClientRect(),scale=r.width/760;return{ratio:r.width/r.height,nodes:[...p.querySelectorAll('.page-main > *,.page-tail')].filter(el=>el.getBoundingClientRect().height>0&&!el.matches('.cover-motion-toggle')).map(el=>{const x=el.getBoundingClientRect();return{class:el.getAttribute('class'),x:(x.x-r.x)/scale,y:(x.y-r.y)/scale,w:x.width/scale,h:x.height/scale}})}})()`);}
+async function measure(id){return b.evaluate(`(()=>{const p=document.querySelector('[data-page-id="${id}"]'),r=p.getBoundingClientRect(),scale=r.width/760;return{ratio:r.width/r.height,nodes:[...p.querySelectorAll('.page-main > *,.page-tail')].filter(el=>el.getBoundingClientRect().height>0).map(el=>{const x=el.getBoundingClientRect();return{class:el.getAttribute('class'),x:(x.x-r.x)/scale,y:(x.y-r.y)/scale,w:x.width/scale,h:x.height/scale}})}})()`);}
 try{
  for(const id of samples){
   await visit(id,'render',1000);const expected=await measure(id);
