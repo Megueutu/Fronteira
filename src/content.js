@@ -147,13 +147,13 @@ const costSource = fromOriginal('cost'), paybackSource = fromOriginal('payback')
 const guideEvidence = {kind:'Roteiro editorial da edição',sources:[{id:'group'}]};
 const contentPages = [
   {...fromOriginal('cover'),id:'opening',kind:'opener',section:'ABERTURA / O PROBLEMA',title:'Eletricidade confiável\npara quem?',subtitle:'Como garantir eletricidade confiável às comunidades remotas, diante das dificuldades de infraestrutura e distribuição?',image:photos.angra,visual:'opening',refs:['group'],evidence:[guideEvidence],action:action('index','Percorra a investigação')},
-  {...editorial,body:editorial.body.slice(0,3),visual:'editorial-map'},
+  {...editorial},
   ...['unequal','matrix','territory','reactor','safety','wallerstein','sovereignty','uranium'].map(fromOriginal),
   {...paybackSource,id:'payback',section:'04 / CUSTO E PAYBACK',subtitle:'Angra 3 como estudo de caso: explore o cálculo, sem confundir simulação com previsão.',body:[...costSource.body,...paybackSource.body],evidence:[...costSource.body.map((_,i)=>evidenceFor('cost',i)),...paybackSource.body.map((_,i)=>evidenceFor('payback',i))],sourceParts:[{id:'cost',length:costSource.body.length},{id:'payback',length:paybackSource.body.length}],refs:[...new Set([...costSource.refs,...paybackSource.refs])]},
   ...['who-pays','messmer','world','public'].map(fromOriginal),
   {id:'adolfo',kind:'essay',section:'ENTREVISTA / ADOLFO BRAID',title:'Da experiência nuclear\nàs perguntas sobre o futuro',subtitle:`${adolfoInterview.fullName}, ${adolfoInterview.role.charAt(0).toLowerCase()}${adolfoInterview.role.slice(1)}.`,body:[adolfoInterview.introduction,...adolfoInterview.career.map(item=>item.text)],refs:['interview','aeita','adolfo-abdan','adolfo-cnen'],evidence:[{kind:'Fonte da entrevista',sources:[{id:'interview',location:'§1, §4 e §6.'}]},{kind:'Fonte',sources:[{id:'aeita'}]},{kind:'Fonte',sources:[{id:'interview',location:'§1, “Trajetória profissional e atuação no ciclo nuclear”.'},{id:'adolfo-abdan'}]},{kind:'Fonte',sources:[{id:'adolfo-abdan'},{id:'adolfo-cnen'}]}],image:interviewPhotos.adolfoLicensing,action:action('interview','Leia a entrevista completa')},
   {id:'interview-profile',kind:'essay',section:'ENTREVISTA / ADOLFO BRAID',title:'O que Adolfo defende',subtitle:'Resumo das respostas da entrevista com o grupo.',body:adolfoInterview.conversations.map(item=>item.answer),refs:['interview'],evidence:adolfoInterview.conversations.map(item=>({kind:'Fonte da entrevista',sources:[{id:'interview',location:item.record}]})),image:interviewPhotos.adolfoAmazul,action:action('interview','Abra a entrevista completa')},
-  {...balanceSource,id:'balance',subtitle:'Critérios para decidir e o posicionamento do editorial.',body:[...balanceSource.body,...editorial.body.slice(3)],evidence:[...balanceSource.body.map((_,i)=>evidenceFor('balance',i)),evidenceFor('editorial',3)],sourceParts:[{id:'balance',length:balanceSource.body.length},{id:'editorial',length:1,offset:3}],refs:[...new Set([...balanceSource.refs,'group','santos','wallerstein','enrichment','sin'])]},
+  {...balanceSource},
 ].map((page,index)=>({...page,folio:index+1,readingLabel:String(index+1).padStart(2,'0'),contentPage:true}));
 for (const page of contentPages) {
   const photoKey={safety:'pool',sovereignty:'caetite','who-pays':'suburb'}[page.id];
@@ -199,7 +199,7 @@ export const chapters = [
   {id:'payback',title:'Custo e payback',detail:'Angra 3, cenários e distribuição'},
   {id:'messmer',title:'Política e opinião pública',detail:'Messmer, Weber e o mundo'},
   {id:'adolfo',title:'Adolfo Braid',detail:'Trajetória, microrreatores e as respostas da entrevista'},
-  {id:'balance',title:'Balanço final',detail:'Os critérios para decidir e o posicionamento do editorial'},
+  {id:'balance',title:'Balanço final',detail:'Os critérios para decidir'},
 ].map(chapter=>({...chapter,page:pageIndexForId(chapter.id)}));
 export const {spreadCount,clampSpread,spreadForPage,getOpening,getSpread,formatPages,formatPage} = createPagination(pages);
 export const escapeHTML = text => String(text).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');

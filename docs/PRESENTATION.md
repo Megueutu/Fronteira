@@ -13,7 +13,7 @@ A implementação foi executada em 19/10/2026. Por pedido explícito do respons�
 
 Atualização de 18/10/2026 (pedido do responsável): a página 3 ("Uma pergunta. Cinco perspectivas.") foi retirada e a vaga virou a página 20, dedicada a Adolfo Braid, montada com textos já existentes da entrevista. Em seguida, por pedido do responsável, a ordem passou a ser sistema-mundo, não proliferação, ciclo do urânio e payback; custo e payback foram unidos em uma página (a página de tarifas perdeu o parágrafo de Max Weber) e a revista fechou em 19 páginas, com uma face de notas para manter 24 faces. A tabela abaixo reflete a nova numeração; a página 10 (Wallerstein) não cita mais o autor.
 
-Atualização seguinte (18/10/2026): a página "Volte às fontes" foi removida; as páginas de Adolfo Braid viraram duas páginas-resumo numeradas (16 e 17) e o antigo suplemento deixou de ser uma face à parte, mantendo-se o popup da entrevista completa; o balanço final e o posicionamento do editorial foram unidos na última página (18). A tabela abaixo reflete essa numeração.
+Atualização seguinte (18/10/2026): a página "Volte às fontes" foi removida; as páginas de Adolfo Braid viraram duas páginas-resumo numeradas (16 e 17) e o antigo suplemento deixou de ser uma face à parte, mantendo-se o popup da entrevista completa; o editorial voltou a ficar inteiro, com os quatro parágrafos, na página 2, e o balanço final é a última página (18). A tabela abaixo reflete essa numeração.
 
 Decisão de 19/10/2026: a edição possui dezoito páginas de conteúdo (ver atualizações de 18/10/2026 abaixo), sem contar a produção e o suplemento. São 24 faces físicas e 13 aberturas, sem faces de notas nem terceira capa em branco. As posições físicas internas usadas pelo código não são os fólios exibidos na revista.
 
@@ -25,7 +25,7 @@ Decisão de 19/10/2026: a edição possui dezoito páginas de conteúdo (ver atu
 | Pessoa 4 | Sistema-mundo, soberania e tratado de não proliferação | 8–9 | 1 min 35 s |
 | Pessoa 5 | Ciclo do combustível, Angra 3 e payback (visão geral e laboratório unificados) | 10–11 | 1 min 35 s |
 | Pessoa 6 | Quem paga a tarifa, Messmer, trajetórias internacionais e opinião pública | 12–15 | 1 min 35 s |
-| Pessoa 1 | Entrevista com Adolfo Braid (duas páginas-resumo, com a entrevista completa no popup) e balanço final com o posicionamento do editorial | 16–18 | 1 min |
+| Pessoa 1 | Entrevista com Adolfo Braid (duas páginas-resumo, com a entrevista completa no popup) e balanço final | 16–18 | 1 min |
 
 Duração total do roteiro: 9 min 30 s. Os tempos orientam a apresentação oral e não iniciam contagem automática na interface.
 
