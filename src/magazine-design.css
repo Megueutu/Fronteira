@@ -276,3 +276,6 @@ body:not(.render-document) .chart-row:nth-child(n+6) .bar-track i { animation-de
 .page-surface .page-team .team-member figcaption { display: grid; gap: 2px; margin: 0; padding: 0 2px; text-align: left; }
 .page-surface .page-team .team-member figcaption strong { font: 700 17px/1.25 var(--sans); letter-spacing: -.02em; color: var(--ds-ink); }
 .page-surface .page-team .team-member figcaption span { font: 400 13px/1.35 var(--sans); color: var(--ds-ink-48); }
+
+/* Imagem em preto (mapa noturno): mostra o recorte inteiro, sem cortar o continente. */
+.editorial-photo.photo-contain img { object-fit: contain; background: #04050d; }

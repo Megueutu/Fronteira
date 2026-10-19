@@ -52,11 +52,11 @@ test('o suplemento conserva respostas, análises, localizadores e quatro imagens
     assert.ok(markup.includes(escape(art.credit)),art.credit);
     assert.ok(markup.includes(art.licenseUrl),art.licenseUrl);
   }
-  assert.equal(Object.keys(photos).length,9);
+  assert.equal(Object.keys(photos).length,11);
 });
 
 test('fotografias de contexto aparecem uma vez na matéria e não nas continuações',()=>{
-  for(const [id,key] of Object.entries({safety:'pool',sovereignty:'caetite','who-pays':'suburb'})) {
+  for(const [id,key] of Object.entries({safety:'pool',sovereignty:'caetite','who-pays':'suburb',territory:'noiteAmerica'})) {
     const face=pages.find(page=>page.id===id);
     assert.equal(face.image,photos[key]);
     for(const flow of [false,true]) {

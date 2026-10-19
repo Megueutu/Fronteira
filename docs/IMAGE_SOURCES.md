@@ -55,7 +55,7 @@ O responsável forneceu seis JPEGs e solicitou sua inclusão na revista. Os arqu
 | --- | --- |
 | `davi-silva.jpg` | Davi de Oliveira, nome confirmado pelo responsável apesar do nome do arquivo |
 | `eduardo-rodrigues.jpg` | Eduardo Rodrigues |
-| `gustavo-souza.jpg` | Gustavo Souza |
+| `gustavo-sousa.jpg` | Gustavo Sousa |
 | `igor-quinto.jpg` | Igor Quinto |
 | `felipe-kogake.jpg` | Felipe Kogake |
 | `lucas-lima.jpg` | Lucas Lima |
@@ -133,3 +133,14 @@ Por pedido do responsável, as sete fotografias do Unsplash acima (`transmission
 ## Bandeiras (flag-icons, MIT)
 
 Bandeiras dos seis países da linha do tempo (Alemanha, Itália, Japão, Bélgica, Lituânia e Coreia do Sul), em SVG 4x3, extraídas de [flag-icons](https://github.com/lipis/flag-icons) (lipis), versão 7.6.0, licença MIT. Arquivos em `assets/flags/` (`de`, `it`, `jp`, `be`, `lt`, `kr`); texto da licença em `assets/third-party/flag-icons/LICENSE`. Sem emojis.
+
+
+## Trocas de fotografias por pedido do responsável (2026-10-18)
+
+| Arquivo | Uso | Origem e direitos |
+| --- | --- | --- |
+| `poste-fiacao.jpg` | Página 3 (Um Brasil desigual) | Primeira imagem de [Safira Energia, "Como os gatos de energia pesam na sua conta de luz" (31/07/2024)](https://blog.safiraenergia.com.br/2024/07/31/como-os-gatos-de-energia-pesam-na-sua-conta-de-luz/). O nome do arquivo de origem (AdobeStock_409703349) indica imagem de banco de imagens; a página não informa licença de reutilização nem o fotógrafo. Direitos reservados. |
+| `america-do-sul-noite.jpg` | Página 5 (Quem recebe a energia?) | Recorte da América do Sul do mapa global Black Marble 2016, da NASA, em [Earth at Night / Maps](https://science.nasa.gov/earth/earth-observatory/earth-at-night/maps/). A página não traz declaração de uso; imagens da NASA seguem as diretrizes de mídia da agência. Recorte e redução de tamanho feitos aqui. |
+| `inb-caetite-beneficiamento.jpg` | Página 9 (Autonomia com quais limites?) | Imagem principal de [Agência Sertão, "Beneficiamento de urânio em Caetité é retomado pela INB" (13/12/2018)](https://agenciasertao.com/2018/12/13/beneficiamento-de-uranio-em-caetite-e-retomado-pela-inb/). A página não informa fotógrafo nem licença. Direitos reservados. |
+
+A fotografia que estava na página 3 (linhas de transmissão do Prosub, Marinha do Brasil, CC BY-SA 2.0) passou para a página 6. As imagens sem licença informada foram usadas por solicitação expressa do responsável, sem declarar licença; procedência não equivale a liberação, e vale pedir autorização às fontes antes de divulgação pública ampla.

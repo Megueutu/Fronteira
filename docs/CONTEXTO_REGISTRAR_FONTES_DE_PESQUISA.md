@@ -48,7 +48,7 @@ Os pedidos posteriores de cabeçalho, rodapé, capa, verde `#1E7349`, editorial 
 - Capa: composição inspirada na referência Brasil Nuclear; recorte contínuo em S, painel à esquerda, vista da usina à direita, canteiro abaixo, verde central, fotos azuladas e ondas na base. Marca Fronteira e chamadas da pesquisa preservadas.
 - Remoção pedida: linha “Sociologia · Instituto J&F” abaixo da marca da capa. Isso não remove a identificação do trabalho nos créditos.
 - Cor base do Fronteira: `#1E7349`, com tons de apoio derivados. Fotografias ampliadas conservam as cores originais, contexto e créditos.
-- Retratos: Davi de Oliveira, Eduardo Rodrigues, Gustavo Souza, Igor Quinto, Felipe Kogake e Lucas Lima, no sumário e nos créditos, com ampliação. O responsável confirmou expressamente Davi de Oliveira, apesar do arquivo original `davi-silva.jpeg`.
+- Retratos: Davi de Oliveira, Eduardo Rodrigues, Gustavo Sousa, Igor Quinto, Felipe Kogake e Lucas Lima, no sumário e nos créditos, com ampliação. O responsável confirmou expressamente Davi de Oliveira, apesar do arquivo original `davi-silva.jpeg`.
 
 ## Editorial final
 

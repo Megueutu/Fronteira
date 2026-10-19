@@ -572,7 +572,7 @@ Image attachment: true
 ## felipe-kogake.jpeg: C:/Users/lucaslima-ieg/Downloads/felipe-kogake.jpeg
 Image attachment: true
 
-## gustavo-souza.jpeg: C:/Users/lucaslima-ieg/Downloads/gustavo-souza.jpeg
+## gustavo-sousa.jpeg: C:/Users/lucaslima-ieg/Downloads/gustavo-sousa.jpeg
 Image attachment: true
 
 ## igor-quinto.jpeg: C:/Users/lucaslima-ieg/Downloads/igor-quinto.jpeg

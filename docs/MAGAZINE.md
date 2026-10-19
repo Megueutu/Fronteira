@@ -12,7 +12,7 @@ Status: edição digital de 20 páginas, autorizada em 2026-10-16. A proposta fo
 
 ## Identidade e método
 
-Fronteira é o nome adotado nesta edição do projeto. A reportagem aborda energia nuclear no Brasil para o trabalho de Sociologia do 2º ano D do Instituto J&F, São Paulo. Pesquisa fornecida por Davi de Oliveira, Eduardo Rodrigues, Gustavo Souza, Igor Quinto, Felipe Kogake e Lucas Lima.
+Fronteira é o nome adotado nesta edição do projeto. A reportagem aborda energia nuclear no Brasil para o trabalho de Sociologia do 2º ano D do Instituto J&F, São Paulo. Pesquisa fornecida por Davi de Oliveira, Eduardo Rodrigues, Gustavo Sousa, Igor Quinto, Felipe Kogake e Lucas Lima.
 
 As reportagens usam fontes identificadas, limites explícitos, distinção entre dado e interpretação e quadros “a favor / em debate” com hierarquia visual equivalente. Isso não significa atribuir validade igual a afirmações sem evidência. O editorial final fornecido pelo responsável defende uma expansão condicionada a acesso à energia, autonomia tecnológica, metas e prestação de contas; essa posição editorial é identificada separadamente da reportagem.
 
