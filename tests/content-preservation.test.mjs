@@ -55,7 +55,7 @@ test('o suplemento conserva respostas, análises, localizadores e quatro imagens
 });
 
 test('fotografias de contexto aparecem uma vez na matéria e não nas continuações',()=>{
-  for(const [id,key] of Object.entries({safety:'steam',sovereignty:'panel','who-pays':'coast'})) {
+  for(const [id,key] of Object.entries({safety:'pool',sovereignty:'caetite','who-pays':'suburb'})) {
     const face=pages.find(page=>page.id===id);
     assert.equal(face.image,photos[key]);
     for(const flow of [false,true]) {

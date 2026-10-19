@@ -112,3 +112,20 @@ O responsável forneceu `Downloads/fronteira.svg` e `Downloads/favicon.svg`, pre
 `assets/qr/site.svg` codifica exatamente `https://megueutu.github.io/Fronteira/`, com quatro módulos de margem branca. É um arquivo vetorial estático gerado pelo encoder MIT de Nayuki; não há requisição a um serviço de QR nem biblioteca de geração carregada pelo visitante. Regeneração: `python scripts/generate-qr.py`. Procedência e hash estão em [SOURCES.json](../assets/qr/SOURCES.json).
 
 Validação: Chromium renderizou o próprio SVG em 164 × 164 px; zxing-cpp 3.1.1 decodificou a captura e retornou o endereço exato acima. Evidências em `artifacts/identity/qr-rendered-164.png` e `qr-verification.json`, ignoradas pelo Git. O decoder foi instalado somente em `artifacts/identity/decoder`, para conferência local. Isso comprova a decodificação digital nessa escala; não equivale a teste de câmera física ou impressão. O arquivo `assets/qr/barcode.svg` é um padrão vetorial decorativo original, sem números ou identificação de produto; não pretende representar ISBN, ISSN ou EAN registrado.
+
+
+## Substituição das fotografias do Unsplash (2026-10-18)
+
+Por pedido do responsável, as sete fotografias do Unsplash acima (`transmission`, `nuclear-night`, `control-room`, `nuclear-lake`, `wind`, `coast`, `nuclear-steam`) foram retiradas e substituídas por imagens brasileiras com significado para cada matéria. As referências ao Unsplash nas seções anteriores são históricas.
+
+| Arquivo | Uso | Crédito e licença |
+| --- | --- | --- |
+| `angra-sala-de-controle.jpg` | Abertura de "Como funciona" | Acervo Eletronuclear, galeria "Segurança e Monitoração" do portal. 940 × 504 px, convertida de PNG para JPEG. |
+| `angra-piscina.jpg` | Página de segurança e resíduos | Acervo Eletronuclear, mesma galeria. 940 × 504 px, convertida de PNG para JPEG. |
+| `angra3-obras-2024.jpg` | Abertura de política (decisão de Estado) | Acervo Eletronuclear, [notícia sobre o estudo do BNDES](https://www.eletronuclear.gov.br/Imprensa-e-Midias/Paginas/Eletronuclear-recebe-estudo-do-BNDES-sobre-Angra-3.aspx). Original de 4160 × 2340 px, reduzido para 2000 px de largura. |
+| `inb-caetite.jpg` | Página de soberania | André Koehne, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Unidade_de_Concentrado_de_Ur%C3%A2nio,_INB_Caetit%C3%A9_6.jpg), CC BY-SA 4.0. |
+| `linhas-transmissao-brasil.jpg` | Abertura "Um Brasil desigual" | Marinha do Brasil, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Linhas_de_transmiss%C3%A3o_PROSUB_-_2021_(53212226602).jpg), CC BY-SA 2.0. |
+| `parque-eolico-rn.jpg` | Galeria de fotografias | Copel/AEN-PR, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Parque_Cutia_Freire_Neto_DJI_0048.jpg), CC0. |
+| `rua-fiacao-rj.jpg` | Página de tarifas | Junius, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bento_Ribeiro_2.jpg), domínio público por declaração do autor. |
+
+**Direitos das imagens da Eletronuclear:** o portal informa apenas "Todos os direitos reservados © Eletronuclear" e não publica licença de reutilização nem crédito de fotógrafo. As imagens foram usadas por solicitação expressa do responsável, como já ocorre com a capa, sem declarar licença. Procedência não equivale a liberação: recomenda-se pedir autorização à assessoria de imprensa (imprensaeletronuclear@eletronuclear.gov.br) antes de qualquer divulgação pública ampla. As imagens do Commons foram baixadas por `Special:FilePath` em até 1920 px de largura e recomprimidas em JPEG; a licença CC BY-SA exige atribuição (exibida em cada legenda) e o compartilhamento de adaptações sob a mesma licença.
