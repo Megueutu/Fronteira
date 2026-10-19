@@ -44,6 +44,6 @@ try {
   const frame=await b.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false}); await writeFile(`artifacts/interview/supplement-${width}.png`,Buffer.from(frame.data,'base64'));
  }
  assert.deepEqual(b.errors,[]);
- assert.equal(pages.filter(page=>Number.isInteger(page.folio)).length,20);
+ assert.equal(pages.filter(page=>Number.isInteger(page.folio)).length,19);
  console.log('PASS: unnumbered supplement, complete interview, four credited images, nested focus/Escape, three modes and responsive layouts.');
 }finally{await b.close();}

@@ -11,6 +11,19 @@ const escape = text => String(text).replaceAll('&','&amp;').replaceAll('<','&lt;
 
 test('a redistribuição preserva integralmente e em ordem os parágrafos das vinte faces originais',()=>{
   for (const before of original.pages) {
+    // Custo e payback foram unidos em uma única página (pedido do responsável); os parágrafos de cada origem seguem íntegros e em ordem.
+    const merged = pages.find(page=>page.sourceParts?.some(part=>part.id===before.id));
+    if (merged) {
+      const start = merged.sourceParts.slice(0,merged.sourceParts.findIndex(part=>part.id===before.id)).reduce((sum,part)=>sum+part.length,0);
+      const part = merged.sourceParts.find(item=>item.id===before.id);
+      assert.deepEqual(merged.body.slice(start,start+part.length),before.body,before.id);
+      for (let i=0;i<before.body.length;i++) {
+        assert.deepEqual(merged.evidence[start+i],evidenceFor(before.id,i),`${before.id} parágrafo ${i}`);
+        assert.ok(pageHTML(merged,pages.indexOf(merged)).includes(escape(before.body[i])),`${before.id}, parágrafo ${i}`);
+      }
+      assert.ok((before.refs || []).every(ref=>merged.refs.includes(ref)),before.id);
+      continue;
+    }
     const faces = pages.filter(page=>(page.sourceId || page.id) === before.id);
     assert.deepEqual(faces.flatMap(page=>page.body),before.body,before.id);
     const anchor = pages.find(page=>page.id===before.id);

@@ -7,7 +7,7 @@
   destination.search = location.search;
   // Links antigos por página continuam levando ao assunto correspondente.
   const oldPage = Number(location.hash.match(/^#p(\d+)$/)?.[1]);
-  const pageMap = ['cover','team','contents','editorial','matrix','territory','reactor','safety','safety','safety','uranium','sovereignty','cost','who-pays','public','balance'];
+  const pageMap = ['cover','team','contents','editorial','matrix','territory','reactor','safety','safety','safety','uranium','sovereignty','payback','who-pays','public','balance'];
   if (oldPage >= 1 && oldPage <= pageMap.length && !destination.searchParams.has('page')) destination.searchParams.set('page',pageIndexForId(pageMap[oldPage-1])+1);
   location.replace(destination.href);
 </script></body></html>

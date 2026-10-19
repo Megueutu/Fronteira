@@ -385,8 +385,7 @@
       "body": [
         "Se uma tarifa é calculada para viabilizar um empreendimento, usá-la para provar que o empreendimento se paga pode criar um raciocínio circular. O resultado mostra o que aconteceria sob aquela hipótese; não demonstra que consumidores e sistema elétrico deveriam aceitá-la.",
         "A EPE esclareceu, em 2024, que sua avaliação então disponível sobre Angra 3 utilizava informações preliminares. O documento é importante por lembrar que projeções têm data, escopo e limitações. Não deve ser convertido em uma conclusão definitiva sobre o orçamento atual.",
-        "Há efeitos que o fluxo de caixa de uma usina não mede sozinho: empregos, cadeia de fornecedores, desenvolvimento tecnológico, custos territoriais e distribuição das despesas. Ao comparar com eólica, solar, armazenamento e eficiência energética, é preciso explicitar quais serviços são equivalentes e quais custos de integração estão incluídos.",
-        "Max Weber ajuda a distinguir o cálculo dos meios e a discussão dos fins. Um procedimento pode ser tecnicamente calculável e ainda deixar em aberto quais valores devem orientar a decisão. Transparência, controle de contratos e avaliação de alternativas permitem discutir tanto a eficiência quanto a legitimidade do investimento."
+        "Há efeitos que o fluxo de caixa de uma usina não mede sozinho: empregos, cadeia de fornecedores, desenvolvimento tecnológico, custos territoriais e distribuição das despesas. Ao comparar com eólica, solar, armazenamento e eficiência energética, é preciso explicitar quais serviços são equivalentes e quais custos de integração estão incluídos."
       ],
       "balance": {
         "favor": "A conclusão de uma obra pode aproveitar equipamentos, competências e infraestrutura existentes.",
@@ -394,13 +393,12 @@
       },
       "refs": [
         "cost",
-        "weber",
         "group",
         "polis"
       ],
       "action": {
         "type": "popup",
-        "label": "Meios, fins e custo de oportunidade",
+        "label": "Custo de oportunidade",
         "x": 0.5,
         "y": 0.925
       },

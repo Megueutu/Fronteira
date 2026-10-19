@@ -94,7 +94,7 @@ export const pageEvidence = {
   sovereignty: [evidence('critique'),analysis('wallerstein','critique'),evidence('npt','abacc'),analysis('npt',study('§2, distinção entre propulsão e armamento nuclear.'))],
   cost: [analysis(finance),evidence(finance)],
   payback: [evidence(finance),evidence(finance),analysis(finance)],
-  'who-pays': [analysis(finance),evidence('cost'),analysis(finance,'polis'),analysis('weber')],
+  'who-pays': [analysis(finance),evidence('cost'),analysis(finance,'polis')],
   messmer: [evidence('messmer'),analysis('messmer','weber')],
   world: [evidence('germany','italy','japan','belgium','lithuania','korea'),{kind:'Critério editorial: recortes históricos datados',sources:[]},analysis('weber')],
   public: [analysis('weber','polis'),analysis(c('weber','Verbete “Max Weber”, §6.1, “Domination and Legitimacy”; aplicação à prestação de contas feita pelo grupo.')),analysis('npt',study('§4.3, “Desinformação sobre energia nuclear”.')),{kind:'Método editorial da revista: conferir origem, período e contexto',sources:[]}],

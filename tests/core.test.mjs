@@ -35,7 +35,7 @@ test('edição tem fontes, ações e destinos válidos, sem omitir os cinco tema
   assert.equal(new Set(teamMembers.map(member => member.id)).size,6);
   for (const member of teamMembers) await access(new URL(`..${member.portrait}`,import.meta.url));
   assert.equal(timeline.length,6);
-  for (const id of ['unequal','matrix','territory','reactor','safety','uranium','wallerstein','sovereignty','cost','payback','messmer','world','public','balance','credits','references']) assert.ok(pages.some(page=>page.id===id));
+  for (const id of ['unequal','matrix','territory','reactor','safety','uranium','wallerstein','sovereignty','payback','messmer','world','public','balance','credits','references']) assert.ok(pages.some(page=>page.id===id));
 });
 
 test('matriz mantém total e denominador ao comparar fontes', () => {

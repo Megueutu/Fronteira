@@ -11,7 +11,7 @@ As ações principais e as fontes também estão disponíveis em controles HTML 
 A implementação foi executada em 19/10/2026. Por pedido explícito do responsável, os novos commits registram autor e committer em 18/10/2026 às 12h, UTC−03, sem reescrever o histórico anterior.
 
 
-Atualização de 2026-10-19: **20 páginas de conteúdo**, em **28 faces físicas / 15 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas no desktop e alinhadas à esquerda no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
+Atualização de 2026-10-19: **19 páginas de conteúdo**, em **28 faces físicas / 15 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas no desktop e alinhadas à esquerda no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
 
 ## Revisão física vigente — 36 faces e 19 aberturas
 
