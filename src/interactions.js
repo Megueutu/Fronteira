@@ -4,6 +4,8 @@ import { chartHTML, fuelSteps, reactorSteps, calculateScenario, scenarios, timel
 import { citationHTML, visualEvidence, sourcePanelHTML, pageSourceRecords, sourceCardsHTML } from './citations.js';
 import { paybackBarsHTML, updatePaybackBars, refreshExplorers } from './explorers.js';
 
+const VIDEO_ID = 'z5x1u_tPdKM';
+
 export function createInteractions(onJump) {
   const dialog = document.querySelector('#interaction-dialog');
   const content = document.querySelector('#dialog-content');
@@ -38,10 +40,13 @@ export function createInteractions(onJump) {
     if (dialog.open && pushHistory) history.push({ nodes: [...content.childNodes], className: dialog.className, scroll: dialog.scrollTop, trigger, gallery, slideIndex, currentSteps, scenario: { ...scenario } });
     if (!dialog.open) origin = trigger || document.activeElement;
     gallery = null;
-    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : '';
+    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : '';
     document.querySelector('#open-index').setAttribute('aria-expanded',String(type === 'index'));
     let title = '', markup = '';
-    if (type === 'index') {
+    if (type === 'video') {
+      title = 'Vídeo da revista';
+      markup = `<button type="button" class="video-poster" data-video="${VIDEO_ID}" aria-label="Reproduzir o vídeo da revista"><img src="https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg'"><span class="video-play">${uiIcon('play_arrow')}</span></button><p class="video-link"><a href="https://youtu.be/${VIDEO_ID}" target="_blank" rel="noopener noreferrer">Abrir no YouTube ${uiIcon('arrow_forward')}</a></p>`;
+    } else if (type === 'index') {
       title = 'Sumário da edição';
       markup = `${contentsHTML({drawer:true})}<details><summary>Fluxograma da revista</summary>${flowHTML(['Capa, sumário e editorial','Panorama: matriz, território e desigualdade','Tecnologia: funcionamento, segurança e resíduos','Urânio: ciclo, soberania e Wallerstein','Custo: premissas, payback e distribuição','Política: Messmer, experiências internacionais e Weber','Balanço, uso de IA e referências'])}</details>`;
 
@@ -94,7 +99,7 @@ export function createInteractions(onJump) {
     }
     if (type === 'chart') markup += citationHTML(visualEvidence.matrix);
     if (type === 'checklist') markup += citationHTML({kind:'Critérios elaborados pelo grupo, com base em',sources:page.refs.map(id=>({id}))});
-    if (!['index','interview','member','image','carousel','chart','diagram','cycle','calculator','timeline','checklist','sources','credits','linear','read'].includes(type)) {
+    if (!['video','index','interview','member','image','carousel','chart','diagram','cycle','calculator','timeline','checklist','sources','credits','linear','read'].includes(type)) {
       markup += citationHTML({kind:'Nota da edição: síntese e interpretação com base em',sources:(page.refs || []).map(id=>({id}))});
     }
     content.innerHTML = `<h2 id="dialog-title">${title}</h2>${markup}`;
@@ -124,13 +129,15 @@ export function createInteractions(onJump) {
     if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); close(); }
   });
   dialog.addEventListener('cancel',event => { event.preventDefault(); close(); });
-  dialog.addEventListener('close',() => { document.querySelector('#open-index').setAttribute('aria-expanded','false'); history = []; gallery = null; if (origin?.isConnected) origin.focus(); });
+  dialog.addEventListener('close',() => { if (dialog.classList.contains('video-dialog')) content.replaceChildren(); document.querySelector('#open-index').setAttribute('aria-expanded','false'); history = []; gallery = null; if (origin?.isConnected) origin.focus(); });
   dialog.addEventListener('click',event => {
     if (event.target !== dialog) return;
     const r = dialog.getBoundingClientRect();
     if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) close();
   });
   document.addEventListener('click',event => {
+    const poster = event.target.closest('[data-video]');
+    if (poster) { poster.replaceWith(Object.assign(document.createElement('div'),{className:'video-frame',innerHTML:`<iframe src="https://www.youtube-nocookie.com/embed/${poster.dataset.video}?autoplay=1&rel=0" title="Vídeo da revista Energia Nuclear no Brasil" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`})); return; }
     const jump = event.target.closest('[data-jump],[data-jump-id]');
     if (jump) { history = []; if (dialog.open) dialog.close(); const target=jump.dataset.jumpId ? pages.findIndex(page=>page.id===jump.dataset.jumpId) : Number(jump.dataset.jump); if(target>=0) onJump(target); return; }
     const trigger = event.target.closest('[data-action]');

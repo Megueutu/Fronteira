@@ -125,3 +125,20 @@
 .unified-reader .stage { padding-block: 12px; }
 .unified-reader .webgl-view { height: 100%; }
 @media (max-height: 640px) { .top-app-bar.reader-toolbar { position: static; } }
+
+/* Vídeo da revista: janela grande no centro, com o banner do vídeo antes de carregar o player. */
+.unified-reader #interaction-dialog.video-dialog { width: min(1180px, 94vw); max-width: 94vw; padding: 0; border-radius: 24px; overflow: hidden; background: #0b1d14; color: #fff; }
+.video-dialog .dialog-top { background: #0b1d14; color: #cfe6c4; }
+.video-dialog #close-dialog { color: #fff; }
+.video-dialog #dialog-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.video-dialog #dialog-content { padding: 0; }
+.video-dialog .video-poster, .video-dialog .video-frame { position: relative; display: block; width: min(100%, calc((86dvh - 120px) * 16 / 9)); aspect-ratio: 16 / 9; margin: 0 auto; padding: 0; border: 0; background: #000; cursor: pointer; }
+.video-dialog .video-poster img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.video-dialog .video-play { position: absolute; inset: 0; margin: auto; width: 96px; height: 96px; display: grid; place-items: center; border-radius: 999px; background: #1d7449; color: #fff; box-shadow: 0 8px 32px #0008; transition: transform .15s, background .15s; }
+.video-dialog .video-play .reader-icon { width: 56px; height: 56px; }
+.video-dialog .video-poster:hover .video-play { transform: scale(1.08); background: #25905a; }
+.video-dialog .video-frame { cursor: default; }
+.video-dialog .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-dialog .video-link { margin: 0; padding: 14px 24px 18px; text-align: center; font: 500 14px/1.4 var(--sans); }
+.video-dialog .video-link a { color: #d8f08a; display: inline-flex; align-items: center; gap: 6px; }
+.video-dialog .video-link .reader-icon { width: 18px; height: 18px; }
