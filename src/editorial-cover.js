@@ -13,7 +13,6 @@ export function coverHTML(page, index, { linear = false } = {}) {
       <p class="cover-eyebrow"><span>ENERGIA · SOCIEDADE · BRASIL</span></p>
       <div class="cover-copy"><h2 class="cover-title">Energia<br>Nuclear<br><span>no Brasil</span></h2></div>
       <div class="cover-panel"><p class="cover-callout"><strong>Da mina à tomada.</strong></p><p class="cover-deck">${escape(page.subtitle)}</p><p class="cover-topics">Matriz, tecnologia, urânio, custos e decisões políticas.</p></div>
-      <a class="cover-qr" href="https://megueutu.github.io/Fronteira/" aria-label="Abrir a edição digital da revista"><img src="/assets/qr/site.svg" alt="QR code para a revista digital" width="104" height="104"><span>A EDIÇÃO DIGITAL</span></a>
       <div class="cover-imprint"><span class="cover-issue">OUTUBRO<br>2026</span><img class="publisher-brand" src="/assets/branding/fronteira.svg" alt="Editora Fronteira" width="272" height="35"><img class="cover-barcode" src="/assets/qr/barcode.svg" alt="" aria-hidden="true" width="128" height="46"></div>
     </div>
   </article>`;

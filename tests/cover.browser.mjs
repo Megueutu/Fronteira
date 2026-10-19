@@ -12,8 +12,7 @@ try {
   console.log('cover active'); await b.evaluate('document.fonts.ready');
   assert.equal(await b.evaluate("document.querySelectorAll('#html-book .cover-photograph').length"),1);
   assert.ok(await b.evaluate('document.documentElement.scrollWidth<=innerWidth'));
-  const bounds=await b.evaluate(`(()=>{const qr=document.querySelector('#html-book .cover-qr').getBoundingClientRect(),code=document.querySelector('#html-book .cover-barcode').getBoundingClientRect();return{qrBottom:qr.bottom,codeTop:code.top}})()`);
-  assert.ok(bounds.qrBottom<bounds.codeTop,'QR and barcode have separate space');
+  assert.equal(await b.evaluate("document.querySelectorAll('#html-book .cover-qr').length"),0,'o QR saiu da capa');
   assert.ok(await b.evaluate("document.fonts.check('800 40px MontserratVariable')"),'Montserrat is loaded for the cover');
   assert.equal(await b.evaluate("document.querySelectorAll('#html-book .edition-cover canvas.cover-lava-gl').length"),1);
   console.log('motion check'); const frame="document.querySelector('#html-book .cover-lava-gl').toDataURL()";

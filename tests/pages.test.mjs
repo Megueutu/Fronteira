@@ -12,8 +12,8 @@ test('pages build relocates resources and only publishes website files', async (
   assert.match(await read('src/webgl-scene.js'), /`\/Fronteira\/assets\/textures\//);
   assert.match(await read('src/editorial-cover.js'), /src="\/Fronteira\/assets\/photos\/angra-cover\.jpg"/);
   assert.match(await read('src/editorial-cover.js'), /src="\/Fronteira\/assets\/branding\/fronteira\.svg"/);
-  assert.match(await read('src/editorial-cover.js'), /src="\/Fronteira\/assets\/qr\/site\.svg"/);
-  assert.match(await read('src/editorial-cover.js'), /href="https:\/\/megueutu.github.io\/Fronteira\/"/);
+  assert.match(await read('src/interactions.js'), /src="\/Fronteira\/assets\/qr\/site\.svg"/);
+  assert.match(await read('src/interactions.js'), /href="https:\/\/megueutu.github.io\/Fronteira\/"/);
   assert.match(await read('src/styles.css'), /url\('\/Fronteira\/assets\/fonts\/InterVariable\.woff2'\)/);
   assert.match(await read('src/styles.css'), /url\('\/Fronteira\/assets\/fonts\/InterVariable-Italic\.woff2'\)/);
   assert.match(await read('index.html'), /href="\/Fronteira\/assets\/favicon\.svg"/);

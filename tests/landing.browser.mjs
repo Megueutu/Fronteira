@@ -52,7 +52,7 @@ try {
 
   for(const page of pages) for(const text of page.body) assert.ok(await browser.evaluate(`document.querySelector('#landing-${page.id}').textContent.includes(${JSON.stringify(text)})`),page.id);
   assert.equal(await browser.evaluate("document.querySelectorAll('#landing-cover .cover-photograph').length"),1);
-  assert.equal(await browser.evaluate("document.querySelector('#landing-cover .cover-qr').href"),'https://megueutu.github.io/Fronteira/');
+  assert.ok(await browser.evaluate("document.querySelector('[data-action=qr]')"));
   assert.equal(await browser.evaluate("document.querySelector('#landing-cover .page-bottom')"),null);
 
   for (const width of [1440,768,390,320]) {

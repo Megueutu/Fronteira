@@ -376,3 +376,11 @@
 @media (max-width: 760px) { #interaction-dialog.reading-dialog .linear-content > .magazine-page { padding: var(--ds-space-lg) var(--ds-space-md); } }
 .page-surface .page-contents nav.page-index { margin-inline: calc(-1 * var(--ds-space-md)); }
 @media (max-width: 760px) { #interaction-dialog.lightbox-dialog .expanded-photo figcaption { grid-template-columns: minmax(0,1fr); } }
+
+/* QR code da edição digital, aberto pelo botão da barra superior. */
+#interaction-dialog.qr-dialog { width: min(420px, 92vw); }
+.qr-dialog .qr-card { display: grid; justify-items: center; gap: 16px; padding: 8px 8px 24px; text-align: center; }
+.qr-dialog .qr-card img { width: min(260px, 70vw); height: auto; padding: 16px; background: #fff; border: 1px solid var(--ds-hairline); border-radius: var(--ds-radius-lg); }
+.qr-dialog .qr-card p { margin: 0; color: var(--ds-ink-48); font: 400 15px/1.5 var(--sans); }
+.qr-dialog .qr-card a { display: inline-flex; align-items: center; gap: 6px; color: var(--ds-accent); font: 600 15px/1.4 var(--sans); text-decoration: none; }
+.qr-dialog .qr-card a .reader-icon { width: 18px; height: 18px; }

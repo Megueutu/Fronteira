@@ -44,11 +44,14 @@ export function createInteractions(onJump) {
     if (dialog.open && pushHistory) history.push({ nodes: [...content.childNodes], className: dialog.className, scroll: dialog.scrollTop, trigger, gallery, slideIndex, retitle, currentSteps, scenario: { ...scenario } });
     if (!dialog.open) origin = trigger || document.activeElement;
     gallery = null; retitle = false;
-    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : type === 'zoom' ? 'chart-zoom-dialog' : ['image','member','carousel'].includes(type) ? 'lightbox-dialog' : '';
+    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : type === 'qr' ? 'qr-dialog' : type === 'zoom' ? 'chart-zoom-dialog' : ['image','member','carousel'].includes(type) ? 'lightbox-dialog' : '';
     document.querySelector('#open-index').setAttribute('aria-expanded',String(type === 'index'));
     let title = '', markup = '';
     if (type === 'zoom') {
       title = zoomSource.dataset.zoomTitle || 'Gráfico ampliado';
+    } else if (type === 'qr') {
+      title = 'Edição digital';
+      markup = `<div class="qr-card"><img src="/assets/qr/site.svg" alt="QR code que abre a edição digital da revista" width="260" height="260"><p>Aponte a câmera do celular para abrir a revista.</p><a href="https://megueutu.github.io/Fronteira/" target="_blank" rel="noopener noreferrer">Abrir a edição digital ${uiIcon('arrow_forward')}</a></div>`;
     } else if (type === 'video') {
       title = 'Vídeo da revista';
       markup = `<button type="button" class="video-poster" data-video="${VIDEO_ID}" aria-label="Reproduzir o vídeo da revista"><img src="https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg'"><span class="video-play">${uiIcon('play_arrow')}</span></button><p class="video-link"><a href="https://youtu.be/${VIDEO_ID}" target="_blank" rel="noopener noreferrer">Abrir no YouTube ${uiIcon('arrow_forward')}</a></p>`;
@@ -107,7 +110,7 @@ export function createInteractions(onJump) {
     }
     if (type === 'chart') markup += citationHTML(visualEvidence.matrix);
     if (type === 'checklist') markup += citationHTML({kind:'Critérios elaborados pelo grupo, com base em',sources:page.refs.map(id=>({id}))});
-    if (!['video','index','interview','member','image','carousel','chart','zoom','diagram','cycle','calculator','timeline','checklist','sources','credits','linear','read'].includes(type)) {
+    if (!['qr','video','index','interview','member','image','carousel','chart','zoom','diagram','cycle','calculator','timeline','checklist','sources','credits','linear','read'].includes(type)) {
       markup += citationHTML({kind:'Nota da edição: síntese e interpretação com base em',sources:(page.refs || []).map(id=>({id}))});
     }
     content.innerHTML = `<h2 id="dialog-title">${title}</h2>${markup}`;

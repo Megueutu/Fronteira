@@ -263,19 +263,21 @@
       "kind": "essay",
       "section": "03 / SISTEMA-MUNDO",
       "title": "Em que lugar\no Brasil está?",
-      "subtitle": "O que é a teoria do sistema-mundo e por que ela entra nesta discussão.",
+      "subtitle": "Quem foi Wallerstein e por que sua teoria entra nesta discussão.",
       "body": [
-        "A teoria do sistema-mundo propõe analisar o capitalismo como uma economia-mundo. Em vez de tratar cada país como uma trajetória isolada, examinou as relações históricas de trabalho, comércio, poder e acumulação que conectam regiões desiguais.",
+        "Immanuel Wallerstein (1930–2019) foi um sociólogo estadunidense. Formado em Columbia, lecionou nessa universidade, na McGill e na Binghamton, onde dirigiu o Centro Fernand Braudel, e atuou em Yale como pesquisador sênior. Em The Modern World-System (1974), formulou a teoria do sistema-mundo.",
+        "Wallerstein propôs analisar o capitalismo como uma economia-mundo. Em vez de tratar cada país como uma trajetória isolada, examinou as relações históricas de trabalho, comércio, poder e acumulação que conectam regiões desiguais.",
         "Na teoria, o centro concentra atividades com maior poder econômico e tecnológico; a periferia tende a ocupar posições subordinadas; a semiperiferia combina características de ambas. Essas posições dizem respeito a relações e processos históricos, não a uma hierarquia natural ou permanente entre povos.",
         "O caso nuclear permite formular uma pergunta concreta: o país participa como fornecedor de matéria-prima, comprador de serviços ou produtor de tecnologia e combustível de maior valor agregado? Reservas de urânio e capacidade científica podem aumentar a margem de decisão, mas dependência financeira e gargalos industriais podem limitá-la.",
         "Nessa leitura, o Brasil pode reunir competências avançadas e, ao mesmo tempo, depender de outros países em etapas decisivas. A soberania não se mede apenas pela existência de uma mina ou de um reator. Inclui a capacidade de sustentar pesquisa, produção, formação profissional, regulação e acordos internacionais ao longo do tempo."
       ],
       "quote": "A posição de um país depende também das relações que ele consegue transformar.",
       "refs": [
-        "group",
         "inb",
-        "group",
-        "enrichment"
+        "enrichment",
+        "wallerstein",
+        "wallerstein-bio",
+        "group"
       ],
       "action": {
         "type": "popup",

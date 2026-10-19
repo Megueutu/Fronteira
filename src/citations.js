@@ -64,6 +64,7 @@ for (const ref of references) {
   if (ref.id === 'santos') { ref.url = researchURL + 'ApostaEnergiaNuclearBrasilABNT%20revisto.docx'; ref.name = 'SANTOS, Milton. A natureza do espaço (1996). SANTOS; SILVEIRA. O Brasil: território e sociedade no início do século XXI (2001). Obras indicadas na pesquisa, §3.3; link para o documento do grupo, sem paginação confirmada dos livros.'; }
 }
 references.push(
+  {id:'wallerstein-bio',short:'THE · Immanuel Wallerstein, 1930-2019',name:'REISZ, Matthew. Immanuel Wallerstein, 1930-2019. Times Higher Education, 12 set. 2019.',url:'https://www.timeshighereducation.com/people/immanuel-wallerstein-1930-2019-obituary',location:'Obituário: formação em Columbia, atuação em Columbia, McGill, Binghamton e Yale, direção do Centro Fernand Braudel e The Modern World-System (1974).'},
   {id:'tariff-study',short:'Pesquisa do grupo · PDF ABNT',name:'Pesquisa do grupo. Aposta Energia Nuclear Brasil, PDF ABNT. Tarifas por região.',url:researchURL+'Aposta_Energia_Nuclear_Brasil_ABNT.pdf',location:'Página 24, §5.1, Tabela 2; gráfico na p. 25, Figura 7. Valores da compilação Meutudo de 2026, reproduzidos conforme a pesquisa.'},
   {id:'tariff-compilation',short:'Meutudo · tabela por região (2026)',name:'Meutudo. Tabela de consumo de energia elétrica (Luz) 2026, 14 jan. 2026.',url:'https://meutudo.com.br/blog/tabelas/tabela-de-consumo-de-energia-eletrica-luz/',location:'Seção “Tabelas de Tarifas de Energia Elétrica (Luz) por Região”. Limites ordenados conforme a Tabela 2 do PDF; a página consultada apresenta os títulos mínima/máxima invertidos.'},
   {id:'aneel-tariffs',short:'ANEEL · Ranking das tarifas',name:'ANEEL. Ranking das Tarifas.',url:'https://www.gov.br/aneel/pt-br/assuntos/tarifas/ranking-das-tarifas',location:'Texto introdutório: unidades em R$/kWh e itens não contemplados nas tarifas homologadas, como tributos, iluminação pública e bandeiras.'},
@@ -90,7 +91,7 @@ export const pageEvidence = {
   reactor: [evidence('iaea'),evidence(study('§2, descrição do ciclo nuclear e reatores de Angra.'),'iaea')],
   safety: [evidence('iaea','npt'),evidence('waste'),evidence('fukushima','chernobyl',study('§6, impactos dos acidentes nas decisões nacionais.')),analysis('waste','weber')],
   uranium: [evidence('inb'),evidence('inb','enrichment'),evidence(c('inb','Etapa “Conversão”: serviço contratado no exterior.')),evidence('itataia')],
-  wallerstein: [evidence(study('§8.3 e §9: fundamentação teórica do grupo sobre centro, semiperiferia e periferia.')),evidence(study('§3.3 e §9: síntese da fundamentação teórica; §8.3: sistema-mundo. Páginas das obras originais não informadas.')),analysis(study('§9: síntese da fundamentação teórica.'),'inb'),analysis('inb','enrichment')],
+  wallerstein: [evidence('wallerstein-bio'),evidence('wallerstein'),evidence('wallerstein',theory),analysis('wallerstein','inb'),analysis('wallerstein','enrichment')],
   sovereignty: [evidence('critique'),analysis('wallerstein','critique'),evidence('npt','abacc'),analysis('npt',study('§2, distinção entre propulsão e armamento nuclear.'))],
   cost: [analysis(finance),evidence(finance)],
   payback: [evidence(finance),evidence(finance),analysis(finance)],

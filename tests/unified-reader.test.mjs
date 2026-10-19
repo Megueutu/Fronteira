@@ -62,8 +62,11 @@ test('cover uses one institutional photograph, publisher identity and a real sit
   assert.match(cover,/\/assets\/photos\/angra-cover\.jpg/);
   assert.match(cover,/Energia<br>Nuclear<br><span>no Brasil<\/span>/);
   assert.match(cover,/\/assets\/branding\/fronteira\.svg/);
-  assert.match(cover,/\/assets\/qr\/site\.svg/);
-  assert.match(cover,/href="https:\/\/megueutu.github.io\/Fronteira\/"/);
+  assert.doesNotMatch(cover,/cover-qr/);
+  const dialogs=await readFile(new URL('../src/interactions.js',import.meta.url),'utf8');
+  assert.match(dialogs,/\/assets\/qr\/site\.svg/);
+  assert.match(dialogs,/href="https:\/\/megueutu.github.io\/Fronteira\/"/);
+  assert.match(root,/data-action="qr"/);
   assert.match(root,/href="\/assets\/favicon\.svg"/);
   assert.equal(await readFile(new URL('../assets/favicon.svg',import.meta.url),'utf8'),await readFile(new URL('../assets/branding/favicon.svg',import.meta.url),'utf8'));
   const qr=JSON.parse(await readFile(new URL('../assets/qr/SOURCES.json',import.meta.url),'utf8'));
