@@ -37,13 +37,17 @@ export function createInteractions(onJump) {
   }
   function open(type, pageIndex = 0, trigger, pushHistory = true) {
     const page = pages[pageIndex] || pages[0];
+    const zoomSource = type === 'zoom' ? trigger?.closest('[data-zoom-target]') : null;
+    if (type === 'zoom' && !zoomSource) return;
     if (dialog.open && pushHistory) history.push({ nodes: [...content.childNodes], className: dialog.className, scroll: dialog.scrollTop, trigger, gallery, slideIndex, currentSteps, scenario: { ...scenario } });
     if (!dialog.open) origin = trigger || document.activeElement;
     gallery = null;
-    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : '';
+    dialog.className = ['linear','read'].includes(type) ? 'reading-dialog' : type === 'interview' ? 'interview-dialog' : type === 'index' ? 'contents-drawer' : type === 'video' ? 'video-dialog' : type === 'zoom' ? 'chart-zoom-dialog' : '';
     document.querySelector('#open-index').setAttribute('aria-expanded',String(type === 'index'));
     let title = '', markup = '';
-    if (type === 'video') {
+    if (type === 'zoom') {
+      title = zoomSource.dataset.zoomTitle || 'Gráfico ampliado';
+    } else if (type === 'video') {
       title = 'Vídeo da revista';
       markup = `<button type="button" class="video-poster" data-video="${VIDEO_ID}" aria-label="Reproduzir o vídeo da revista"><img src="https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg'"><span class="video-play">${uiIcon('play_arrow')}</span></button><p class="video-link"><a href="https://youtu.be/${VIDEO_ID}" target="_blank" rel="noopener noreferrer">Abrir no YouTube ${uiIcon('arrow_forward')}</a></p>`;
     } else if (type === 'index') {
@@ -99,10 +103,16 @@ export function createInteractions(onJump) {
     }
     if (type === 'chart') markup += citationHTML(visualEvidence.matrix);
     if (type === 'checklist') markup += citationHTML({kind:'Critérios elaborados pelo grupo, com base em',sources:page.refs.map(id=>({id}))});
-    if (!['video','index','interview','member','image','carousel','chart','diagram','cycle','calculator','timeline','checklist','sources','credits','linear','read'].includes(type)) {
+    if (!['video','index','interview','member','image','carousel','chart','zoom','diagram','cycle','calculator','timeline','checklist','sources','credits','linear','read'].includes(type)) {
       markup += citationHTML({kind:'Nota da edição: síntese e interpretação com base em',sources:(page.refs || []).map(id=>({id}))});
     }
     content.innerHTML = `<h2 id="dialog-title">${title}</h2>${markup}`;
+    if (zoomSource) {
+      // Cópia do gráfico no estado atual; filtros e sliders seguem funcionando porque os eventos são delegados no documento.
+      const copy = zoomSource.cloneNode(true);
+      copy.querySelectorAll('[data-action=zoom]').forEach(button => button.remove());
+      content.append(copy);
+    }
     if (!dialog.open) dialog.showModal();
     refreshExplorers(content);
     closeButton.focus(); dialog.scrollTop = 0;

@@ -1,4 +1,5 @@
 import { citationHTML } from './citations.js';
+import { uiIcon } from './icons.js';
 // Pesquisa ABNT fornecida, p. 24, §5.1, Tabela 2 (compilação Meutudo, 2026).
 export const regionalTariffs = [
   {region:'Sudeste',min:.578,max:1.484},
@@ -18,10 +19,11 @@ export const matrixData = [
   { name: 'Petróleo e derivados', value: .9, renewable: false },
   { name: 'Outras', value: 1.5, renewable: null },
 ];
+export const zoomButton = title => `<button type="button" class="chart-zoom" data-action="zoom" aria-label="Ampliar gráfico: ${title}" title="Ampliar gráfico">${uiIcon('open_in_full')}</button>`;
 const decimal = (number, digits = 1) => new Intl.NumberFormat('pt-BR', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(number);
 export function chartHTML(filter = 'all') {
   const rows = matrixData.filter(row => filter === 'all' || (filter === 'renewable' ? row.renewable : row.name === 'Nuclear'));
-  return `<figure class="matrix-chart"><figcaption>PARTICIPAÇÃO NA GERAÇÃO NACIONAL · %</figcaption><div class="chart-rows">${rows.map(row => `<div class="chart-row${row.name === 'Nuclear' ? ' nuclear-row' : ''}"><span>${row.name}</span><div class="bar-track"><i style="width:${row.value / 51.7 * 100}%"></i></div><b>${decimal(row.value)}%</b></div>`).join('')}</div><p class="visual-caption">EPE · Anuário 2026 · ano-base 2025. A escala é mantida ao filtrar; “outras” reúne fontes de classificação mista. Arredondamentos conforme a pesquisa.</p></figure>`;
+  return `<figure class="matrix-chart" data-zoom-target data-zoom-title="Matriz elétrica brasileira, 2025"><figcaption><span>PARTICIPAÇÃO NA GERAÇÃO NACIONAL · %</span>${zoomButton('matriz elétrica brasileira, 2025')}</figcaption><div class="chart-rows">${rows.map(row => `<div class="chart-row${row.name === 'Nuclear' ? ' nuclear-row' : ''}"><span>${row.name}</span><div class="bar-track"><i style="width:${row.value / 51.7 * 100}%"></i></div><b>${decimal(row.value)}%</b></div>`).join('')}</div><p class="visual-caption">EPE · Anuário 2026 · ano-base 2025. A escala é mantida ao filtrar; “outras” reúne fontes de classificação mista. Arredondamentos conforme a pesquisa.</p></figure>`;
 }
 export const fuelSteps = [
   ['Mineração e beneficiamento', 'A rocha é extraída e processada para obter o concentrado de urânio. Caetité, na Bahia, integra essa etapa da cadeia brasileira.'],
