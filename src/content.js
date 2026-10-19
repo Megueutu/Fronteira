@@ -147,9 +147,9 @@ const guideEvidence = {kind:'Roteiro editorial da edição',sources:[{id:'group'
 const contentPages = [
   {...fromOriginal('cover'),id:'opening',kind:'opener',section:'ABERTURA / O PROBLEMA',title:'Eletricidade confiável.\nPara quem?',subtitle:'Como garantir eletricidade confiável às comunidades remotas, diante das dificuldades de infraestrutura e distribuição?',image:photos.angra,visual:'opening',refs:['group'],evidence:[guideEvidence],action:action('index','Percorra a investigação')},
   {...editorial,body:editorial.body.slice(0,3),visual:'editorial-map'},
-  {id:'method',kind:'data',section:'ABERTURA / O CAMINHO DA PESQUISA',title:'Uma pergunta.\nCinco perspectivas.',subtitle:'Tecnologia, território, custos e decisões políticas precisam ser lidos em conjunto.',body:['A investigação parte do acesso à eletricidade e percorre cinco temas: panorama e território; funcionamento e segurança; urânio e soberania; custos e payback; política e opinião pública. A entrevista com Adolfo Braid amplia essa leitura no suplemento.','Os gráficos, esquemas e a calculadora ajudam a explorar a pesquisa. As fontes permitem distinguir dados, hipóteses e interpretações; o balanço final retoma os critérios para avaliar as escolhas.'],refs:['group'],evidence:[guideEvidence,guideEvidence],visual:'guide',action:action('index','Explore a estrutura da revista')},
   ...['unequal','matrix','territory','reactor','safety','uranium','wallerstein','sovereignty','cost','payback','who-pays','messmer','world','public','balance','references'].map(fromOriginal),
   {...editorial,id:'editorial-conclusion',kind:'editorial',title:'Posicionamento\ndo editorial.',subtitle:'Acesso à energia, autonomia tecnológica e prestação de contas.',body:editorial.body.slice(3),sourceParagraphOffset:3,note:undefined,image:photos.grid,visual:'closing',action:action('checklist','Retome os critérios do balanço')},
+  {id:'adolfo',kind:'essay',section:'ENTREVISTA / ADOLFO BRAID',title:'Da experiência nuclear\nàs perguntas sobre o futuro.',subtitle:`${adolfoInterview.fullName}, ${adolfoInterview.role.charAt(0).toLowerCase()}${adolfoInterview.role.slice(1)}.`,body:[adolfoInterview.introduction,...adolfoInterview.career.map(item=>item.text),adolfoInterview.conversations[1].answer,adolfoInterview.conversations[2].answer],refs:['interview','aeita','adolfo-abdan','adolfo-cnen'],evidence:[{kind:'Fonte da entrevista',sources:[{id:'interview',location:'§1, §4 e §6.'}]},{kind:'Fonte',sources:[{id:'aeita'}]},{kind:'Fonte',sources:[{id:'interview',location:'§1, “Trajetória profissional e atuação no ciclo nuclear”.'},{id:'adolfo-abdan'}]},{kind:'Fonte',sources:[{id:'adolfo-abdan'},{id:'adolfo-cnen'}]},{kind:'Fonte da entrevista',sources:[{id:'interview',location:adolfoInterview.conversations[1].record}]},{kind:'Fonte da entrevista',sources:[{id:'interview',location:adolfoInterview.conversations[2].record}]}],image:interviewPhotos.adolfoLicensing,action:action('interview','Leia a entrevista completa')},
 ].map((page,index)=>({...page,folio:index+1,readingLabel:String(index+1).padStart(2,'0'),contentPage:true}));
 for (const page of contentPages) {
   const photoKey={safety:'steam',sovereignty:'panel','who-pays':'coast'}[page.id];
@@ -179,7 +179,7 @@ for (const page of pages) {
 }
 
 export const chapters = [
-  {id:'opening',title:'Abertura',detail:'Páginas 1–3 · problema, editorial e investigação'},
+  {id:'opening',title:'Abertura',detail:'Páginas 1–2 · problema e editorial'},
   {id:'unequal',title:'Um Brasil Desigual',detail:'Panorama, território e Milton Santos'},
   {id:'reactor',title:'Como funciona',detail:'Reator, segurança e resíduos'},
   {id:'uranium',title:'Urânio e soberania',detail:'Ciclo do combustível e Wallerstein'},
@@ -187,12 +187,12 @@ export const chapters = [
   {id:'messmer',title:'Política e opinião pública',detail:'Messmer, Weber e o mundo'},
   {id:'interview-profile',title:'Adolfo Braid',detail:'Trajetória, microrreatores e perguntas da pesquisa'},
   {id:'balance',title:'Balanço final',detail:'Os critérios para decidir'},
-  {id:'references',title:'Fontes e posicionamento',detail:'Páginas 19–20 · pesquisa e conclusão do editorial'},
+  {id:'references',title:'Fontes e posicionamento',detail:'Páginas 18–20 · fontes, conclusão do editorial e entrevista'},
 ].map(chapter=>({...chapter,page:pageIndexForId(chapter.id)}));
 export const {spreadCount,clampSpread,spreadForPage,getOpening,getSpread,formatPages,formatPage} = createPagination(pages);
 export const escapeHTML = text => String(text).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function contentsHTML({drawer=false}={}) {
-  const ranges={opening:'01–03',unequal:'04–06',reactor:'07–08',uranium:'09–11',cost:'12–14',messmer:'15–17',balance:'18',references:'19–20','interview-profile':'EXTRA'};
+  const ranges={opening:'01–02',unequal:'03–05',reactor:'06–07',uranium:'08–10',cost:'11–13',messmer:'14–16',balance:'17',references:'18–20','interview-profile':'EXTRA'};
   return `<nav class="edition-index ${drawer?'dialog-index':'page-index'}" aria-label="Sumário da edição">${chapters.map(ch=>`<button type="button" data-jump="${ch.page}"><span class="index-folio">${ranges[ch.id]}</span><span class="index-copy"><strong>${escapeHTML(ch.title)}</strong><small>${escapeHTML(ch.detail.replace(/^Páginas \d+–\d+ · /,''))}</small></span>${uiIcon('arrow_forward')}</button>`).join('')}</nav>`;
 }
 export function referenceHTML(ids = [], all = false) {

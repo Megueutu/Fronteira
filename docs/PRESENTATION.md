@@ -11,17 +11,19 @@ As ações principais e as fontes também estão disponíveis em controles HTML 
 A implementação foi executada em 19/10/2026. Por pedido explícito do responsável, os novos commits registram autor e committer em 18/10/2026 às 12h, UTC−03, sem reescrever o histórico anterior.
 
 
+Atualização de 18/10/2026 (pedido do responsável): a página 3 ("Uma pergunta. Cinco perspectivas.") foi retirada e a vaga virou a página 20, dedicada a Adolfo Braid, montada com textos já existentes da entrevista. A tabela abaixo reflete a nova numeração; a página 10 (Wallerstein) não cita mais o autor.
+
 Decisão de 19/10/2026: a edição possui vinte páginas de conteúdo, sem contar a produção e o suplemento. São 28 faces físicas e 15 aberturas. As posições físicas internas usadas pelo código não são os fólios exibidos na revista.
 
 | Responsável | Conteúdo | Páginas | Tempo |
 | --- | --- | --- | --- |
-| Pessoa 1 | Problema do acesso confiável, editorial e mapa da investigação | 1–3 | 45 s |
-| Pessoa 2 | Desigualdade energética, matriz elétrica, território e Milton Santos | 4–6 | 1 min 35 s |
-| Pessoa 3 | Funcionamento, segurança, resíduos e responsabilidades | 7–8 | 1 min 35 s |
-| Pessoa 4 | Ciclo do combustível, Wallerstein, soberania e cooperação | 9–11 | 1 min 35 s |
-| Pessoa 5 | Angra 3, payback, calculadora e distribuição dos custos | 12–14 | 1 min 35 s |
-| Pessoa 6 | Messmer, trajetórias internacionais, Weber e suplemento de Adolfo Braid | 15–17 + suplemento | 1 min 35 s |
-| Pessoa 1 | Balanço, fontes e posicionamento do editorial | 18–20 | 50 s |
+| Pessoa 1 | Problema do acesso confiável e editorial | 1–2 | 45 s |
+| Pessoa 2 | Desigualdade energética, matriz elétrica, território e Milton Santos | 3–5 | 1 min 35 s |
+| Pessoa 3 | Funcionamento, segurança, resíduos e responsabilidades | 6–7 | 1 min 35 s |
+| Pessoa 4 | Ciclo do combustível, Wallerstein, soberania e cooperação | 8–10 | 1 min 35 s |
+| Pessoa 5 | Angra 3, payback, calculadora e distribuição dos custos | 11–13 | 1 min 35 s |
+| Pessoa 6 | Messmer, trajetórias internacionais, Weber | 14–16 | 1 min 35 s |
+| Pessoa 1 | Balanço, fontes, posicionamento do editorial e página de Adolfo Braid (com entrada para a entrevista completa) | 17–20 | 1 min |
 
 Duração total do roteiro: 9 min 30 s. Os tempos orientam a apresentação oral e não iniciam contagem automática na interface.
 

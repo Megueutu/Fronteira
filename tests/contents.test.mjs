@@ -9,6 +9,6 @@ test('the printed and drawer contents share entries and omit the colophon',()=>{
  assert.doesNotMatch(paper,/Expediente/);
  assert.equal((paper.match(/data-jump=/g)||[]).length,9);
  assert.equal((paper.match(/index-folio/g)||[]).length,9);
- assert.ok(paper.includes('01–03')&&paper.includes('19–20')&&paper.includes('EXTRA'));
+ assert.ok(paper.includes('01–02')&&paper.includes('18–20')&&paper.includes('EXTRA'));
  assert.equal(pages[pageIndexForId('credits')].readingLabel,'Expediente');
 });
