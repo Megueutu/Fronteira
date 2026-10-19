@@ -552,22 +552,6 @@
         "x": 0.5,
         "y": 0.925
       }
-    },
-    {
-      "id": "references",
-      "kind": "references",
-      "section": "REFERÊNCIAS / CONTINUE A LEITURA",
-      "title": "Volte às fontes.",
-      "subtitle": "Fontes institucionais, obras teóricas e documentação da pesquisa.",
-      "body": [
-        "O botão de fontes de cada matéria reúne os documentos e o local de consulta utilizado na pesquisa. Abra a lista completa para acessar os links, os recortes históricos e os créditos. Consulta e revisão desta edição: 16 de outubro de 2026."
-      ],
-      "action": {
-        "type": "sources",
-        "label": "Abra todas as referências",
-        "x": 0.5,
-        "y": 0.925
-      }
     }
   ],
   "interview": {

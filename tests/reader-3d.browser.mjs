@@ -28,7 +28,7 @@ try {
   await browser.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
   for(let opening=2;opening<spreadCount;opening++) {
     await browser.click('#next');await idle(getSpread(opening).length);
-    const expected=getSpread(opening).filter(page=>page.folio || page.supplement).map(page=>String(pages.indexOf(page)));
+    const expected=getSpread(opening).filter(page=>page.folio).map(page=>String(pages.indexOf(page)));
     assert.deepEqual(await browser.evaluate("[...document.querySelectorAll('.page-hotspot-group')].map(button=>button.dataset.page)"),expected);
     assert.equal(await browser.evaluate("document.querySelector('#page-status').textContent"),formatPages(opening));
   }

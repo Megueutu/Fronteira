@@ -1,6 +1,6 @@
 # Finalidade do Fronteira
 
-Atualização de 2026-10-19: **19 páginas de conteúdo**, em **28 faces físicas / 15 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas na composição fixa, com escala proporcional também no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
+Atualização de 2026-10-19: **18 páginas de conteúdo**, em **28 faces físicas / 15 aberturas**. Capa, interiores, sumário, equipe, expediente e entrada do suplemento ficam fora da numeração. A entrevista completa abre na camada interativa. Corpo do miolo: 16 px / 1,45, colunas justificadas na composição fixa, com escala proporcional também no celular. O mapa vigente está em [PRESENTATION.md](PRESENTATION.md). As contagens anteriores abaixo são históricas.
 
 A edição vigente, aprovada em 18/10/2026, tem o título **Energia Nuclear no Brasil** e Fronteira como editora. Reúne 36 faces com capa, interiores, miolo, entrevista integrada e quarta capa, preservando integralmente a redação anterior. A revisão visual prioriza fotografia, Inter local e leitura em colunas, com detalhes em [EDITORIAL_REVIEW.md](EDITORIAL_REVIEW.md).
 

@@ -52,7 +52,7 @@ test('physical edition has complete signatures, isolated covers and stable desti
     assert.doesNotMatch(pageHTML(page,index),/class="page-(?:top|bottom|tail)"/,id);
   }
   const numbered=pages.filter(page=>page.folio);
-  assert.equal(numbered.length,19);
+  assert.equal(numbered.length,18);
   assert.deepEqual(numbered.map(page=>page.folio),Array.from({length:numbered.length},(_,i)=>i+1));
 });
 

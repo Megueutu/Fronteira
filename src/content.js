@@ -142,16 +142,17 @@ const originalById = Object.fromEntries(originalPages.map(page=>[page.id,page]))
 const fromOriginal = id => ({...originalById[id],sourceId:id,sourceParagraphOffset:0});
 export const interviewSections = createInterviewPages(interviewPhotos);
 const editorial = fromOriginal('editorial');
-const costSource = fromOriginal('cost'), paybackSource = fromOriginal('payback');
+const costSource = fromOriginal('cost'), paybackSource = fromOriginal('payback'), balanceSource = fromOriginal('balance');
 const guideEvidence = {kind:'Roteiro editorial da edição',sources:[{id:'group'}]};
 const contentPages = [
   {...fromOriginal('cover'),id:'opening',kind:'opener',section:'ABERTURA / O PROBLEMA',title:'Eletricidade confiável.\nPara quem?',subtitle:'Como garantir eletricidade confiável às comunidades remotas, diante das dificuldades de infraestrutura e distribuição?',image:photos.angra,visual:'opening',refs:['group'],evidence:[guideEvidence],action:action('index','Percorra a investigação')},
   {...editorial,body:editorial.body.slice(0,3),visual:'editorial-map'},
   ...['unequal','matrix','territory','reactor','safety','wallerstein','sovereignty','uranium'].map(fromOriginal),
   {...paybackSource,id:'payback',section:'04 / CUSTO E PAYBACK',subtitle:'Angra 3 como estudo de caso: explore o cálculo, sem confundir simulação com previsão.',body:[...costSource.body,...paybackSource.body],evidence:[...costSource.body.map((_,i)=>evidenceFor('cost',i)),...paybackSource.body.map((_,i)=>evidenceFor('payback',i))],sourceParts:[{id:'cost',length:costSource.body.length},{id:'payback',length:paybackSource.body.length}],refs:[...new Set([...costSource.refs,...paybackSource.refs])]},
-  ...['who-pays','messmer','world','public','balance','references'].map(fromOriginal),
-  {...editorial,id:'editorial-conclusion',kind:'editorial',title:'Posicionamento\ndo editorial.',subtitle:'Acesso à energia, autonomia tecnológica e prestação de contas.',body:editorial.body.slice(3),sourceParagraphOffset:3,note:undefined,image:photos.grid,visual:'closing',action:action('checklist','Retome os critérios do balanço')},
-  {id:'adolfo',kind:'essay',section:'ENTREVISTA / ADOLFO BRAID',title:'Da experiência nuclear\nàs perguntas sobre o futuro.',subtitle:`${adolfoInterview.fullName}, ${adolfoInterview.role.charAt(0).toLowerCase()}${adolfoInterview.role.slice(1)}.`,body:[adolfoInterview.introduction,...adolfoInterview.career.map(item=>item.text),adolfoInterview.conversations[1].answer,adolfoInterview.conversations[2].answer],refs:['interview','aeita','adolfo-abdan','adolfo-cnen'],evidence:[{kind:'Fonte da entrevista',sources:[{id:'interview',location:'§1, §4 e §6.'}]},{kind:'Fonte',sources:[{id:'aeita'}]},{kind:'Fonte',sources:[{id:'interview',location:'§1, “Trajetória profissional e atuação no ciclo nuclear”.'},{id:'adolfo-abdan'}]},{kind:'Fonte',sources:[{id:'adolfo-abdan'},{id:'adolfo-cnen'}]},{kind:'Fonte da entrevista',sources:[{id:'interview',location:adolfoInterview.conversations[1].record}]},{kind:'Fonte da entrevista',sources:[{id:'interview',location:adolfoInterview.conversations[2].record}]}],image:interviewPhotos.adolfoLicensing,action:action('interview','Leia a entrevista completa')},
+  ...['who-pays','messmer','world','public'].map(fromOriginal),
+  {id:'adolfo',kind:'essay',section:'ENTREVISTA / ADOLFO BRAID',title:'Da experiência nuclear\nàs perguntas sobre o futuro.',subtitle:`${adolfoInterview.fullName}, ${adolfoInterview.role.charAt(0).toLowerCase()}${adolfoInterview.role.slice(1)}.`,body:[adolfoInterview.introduction,...adolfoInterview.career.map(item=>item.text)],refs:['interview','aeita','adolfo-abdan','adolfo-cnen'],evidence:[{kind:'Fonte da entrevista',sources:[{id:'interview',location:'§1, §4 e §6.'}]},{kind:'Fonte',sources:[{id:'aeita'}]},{kind:'Fonte',sources:[{id:'interview',location:'§1, “Trajetória profissional e atuação no ciclo nuclear”.'},{id:'adolfo-abdan'}]},{kind:'Fonte',sources:[{id:'adolfo-abdan'},{id:'adolfo-cnen'}]}],image:interviewPhotos.adolfoLicensing,action:action('interview','Leia a entrevista completa')},
+  {id:'interview-profile',kind:'essay',section:'ENTREVISTA / ADOLFO BRAID',title:'O que Adolfo defende.',subtitle:'Resumo das respostas da entrevista com o grupo.',body:adolfoInterview.conversations.map(item=>item.answer),refs:['interview'],evidence:adolfoInterview.conversations.map(item=>({kind:'Fonte da entrevista',sources:[{id:'interview',location:item.record}]})),image:interviewPhotos.adolfoAmazul,action:action('interview','Abra a entrevista completa')},
+  {...balanceSource,id:'balance',subtitle:'Critérios para decidir e o posicionamento do editorial.',body:[...balanceSource.body,...editorial.body.slice(3)],evidence:[...balanceSource.body.map((_,i)=>evidenceFor('balance',i)),evidenceFor('editorial',3)],sourceParts:[{id:'balance',length:balanceSource.body.length},{id:'editorial',length:1,offset:3}],refs:[...new Set([...balanceSource.refs,'group','santos','wallerstein','enrichment','sin'])]},
 ].map((page,index)=>({...page,folio:index+1,readingLabel:String(index+1).padStart(2,'0'),contentPage:true}));
 for (const page of contentPages) {
   const photoKey={safety:'steam',sovereignty:'panel','who-pays':'coast'}[page.id];
@@ -165,10 +166,11 @@ const front = [
   {...fromOriginal('contents'),showTeam:false,folio:null,readingLabel:'Sumário'},
   {id:'team',kind:'team',section:'PESQUISA E EDIÇÃO',title:'Quem fez esta pesquisa',subtitle:'Pesquisa e edição do grupo · São Paulo',sourceId:'team',body:[],refs:[],action:action('index','Explore a edição'),folio:null,readingLabel:'Equipe'},
 ];
-const supplement = {...interviewSections[0],folio:null,readingLabel:'Suplemento',supplement:true};
-export const pages = [...front,...contentPages,supplement,
+export const pages = [...front,...contentPages,
   {...fromOriginal('credits'),folio:null,readingLabel:'Expediente'},
   {id:'notes',kind:'interlude',section:'',title:'Notas',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Notas'},
+  {id:'notes-2',kind:'interlude',section:'',title:'Notas',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Notas'},
+  {id:'notes-3',kind:'interlude',section:'',title:'Notas',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Notas'},
   {id:'inside-back',kind:'inside-cover',section:'',title:'Terceira capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Terceira capa'},
   {id:'back-cover',kind:'back-cover',section:'',title:'Quarta capa',subtitle:'',body:[],refs:[],action:null,folio:null,readingLabel:'Quarta capa'},
 ];
@@ -188,14 +190,13 @@ export const chapters = [
   {id:'wallerstein',title:'Soberania e urânio',detail:'Sistema-mundo, não proliferação e ciclo do combustível'},
   {id:'payback',title:'Custo e payback',detail:'Angra 3, cenários e distribuição'},
   {id:'messmer',title:'Política e opinião pública',detail:'Messmer, Weber e o mundo'},
-  {id:'interview-profile',title:'Adolfo Braid',detail:'Trajetória, microrreatores e perguntas da pesquisa'},
-  {id:'balance',title:'Balanço final',detail:'Os critérios para decidir'},
-  {id:'references',title:'Fontes e posicionamento',detail:'Páginas 17–19 · fontes, conclusão do editorial e entrevista'},
+  {id:'adolfo',title:'Adolfo Braid',detail:'Trajetória, microrreatores e as respostas da entrevista'},
+  {id:'balance',title:'Balanço final',detail:'Os critérios para decidir e o posicionamento do editorial'},
 ].map(chapter=>({...chapter,page:pageIndexForId(chapter.id)}));
 export const {spreadCount,clampSpread,spreadForPage,getOpening,getSpread,formatPages,formatPage} = createPagination(pages);
 export const escapeHTML = text => String(text).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function contentsHTML({drawer=false}={}) {
-  const ranges={opening:'01–02',unequal:'03–05',reactor:'06–07',wallerstein:'08–10',payback:'11–12',messmer:'13–15',balance:'16',references:'17–19','interview-profile':'EXTRA'};
+  const ranges={opening:'01–02',unequal:'03–05',reactor:'06–07',wallerstein:'08–10',payback:'11–12',messmer:'13–15',adolfo:'16–17',balance:'18'};
   return `<nav class="edition-index ${drawer?'dialog-index':'page-index'}" aria-label="Sumário da edição">${chapters.map(ch=>`<button type="button" data-jump="${ch.page}"><span class="index-folio">${ranges[ch.id]}</span><span class="index-copy"><strong>${escapeHTML(ch.title)}</strong><small>${escapeHTML(ch.detail.replace(/^Páginas \d+–\d+ · /,''))}</small></span>${uiIcon('arrow_forward')}</button>`).join('')}</nav>`;
 }
 export function referenceHTML(ids = [], all = false) {
@@ -245,7 +246,7 @@ export function pageHTML(page, index, { linear = false, digital = false } = {}) 
   const bibliography = page.kind === 'references' ? `<ol class="bibliography">${referenceHTML(['epe','ben','sin','santos','iaea','waste','inb','enrichment','wallerstein','critique','cost','weber','group','interview','messmer','npt'])}</ol>` : '';
   const balanceBox = page.balance ? `<aside class="balance-box" aria-label="Argumentos a favor e em debate"><div><h3>A FAVOR</h3><p>${page.balance.favor}</p></div><div><h3>EM DEBATE</h3><p>${page.balance.debate}</p></div>${citationHTML({kind:'Síntese do grupo, com base em',sources:(page.refs || []).map(id=>({id}))},{className:'inline-citation'})}</aside>` : '';
   const inlineNote = page.note && ['unequal','territory','wallerstein','public'].includes(page.id) ? `<aside class="reader-note"><h3>${escapeHTML(page.note.title)}</h3><p>${escapeHTML(page.note.text)}</p></aside>` : '';
-  const panel=page.id==='payback' ? null : page.enrichment || editorialPanels[page.id];
+  const panel=['payback','balance'].includes(page.id) ? null : page.enrichment || editorialPanels[page.id];
   const enrichment=panel ? `<aside class="editorial-panel panel-${page.id}"><h3>${escapeHTML(panel.title)}</h3><div>${panel.items.map(([title,text])=>`<section><h4>${escapeHTML(title)}</h4><p>${escapeHTML(text)}</p></section>`).join('')}</div>${citationHTML({kind:'Leitura complementar da edição, com base em',sources:panel.refs.map(id=>({id}))},{className:'inline-citation'})}</aside>` : '';
   const explorer = digital ? explorerHTML(page.id,photos) : '';
   return `<article class="magazine-page page-${page.kind}${linear ? ' linear-page' : ''}${explorer && page.visual ? ' has-digital-visual' : ''}" data-page-index="${index}" data-page-id="${page.id}" aria-label="${page.readingLabel}: ${escapeHTML(page.title.replaceAll('\n',' '))}"><header class="page-top"><span>FRONTEIRA</span><span>${page.section}</span></header><div class="page-main">${page.kicker ? `<p class="kicker">${page.kicker}</p>` : ''}<h2>${page.title.replaceAll('\n','<br>')}</h2><p class="page-subtitle">${page.subtitle}</p>${image}${body}${page.visual ? visuals[page.visual] + citationHTML(visualEvidence[page.visual] || {kind:'Roteiro editorial da edição',sources:[{id:'group'}]},{className:'inline-citation visual-source'}) : ''}${contents}${page.kind==='team' ? teamHTML() : ''}${bibliography}${page.quote ? `<blockquote>${page.quote}</blockquote>${citationHTML({kind:'Formulação da edição; interpretação do grupo',sources:page.refs.map(id=>({id}))},{className:'inline-citation'})}` : ''}${balanceBox}${inlineNote}${enrichment}${explorer}</div><div class="page-tail"><button type="button" class="page-action" data-action="${page.action.type}" data-page="${index}"><span>${page.action.label}</span><b aria-hidden="true">${uiIcon("arrow_forward")}</b></button><footer class="page-bottom">${sourceButtonHTML(page,index)}<span>${page.folio ? String(page.folio).padStart(2,'0') : page.readingLabel}</span></footer></div></article>`;

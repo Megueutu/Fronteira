@@ -12,9 +12,8 @@ try {
   await b.waitFor(`document.body?.dataset.readerMode==='${mode}'&&document.querySelector('#stage')?.getAttribute('aria-busy')==='false'`);
   if(mode==='3d') await b.waitFor("document.querySelector('#loading').hidden");
   if(mode==='landing') {
-   assert.equal(await b.evaluate("document.querySelectorAll('#landing-view .page-interview').length"),1);
-   await b.click('#landing-interview-profile .supplement-open');
-  } else if(mode==='html') await b.click('#html-book .supplement-open');
+   await b.click('#landing-interview-profile [data-action=interview]');
+  } else if(mode==='html') await b.click('#html-book [data-page-id=interview-profile] [data-action=interview]');
   else await b.click('.hotspot[data-action=interview]');
   await b.waitFor("document.querySelector('dialog.interview-dialog')?.open");
   await b.waitFor("[...document.querySelectorAll('dialog .interview-photo img')].every(image=>image.naturalWidth>0)");
@@ -37,13 +36,13 @@ try {
  for(const width of [768,390,320]) {
   console.log('interview width',width); await b.viewport(width,1000,width<760);
   await b.navigate(`${base}/?template=landing&page=${pageIndexForId('interview-profile')+1}`);
-  await b.waitFor("document.querySelector('#landing-interview-profile .supplement-open')");
+  await b.waitFor("document.querySelector('#landing-interview-profile [data-action=interview]')");
   assert.ok(await b.evaluate('document.documentElement.scrollWidth<=innerWidth'));
-  await b.click('#landing-interview-profile .supplement-open');
+  await b.click('#landing-interview-profile [data-action=interview]');
   assert.ok(await b.evaluate("document.querySelector('dialog').scrollWidth<=document.querySelector('dialog').clientWidth"));
   const frame=await b.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false}); await writeFile(`artifacts/interview/supplement-${width}.png`,Buffer.from(frame.data,'base64'));
  }
  assert.deepEqual(b.errors,[]);
- assert.equal(pages.filter(page=>Number.isInteger(page.folio)).length,19);
- console.log('PASS: unnumbered supplement, complete interview, four credited images, nested focus/Escape, three modes and responsive layouts.');
+ assert.equal(pages.filter(page=>Number.isInteger(page.folio)).length,18);
+ console.log('PASS: two numbered interview pages, complete interview, four credited images, nested focus/Escape, three modes and responsive layouts.');
 }finally{await b.close();}

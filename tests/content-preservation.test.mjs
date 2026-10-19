@@ -9,33 +9,31 @@ import { evidenceFor } from '../src/citations.js';
 const original = JSON.parse(await readFile(new URL('./fixtures/editorial-original.json',import.meta.url),'utf8'));
 const escape = text => String(text).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 
-test('a redistribuição preserva integralmente e em ordem os parágrafos das vinte faces originais',()=>{
+test('a redistribuição preserva integralmente e em ordem os parágrafos das faces originais mantidas',()=>{
+  // Páginas unidas a pedido do responsável (custo + payback; balanço + conclusão do editorial) declaram `sourceParts`.
+  const entries = pages.flatMap(page=>page.sourceParts
+    ? (offset=>page.sourceParts.map(part=>{const start=offset;offset+=part.length;return {page,id:part.id,body:page.body.slice(start,start+part.length),start,merged:true};}))(0)
+    : [{page,id:page.sourceId || page.id,body:page.body,start:0,merged:false}]);
   for (const before of original.pages) {
-    // Custo e payback foram unidos em uma única página (pedido do responsável); os parágrafos de cada origem seguem íntegros e em ordem.
-    const merged = pages.find(page=>page.sourceParts?.some(part=>part.id===before.id));
-    if (merged) {
-      const start = merged.sourceParts.slice(0,merged.sourceParts.findIndex(part=>part.id===before.id)).reduce((sum,part)=>sum+part.length,0);
-      const part = merged.sourceParts.find(item=>item.id===before.id);
-      assert.deepEqual(merged.body.slice(start,start+part.length),before.body,before.id);
-      for (let i=0;i<before.body.length;i++) {
-        assert.deepEqual(merged.evidence[start+i],evidenceFor(before.id,i),`${before.id} parágrafo ${i}`);
-        assert.ok(pageHTML(merged,pages.indexOf(merged)).includes(escape(before.body[i])),`${before.id}, parágrafo ${i}`);
-      }
-      assert.ok((before.refs || []).every(ref=>merged.refs.includes(ref)),before.id);
-      continue;
-    }
-    const faces = pages.filter(page=>(page.sourceId || page.id) === before.id);
-    assert.deepEqual(faces.flatMap(page=>page.body),before.body,before.id);
+    const mine = entries.filter(entry=>entry.id===before.id);
+    assert.deepEqual(mine.flatMap(entry=>entry.body),before.body,before.id);
     const anchor = pages.find(page=>page.id===before.id);
-    for (const key of ['title','subtitle','note','quote','kicker']) assert.deepEqual(anchor[key],before[key],`${before.id}.${key}`);
-    const balances=faces.filter(face=>face.balance).map(face=>face.balance);
-    assert.deepEqual(balances,before.balance?[before.balance]:[],`${before.id}.balance`);
-    const refs=new Set(faces.flatMap(face=>face.refs || []));
+    if (!mine.some(entry=>entry.merged)) for (const key of ['title','subtitle','note','quote','kicker']) assert.deepEqual(anchor[key],before[key],`${before.id}.${key}`);
+    if (!mine.some(entry=>entry.merged)) {
+      const faces = mine.map(entry=>entry.page);
+      const balances=faces.filter(face=>face.balance).map(face=>face.balance);
+      assert.deepEqual(balances,before.balance?[before.balance]:[],`${before.id}.balance`);
+    } else if (before.balance) assert.deepEqual(mine[0].page.balance,before.balance,`${before.id}.balance`);
+    const refs=new Set(mine.flatMap(entry=>entry.page.refs || []));
     assert.ok((before.refs || []).every(ref=>refs.has(ref)),before.id);
-    for (const face of faces) for (let i=0;i<face.body.length;i++) {
-      const offset=face.sourceParagraphOffset || 0;
-      assert.deepEqual(evidenceFor(face.sourceId || face.id,i+offset),evidenceFor(before.id,i+offset));
-      assert.ok(pageHTML(face,pages.indexOf(face)).includes(escape(face.body[i])),`${face.id}, parágrafo ${i}`);
+    for (const entry of mine) {
+      const html=pageHTML(entry.page,pages.indexOf(entry.page));
+      for (let i=0;i<entry.body.length;i++) {
+        const offset=entry.merged ? (entry.page.sourceParts.find(part=>part.id===entry.id).offset || 0) : (entry.page.sourceParagraphOffset || 0);
+        if (entry.merged) assert.deepEqual(entry.page.evidence[entry.start+i],evidenceFor(entry.id,i+offset),`${entry.id}, parágrafo ${i}`);
+        else assert.deepEqual(evidenceFor(entry.id,i+offset),evidenceFor(before.id,i+offset));
+        assert.ok(html.includes(escape(entry.body[i])),`${entry.id}, parágrafo ${i}`);
+      }
     }
   }
 });
