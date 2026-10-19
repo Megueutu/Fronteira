@@ -90,7 +90,7 @@ export const pageEvidence = {
   reactor: [evidence('iaea'),evidence(study('§2, descrição do ciclo nuclear e reatores de Angra.'),'iaea')],
   safety: [evidence('iaea','npt'),evidence('waste'),evidence('fukushima','chernobyl',study('§6, impactos dos acidentes nas decisões nacionais.')),analysis('waste','weber')],
   uranium: [evidence('inb'),evidence('inb','enrichment'),evidence(c('inb','Etapa “Conversão”: serviço contratado no exterior.')),evidence('itataia')],
-  wallerstein: [evidence('wallerstein'),evidence('wallerstein',theory),analysis('wallerstein','inb'),analysis('wallerstein','enrichment')],
+  wallerstein: [evidence(study('§8.3 e §9: fundamentação teórica do grupo sobre centro, semiperiferia e periferia.')),evidence(study('§3.3 e §9: síntese da fundamentação teórica; §8.3: sistema-mundo. Páginas das obras originais não informadas.')),analysis(study('§9: síntese da fundamentação teórica.'),'inb'),analysis('inb','enrichment')],
   sovereignty: [evidence('critique'),analysis('wallerstein','critique'),evidence('npt','abacc'),analysis('npt',study('§2, distinção entre propulsão e armamento nuclear.'))],
   cost: [analysis(finance),evidence(finance)],
   payback: [evidence(finance),evidence(finance),analysis(finance)],
