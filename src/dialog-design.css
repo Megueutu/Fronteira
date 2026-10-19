@@ -14,7 +14,7 @@
 #interaction-dialog {
   width: min(880px, calc(100% - 32px)); max-height: min(90dvh, 1000px); padding: 0; border: 0; border-radius: 28px;
   background: var(--ds-canvas); color: var(--ds-ink); font-family: var(--sans);
-  box-shadow: var(--ds-product-shadow); overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--ds-hairline) transparent;
+  box-shadow: var(--ds-product-shadow); overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) transparent;
 }
 #interaction-dialog[open] { animation: ds-dialog-in .28s cubic-bezier(.2,.8,.2,1); }
 #interaction-dialog::backdrop { background: #0000004d; -webkit-backdrop-filter: blur(14px) saturate(120%); backdrop-filter: blur(14px) saturate(120%); }
@@ -401,7 +401,4 @@
 #interaction-dialog.qr-dialog #dialog-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .qr-dialog .qr-card .qr-link { display: block; line-height: 0; }
 
-/* Popups sem barra de rolagem visível; o conteúdo continua rolando. */
-#interaction-dialog, #interaction-dialog * { scrollbar-width: none; -ms-overflow-style: none; }
-#interaction-dialog::-webkit-scrollbar, #interaction-dialog *::-webkit-scrollbar { display: none; width: 0; height: 0; }
 #download-pdf { text-decoration: none; }

@@ -341,7 +341,7 @@ summary { cursor: pointer; padding: 15px 0; color: var(--green); font-size: var(
 .explorer-matrix-row[aria-pressed=true] .explorer-bar-track i { background: var(--green); }
 .explorer-filter-total, .explorer-footnote { color: var(--muted); font: var(--font-size-12)/1.6 var(--sans); }
 .explorer-footnote { margin: 20px 0 0; }
-.explorer-track { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--green) var(--soft); touch-action: pan-x pan-y; }
+.explorer-track { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--scroll-thumb, var(--green)) transparent; touch-action: pan-x pan-y; }
 .explorer-track:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
 .explorer-slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; }
 .explorer-photo { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,.7fr); gap: 28px; align-items: center; margin: 0; height: 100%; }

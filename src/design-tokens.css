@@ -34,3 +34,10 @@
   --ds-tight: -.022em;
   --ds-display: 'InterVariable', system-ui, sans-serif;
 }
+
+/* Barras de rolagem: finas e verdes (identidade da revista, no espírito das barras de sobreposição da Apple).
+   Usa só as propriedades padrão: com elas, o Chromium ignora ::-webkit-scrollbar. */
+:root { --scroll-thumb: #1d7449; --scroll-track: transparent; }
+* { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) var(--scroll-track); }
+html { scrollbar-color: var(--scroll-thumb) var(--ds-parchment); }
+#interaction-dialog.video-dialog, #interaction-dialog.lightbox-dialog { --scroll-thumb: #8fd06a; }
