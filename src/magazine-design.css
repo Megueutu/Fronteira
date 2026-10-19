@@ -3,19 +3,20 @@
    sem sombras nem barras laterais. Cabeçalho: logotipo centralizado, sem filete. */
 
 /* ---------- Cabeçalho de página: logotipo central, rótulo da seção como eyebrow ---------- */
-.magazine-page .page-top { display: flex; justify-content: center; align-items: center; min-height: 0; height: 20px; padding: 0; margin: 0 0 var(--ds-space-lg); border: 0; }
+.magazine-page .page-top { display: flex; justify-content: center; align-items: center; min-height: 0; height: 20px; padding: 0; margin: 0 0 30px; border: 0; }
 .magazine-page .page-logo { display: block; width: auto; height: 18px; user-select: none; -webkit-user-drag: none; filter: brightness(0) saturate(100%) invert(34%) sepia(30%) saturate(1021%) hue-rotate(98deg) brightness(93%) contrast(88%); }
-.page-eyebrow { margin: 0 0 var(--ds-space-xs); color: var(--ds-accent); font: 600 var(--font-size-12)/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase; text-align: left; }
+/* Rótulo da seção: Inter semibold discreto, sem caixa alta e sem numeração. */
+.page-eyebrow { margin: 0 0 6px; color: var(--ds-accent); font: 600 13px/1.3 var(--sans); letter-spacing: 0; text-transform: none; text-align: left; }
 .page-surface .magazine-page .page-top { margin-bottom: var(--ds-space-md); }
 .linear-content .page-top { margin-bottom: var(--ds-space-md); }
 
 /* ---------- Títulos: display 600, tracking apertado, subtítulo como lead ---------- */
 .magazine-page.magazine-page:not(.page-cover):not(.page-decorative) .page-main > h2,
-.magazine-page.magazine-page .interview-heading > h2 { font-weight: 600; letter-spacing: var(--ds-tight); line-height: 1.08; text-wrap: balance; color: var(--ds-ink); }
-.magazine-page.magazine-page.magazine-page:not(.page-cover):not(.page-decorative) .page-main > h2 { font-size: min(var(--font-size-40), calc(684px / (var(--title-chars, 24) * .54))); white-space: nowrap; margin: 0 0 var(--ds-space-xs); max-width: none; }
-.page-surface .magazine-page.magazine-page.page-opener .page-main > h2 { font-size: min(var(--font-size-48), calc(684px / (var(--title-chars, 24) * .54))); white-space: nowrap; line-height: 1.07; margin-bottom: var(--ds-space-sm); }
-.magazine-page.magazine-page.magazine-page:not(.page-cover):not(.page-decorative) .page-subtitle { margin: 0 0 var(--ds-space-md); max-width: 92%; color: var(--ds-ink-48); font: 400 var(--font-size-18)/1.4 var(--sans); letter-spacing: -.01em; text-wrap: pretty; }
-.page-surface .magazine-page.magazine-page.page-opener .page-subtitle { font-size: var(--font-size-20); }
+.magazine-page.magazine-page .interview-heading > h2 { font-family: var(--ds-display); font-weight: 700; letter-spacing: -.02em; line-height: 1.12; text-wrap: balance; color: var(--ds-ink); }
+.magazine-page.magazine-page.magazine-page:not(.page-cover):not(.page-decorative) .page-main > h2 { font-size: max(26px, min(34px, calc(684px / (var(--title-chars, 24) * .64)))); white-space: nowrap; margin: 0 0 10px; max-width: none; }
+.page-surface .magazine-page.magazine-page.page-opener .page-main > h2 { font-size: max(28px, min(40px, calc(684px / (var(--title-chars, 24) * .64)))); white-space: nowrap; line-height: 1.1; margin-bottom: 12px; }
+.magazine-page.magazine-page.magazine-page:not(.page-cover):not(.page-decorative) .page-subtitle { margin: 0 0 22px; max-width: 92%; color: var(--ds-ink-48); font: 400 var(--font-size-16)/1.45 var(--sans); letter-spacing: -.01em; text-wrap: pretty; }
+.page-surface .magazine-page.magazine-page.page-opener .page-subtitle { font-size: var(--font-size-18); }
 .page-interview .page-main > h2 { font-weight: 600; }
 .interview-page-content h3, .interview-page-content h4 { font-weight: 600; letter-spacing: var(--ds-tight); }
 .page-surface .page-contents .page-index strong { font-weight: 600; letter-spacing: -.01em; }
